@@ -1,2 +1,2 @@
-# Demonolgy
+# Demonology
 UCI VGDC Unity project: Demonology
