@@ -43,12 +43,13 @@ public class CharacterMove : MonoBehaviour {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if (Input.GetKeyUp(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
 
             //Force added for up direction
-            rb.AddForce(new Vector2(0, speed), ForceMode2D.Impulse);
             isGrounded = false;
+            rb.AddForce(new Vector2(0, speed), ForceMode2D.Impulse);
+            
         }
 
         if (Input.GetKeyDown(KeyCode.S) && !isCrouched)
@@ -75,14 +76,6 @@ public class CharacterMove : MonoBehaviour {
         {
             //Check to see if touching the floor
             isGrounded = true;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "floor")
-        {
-            isGrounded = false;
         }
     }
 }
