@@ -5,6 +5,12 @@ public class CharacterMove : MonoBehaviour {
     //character movement speed
     public int speed = 5;
 
+    public KeyCode jump = KeyCode.W;
+    public KeyCode crouch = KeyCode.S;
+    public KeyCode moveLeft = KeyCode.D;
+    public KeyCode moveRight = KeyCode.A;
+
+
     //is the player touching the ground
     private bool isGrounded = false;
 
@@ -34,16 +40,16 @@ public class CharacterMove : MonoBehaviour {
 	void Update () {
 
         //character movement with wasd
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(moveLeft))
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(moveRight))
         {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        if (Input.GetKeyDown(jump) && isGrounded)
         {
 
             //Force added for up direction
@@ -52,7 +58,7 @@ public class CharacterMove : MonoBehaviour {
             
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && !isCrouched)
+        if (Input.GetKeyDown(crouch) && !isCrouched)
         {
             //change the size and offset of the collider2D
             bc.size = new Vector2(bc.size.x, heightChange);
@@ -60,7 +66,7 @@ public class CharacterMove : MonoBehaviour {
             isCrouched = true;
 
         }
-        if (Input.GetKeyUp(KeyCode.S) && isCrouched)
+        if (Input.GetKeyUp(crouch) && isCrouched)
         {
             bc.size = new Vector2(bc.size.x, (standHeight / crouchHeight) * bc.size.y);
             bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
