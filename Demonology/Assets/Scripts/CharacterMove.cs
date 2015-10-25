@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CharacterMove : MonoBehaviour {
     //character movement speed
-    public int speed = 5;
+    public int speed = 5;//change in editor not here
+    public int jumpspeed = 5;//change in editor not here
 
     public KeyCode jump = KeyCode.W;
     public KeyCode crouch = KeyCode.S;
@@ -54,7 +55,7 @@ public class CharacterMove : MonoBehaviour {
 
             //Force added for up direction
             isGrounded = false;
-            rb.AddForce(new Vector2(0, speed), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
             
         }
 
@@ -75,6 +76,7 @@ public class CharacterMove : MonoBehaviour {
         }
 
     }
+
 
     void OnCollisionEnter2D(Collision2D other)
     {

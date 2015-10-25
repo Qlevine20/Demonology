@@ -10,6 +10,7 @@ public class ImpAI : Mobile {
 	
 	// Update is called once per frame
 	void Update () {
+        Movement();
 	
 	}
 }
