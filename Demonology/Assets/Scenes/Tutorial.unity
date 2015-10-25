@@ -1388,7 +1388,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 465666, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.54999995
       objectReference: {fileID: 0}
     - target: {fileID: 465666, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2196,6 +2196,22 @@ Prefab:
       propertyPath: DeadlyObs.Array.data[1]
       value: 
       objectReference: {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
+    - target: {fileID: 6109764, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Offset.x
+      value: .0108708739
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109764, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Size.x
+      value: .434718609
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109764, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Offset.y
+      value: .0163059235
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109764, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Size.y
+      value: .967388153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
   m_IsPrefabParent: 0
