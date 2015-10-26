@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Mobile : MonoBehaviour {
-
+public class Mobile : DeadlyBehavior {
 
     public float speed = 1;
     public float wallDist = .04f;
@@ -15,7 +14,6 @@ public class Mobile : MonoBehaviour {
 		//Change later for now default to right
 		Dir = Vector2.right;
 	}
-
 	public virtual void FixedUpdate()
 	{
 		Movement (new Ray2D(transform.position,Dir));
@@ -36,4 +34,5 @@ public class Mobile : MonoBehaviour {
 		//Draws the Raycast so it is viewable in the editor
 		Debug.DrawRay (ry.origin, ry.direction,Color.red);
     }
+
 }

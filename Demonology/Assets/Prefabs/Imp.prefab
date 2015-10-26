@@ -71,8 +71,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104737c77e067f140be9880e13f25a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathAnim: {fileID: 0}
+  DeadlyObs:
+  - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
+  - {fileID: 105602, guid: 6b36c82d142b3cd43825f31284eba71a, type: 2}
+  - {fileID: 192010, guid: 81b813441564917479a3b7e5d153c9dc, type: 2}
   speed: 1
   wallDist: 1
+  lavaSpeed: 0
+  lavaDeath: {fileID: 0}
 --- !u!212 &21201298
 SpriteRenderer:
   m_ObjectHideFlags: 1

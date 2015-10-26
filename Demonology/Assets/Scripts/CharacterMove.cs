@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterMove : MonoBehaviour {
+public class CharacterMove : DeadlyBehavior {
     //character movement speed
     public int speed = 5;//change in editor not here
     public int jumpspeed = 5;//change in editor not here
@@ -77,13 +77,24 @@ public class CharacterMove : MonoBehaviour {
 
     }
 
+	override public void OnDeath()
+	{
+		if (DeathAnim != null) 
+		{
+			DeathAnim.Play ();
+		}
+		//Put in code to go to checkpoint here
+		Application.LoadLevel (Application.loadedLevel);
+	}
 
-    void OnCollisionEnter2D(Collision2D other)
+
+    override public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "floor")
         {
             //Check to see if touching the floor
             isGrounded = true;
         }
+		base.OnCollisionEnter2D (other);
     }
 }

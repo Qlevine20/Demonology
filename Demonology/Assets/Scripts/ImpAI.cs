@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ImpAI : Mobile {
 
+	public float lavaSpeed;
+	public Animation lavaDeath;
 	// Use this for initialization
 	public override void Start () {
 
@@ -11,8 +13,29 @@ public class ImpAI : Mobile {
 	}
 	// Update is called once per frame
 
-	void OnDeath()
+	public override void OnCollisionEnter2D(Collision2D other)
 	{
-		Physics2D.IgnoreLayerCollision (8, 9, false);
+
+		if (other.gameObject.tag == "magma") {
+			if (lavaDeath != null) {
+				lavaDeath.Play ();
+			}
+			Physics2D.IgnoreLayerCollision (10, 9, false);
+			StartCoroutine (WaitTime (2f));
+			
+		} 
+		else 
+		{
+			base.OnCollisionEnter2D (other);
+		}
+			
+	}
+
+
+	public override IEnumerator WaitTime(float num)
+	{
+		speed = 0;
+		yield return new WaitForSeconds (num);
+		OnDeath ();
 	}
 }
