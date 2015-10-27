@@ -31,6 +31,7 @@ GameObject:
   - 61: {fileID: 6109764}
   - 50: {fileID: 5019588}
   - 114: {fileID: 11425276}
+  - 114: {fileID: 11460636}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -161,6 +162,24 @@ MonoBehaviour:
   crouch: 115
   moveLeft: 100
   moveRight: 97
+--- !u!114 &11460636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337fc2a079c3cb44fb93930f45773899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathAnim: {fileID: 0}
+  DeadlyObs: []
+  Summon: 113
+  Minions:
+  - {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  reqMats: 0100000000000000000000000000000000000000
+  maxMins: 5
 --- !u!124 &12433144
 Behaviour:
   m_ObjectHideFlags: 1

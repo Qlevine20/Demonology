@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 496502}
   - 212: {fileID: 21203092}
   - 61: {fileID: 6124460}
-  m_Layer: 0
+  - 50: {fileID: 5014532}
+  m_Layer: 9
   m_Name: Crystal Cluster
   m_TagString: crystal
   m_Icon: {fileID: 0}
@@ -24,11 +25,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.9499998, y: -1.12, z: 0}
+  m_LocalPosition: {x: 10.3900003, y: 1.83000004, z: 15.8800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!50 &5014532
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106174}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6124460
 BoxCollider2D:
   m_ObjectHideFlags: 1

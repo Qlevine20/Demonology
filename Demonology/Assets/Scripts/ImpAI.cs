@@ -20,7 +20,7 @@ public class ImpAI : Mobile {
 			if (lavaDeath != null) {
 				lavaDeath.Play ();
 			}
-			Physics2D.IgnoreLayerCollision (10, 9, false);
+			gameObject.layer = LayerMask.NameToLayer ("Player");
 			StartCoroutine (WaitTime (2f));
 			
 		} 

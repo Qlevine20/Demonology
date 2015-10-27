@@ -87,6 +87,26 @@ NavMeshSettings:
 --- !u!127 &5
 LevelGameManager:
   m_ObjectHideFlags: 0
+--- !u!1 &10037084 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
+  m_PrefabInternal: {fileID: 1312096101}
+--- !u!50 &10037088
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10037084}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &19503485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,11 +1488,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 37.9099998
+      value: 10.3900003
       objectReference: {fileID: 0}
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.10000002
+      value: 1.83000004
       objectReference: {fileID: 0}
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1552,11 +1572,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 15.9499998
+      value: 10.04
       objectReference: {fileID: 0}
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.12
+      value: .0599999987
       objectReference: {fileID: 0}
     - target: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2221,6 +2241,10 @@ Prefab:
     - target: {fileID: 469206, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460636, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: reqMats.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
