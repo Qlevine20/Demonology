@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 465666}
   - 212: {fileID: 21201298}
   - 50: {fileID: 5062328}
+  - 61: {fileID: 6150630}
   - 61: {fileID: 6161702}
   - 114: {fileID: 11415624}
   m_Layer: 10
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.51999998, y: 1.73000002, z: 0}
+  m_LocalPosition: {x: -7.07741261, y: 3.87005043, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,6 +48,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &6150630
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148432}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: .000677108765, y: .0621885322}
+  serializedVersion: 2
+  m_Size: {x: .128439739, y: .0418744199}
 --- !u!61 &6161702
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -78,6 +92,13 @@ MonoBehaviour:
   - {fileID: 192010, guid: 81b813441564917479a3b7e5d153c9dc, type: 2}
   speed: 1
   wallDist: 1
+  reqMats: 0100000000000000000000000000000000000000
+  reqMatsName:
+  - Imp
+  - Stuff
+  - Whatever
+  - Filler
+  - Etc
   lavaSpeed: 0
   lavaDeath: {fileID: 0}
 --- !u!212 &21201298
@@ -112,7 +133,51 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: reqMats.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMats.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.data[0]
+      value: Imp
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.data[1]
+      value: Stuff
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.data[2]
+      value: Whatever
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.data[3]
+      value: Filler
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMatsName.Array.data[4]
+      value: Etc
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148432}

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ImpAI : Mobile {
+public class ImpAI : DemonBehavior {
 
 	public float lavaSpeed;
 	public Animation lavaDeath;
+
 	// Use this for initialization
 	public override void Start () {
-
 		Physics2D.IgnoreLayerCollision(10,9);
 		base.Start ();
 	}
@@ -21,8 +21,17 @@ public class ImpAI : Mobile {
 				lavaDeath.Play ();
 			}
 			gameObject.layer = LayerMask.NameToLayer ("Player");
+			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			StartCoroutine (WaitTime (2f));
 			
+		} 
+		else if (other.gameObject.tag == "spike") {
+			if (lavaDeath != null) {
+				lavaDeath.Play ();
+			}
+			gameObject.layer = LayerMask.NameToLayer ("Player");
+			gameObject.GetComponent<BoxCollider2D>().enabled = true;
+			speed = 0;
 		} 
 		else 
 		{

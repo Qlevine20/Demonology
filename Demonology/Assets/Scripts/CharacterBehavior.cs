@@ -6,10 +6,11 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	public KeyCode Summon = KeyCode.Q;
 	public GameObject[] Minions;
-	public int[] reqMats;
-	private Dictionary<string,int> currentMats = new Dictionary<string,int >();
-	private Dictionary<string,int> neededMats = new Dictionary<string,int >();
+	public int[] currentMats;
+	public GameObject Selected;
+	//private Dictionary<string,int> currentMats = new Dictionary<string,int >();
 	public int maxMins = 5;
+
 
 	public struct summMaterials
 	{
@@ -37,12 +38,14 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	public virtual void summon()
 	{
-		foreach (GameObject min in Minions) 
+		 
+		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Selected.tag).Length<maxMins)
 		{
-			if(checkMaterials() && GameObject.FindGameObjectsWithTag(min.tag).Length<maxMins)
+			Instantiate (Selected, transform.position,transform.rotation);
+			int[] reqMats = Selected.GetComponent<DemonBehavior>().reqMats;
+			for (int i=0; i<reqMats.Length; i++) 
 			{
-				Instantiate (min, transform.position,transform.rotation);
-
+				currentMats[i] -= reqMats[i];
 			}
 		}
 
@@ -60,27 +63,25 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	public virtual void pickUpMat(GameObject pickUp)
 	{
+		int[] newMats = pickUp.GetComponent<CrystalScript>().newMats;
+		for (int i=0; i<currentMats.Length; i++) 
+		{
+			currentMats[i] += newMats[i];
+		}
 		Destroy (pickUp);
-		print (currentMats.ContainsKey(pickUp.name));
-		if(currentMats.ContainsKey(pickUp.name))
-		{
-			currentMats[pickUp.name] += 1;
-		}
-		else
-		{
-			currentMats[pickUp.name] = 1;
-		}
 	}
 
 	public virtual bool checkMaterials()
 	{
-		foreach (string key in neededMats.Keys) 
+		int[] reqMats = Selected.GetComponent<DemonBehavior>().reqMats;
+		for (int i=0; i<reqMats.Length; i++) 
 		{
-			if(currentMats[key] < neededMats[key])
+			if(currentMats[i] < reqMats[i])
 			{
 				return false;
 			}
 		}
+
 		return true;
 	}
 

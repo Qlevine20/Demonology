@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 483154}
   - 212: {fileID: 21266734}
   - 61: {fileID: 6113484}
+  - 61: {fileID: 6135072}
   m_Layer: 8
   m_Name: Rock
   m_TagString: floor
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.63000011, y: 2.18000007, z: 15.875}
+  m_LocalPosition: {x: -3, y: 3.33999991, z: 15.875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,6 +43,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.08999991, y: 3.55999994}
+--- !u!61 &6135072
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101744}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: -.00237083435, y: 1.51659727}
+  serializedVersion: 2
+  m_Size: {x: 1.957322, y: .533192754}
 --- !u!212 &21266734
 SpriteRenderer:
   m_ObjectHideFlags: 1

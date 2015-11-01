@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CharacterMove : DeadlyBehavior {
     //character movement speed
-    public int speed = 5;//change in editor not here
-    public int jumpspeed = 5;//change in editor not here
+    public int speed = 10;//change in editor not here
+    public int jumpspeed = 10;//change in editor not here
 
     public KeyCode jump = KeyCode.W;
     public KeyCode crouch = KeyCode.S;
@@ -88,13 +88,13 @@ public class CharacterMove : DeadlyBehavior {
 	}
 
 
-    override public void OnCollisionEnter2D(Collision2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "floor")
+        if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp")
         {
             //Check to see if touching the floor
             isGrounded = true;
         }
-		base.OnCollisionEnter2D (other);
+		//base.OnCollisionEnter2D (other);
     }
 }
