@@ -8,8 +8,10 @@ public class CharacterMove : DeadlyBehavior {
 
     public KeyCode jump = KeyCode.W;
     public KeyCode crouch = KeyCode.S;
-    public KeyCode moveLeft = KeyCode.D;
-    public KeyCode moveRight = KeyCode.A;
+    public KeyCode moveLeft = KeyCode.A;
+    public KeyCode moveRight = KeyCode.D;
+	public static Vector2 Dir;
+
 
 
     //is the player touching the ground
@@ -31,23 +33,26 @@ public class CharacterMove : DeadlyBehavior {
 
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
+		Dir = Vector2.right;
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<Collider2D>() as BoxCollider2D;
         heightChange = (crouchHeight / standHeight) * bc.size.y;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         //character movement with wasd
-        if (Input.GetKey(moveLeft))
-        {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-        }
         if (Input.GetKey(moveRight))
         {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+			Dir = Vector2.right;
+        }
+        if (Input.GetKey(moveLeft))
+        {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
+			Dir = Vector2.left;
         }
 
         if (Input.GetKeyDown(jump) && isGrounded)

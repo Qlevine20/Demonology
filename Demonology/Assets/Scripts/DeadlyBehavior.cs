@@ -7,6 +7,7 @@ public class DeadlyBehavior : MonoBehaviour {
     //List of all game objects that kill player instantly
 	public Animation DeathAnim;
 	public GameObject[] DeadlyObs;
+
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
 		CheckDeath (other.gameObject,DeadlyObs);
