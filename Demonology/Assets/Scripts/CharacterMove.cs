@@ -95,11 +95,24 @@ public class CharacterMove : DeadlyBehavior {
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp")
+        if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp" || other.gameObject.tag == "moving")
         {
+
+            if (other.gameObject.tag == "moving")
+            {
+                transform.parent = other.transform;
+            }
             //Check to see if touching the floor
             isGrounded = true;
         }
 		//base.OnCollisionEnter2D (other);
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "moving")
+        {
+            transform.parent = null;
+        }
     }
 }

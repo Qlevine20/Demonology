@@ -11,9 +11,10 @@ GameObject:
   - 212: {fileID: 21236124}
   - 61: {fileID: 6157898}
   - 114: {fileID: 11400746}
+  - 61: {fileID: 6186792}
   m_Layer: 0
   m_Name: MovingPlatform
-  m_TagString: Untagged
+  m_TagString: moving
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 5.21000004, z: 0}
+  m_LocalPosition: {x: 4.1800127, y: 1.49891126, z: 0}
   m_LocalScale: {x: .25, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,6 +44,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 11.0900002, y: 3.79999995}
+--- !u!61 &6186792
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199114}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 2}
+  serializedVersion: 2
+  m_Size: {x: 11.0900002, y: 1.5}
 --- !u!114 &11400746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,12 +69,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locs:
-  - {x: 0, y: 0}
+  - {x: 4, y: 1}
   - {x: 19, y: 5.21000004}
   - {x: 10, y: 8}
   - {x: 10, y: 4}
   - {x: 7, y: 6}
-  speed: 5
+  speed: 2
 --- !u!212 &21236124
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -34,6 +34,19 @@ public class MovingBlock : MonoBehaviour {
 		}
 	}
 
+    public void OnDrawGizmos()
+    {
+        if (locs.Length < 1)
+        {
+            return;
+        }
+
+        for (int i = 1; i < locs.Length; i++)
+        {
+            Gizmos.DrawCube(locs[i - 1], new Vector3(1, 1, 0));
+            Gizmos.DrawLine(locs[i - 1], locs[i]);
+        }
+    }
 
 
 	bool MoveBetweenPoints(Vector2 p)
