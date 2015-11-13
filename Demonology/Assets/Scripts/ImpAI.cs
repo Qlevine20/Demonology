@@ -13,6 +13,21 @@ public class ImpAI : DemonBehavior {
 	}
 	// Update is called once per frame
 
+	public virtual void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "moving") 
+		{
+			transform.parent = other.transform;
+		}
+	}
+
+	public virtual void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "moving") 
+		{
+			transform.parent = null;
+		}
+	}
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
 
@@ -23,7 +38,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("Player");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			StartCoroutine (WaitTime (2f));
-			
+			gameObject.tag = "floor";
 		} 
 		else if (other.gameObject.tag == "spike") {
 			if (lavaDeath != null) {
@@ -32,6 +47,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("Player");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
+			gameObject.tag = "floor";
 		} 
 		else 
 		{
