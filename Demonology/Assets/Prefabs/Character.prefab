@@ -99,8 +99,9 @@ MonoBehaviour:
   Summon: 113
   Minions:
   - {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   currentMats: 0100000000000000000000000000000000000000
-  Selected: {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  Selected: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   maxMins: 5
 --- !u!212 &21285244
 SpriteRenderer:
@@ -135,6 +136,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Minions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
@@ -176,6 +181,14 @@ Prefab:
       propertyPath: jumpspeed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Minions.Array.data[1]
+      value: 
+      objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Selected
+      value: 
+      objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
