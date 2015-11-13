@@ -3,14 +3,17 @@ using System.Collections;
 
 public class ImpAI : DemonBehavior {
 
-	public float lavaSpeed;
-	public Animation lavaDeath;
+    public float lavaSpeed;
+    public Animation lavaDeath;
+    public AudioClip[] impSummons;
 
-	// Use this for initialization
-	public override void Start () {
-		Physics2D.IgnoreLayerCollision(10,9);
-		base.Start ();
-	}
+    // Use this for initialization
+    public override void Start()
+    {
+        Physics2D.IgnoreLayerCollision(10, 9);
+        base.Start();
+        AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
+    }
 	// Update is called once per frame
 
 	public virtual void OnTriggerEnter2D(Collider2D other)
