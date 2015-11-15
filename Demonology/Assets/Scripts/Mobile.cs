@@ -7,8 +7,9 @@ public class Mobile : DeadlyBehavior {
     public float wallDist = .04f;
 	private Vector2 StartDir;
 	//Direction of the entity
-	public virtual void Start ()
+	public override void Start ()
 	{
+		base.Start ();
 		StartDir = CharacterBehavior.Dir;
 	}
 

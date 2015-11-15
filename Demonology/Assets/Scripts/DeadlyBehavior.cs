@@ -7,6 +7,12 @@ public class DeadlyBehavior : MonoBehaviour {
     //List of all game objects that kill player instantly
 	public Animation DeathAnim;
 	public GameObject[] DeadlyObs;
+	public static GameObject Player;
+
+	public virtual void Start()
+	{
+		Player = GameObject.FindGameObjectWithTag ("Player");
+	}
 
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
@@ -14,6 +20,11 @@ public class DeadlyBehavior : MonoBehaviour {
 
         
     }
+
+	public virtual void Update()
+	{
+		Player = GameObject.FindGameObjectWithTag ("Player");
+	}
 
 	public virtual void CheckDeath(GameObject other, GameObject[]DeadlyObs)
 	{

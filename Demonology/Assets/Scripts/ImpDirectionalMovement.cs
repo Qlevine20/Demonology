@@ -9,12 +9,12 @@ public class ImpDirectionalMovement : ImpAI {
 		if (Physics2D.Raycast(ry.origin,ry.direction,wallDist,1<<8)) 
 		{
 			//Changes the direction the object faces to the opposite of its current direction
-			CharacterMove.Dir = new Vector2(-CharacterMove.Dir.x,CharacterMove.Dir.y);
+			CharacterBehavior.Dir = new Vector2(-CharacterBehavior.Dir.x,CharacterBehavior.Dir.y);
 				
 				
 		}
 			//Move forward
-		transform.Translate(CharacterMove.Dir * speed * Time.deltaTime);
+		transform.Translate(CharacterBehavior.Dir * speed * Time.deltaTime);
 		//Draws the Raycast so it is viewable in the editor
 		Debug.DrawRay (ry.origin, ry.direction,Color.red);
 	}
