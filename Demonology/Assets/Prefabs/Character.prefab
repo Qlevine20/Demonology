@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21285244}
   - 61: {fileID: 6109764}
   - 50: {fileID: 5019588}
+  - 114: {fileID: 11425276}
   - 114: {fileID: 11460636}
   m_Layer: 9
   m_Name: Character
@@ -57,9 +58,31 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .0108708739, y: .0163059235}
+  m_Offset: {x: .000577449799, y: .000323295593}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.79999995}
+  m_Size: {x: .913534522, y: 1.70020854}
+--- !u!114 &11425276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7572e954ef1a6714caa862d7fd06c9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathAnim: {fileID: 0}
+  DeadlyObs:
+  - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
+  - {fileID: 192010, guid: 81b813441564917479a3b7e5d153c9dc, type: 2}
+  - {fileID: 105602, guid: 6b36c82d142b3cd43825f31284eba71a, type: 2}
+  speed: 5
+  jumpspeed: 15
+  jump: 119
+  crouch: 115
+  moveLeft: 97
+  moveRight: 100
 --- !u!114 &11460636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,20 +95,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathAnim: {fileID: 0}
-  DeadlyObs:
-  - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
+  DeadlyObs: []
   Summon: 113
   Minions:
   - {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   currentMats: 0100000000000000000000000000000000000000
-  Selected: {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  Selected: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   maxMins: 5
-  speed: 5
-  jumpspeed: 20
-  jump: 119
-  crouch: 115
-  moveLeft: 97
-  moveRight: 100
 --- !u!212 &21285244
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -119,6 +136,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Minions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
@@ -160,6 +181,14 @@ Prefab:
       propertyPath: jumpspeed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Minions.Array.data[1]
+      value: 
+      objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Selected
+      value: 
+      objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
