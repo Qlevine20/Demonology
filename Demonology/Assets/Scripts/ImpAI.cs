@@ -6,6 +6,7 @@ public class ImpAI : DemonBehavior {
     public float lavaSpeed;
     public Animation lavaDeath;
     public AudioClip[] impSummons;
+    public AudioClip[] impDeaths;
 
     // Use this for initialization
     public override void Start()
@@ -13,6 +14,7 @@ public class ImpAI : DemonBehavior {
         Physics2D.IgnoreLayerCollision(10, 9);
         base.Start();
         AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
+
     }
 	// Update is called once per frame
 
@@ -42,6 +44,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			StartCoroutine (WaitTime (2f));
 			gameObject.tag = "floor";
+            AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 		} 
 		else if (other.gameObject.tag == "spike") {
 			if (lavaDeath != null) {
@@ -51,6 +54,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
 			gameObject.tag = "floor";
+            AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 		} 
 		else 
 		{
