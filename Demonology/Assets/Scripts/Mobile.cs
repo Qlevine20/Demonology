@@ -9,7 +9,7 @@ public class Mobile : DeadlyBehavior {
 	//Direction of the entity
 	public virtual void Start ()
 	{
-		StartDir = CharacterMove.Dir;
+		StartDir = CharacterBehavior.Dir;
 	}
 
 	public virtual void FixedUpdate()
