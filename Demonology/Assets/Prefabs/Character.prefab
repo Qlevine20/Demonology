@@ -75,11 +75,15 @@ MonoBehaviour:
   DeadlyObs:
   - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
   Summon: 113
+  ShiftLeft: 101
+  ShiftRight: 114
   Minions:
   - {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
   - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
-  currentMats: 0100000000000000000000000000000000000000
-  Selected: {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  currentMats: 0a00000000000000000000000000000000000000
+  Demons:
+  - {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+  - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   maxMins: 5
   PlayerPrefab: {fileID: 187882}
   speed: 5
@@ -121,6 +125,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Demons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Minions.Array.size
       value: 2
@@ -178,6 +186,18 @@ Prefab:
       propertyPath: PlayerPrefab
       value: 
       objectReference: {fileID: 187882}
+    - target: {fileID: 0}
+      propertyPath: Demons.Array.data[0]
+      value: 
+      objectReference: {fileID: 148432, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: Demons.Array.data[1]
+      value: 
+      objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
+    - target: {fileID: 0}
+      propertyPath: currentMats.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}

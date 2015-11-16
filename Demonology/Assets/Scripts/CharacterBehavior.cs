@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class CharacterBehavior : DeadlyBehavior {
 	
 	public KeyCode Summon = KeyCode.Q;
+	public KeyCode ShiftLeft = KeyCode.E;
+	public KeyCode ShiftRight = KeyCode.R;
+	
 	public GameObject[] Minions;
 	public int[] currentMats;
-	public GameObject Selected;
+	public GameObject[] Demons;
+	private int selected = 0;
 	public static GameObject activeCheckpoint;
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
@@ -67,6 +71,20 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			summon();
 		}
+		if (Input.GetKeyDown (ShiftLeft)) 
+		{
+			if (--selected < 0)
+			{
+				selected = Demons.Length-1;
+			}
+		}
+		if (Input.GetKeyDown (ShiftRight)) 
+		{
+			if (++selected >= Demons.Length)
+			{
+				selected = 0;
+			}
+		}
 	}
 	
 	public override void OnDeath()
@@ -84,10 +102,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	public virtual void summon()
 	{
 		
-		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Selected.tag).Length<maxMins)
+		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
 		{
-			Instantiate (Selected, transform.position,transform.rotation);
-			int[] reqMats = Selected.GetComponent<DemonBehavior>().reqMats;
+			Instantiate (Demons[selected], transform.position,transform.rotation);
+			int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
 			for (int i=0; i<reqMats.Length; i++) 
 			{
 				currentMats[i] -= reqMats[i];
@@ -110,13 +128,13 @@ public class CharacterBehavior : DeadlyBehavior {
 			isGrounded = true;
 		}
 		//base.OnCollisionEnter2D (other);
-
+		
 		if (other.gameObject.tag == "moving") 
 		{
 			transform.parent = other.transform;
 		}
 	}
-
+	
 	public virtual void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "moving") 
@@ -137,7 +155,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public virtual bool checkMaterials()
 	{
-		int[] reqMats = Selected.GetComponent<DemonBehavior>().reqMats;
+		int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
 		for (int i=0; i<reqMats.Length; i++) 
 		{
 			if(currentMats[i] < reqMats[i])

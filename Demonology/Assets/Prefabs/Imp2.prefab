@@ -105,6 +105,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: accbfbedfbd6cba4ea91cfd9aac5d570, type: 3}
   - {fileID: 8300000, guid: 3b22efe121aba9045881bc5071e4250d, type: 3}
   - {fileID: 8300000, guid: beefcdbc24ca9f9408749c7aa6600be2, type: 3}
+  impDeaths:
+  - {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
+  - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
+  - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
 --- !u!212 &21239902
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -143,6 +147,10 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: impDeaths.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Color.r
       value: .0882353187
       objectReference: {fileID: 0}
@@ -178,6 +186,18 @@ Prefab:
       propertyPath: reqMats.Array.data[4]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impDeaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
+    - target: {fileID: 0}
+      propertyPath: impDeaths.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
+    - target: {fileID: 0}
+      propertyPath: impDeaths.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116858}
