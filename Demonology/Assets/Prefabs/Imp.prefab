@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 465666}
   - 212: {fileID: 21201298}
   - 50: {fileID: 5062328}
-  - 61: {fileID: 6150630}
   - 61: {fileID: 6161702}
   - 114: {fileID: 11415624}
   m_Layer: 10
@@ -48,19 +47,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6150630
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148432}
-  m_Enabled: 0
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: .000677108765, y: .0621885322}
-  serializedVersion: 2
-  m_Size: {x: .128439739, y: .0418744199}
 --- !u!61 &6161702
 BoxCollider2D:
   m_ObjectHideFlags: 1

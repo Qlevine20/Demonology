@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ImpAI : DemonBehavior {
 
-    public float lavaSpeed;
     public Animation lavaDeath;
     public AudioClip[] impSummons;
     public AudioClip[] impDeaths;
@@ -50,7 +49,7 @@ public class ImpAI : DemonBehavior {
 			if (lavaDeath != null) {
 				lavaDeath.Play ();
 			}
-			gameObject.layer = LayerMask.NameToLayer ("Player");
+			gameObject.layer = LayerMask.NameToLayer ("Ground");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
 			gameObject.tag = "floor";

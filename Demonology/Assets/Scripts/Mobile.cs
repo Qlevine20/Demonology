@@ -22,7 +22,7 @@ public class Mobile : DeadlyBehavior {
 		//Casts a ray in front of the object to see if there are any obstacles blocking the path
 		if (Physics2D.Raycast(ry.origin,ry.direction,wallDist,1<<8)) 
 		{
-			//Changes the direction the object faces to the opposite of its current direction
+			//Changes the Direction the object faces to the opposite of its current Direction
 			StartDir = new Vector2(-StartDir.x,StartDir.y);
 
 

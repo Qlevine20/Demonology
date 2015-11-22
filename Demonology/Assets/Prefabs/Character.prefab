@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &164010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444798}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &187882
 GameObject:
   m_ObjectHideFlags: 0
@@ -19,6 +34,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &444798
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .075000003, y: -.887000024, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 469206}
+  m_RootOrder: 0
 --- !u!4 &469206
 Transform:
   m_ObjectHideFlags: 1
@@ -26,9 +53,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .519999981, y: 1.28999996, z: 0}
+  m_LocalPosition: {x: 7.80000019, y: .0900000036, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 444798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5019588
@@ -86,6 +114,10 @@ MonoBehaviour:
   - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   maxMins: 5
   PlayerPrefab: {fileID: 187882}
+  groundCheck: {fileID: 444798}
+  whatIsGrounded:
+    serializedVersion: 2
+    m_Bits: 0
   speed: 5
   jumpspeed: 15
   jump: 119
