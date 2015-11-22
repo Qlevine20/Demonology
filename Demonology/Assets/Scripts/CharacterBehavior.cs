@@ -92,9 +92,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (DeathAnim != null) 
 		{
 			DeathAnim.Play ();
-			
-			
 		}
+		transform.parent = null;
 		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y, 0.0f), Quaternion.identity);
 		base.OnDeath();
 	}
@@ -140,6 +139,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "moving") 
 		{
 			transform.parent = null;
+		}
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		{
+			//Check to see if touching the floor
+			isGrounded = false;
 		}
 	}
 	
