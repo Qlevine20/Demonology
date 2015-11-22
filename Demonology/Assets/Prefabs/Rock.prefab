@@ -10,8 +10,7 @@ GameObject:
   - 4: {fileID: 483154}
   - 212: {fileID: 21266734}
   - 61: {fileID: 6113484}
-  - 61: {fileID: 6135072}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Rock
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -43,19 +42,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.08999991, y: 3.55999994}
---- !u!61 &6135072
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101744}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 1.79999995}
-  serializedVersion: 2
-  m_Size: {x: 2.0999999, y: .533192754}
 --- !u!212 &21266734
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -98,8 +84,13 @@ Prefab:
       value: 1.79999995
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+<<<<<<< HEAD
+      propertyPath: m_Layer
+      value: 11
+=======
       propertyPath: m_LocalPosition.z
       value: 0
+>>>>>>> f66f0f7f41ec9a9f4f4bba730d9c37a2adc42134
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

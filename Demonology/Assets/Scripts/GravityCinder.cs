@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GravityCinder : MonoBehaviour {
 	
-	public ParticleSystem cParts;
-	public Rigidbody2D rigid;
+	private ParticleSystem cParts;
+	private Rigidbody2D rigid;
 	public float pauseTime = 2f;
 	public float lowerThresh;
 	public float startVel = 0.0f;
@@ -16,6 +16,8 @@ public class GravityCinder : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 		startPos = transform.position;
+		cParts = GetComponent<ParticleSystem>();
+		rigid = GetComponent<Rigidbody2D>();
 		gravitySave = rigid.gravityScale;
 		rigid.velocity = new Vector2(0.0f, startVel);
 	}

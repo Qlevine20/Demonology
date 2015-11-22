@@ -65,7 +65,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -85,6 +84,9 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!127 &5
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!1 &10037084 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
@@ -152,7 +154,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 6186792, guid: f04ed95fa5feb4345b50d0397fad7e7b, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_Size.x
       value: 10.5
       objectReference: {fileID: 0}
@@ -288,7 +290,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 6135072, guid: 2f3d9656e05d1d84cb18ece64b37731c, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_Offset.y
       value: 1.79999995
       objectReference: {fileID: 0}
@@ -442,12 +444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 6d216e3670d3d4155a62799cfc85fbdb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -828,12 +824,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 6533326, guid: 10d072982265217499ef7b35c8c73c53, type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6533326, guid: 10d072982265217499ef7b35c8c73c53, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10d072982265217499ef7b35c8c73c53, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &517921652
@@ -1097,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
+  m_AllowActivationOnStandalone: 0
 --- !u!114 &767557601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1106,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_ForceModuleActive: 0
+  m_AllowActivationOnMobileDevice: 0
 --- !u!114 &767557602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,12 +1513,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ad30b19e6fe48421999587039dda55b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1869,21 +1854,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11464724, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 187882, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1290945229 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 156150, guid: 10d072982265217499ef7b35c8c73c53, type: 2}
-  m_PrefabInternal: {fileID: 496428574}
 --- !u!4 &1290945230 stripped
 Transform:
   m_PrefabParentObject: {fileID: 474672, guid: 10d072982265217499ef7b35c8c73c53, type: 2}
   m_PrefabInternal: {fileID: 496428574}
+<<<<<<< HEAD
+=======
 --- !u!61 &1290945232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1956,6 +1935,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   m_IsPrefabParent: 0
+>>>>>>> f66f0f7f41ec9a9f4f4bba730d9c37a2adc42134
 --- !u!1001 &1312096101
 Prefab:
   m_ObjectHideFlags: 0
@@ -2180,12 +2160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -2589,7 +2563,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 469206, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD
       value: 2.19000006
+=======
+<<<<<<< HEAD
+      value: .389999986
+=======
+      value: 1.32000005
+>>>>>>> f66f0f7f41ec9a9f4f4bba730d9c37a2adc42134
+>>>>>>> 169e58faba89e3554d6428816decf94761340c53
       objectReference: {fileID: 0}
     - target: {fileID: 469206, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2614,6 +2596,18 @@ Prefab:
     - target: {fileID: 469206, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: whatIsGrounded.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 444798, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 444798, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
@@ -2832,7 +2826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2013027648
 Transform:
   m_ObjectHideFlags: 0
