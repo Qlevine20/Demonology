@@ -3,12 +3,23 @@ using System.Collections;
 
 public class Mobile : DeadlyBehavior {
 
-    public float speed = 1;
+    public float speed = 0;
     public float wallDist = .04f;
 	private Vector2 StartDir;
+	public Animator Anim;
+	public bool mobFacingRight;
+
 	//Direction of the entity
 	public override void Start ()
 	{
+		mobFacingRight = CharacterBehavior.FacingRight;
+
+		if (!mobFacingRight)
+		{
+			Flip ();
+		}
+
+		Anim = GetComponent<Animator> ();
 		base.Start ();
 		StartDir = CharacterBehavior.Dir;
 	}
@@ -23,14 +34,28 @@ public class Mobile : DeadlyBehavior {
 		if (Physics2D.Raycast(ry.origin,ry.direction,wallDist,1<<8)) 
 		{
 			//Changes the Direction the object faces to the opposite of its current Direction
+			Flip();
+
 			StartDir = new Vector2(-StartDir.x,StartDir.y);
 
 
+		}
+		if(Anim!=null)
+		{
+				Anim.SetFloat ("Speed", speed);
 		}
 		//Move forward
 		transform.Translate(StartDir * speed * Time.deltaTime);
 		//Draws the Raycast so it is viewable in the editor
 		Debug.DrawRay (ry.origin, ry.direction,Color.red);
     }
+
+	void Flip()
+	{
+		mobFacingRight = !mobFacingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
 
 }
