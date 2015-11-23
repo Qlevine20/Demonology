@@ -12,7 +12,7 @@ GameObject:
   - 61: {fileID: 6108274}
   - 61: {fileID: 6154148}
   - 61: {fileID: 6138632}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fall
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -106,6 +106,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

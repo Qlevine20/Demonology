@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21210260}
   - 61: {fileID: 6109710}
   - 61: {fileID: 6122514}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jumping Rock
   m_TagString: floor
   m_Icon: {fileID: 0}
@@ -96,6 +96,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

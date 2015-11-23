@@ -86,12 +86,14 @@ MonoBehaviour:
   - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   maxMins: 5
   PlayerPrefab: {fileID: 187882}
+  groundCheck: {fileID: 0}
+  whatIsGrounded:
+    serializedVersion: 2
+    m_Bits: 2048
   speed: 5
   jumpspeed: 15
   jump: 119
   crouch: 115
-  moveLeft: 97
-  moveRight: 100
 --- !u!212 &21285244
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -197,6 +199,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: currentMats.Array.data[0]
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: whatIsGrounded.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

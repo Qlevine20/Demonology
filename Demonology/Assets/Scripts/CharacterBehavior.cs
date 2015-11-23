@@ -15,6 +15,13 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static GameObject activeCheckpoint;
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
+
+	Animator anim;
+
+	public Transform groundCheck;
+	private float groundRadius = .01f;
+
+	public LayerMask whatIsGrounded;
 	
 	//is the player touching the ground
 	private bool isGrounded = false;
@@ -39,14 +46,15 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public KeyCode jump = KeyCode.W;
 	public KeyCode crouch = KeyCode.S;
-	public KeyCode moveLeft = KeyCode.A;
-	public KeyCode moveRight = KeyCode.D;
 	public static Vector2 Dir;
+	public static bool FacingRight;
 	
 	
 	
 	public override void Start () {
 		base.Start ();
+		FacingRight = true;
+		rb = GetComponent<Rigidbody2D> ();
 		Dir = Vector2.right;
 		rb = GetComponent<Rigidbody2D>();
 		bc = GetComponent<Collider2D>() as BoxCollider2D;
@@ -94,6 +102,10 @@ public class CharacterBehavior : DeadlyBehavior {
 			DeathAnim.Play ();
 		}
 		transform.parent = null;
+		if (!FacingRight) 
+		{
+			Flip ();
+		}
 		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y, 0.0f), Quaternion.identity);
 		base.OnDeath();
 	}
@@ -121,11 +133,11 @@ public class CharacterBehavior : DeadlyBehavior {
 			pickUpMat (other.gameObject);
 		}
 		
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
-		{
+		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		//{
 			//Check to see if touching the floor
-			isGrounded = true;
-		}
+		//	isGrounded = true;
+		//}
 		//base.OnCollisionEnter2D (other);
 		
 		if (other.gameObject.tag == "moving") 
@@ -140,11 +152,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			transform.parent = null;
 		}
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
-		{
-			//Check to see if touching the floor
-			isGrounded = false;
-		}
+		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		//{
+		//	//Check to see if touching the floor
+		//	isGrounded = false;
+		//}
 	}
 	
 	public virtual void pickUpMat(GameObject pickUp)
@@ -173,18 +185,44 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		
-		//character movement with wasd
-		if (Input.GetKey(moveRight))
+
+
+		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGrounded);
+		//anim.SetBool ("Ground", isGrounded);
+
+		//anim.SetFloat ("vspeed", rb.velocity.y);
+
+
+		float move = Input.GetAxis ("Horizontal");
+		rb.velocity = new Vector2(move * speed, rb.velocity.y);
+
+		if(move > 0 && !FacingRight)
 		{
-			transform.Translate(Vector2.right * speed * Time.deltaTime);
-			Dir = Vector2.right;
+			Flip ();
 		}
-		if (Input.GetKey(moveLeft))
+		else if (move < 0 && FacingRight)
 		{
-			transform.Translate(Vector2.left * speed * Time.deltaTime);
+			Flip ();
+		}
+
+		if (CharacterBehavior.FacingRight) {
+			Dir = Vector2.right;
+		} else 
+		{
 			Dir = Vector2.left;
 		}
+		//character movement with wasd
+		
+//		if (Input.GetKey(moveRight))
+//		{
+//			rb.velocity = (Vector2.right * speed *);
+//			Dir = Vector2.right;
+//		}
+//		if (Input.GetKey(moveLeft))
+//		{
+//			transform.Translate(Vector2.left * speed * Time.deltaTime);
+//			Dir = Vector2.left;
+//		}
 		
 		if (Input.GetKeyDown(jump) && isGrounded)
 		{
@@ -192,7 +230,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			//Force added for up direction
 			isGrounded = false;
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-			
+			//anim.SetBool ("Ground", false);
 		}
 		
 		if (Input.GetKeyDown(crouch) && !isCrouched)
@@ -211,6 +249,14 @@ public class CharacterBehavior : DeadlyBehavior {
 			
 		}
 		
+	}
+
+	void Flip()
+	{
+		FacingRight = !FacingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
 	}
 	
 	
