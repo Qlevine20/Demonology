@@ -133,11 +133,19 @@ public class CharacterBehavior : DeadlyBehavior {
 			pickUpMat (other.gameObject);
 		}
 		
-		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
-		//{
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		{
 			//Check to see if touching the floor
-		//	isGrounded = true;
-		//}
+			//isGrounded = true;
+			/*if ( rb.velocity.y <= 0.0f )
+			{
+				print(rb.velocity.y);
+			}*/
+			if ( rb.velocity.y <= -25.0f )
+			{
+				OnDeath ();
+			}
+		}
 		//base.OnCollisionEnter2D (other);
 		
 		if (other.gameObject.tag == "moving") 
