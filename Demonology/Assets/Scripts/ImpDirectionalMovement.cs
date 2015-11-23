@@ -2,10 +2,22 @@
 using System.Collections;
 
 public class ImpDirectionalMovement : ImpAI {
-	
+	Vector2 OldDir;
+
+	public override void Start ()
+	{
+		base.Start ();
+		OldDir = CharacterBehavior.Dir;
+	}
 	public override void Movement(Ray2D ry)
 	{
+
 		transform.Translate(CharacterBehavior.Dir * speed * Time.deltaTime);
-		//Draws the Raycast so it is viewable in the editor
+		if (CharacterBehavior.Dir != OldDir) 
+		{
+			OldDir = CharacterBehavior.Dir;
+			Flip ();
+		}
+
 	}
 }

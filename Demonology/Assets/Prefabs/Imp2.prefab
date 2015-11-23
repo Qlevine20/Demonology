@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5022382}
   - 61: {fileID: 6189372}
   - 114: {fileID: 11400966}
+  - 95: {fileID: 9584654}
   m_Layer: 10
   m_Name: Imp2
   m_TagString: imp
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 116858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.07741261, y: 3.87005043, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,6 +61,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .159999996, y: .159999996}
+--- !u!95 &9584654
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57a08e6a2d578435597e3a95de901ad0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,8 +94,10 @@ MonoBehaviour:
   - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
   - {fileID: 105602, guid: 6b36c82d142b3cd43825f31284eba71a, type: 2}
   - {fileID: 192010, guid: 81b813441564917479a3b7e5d153c9dc, type: 2}
-  speed: 2
+  speed: 3
   wallDist: 1
+  Anim: {fileID: 0}
+  mobFacingRight: 0
   reqMats: 0200000000000000000000000000000000000000
   reqMatsName:
   - Imp
@@ -118,8 +138,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: .0882353187, g: .720689654, b: .54411763, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a727eeee9f25d401aac0581c66c8c197, type: 3}
+  m_Color: {r: 1, g: .113793097, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -149,15 +169,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.r
-      value: .0882353187
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.b
-      value: .54411763
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.g
-      value: .720689654
+      value: .113793097
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: reqMats.Array.data[0]
@@ -165,7 +185,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: reqMats.Array.data[1]
@@ -242,6 +262,19 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: wallDist
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a727eeee9f25d401aac0581c66c8c197,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

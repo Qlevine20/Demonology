@@ -50,7 +50,7 @@ public class Mobile : DeadlyBehavior {
 		Debug.DrawRay (ry.origin, ry.direction,Color.red);
     }
 
-	void Flip()
+	public virtual void Flip()
 	{
 		mobFacingRight = !mobFacingRight;
 		Vector3 theScale = transform.localScale;
