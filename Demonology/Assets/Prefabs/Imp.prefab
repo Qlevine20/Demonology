@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.2463446, y: .396112561, z: 0}
+  m_LocalPosition: {x: 14.8833113, y: 1.19000006, z: 0}
   m_LocalScale: {x: 2.19642448, y: 2.19642448, z: .439284891}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .00443649292, y: .321209967}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: .410223961, y: .642702401}
 --- !u!95 &9540646
@@ -98,6 +98,9 @@ MonoBehaviour:
   wallDist: 1
   Anim: {fileID: 0}
   mobFacingRight: 0
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 256
   reqMats: 0100000000000000000000000000000000000000
   reqMatsName:
   - Imp
@@ -150,6 +153,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: whatIsWall.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

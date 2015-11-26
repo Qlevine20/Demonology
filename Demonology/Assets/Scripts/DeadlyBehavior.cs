@@ -48,6 +48,17 @@ public class DeadlyBehavior : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
+	public virtual void HalveCollider(BoxCollider2D bc,float heightChange)
+	{
+		bc.size = new Vector2(bc.size.x, heightChange);
+		bc.offset = new Vector2(bc.offset.x, bc.offset.y - (heightChange/2));
+	}
+
+	public virtual void DoubleCollider(BoxCollider2D bc, float heightChange)
+	{
+		bc.size = new Vector2(bc.size.x, heightChange * bc.size.y);
+		bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+	}
 	public virtual IEnumerator WaitTime(float num)
 	{
 		print (Time.time);

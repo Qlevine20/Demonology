@@ -244,16 +244,14 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (Input.GetKeyDown(crouch) && !isCrouched)
 		{
 			//change the size and offset of the collider2D
-			bc.size = new Vector2(bc.size.x, heightChange);
-			bc.offset = new Vector2(bc.offset.x, bc.offset.y - (heightChange/2));
 			isCrouched = true;
+			HalveCollider(bc,heightChange);
 			
 		}
 		if (Input.GetKeyUp(crouch) && isCrouched)
 		{
-			bc.size = new Vector2(bc.size.x, (standHeight / crouchHeight) * bc.size.y);
-			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
 			isCrouched = false;
+			DoubleCollider(bc,standHeight/crouchHeight);
 			
 		}
 		

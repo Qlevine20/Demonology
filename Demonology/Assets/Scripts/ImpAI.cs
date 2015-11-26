@@ -6,12 +6,15 @@ public class ImpAI : DemonBehavior {
     public Animation lavaDeath;
     public AudioClip[] impSummons;
     public AudioClip[] impDeaths;
-	private bool dying = false;
 	private Rigidbody2D rb;
+	private BoxCollider2D bc;
+	private float heightChange;
 
     // Use this for initialization
     public override void Start()
     {
+		bc = GetComponent<BoxCollider2D> ();
+		heightChange = (.5f) * bc.size.y;
 		speed = 2;
         Physics2D.IgnoreLayerCollision(10, 9);
         base.Start();
@@ -67,6 +70,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+			HalveCollider(bc,heightChange);
 		} 
 		else if (other.gameObject.tag == "spike") {
 
@@ -79,7 +83,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
 			gameObject.tag = "floor";
-
+			HalveCollider(bc,heightChange);
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 		} 
 		else 
@@ -88,6 +92,8 @@ public class ImpAI : DemonBehavior {
 		}
 			
 	}
+
+
 
 
 	public override IEnumerator WaitTime(float num)
