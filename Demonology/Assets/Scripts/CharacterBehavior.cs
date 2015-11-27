@@ -33,7 +33,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// player crouch/jump info
 	private bool isCrouched = false;
 	private bool isGrounded = false;
-	private float groundRadius = .01f;
+	private float groundRadius = .001f;
 	public LayerMask whatIsGrounded;
 	public Transform groundCheck;
 	public int speed = 10;//change in editor not here
@@ -181,7 +181,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		return true;
 	}
 	
-	// Update is called once per frame
+	// FixedUpdate is called once per frame
 	void FixedUpdate () {
 		
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGrounded);

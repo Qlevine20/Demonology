@@ -17,6 +17,7 @@ public class ImpAI : DemonBehavior {
 		heightChange = (.5f) * bc.size.y;
 		speed = 2;
         Physics2D.IgnoreLayerCollision(10, 9);
+		Physics2D.IgnoreLayerCollision (10, 10);
         base.Start();
         AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
 		rb = GetComponent<Rigidbody2D>();
