@@ -17,7 +17,6 @@ public class DeadlyBehavior : MonoBehaviour {
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
 		CheckDeath (other.gameObject,DeadlyObs);
-
         
     }
 
@@ -34,9 +33,7 @@ public class DeadlyBehavior : MonoBehaviour {
 			{
 				OnDeath ();
 			}
-			
 		}
-
 	}
 
 	public virtual void OnDeath()
@@ -57,8 +54,9 @@ public class DeadlyBehavior : MonoBehaviour {
 	public virtual void DoubleCollider(BoxCollider2D bc, float heightChange)
 	{
 		bc.size = new Vector2(bc.size.x, heightChange * bc.size.y);
-		bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+		bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange*bc.size.y/8));
 	}
+
 	public virtual IEnumerator WaitTime(float num)
 	{
 		print (Time.time);

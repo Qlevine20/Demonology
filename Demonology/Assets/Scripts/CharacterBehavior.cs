@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +8,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode Summon = KeyCode.Q;
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
+	public KeyCode jump = KeyCode.W;
+	public KeyCode crouch = KeyCode.S;
 	
 	public GameObject[] Minions;
 	public int[] currentMats;
@@ -15,21 +18,11 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static GameObject activeCheckpoint;
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
-
+	
 	Animator anim;
-
-	public Transform groundCheck;
-	private float groundRadius = .01f;
-
-	public LayerMask whatIsGrounded;
 	
-	//is the player touching the ground
-	private bool isGrounded = false;
-	
-	//player rigidbody
+	//player rigidbody and collider
 	private Rigidbody2D rb;
-	
-	//player collider2D
 	private BoxCollider2D bc;
 	
 	//player heights
@@ -37,19 +30,19 @@ public class CharacterBehavior : DeadlyBehavior {
 	private float standHeight = 2;
 	private float heightChange;
 	
-	//is the character currently crouched
+	// player crouch/jump info
 	private bool isCrouched = false;
-	
-	
+	private bool isGrounded = false;
+	private float groundRadius = .01f;
+	public LayerMask whatIsGrounded;
+	public Transform groundCheck;
 	public int speed = 10;//change in editor not here
 	public int jumpspeed = 10;//change in editor not here
 	
-	public KeyCode jump = KeyCode.W;
-	public KeyCode crouch = KeyCode.S;
 	public static Vector2 Dir;
 	public static bool FacingRight;
 	
-	
+
 	
 	public override void Start () {
 		base.Start ();
@@ -101,7 +94,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			DeathAnim.Play ();
 		}
-		transform.parent = null;
+		transform.SetParent(null);
 		if (!FacingRight) 
 		{
 			Flip ();
@@ -112,7 +105,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public virtual void summon()
 	{
-		
 		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
 		{
 			Instantiate (Demons[selected], transform.position,transform.rotation);
@@ -122,7 +114,6 @@ public class CharacterBehavior : DeadlyBehavior {
 				currentMats[i] -= reqMats[i];
 			}
 		}
-		
 	}
 	
 	
@@ -150,7 +141,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		
 		if (other.gameObject.tag == "moving") 
 		{
-			transform.parent = other.transform;
+			transform.SetParent(other.transform);
 		}
 	}
 	
@@ -158,7 +149,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	{
 		if (other.gameObject.tag == "moving") 
 		{
-			transform.parent = null;
+			transform.SetParent(null);
 		}
 		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
 		//{
@@ -187,54 +178,45 @@ public class CharacterBehavior : DeadlyBehavior {
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
-
+		
 		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGrounded);
 		//anim.SetBool ("Ground", isGrounded);
-
 		//anim.SetFloat ("vspeed", rb.velocity.y);
-
-
+		
 		float move = Input.GetAxis ("Horizontal");
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
-
-		if(move > 0 && !FacingRight)
-		{
+		
+		if (move > 0 && !FacingRight) {
+			Flip ();
+		} else if (move < 0 && FacingRight) {
 			Flip ();
 		}
-		else if (move < 0 && FacingRight)
-		{
-			Flip ();
-		}
-
+		
 		if (CharacterBehavior.FacingRight) {
 			Dir = Vector2.right;
-		} else 
-		{
+		} else {
 			Dir = Vector2.left;
 		}
 		//character movement with wasd
 		
-//		if (Input.GetKey(moveRight))
-//		{
-//			rb.velocity = (Vector2.right * speed *);
-//			Dir = Vector2.right;
-//		}
-//		if (Input.GetKey(moveLeft))
-//		{
-//			transform.Translate(Vector2.left * speed * Time.deltaTime);
-//			Dir = Vector2.left;
-//		}
+		//		if (Input.GetKey(moveRight))
+		//		{
+		//			rb.velocity = (Vector2.right * speed *);
+		//			Dir = Vector2.right;
+		//		}
+		//		if (Input.GetKey(moveLeft))
+		//		{
+		//			transform.Translate(Vector2.left * speed * Time.deltaTime);
+		//			Dir = Vector2.left;
+		//		}
 		
 		if (Input.GetKeyDown(jump) && isGrounded)
 		{
-			
 			//Force added for up direction
 			isGrounded = false;
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
@@ -246,24 +228,20 @@ public class CharacterBehavior : DeadlyBehavior {
 			//change the size and offset of the collider2D
 			isCrouched = true;
 			HalveCollider(bc,heightChange);
-			
 		}
 		if (Input.GetKeyUp(crouch) && isCrouched)
 		{
 			isCrouched = false;
 			DoubleCollider(bc,standHeight/crouchHeight);
-			
 		}
 		
 	}
-
+	
 	void Flip()
 	{
 		FacingRight = !FacingRight;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
-	}
-	
-	
+	}	
 }

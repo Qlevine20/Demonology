@@ -4,8 +4,12 @@ using System.Collections;
 
 public class UICrystalDisplay : MonoBehaviour {
 	
-	public Text crystalText;
+	private Text crystalText;
 	private int[] playerMats;
+
+	void Start () {
+		crystalText = GetComponent<Text>();
+	}
 
 	// Update is called once per frame
 	void Update () {

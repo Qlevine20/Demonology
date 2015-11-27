@@ -29,6 +29,25 @@ public class ImpAI : DemonBehavior {
 		{
 			transform.parent = other.transform;
 		}
+
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		{
+			if ( rb.velocity.y <= -15.0f )
+			{
+				if (!dying)
+				{
+					dying = true;
+					Anim.SetBool ("Death", true);
+				}
+				gameObject.layer = LayerMask.NameToLayer ("Ground");
+				gameObject.GetComponent<BoxCollider2D>().enabled = true;
+				speed = 0;
+				gameObject.tag = "floor";
+				HalveCollider(bc,heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+			}
+		}
 	}
 
 	public virtual void OnTriggerExit2D(Collider2D other)
@@ -37,27 +56,10 @@ public class ImpAI : DemonBehavior {
 		{
 			transform.parent = null;
 		}
-
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
-		{
-			if ( rb.velocity.y <= -15.0f )
-			{
-				print(rb.velocity.y);
-				if (lavaDeath != null) {
-					lavaDeath.Play ();
-				}
-				gameObject.layer = LayerMask.NameToLayer ("Ground");
-				gameObject.GetComponent<BoxCollider2D>().enabled = true;
-				speed = 0;
-				gameObject.tag = "floor";
-				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-			}
-		}
 	}
+
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
-
-
 		if (other.gameObject.tag == "magma") {
 			if (!dying)
 			{
@@ -71,6 +73,7 @@ public class ImpAI : DemonBehavior {
 			Anim.SetBool ("Death", true);
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 			HalveCollider(bc,heightChange);
+			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
 		} 
 		else if (other.gameObject.tag == "spike") {
 
@@ -84,6 +87,7 @@ public class ImpAI : DemonBehavior {
 			speed = 0;
 			gameObject.tag = "floor";
 			HalveCollider(bc,heightChange);
+			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 		} 
 		else 
@@ -92,9 +96,6 @@ public class ImpAI : DemonBehavior {
 		}
 			
 	}
-
-
-
 
 	public override IEnumerator WaitTime(float num)
 	{
