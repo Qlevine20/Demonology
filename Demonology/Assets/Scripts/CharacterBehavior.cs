@@ -32,10 +32,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	// player crouch/jump info
 	private bool isCrouched = false;
-	private bool isGrounded = false;
+
 	private float groundRadius = .001f;
 	public LayerMask whatIsGrounded;
-	public Transform groundCheck;
+	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
 	public int jumpspeed = 10;//change in editor not here
 	
@@ -127,7 +127,6 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
 		{
 			//Check to see if touching the floor
-			//isGrounded = true;
 			/*if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
@@ -151,10 +150,13 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			transform.SetParent(null);
 		}
+		if (other.gameObject.tag == "DeathBoundary") 
+		{
+			OnDeath ();
+		}
 		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
 		//{
 		//	//Check to see if touching the floor
-		//	isGrounded = false;
 		//}
 	}
 	
@@ -184,7 +186,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	// FixedUpdate is called once per frame
 	void FixedUpdate () {
 		
-		isGrounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGrounded);
 		//anim.SetBool ("Ground", isGrounded);
 		//anim.SetFloat ("vspeed", rb.velocity.y);
 		
@@ -215,10 +216,9 @@ public class CharacterBehavior : DeadlyBehavior {
 		//			Dir = Vector2.left;
 		//		}
 		
-		if (Input.GetKeyDown(jump) && isGrounded)
+		if (Input.GetKeyDown(jump) && onGround ())
 		{
 			//Force added for up direction
-			isGrounded = false;
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
 			//anim.SetBool ("Ground", false);
 		}
@@ -236,7 +236,27 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		
 	}
-	
+	private bool onGround()
+	{
+		if (rb.velocity.y <= 0) 
+		{
+			foreach(Transform t in groundChecks)
+			{
+				Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
+
+				for(int i =0;i<colliders.Length;i++)
+				{
+					if(colliders[i].gameObject!=gameObject)
+					{
+						return true;
+					}
+				}
+			} 
+		}
+		return false;
+	}
+
+
 	void Flip()
 	{
 		FacingRight = !FacingRight;
