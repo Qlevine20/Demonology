@@ -32,7 +32,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	// player crouch/jump info
 	private bool isCrouched = false;
-
+	private bool jumpNow = false;
 	private float groundRadius = .001f;
 	public LayerMask whatIsGrounded;
 	public Transform[] groundChecks;
@@ -85,6 +85,10 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
 				selected = 0;
 			}
+		}
+		if (Input.GetKeyDown (jump) && onGround ()) 
+		{
+			jumpNow = true;
 		}
 	}
 	
@@ -186,9 +190,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	// FixedUpdate is called once per frame
 	void FixedUpdate () {
 		
-		//anim.SetBool ("Ground", isGrounded);
-		//anim.SetFloat ("vspeed", rb.velocity.y);
-		
 		float move = Input.GetAxis ("Horizontal");
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
 		
@@ -216,10 +217,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		//			Dir = Vector2.left;
 		//		}
 		
-		if (Input.GetKeyDown(jump) && onGround ())
+		if (jumpNow)
 		{
 			//Force added for up direction
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+			jumpNow = false;
 			//anim.SetBool ("Ground", false);
 		}
 		
@@ -234,7 +236,6 @@ public class CharacterBehavior : DeadlyBehavior {
 			isCrouched = false;
 			DoubleCollider(bc,standHeight/crouchHeight);
 		}
-		
 	}
 	private bool onGround()
 	{
