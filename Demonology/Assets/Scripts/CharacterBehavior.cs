@@ -33,7 +33,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// player crouch/jump info
 	private bool isCrouched = false;
 	private bool jumpNow = false;
-	private float groundRadius = .001f;
+	private float groundRadius = .1f;
 	public LayerMask whatIsGrounded;
 	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
@@ -126,6 +126,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "crystal") 
 		{
 			pickUpMat (other.gameObject);
+		}
+		if (other.gameObject.tag == "Finish") 
+		{
+			//Add go to next level code here
+			Application.LoadLevel (Application.loadedLevel);
 		}
 		
 		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
