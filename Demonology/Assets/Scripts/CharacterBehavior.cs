@@ -178,7 +178,9 @@ public class CharacterBehavior : DeadlyBehavior {
 	{
 		if (other.gameObject.tag == "moving") 
 		{
+			float xPos = transform.position.x;
 			transform.SetParent(null);
+			transform.position = new Vector3(xPos,transform.position.y,0.0f);
 		}
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
