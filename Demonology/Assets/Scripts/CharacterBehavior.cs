@@ -18,6 +18,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static GameObject activeCheckpoint;
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
+	public GameObject CrystalPrefab;
+	private List<GameObject> PickUpList= new List<GameObject>();
+	public static int[] CheckPointMatsCount = new int[5];
+
 	
 	Animator anim;
 	
@@ -103,7 +107,17 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			Flip ();
 		}
+		currentMats[0] = CheckPointMatsCount[0];
 		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y, 0.0f), Quaternion.identity);
+		if (PickUpList != null) 
+		{
+			foreach (GameObject g in PickUpList) {
+				g.SetActive(true);
+				//When there are more than one type of crystal this breaks
+			}
+
+			PickUpList.Clear ();
+		}
 		base.OnDeath();
 	}
 	
@@ -123,6 +137,13 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
+		if(other.gameObject.tag == "checkpoint"){
+			activeCheckpoint = other.gameObject;
+			CheckPointMatsCount[0] = currentMats[0];
+			PickUpList.Clear();
+			other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+		}
+
 		if (other.gameObject.tag == "crystal") 
 		{
 			pickUpMat (other.gameObject);
@@ -176,7 +197,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			currentMats[i] += newMats[i];
 		}
-		Destroy (pickUp);
+		if (PickUpList!=null) 
+		{
+			PickUpList.Add (pickUp);
+			pickUp.SetActive(false);
+		}
 	}
 	
 	public virtual bool checkMaterials()

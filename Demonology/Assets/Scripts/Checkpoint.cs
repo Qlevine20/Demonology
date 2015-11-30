@@ -21,9 +21,7 @@ public class Checkpoint : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-			if(other.gameObject.tag == "Player"){
-			CharacterBehavior.activeCheckpoint = this.gameObject;
-			}
-	}
+	//void OnTriggerEnter2D(Collider2D other){
+
+	//}
 }
