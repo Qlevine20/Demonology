@@ -26,6 +26,7 @@ public class Mobile : DeadlyBehavior {
 		StartDir = CharacterBehavior.Dir;
 	}
 
+
 	public virtual void FixedUpdate()
 	{
 		if (!dying)

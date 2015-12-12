@@ -45,6 +45,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public static Vector2 Dir;
 	public static bool FacingRight;
+	public static bool Died;
 	
 
 	
@@ -118,7 +119,28 @@ public class CharacterBehavior : DeadlyBehavior {
 
 			PickUpList.Clear ();
 		}
+//		List<string> minNames = new List<>;
+//		foreach (GameObject min in Minions) 
+//		{
+//			minNames.Add (min.name);
+//			GameObject[] d = GameObject.FindGameObjectsWithTag (min.tag);
+//			foreach(GameObject minkill in d)
+//			{
+//				Destroy (minkill);
+//			}
+//		}
+//		GameObject[] des = GameObject.FindGameObjectsWithTag("floor");
+//		foreach(GameObject f in des)
+//		{
+//			if(minNames.Contains(f.name))
+//			{
+//				Destroy (f);
+//			}
+//		}
+
+
 		base.OnDeath();
+		Died = true;
 	}
 	
 	public virtual void summon()

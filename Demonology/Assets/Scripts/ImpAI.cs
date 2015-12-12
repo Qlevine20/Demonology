@@ -13,6 +13,7 @@ public class ImpAI : DemonBehavior {
     // Use this for initialization
     public override void Start()
     {
+
 		bc = GetComponent<BoxCollider2D> ();
 		heightChange = (.5f) * bc.size.y;
 		speed = 2;
@@ -51,6 +52,18 @@ public class ImpAI : DemonBehavior {
 		}
 	}
 
+
+	public virtual void Update()
+	{
+		base.Update ();
+		if (CharacterBehavior.Died) 
+		{
+			CharacterBehavior.Died = false;
+			Destroy (gameObject);
+
+		}
+	}
+
 	public virtual void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.gameObject.tag == "moving") 
@@ -69,6 +82,7 @@ public class ImpAI : DemonBehavior {
 			}
 			gameObject.layer = LayerMask.NameToLayer ("Ground");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
+			speed = 0;
 			StartCoroutine (WaitTime (3f));
 			gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
@@ -100,7 +114,6 @@ public class ImpAI : DemonBehavior {
 
 	public override IEnumerator WaitTime(float num)
 	{
-		speed = 0;
 		yield return new WaitForSeconds (num);
 		OnDeath ();
 	}
