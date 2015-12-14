@@ -53,7 +53,7 @@ public class ImpAI : DemonBehavior {
 	}
 
 
-	public virtual void Update()
+	public override void Update()
 	{
 		base.Update ();
 		if (CharacterBehavior.Died) 

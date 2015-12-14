@@ -164,6 +164,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			CheckPointMatsCount[0] = currentMats[0];
 			PickUpList.Clear();
 			other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+			other.gameObject.GetComponent<Checkpoint>().touched = true;
 		}
 
 		if (other.gameObject.tag == "crystal") 

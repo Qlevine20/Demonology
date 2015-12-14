@@ -72,8 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf256372961744ee285d49777e488df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
-  player: {fileID: 187882, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  touched: 0
 --- !u!212 &21256666
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -111,6 +110,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 187882, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156932}
