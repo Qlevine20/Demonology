@@ -16,8 +16,9 @@ public class ImpExp : ImpAI {
 
 	public override void OnDeath()
 	{
-		base.OnDeath ();
 		Instantiate (Psyst, transform.position, Quaternion.identity);
+		base.OnDeath ();
+
 	}
 
 	public override void Update()

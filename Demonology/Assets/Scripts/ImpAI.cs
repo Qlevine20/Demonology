@@ -9,6 +9,7 @@ public class ImpAI : DemonBehavior {
 	private Rigidbody2D rb;
 	private BoxCollider2D bc;
 	private float heightChange;
+	public float SinkTime = 3.0f;
 
     // Use this for initialization
     public override void Start()
@@ -58,9 +59,15 @@ public class ImpAI : DemonBehavior {
 		base.Update ();
 		if (CharacterBehavior.Died) 
 		{
-			CharacterBehavior.Died = false;
 			Destroy (gameObject);
 
+		}
+	}
+	public virtual void LateUpdate()
+	{
+		if (CharacterBehavior.Died) 
+		{
+			CharacterBehavior.Died = false;
 		}
 	}
 
@@ -83,7 +90,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("Ground");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
-			StartCoroutine (WaitTime (3f));
+			StartCoroutine (WaitTime (SinkTime));
 			gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
