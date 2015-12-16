@@ -118,6 +118,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
+  SinkTime: 1
   TimeToExp: 10
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
 --- !u!212 &21246288
@@ -185,6 +186,10 @@ Prefab:
       propertyPath: Psyst
       value: 
       objectReference: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: SinkTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 198696}

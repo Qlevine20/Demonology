@@ -21,6 +21,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public GameObject CrystalPrefab;
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
+	private bool WallColl;
+	private bool TouchStickImp;
 
 	
 	Animator anim;
@@ -91,7 +93,7 @@ public class CharacterBehavior : DeadlyBehavior {
 				selected = 0;
 			}
 		}
-		if (Input.GetKeyDown (jump) && onGround ()) 
+		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && TouchStickImp) 
 		{
 			jumpNow = true;
 		}
@@ -214,8 +216,33 @@ public class CharacterBehavior : DeadlyBehavior {
 		//	//Check to see if touching the floor
 		//}
 	}
-	
-	public virtual void pickUpMat(GameObject pickUp)
+
+
+	public override void OnCollisionEnter2D(Collision2D other)
+	{
+		base.OnCollisionEnter2D (other);
+		if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
+		{
+			WallColl = true;
+		}
+		if (other.gameObject.tag == "stickImp") 
+		{
+			TouchStickImp = true;
+		}
+	}
+
+	public virtual void OnCollisionExit2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
+		{
+			WallColl = false;
+		}
+		if (other.gameObject.tag == "stickImp") 
+		{
+			TouchStickImp = false;
+		}
+	}
+public virtual void pickUpMat(GameObject pickUp)
 	{
 		int[] newMats = pickUp.GetComponent<CrystalScript>().newMats;
 		for (int i=0; i<currentMats.Length; i++) 
@@ -241,12 +268,35 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		return true;
 	}
+
+
+	private bool onGround()
+	{
+		if (rb.velocity.y <= 0) 
+		{
+			foreach(Transform t in groundChecks)
+			{
+				Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
+				
+				for(int i =0;i<colliders.Length;i++)
+				{
+					if(colliders[i].gameObject!=gameObject)
+					{
+						return true;
+					}
+				}
+			} 
+		}
+		return false;
+	}
 	
 	// FixedUpdate is called once per frame
 	void FixedUpdate () {
-		
 		float move = Input.GetAxis ("Horizontal");
-		rb.velocity = new Vector2(move * speed, rb.velocity.y);
+		if(!WallColl || onGround())
+		{
+			rb.velocity = new Vector2(move * speed, rb.velocity.y);
+		}
 		
 		if (move > 0 && !FacingRight) {
 			Flip ();
@@ -259,22 +309,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		} else {
 			Dir = Vector2.left;
 		}
-		//character movement with wasd
-		
-		//		if (Input.GetKey(moveRight))
-		//		{
-		//			rb.velocity = (Vector2.right * speed *);
-		//			Dir = Vector2.right;
-		//		}
-		//		if (Input.GetKey(moveLeft))
-		//		{
-		//			transform.Translate(Vector2.left * speed * Time.deltaTime);
-		//			Dir = Vector2.left;
-		//		}
 		
 		if (jumpNow)
 		{
 			//Force added for up direction
+			rb.velocity = new Vector2(rb.velocity.x,0);
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
 			jumpNow = false;
 			//anim.SetBool ("Ground", false);
@@ -292,25 +331,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			DoubleCollider(bc,standHeight/crouchHeight);
 		}
 	}
-	private bool onGround()
-	{
-		if (rb.velocity.y <= 0) 
-		{
-			foreach(Transform t in groundChecks)
-			{
-				Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
 
-				for(int i =0;i<colliders.Length;i++)
-				{
-					if(colliders[i].gameObject!=gameObject)
-					{
-						return true;
-					}
-				}
-			} 
-		}
-		return false;
-	}
 
 
 	void Flip()
