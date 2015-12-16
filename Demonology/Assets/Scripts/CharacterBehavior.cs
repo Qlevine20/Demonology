@@ -22,6 +22,9 @@ public class CharacterBehavior : DeadlyBehavior {
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 
+    public AudioClip[] crystalPickupSounds;
+    public AudioClip[] characterMoveSounds;
+    private int characterMoveSoundIndex = 0;
 	
 	Animator anim;
 	
@@ -170,6 +173,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "crystal") 
 		{
 			pickUpMat (other.gameObject);
+            AudioSource.PlayClipAtPoint(crystalPickupSounds[Random.Range(0, crystalPickupSounds.Length)], transform.position);
 		}
 		if (other.gameObject.tag == "Finish") 
 		{
@@ -247,12 +251,23 @@ public class CharacterBehavior : DeadlyBehavior {
 		
 		float move = Input.GetAxis ("Horizontal");
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
-		
+
 		if (move > 0 && !FacingRight) {
 			Flip ();
 		} else if (move < 0 && FacingRight) {
 			Flip ();
 		}
+
+        if (move != 0) {
+            //AudioSource audio = GetComponent<AudioSource>();
+            //characterMoveSoundIndex = Random.Range(0, characterMoveSounds.Length);
+            //audio.clip = characterMoveSounds[characterMoveSoundIndex];
+            //audio.Play();
+        } else if (move == 0) {
+            //AudioSource audio = GetComponent<AudioSource>();
+            //audio.clip = characterMoveSounds[characterMoveSoundIndex];
+            //audio.Stop();
+        }
 		
 		if (CharacterBehavior.FacingRight) {
 			Dir = Vector2.right;
