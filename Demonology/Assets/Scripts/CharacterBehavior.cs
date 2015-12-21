@@ -19,6 +19,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
+
+
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 	private bool WallColl;
@@ -35,6 +37,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private float crouchHeight = 1;
 	private float standHeight = 2;
 	private float heightChange;
+	private GameObject ImpSelect;
 	
 	// player crouch/jump info
 	private bool isCrouched = false;
@@ -53,12 +56,15 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public override void Start () {
 		base.Start ();
+
+		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
 		FacingRight = true;
 		rb = GetComponent<Rigidbody2D> ();
 		Dir = Vector2.right;
 		rb = GetComponent<Rigidbody2D>();
 		bc = GetComponent<Collider2D>() as BoxCollider2D;
 		heightChange = (crouchHeight / standHeight) * bc.size.y;
+		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
 	
 	
@@ -75,6 +81,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public override void Update()
 	{
 		base.Update ();
+
+
 		if (Input.GetKeyDown (Summon)) 
 		{
 			summon();
@@ -85,13 +93,25 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
 				selected = Demons.Length-1;
 			}
+			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
+
+		if (Input.GetAxis ("Mouse ScrollWheel") > 0) 
+		{
+			ScrollUp();
+		}
+		if (Input.GetAxis ("Mouse ScrollWheel") < 0) 
+		{
+			ScrollDown();
+		}
+
 		if (Input.GetKeyDown (ShiftRight)) 
 		{
 			if (++selected >= Demons.Length)
 			{
 				selected = 0;
 			}
+			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
 		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && TouchStickImp) 
 		{
@@ -143,8 +163,28 @@ public class CharacterBehavior : DeadlyBehavior {
 
 		base.OnDeath();
 		Died = true;
+
+
 	}
-	
+
+	public void ScrollUp()
+	{
+		if (++selected >= Demons.Length)
+		{
+			selected = 0;
+		}
+		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+	}
+
+	public void ScrollDown()
+	{
+		if (--selected < 0)
+		{
+			selected = Demons.Length-1;
+		}
+		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+	}
+
 	public virtual void summon()
 	{
 		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
