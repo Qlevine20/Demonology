@@ -7,10 +7,10 @@ public class MovingBlock : MonoBehaviour {
 	public float speed;
 	//Array Position
 	protected int Pos;
-	private int ArrayDir;
+	protected int ArrayDir;
 
 	// Use this for initialization
-	public void Start () {
+	public virtual void Start () {
 		locs [0] = transform.position;
 		ArrayDir = 1;
 		Pos = 0;
