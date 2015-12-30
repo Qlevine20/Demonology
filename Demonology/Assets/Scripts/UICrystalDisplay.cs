@@ -6,6 +6,8 @@ public class UICrystalDisplay : MonoBehaviour {
 	
 	private Text crystalText;
 	private int[] playerMats;
+	public GameObject GameMenu;
+	public KeyCode menuKey;
 
 	void Start () {
 		crystalText = GetComponent<Text>();
@@ -16,5 +18,30 @@ public class UICrystalDisplay : MonoBehaviour {
 		if(DeadlyBehavior.Player)
 		playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior>().currentMats;
 		crystalText.text = playerMats[0].ToString();
+
+		if (Input.GetKeyUp (menuKey)) 
+		{
+			UpdateMenu (GameMenu);
+		}
+	}
+
+	public void UpdateMenu(GameObject menu)
+	{
+		if(menu.activeSelf)
+		{
+			menu.SetActive(false);
+			Time.timeScale = 1.0f;
+		}
+		else
+		{
+			menu.SetActive(true);
+			Time.timeScale = 0;
+		}
+	}
+
+	public void ExitToMainMenu()
+	{
+		Application.LoadLevel ("Main Menu");
+		Time.timeScale = 1.0f;
 	}
 }
