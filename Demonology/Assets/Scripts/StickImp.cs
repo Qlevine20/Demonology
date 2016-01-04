@@ -26,7 +26,6 @@ public class StickImp : ImpAI {
 		base.OnCollisionEnter2D(other);
 		if (other.gameObject.tag == "floor") 
 		{
-			gameObject.layer = LayerMask.NameToLayer("Ground");
 			Rb.isKinematic = true;
 
 		}

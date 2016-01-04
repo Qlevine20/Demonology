@@ -25,8 +25,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 	private bool WallColl;
-	private bool TouchStickImp;
-	private bool HoldingImp;
+	private string HoldingImp;
 	
 	
 	Animator anim;
@@ -59,7 +58,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public override void Start () {
 		base.Start ();
 		
-		HoldingImp = false;
+		HoldingImp = "";
 		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
 		FacingRight = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -116,7 +115,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
-		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && TouchStickImp) 
+		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && HoldingImp == "stickImp") 
 		{
 			jumpNow = true;
 		}
@@ -254,6 +253,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			OnDeath ();
 		}
+
 		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
 		//{
 		//	//Check to see if touching the floor
@@ -262,14 +262,28 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "impTrigger") {
-			Debug.Log ("In Trigger");
-			if (Input.GetKey (grab) && !HoldingImp) {
-				Debug.Log ("working");
-				HoldingImp = true;
+		if (other.gameObject.tag == "impTrigger") 
+		{
+			if (Input.GetKey (grab) && HoldingImp == "") 
+			{
+				HoldingImp = other.transform.parent.gameObject.tag;
 				GrabImp(other);
 			}
 		}
+		if (other.gameObject.tag == "stickImp") 
+		{
+			if(Input.GetKey (grab) && HoldingImp == "")
+			{
+				HoldingImp = other.transform.parent.gameObject.tag;
+				StickToImp(other);
+			}
+		}
+	}
+
+	void StickToImp(Collider2D imp)
+	{
+		rb.isKinematic = true;
+
 	}
 	
 	
@@ -280,10 +294,6 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			WallColl = true;
 		}
-		if (other.gameObject.tag == "stickImp") 
-		{
-			TouchStickImp = true;
-		}
 	}
 	
 	public virtual void OnCollisionExit2D(Collision2D other)
@@ -292,10 +302,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			WallColl = false;
 		}
-		if (other.gameObject.tag == "stickImp") 
-		{
-			TouchStickImp = false;
-		}
+
 	}
 	public virtual void pickUpMat(GameObject pickUp)
 	{
@@ -352,6 +359,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			rb.velocity = new Vector2(move * speed, rb.velocity.y);
 		}
+
+		if (move != 0) 
+		{
+			CheckHoldingStickImp();
+		}
 		
 		if (move > 0 && !FacingRight) {
 			Flip ();
@@ -367,6 +379,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		
 		if (jumpNow)
 		{
+			CheckHoldingStickImp();
 			//Force added for up direction
 			rb.velocity = new Vector2(rb.velocity.x,0);
 			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
@@ -389,14 +402,21 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	void GrabImp(Collider2D imp)
 	{
-		Debug.Log ("GrabbingImp");
 		imp.transform.parent.GetComponent<Mobile> ().speed = 0;
 		imp.transform.parent.GetComponent<Rigidbody2D> ().gravityScale = 0;
 		imp.transform.parent.transform.parent = transform;
 		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
 	}
 	
-	
+	void CheckHoldingStickImp()
+	{
+		if(HoldingImp == "stickImp")
+		{
+			HoldingImp = "";
+			rb.isKinematic = false;
+			
+		}
+	}
 	
 	void Flip()
 	{

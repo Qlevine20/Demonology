@@ -164,6 +164,7 @@ MonoBehaviour:
   ShiftRight: 114
   jump: 119
   crouch: 115
+  grab: 103
   Minions:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
   - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
@@ -305,6 +306,10 @@ Prefab:
       propertyPath: Demons.Array.data[3]
       value: 
       objectReference: {fileID: 134596, guid: 01c7110a8b56c1d4f95bcab9caca242e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: maxMins
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
