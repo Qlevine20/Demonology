@@ -10,6 +10,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode ShiftRight = KeyCode.R;
 	public KeyCode jump = KeyCode.W;
 	public KeyCode crouch = KeyCode.S;
+	public KeyCode grab = KeyCode.G;
 	
 	public GameObject[] Minions;
 	public int[] currentMats;
@@ -19,13 +20,14 @@ public class CharacterBehavior : DeadlyBehavior {
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
-
-
+	
+	
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 	private bool WallColl;
 	private bool TouchStickImp;
-
+	private bool HoldingImp;
+	
 	
 	Animator anim;
 	
@@ -52,11 +54,12 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static bool FacingRight;
 	public static bool Died;
 	
-
+	
 	
 	public override void Start () {
 		base.Start ();
-
+		
+		HoldingImp = false;
 		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
 		FacingRight = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -81,8 +84,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public override void Update()
 	{
 		base.Update ();
-
-
+		
+		
 		if (Input.GetKeyDown (Summon)) 
 		{
 			summon();
@@ -95,7 +98,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
-
+		
 		if (Input.GetAxis ("Mouse ScrollWheel") > 0) 
 		{
 			ScrollUp();
@@ -104,7 +107,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			ScrollDown();
 		}
-
+		
 		if (Input.GetKeyDown (ShiftRight)) 
 		{
 			if (++selected >= Demons.Length)
@@ -138,35 +141,35 @@ public class CharacterBehavior : DeadlyBehavior {
 				g.SetActive(true);
 				//When there are more than one type of crystal this breaks
 			}
-
+			
 			PickUpList.Clear ();
 		}
-//		List<string> minNames = new List<>;
-//		foreach (GameObject min in Minions) 
-//		{
-//			minNames.Add (min.name);
-//			GameObject[] d = GameObject.FindGameObjectsWithTag (min.tag);
-//			foreach(GameObject minkill in d)
-//			{
-//				Destroy (minkill);
-//			}
-//		}
-//		GameObject[] des = GameObject.FindGameObjectsWithTag("floor");
-//		foreach(GameObject f in des)
-//		{
-//			if(minNames.Contains(f.name))
-//			{
-//				Destroy (f);
-//			}
-//		}
-
-
+		//		List<string> minNames = new List<>;
+		//		foreach (GameObject min in Minions) 
+		//		{
+		//			minNames.Add (min.name);
+		//			GameObject[] d = GameObject.FindGameObjectsWithTag (min.tag);
+		//			foreach(GameObject minkill in d)
+		//			{
+		//				Destroy (minkill);
+		//			}
+		//		}
+		//		GameObject[] des = GameObject.FindGameObjectsWithTag("floor");
+		//		foreach(GameObject f in des)
+		//		{
+		//			if(minNames.Contains(f.name))
+		//			{
+		//				Destroy (f);
+		//			}
+		//		}
+		
+		
 		base.OnDeath();
 		Died = true;
-
-
+		
+		
 	}
-
+	
 	public void ScrollUp()
 	{
 		if (++selected >= Demons.Length)
@@ -175,7 +178,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
-
+	
 	public void ScrollDown()
 	{
 		if (--selected < 0)
@@ -184,7 +187,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
-
+	
 	public virtual void summon()
 	{
 		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
@@ -208,7 +211,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			other.gameObject.GetComponent<Checkpoint>().touched = true;
 		}
-
+		
 		if (other.gameObject.tag == "crystal") 
 		{
 			pickUpMat (other.gameObject);
@@ -256,8 +259,20 @@ public class CharacterBehavior : DeadlyBehavior {
 		//	//Check to see if touching the floor
 		//}
 	}
-
-
+	
+	public void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "impTrigger") {
+			Debug.Log ("In Trigger");
+			if (Input.GetKey (grab) && !HoldingImp) {
+				Debug.Log ("working");
+				HoldingImp = true;
+				GrabImp(other);
+			}
+		}
+	}
+	
+	
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
 		base.OnCollisionEnter2D (other);
@@ -270,7 +285,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			TouchStickImp = true;
 		}
 	}
-
+	
 	public virtual void OnCollisionExit2D(Collision2D other)
 	{
 		if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
@@ -282,7 +297,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			TouchStickImp = false;
 		}
 	}
-public virtual void pickUpMat(GameObject pickUp)
+	public virtual void pickUpMat(GameObject pickUp)
 	{
 		int[] newMats = pickUp.GetComponent<CrystalScript>().newMats;
 		for (int i=0; i<currentMats.Length; i++) 
@@ -308,8 +323,8 @@ public virtual void pickUpMat(GameObject pickUp)
 		}
 		return true;
 	}
-
-
+	
+	
 	private bool onGround()
 	{
 		if (rb.velocity.y <= 0) 
@@ -371,9 +386,18 @@ public virtual void pickUpMat(GameObject pickUp)
 			DoubleCollider(bc,standHeight/crouchHeight);
 		}
 	}
-
-
-
+	
+	void GrabImp(Collider2D imp)
+	{
+		Debug.Log ("GrabbingImp");
+		imp.transform.parent.GetComponent<Mobile> ().speed = 0;
+		imp.transform.parent.GetComponent<Rigidbody2D> ().gravityScale = 0;
+		imp.transform.parent.transform.parent = transform;
+		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
+	}
+	
+	
+	
 	void Flip()
 	{
 		FacingRight = !FacingRight;
