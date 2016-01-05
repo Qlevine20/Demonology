@@ -161,7 +161,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
   SinkTime: 1
-  TimeToExp: 10
+  TimeToExp: 2
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
 --- !u!212 &21246288
 SpriteRenderer:
@@ -222,7 +222,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TimeToExp
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Psyst

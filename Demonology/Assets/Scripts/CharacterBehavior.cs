@@ -20,6 +20,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public int maxMins = 5;
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
+	public LayerMask IgnorePlayerLayer;
 	
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
@@ -79,12 +80,41 @@ public class CharacterBehavior : DeadlyBehavior {
 		public int numOfMat;
 	}
 	
-	
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		ray = new Ray (new Vector3 (ray.origin.x, ray.origin.y-2.5f,0.0f), new Vector3 (ray.direction.x, ray.direction.y,0.0f));
+		Gizmos.DrawRay (ray);
+
+	}
 	public override void Update()
 	{
 		base.Update ();
-		
-		
+
+
+		if (HoldingImp!="") 
+		{
+
+//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+//			Gizmos.DrawRay (ray);
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray2D mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
+			if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
+			{
+				transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
+			}
+			else
+			{
+				float Change = Physics2D.Raycast (mP.origin,mP.direction,1.0f,IgnorePlayerLayer).distance;
+				transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (Change-0.5f).x,mP.GetPoint (Change-0.5f).y,0.0f);
+
+			}
+		}
+
+
+
+
 		if (Input.GetKeyDown (Summon)) 
 		{
 			summon();
@@ -239,6 +269,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			if (Input.GetKey (grab) && HoldingImp == "") 
 			{
 				HoldingImp = other.transform.parent.gameObject.tag;
+				other.transform.parent.transform.parent = transform;
 				GrabImp(other);
 			}
 		}
@@ -370,6 +401,9 @@ public class CharacterBehavior : DeadlyBehavior {
 			isCrouched = false;
 			DoubleCollider(bc,standHeight/crouchHeight);
 		}
+
+
+
 	}
 	
 	void GrabImp(Collider2D imp)
@@ -397,4 +431,9 @@ public class CharacterBehavior : DeadlyBehavior {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}	
+
+	public Vector3 ConvertVector3(Vector3 prefix, float x, float y, float z)
+	{
+		return new Vector3 (prefix.x + x,prefix.y + y,prefix.z + z);
+	}
 }

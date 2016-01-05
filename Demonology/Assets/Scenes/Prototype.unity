@@ -1368,7 +1368,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 807282606}
   - 61: {fileID: 807282605}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DeathBoundary
   m_TagString: DeathBoundary
   m_Icon: {fileID: 0}
@@ -1917,6 +1917,10 @@ Prefab:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 587985205}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: IgnorePlayerLayer.m_Bits
+      value: 2305
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
   m_IsPrefabParent: 0
