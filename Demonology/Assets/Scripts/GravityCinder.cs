@@ -13,6 +13,7 @@ public class GravityCinder : MonoBehaviour {
 	private bool dead = false;
 	private float gravitySave;
 
+
 	// Use this for initialization
 	public void Start () {
 		startPos = transform.position;
