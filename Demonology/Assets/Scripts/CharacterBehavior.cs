@@ -98,15 +98,6 @@ public class CharacterBehavior : DeadlyBehavior {
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
 		
-		if (Input.GetAxis ("Mouse ScrollWheel") > 0) 
-		{
-			ScrollUp();
-		}
-		if (Input.GetAxis ("Mouse ScrollWheel") < 0) 
-		{
-			ScrollDown();
-		}
-		
 		if (Input.GetKeyDown (ShiftRight)) 
 		{
 			if (++selected >= Demons.Length)
@@ -168,25 +159,6 @@ public class CharacterBehavior : DeadlyBehavior {
 		
 		
 	}
-	
-	public void ScrollUp()
-	{
-		if (++selected >= Demons.Length)
-		{
-			selected = 0;
-		}
-		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
-	}
-	
-	public void ScrollDown()
-	{
-		if (--selected < 0)
-		{
-			selected = Demons.Length-1;
-		}
-		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
-	}
-	
 	public virtual void summon()
 	{
 		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
