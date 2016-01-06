@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.8599997, y: 4.84000015, z: 0}
+  m_LocalPosition: {x: 11.0799999, y: 1.51999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 490698}
@@ -179,6 +179,9 @@ MonoBehaviour:
   maxMins: 5
   PlayerPrefab: {fileID: 187882}
   CrystalPrefab: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
+  IgnorePlayerLayer:
+    serializedVersion: 2
+    m_Bits: 2305
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 256
@@ -188,6 +191,7 @@ MonoBehaviour:
   - {fileID: 469950}
   speed: 5
   jumpspeed: 15
+  ForceMult: 20
 --- !u!212 &21285244
 SpriteRenderer:
   m_ObjectHideFlags: 1

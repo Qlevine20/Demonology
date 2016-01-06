@@ -25,6 +25,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
+	private Ray2D mP;
 	private bool WallColl;
 	private string HoldingImp;
 	
@@ -49,6 +50,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
 	public int jumpspeed = 10;//change in editor not here
+	public float ForceMult;
 	
 	public static Vector2 Dir;
 	public static bool FacingRight;
@@ -58,7 +60,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public override void Start () {
 		base.Start ();
-		
+
+		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
 		HoldingImp = "";
 		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
 		FacingRight = true;
@@ -83,9 +86,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.yellow;
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		ray = new Ray (new Vector3 (ray.origin.x, ray.origin.y-2.5f,0.0f), new Vector3 (ray.direction.x, ray.direction.y,0.0f));
-		Gizmos.DrawRay (ray);
+		Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
 
 	}
 	public override void Update()
@@ -95,20 +96,27 @@ public class CharacterBehavior : DeadlyBehavior {
 
 		if (HoldingImp!="") 
 		{
-
-//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//			Gizmos.DrawRay (ray);
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			Ray2D mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
-			if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
+			if(transform.childCount > 3)
 			{
-				transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
+	//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	//			Gizmos.DrawRay (ray);
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
+				if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
+				{
+					transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
+				}
+				else
+				{
+					float Change = Physics2D.Raycast (mP.origin,mP.direction,1.0f,IgnorePlayerLayer).distance;
+					transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (Change-0.5f).x,mP.GetPoint (Change-0.5f).y,0.0f);
+
+
+				}
 			}
 			else
 			{
-				float Change = Physics2D.Raycast (mP.origin,mP.direction,1.0f,IgnorePlayerLayer).distance;
-				transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (Change-0.5f).x,mP.GetPoint (Change-0.5f).y,0.0f);
-
+				HoldingImp = "";
 			}
 		}
 
@@ -270,6 +278,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
 				HoldingImp = other.transform.parent.gameObject.tag;
 				other.transform.parent.transform.parent = transform;
+				other.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
 				GrabImp(other);
 			}
 		}
@@ -401,6 +410,19 @@ public class CharacterBehavior : DeadlyBehavior {
 			isCrouched = false;
 			DoubleCollider(bc,standHeight/crouchHeight);
 		}
+		if (Input.GetMouseButtonDown (0)) 
+		{
+			if(HoldingImp!="")
+			{
+				HoldingImp = "";
+				GameObject childImp = transform.GetChild (3).gameObject; 
+				childImp.transform.parent = null;
+				Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
+				childRb.isKinematic = false;
+				childRb.AddForce(mP.direction*ForceMult,ForceMode2D.Impulse);
+				childImp.GetComponent<BoxCollider2D>().enabled = true;
+			}
+		}
 
 
 
@@ -408,8 +430,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	void GrabImp(Collider2D imp)
 	{
-		imp.transform.parent.GetComponent<Mobile> ().speed = 0;
-		imp.transform.parent.GetComponent<Rigidbody2D> ().gravityScale = 0;
 		imp.transform.parent.transform.parent = transform;
 		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
 	}
