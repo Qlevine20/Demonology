@@ -162,7 +162,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			Flip ();
 		}
 		currentMats[0] = CheckPointMatsCount[0];
-		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y, 0.0f), Quaternion.identity);
+		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
 		if (PickUpList != null) 
 		{
 			foreach (GameObject g in PickUpList) {

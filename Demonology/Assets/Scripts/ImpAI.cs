@@ -59,7 +59,7 @@ public class ImpAI : DemonBehavior {
 		base.Update ();
 		if (CharacterBehavior.Died) 
 		{
-			Destroy (gameObject);
+			OnDeath ();
 
 		}
 	}

@@ -65,7 +65,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -85,6 +84,9 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!127 &5
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!4 &10037085 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
@@ -140,12 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .720588207, g: 0, b: 0, a: .603999972}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ee0e177c74b8c46bda64c6fa4b2c58c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -273,12 +269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 6d216e3670d3d4155a62799cfc85fbdb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -340,12 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: a727eeee9f25d401aac0581c66c8c197, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -1334,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
+  m_AllowActivationOnStandalone: 0
 --- !u!114 &767557601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1336,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_ForceModuleActive: 0
+  m_AllowActivationOnMobileDevice: 0
 --- !u!114 &767557602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,6 +1458,23 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 22c47e031b1634a96aefc7bbc6f65075, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &855338724 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 175394, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
+--- !u!58 &855338726
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 855338724}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
 --- !u!1 &870748210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1878,10 @@ Prefab:
       propertyPath: ForceMult
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6109764, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
   m_IsPrefabParent: 0
@@ -1928,12 +1933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: ad30b19e6fe48421999587039dda55b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -2090,6 +2089,10 @@ Prefab:
     - target: {fileID: 101744, guid: 2f3d9656e05d1d84cb18ece64b37731c, type: 2}
       propertyPath: m_Name
       value: Rock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6113484, guid: 2f3d9656e05d1d84cb18ece64b37731c, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f3d9656e05d1d84cb18ece64b37731c, type: 2}
@@ -2475,7 +2478,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 488716, guid: bbac530feb1c3444587e584901b52ea8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5.3499999
+      value: 5.36999989
       objectReference: {fileID: 0}
     - target: {fileID: 488716, guid: bbac530feb1c3444587e584901b52ea8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2633,12 +2636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -2699,7 +2696,20 @@ EdgeCollider2D:
   - {x: 4.20514536, y: 3.67947245}
   - {x: 5.06836557, y: 3.05587626}
   - {x: 5.21854258, y: 2.56629801}
---- !u!60 &1516798580
+--- !u!58 &1516798580
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1516798578}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 3.79999995, y: 3}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!60 &1516798581
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2745,50 +2755,7 @@ PolygonCollider2D:
       - {x: 5.18499994, y: 2.65499997}
       - {x: 5.15500021, y: 2.7650001}
       - {x: 5.10500002, y: 2.91499996}
-      - {x: 5.0250001, y: 3.05500007}
-      - {x: 4.83500004, y: 3.2650001}
-      - {x: 4.59499979, y: 3.42499995}
-      - {x: 4.36499977, y: 3.57500005}
-      - {x: 4.17500019, y: 3.74499989}
-      - {x: 4.08500004, y: 3.93499994}
-      - {x: 3.90499997, y: 4.21500015}
-      - {x: 3.80500007, y: 4.30499983}
-      - {x: 3.75500011, y: 4.32499981}
-      - {x: 3.7249999, y: 4.33500004}
-      - {x: 3.09500003, y: 4.33500004}
-      - {x: 3.08500004, y: 4.34499979}
-      - {x: 2.95499992, y: 4.35500002}
-      - {x: 2.89499998, y: 4.375}
-      - {x: 2.65499997, y: 4.375}
-      - {x: 2.40499997, y: 4.30499983}
-      - {x: 2.03500009, y: 4.18499994}
-      - {x: 1.83500004, y: 4.18499994}
-      - {x: 1.495, y: 4.19500017}
-      - {x: 1.14499998, y: 4.23500013}
-      - {x: .915000021, y: 4.26499987}
-      - {x: .795000017, y: 4.26499987}
-      - {x: .465000004, y: 4.25500011}
-      - {x: .455000013, y: 4.26499987}
-      - {x: .174999997, y: 4.29500008}
-      - {x: -.38499999, y: 4.29500008}
-      - {x: -.61500001, y: 4.28499985}
-      - {x: -1.01499999, y: 4.2249999}
-      - {x: -1.04499996, y: 4.20499992}
-      - {x: -1.05499995, y: 4.19500017}
-      - {x: -2.33500004, y: 4.19500017}
-      - {x: -2.44499993, y: 4.18499994}
-      - {x: -2.49499989, y: 4.17500019}
-      - {x: -2.7249999, y: 4.15500021}
-      - {x: -3.04500008, y: 4.11499977}
-      - {x: -3.05500007, y: 4.10500002}
-      - {x: -3.82500005, y: 4.10500002}
-      - {x: -3.83500004, y: 4.11499977}
-      - {x: -4.0250001, y: 4.13500023}
-      - {x: -4.49499989, y: 4.13500023}
-      - {x: -4.625, y: 4.125}
-      - {x: -4.7249999, y: 4.10500002}
-      - {x: -4.78499985, y: 4.07499981}
-      - {x: -4.88500023, y: 3.9849999}
+      - {x: 2.30630016, y: 3.77805948}
       - {x: -5.03499985, y: 3.83500004}
       - {x: -5.18499994, y: 3.65499997}
       - {x: -5.19500017, y: 3.625}
@@ -2875,6 +2842,19 @@ PolygonCollider2D:
       - {x: 2.79500008, y: -4.30499983}
       - {x: 2.80500007, y: -4.28499985}
       - {x: 2.81500006, y: -3.95499992}
+--- !u!61 &1516798582
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1516798578}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -.635838509, y: 2.966887}
+  serializedVersion: 2
+  m_Size: {x: 9.11807728, y: 2.08952093}
 --- !u!4 &1545703831 stripped
 Transform:
   m_PrefabParentObject: {fileID: 430832, guid: 9c1e3f175b595c34fb94198b1e7fb6dd, type: 2}
@@ -2968,6 +2948,23 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 430832, guid: 9c1e3f175b595c34fb94198b1e7fb6dd, type: 2}
   m_PrefabInternal: {fileID: 1723226766}
+--- !u!1 &1597332759 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 110560, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
+--- !u!58 &1597332761
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1597332759}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
 --- !u!1001 &1605134622
 Prefab:
   m_ObjectHideFlags: 0
@@ -3026,6 +3023,23 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   m_PrefabInternal: {fileID: 454191284}
+--- !u!1 &1685396604 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 111458, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
+--- !u!58 &1685396605
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685396604}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
 --- !u!4 &1701825543 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496502, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
@@ -3858,6 +3872,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2039046910 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 187882, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
+--- !u!60 &2039046916
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039046910}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: .25, y: .670000017}
+      - {x: -.119999997, y: .850000024}
+      - {x: -.370000005, y: .850000024}
+      - {x: -.449999988, y: .769999981}
+      - {x: -.449999988, y: -.0700000003}
+      - {x: -.419999987, y: -.479999989}
+      - {x: -.209999993, y: -.850000024}
+      - {x: .370000005, y: -.850000024}
+      - {x: .389999986, y: -.74000001}
+      - {x: .449999988, y: -.0500000007}
+      - {x: .449999988, y: .469999999}
 --- !u!1001 &2076493707
 Prefab:
   m_ObjectHideFlags: 0

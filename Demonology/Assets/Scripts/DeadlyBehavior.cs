@@ -38,10 +38,6 @@ public class DeadlyBehavior : MonoBehaviour {
 
 	public virtual void OnDeath()
 	{
-		if (DeathAnim != null) 
-		{
-			DeathAnim.Play ();
-		}
 		Destroy (gameObject);
 	}
 
