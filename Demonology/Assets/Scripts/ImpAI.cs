@@ -45,7 +45,7 @@ public class ImpAI : DemonBehavior {
 				gameObject.layer = LayerMask.NameToLayer ("Ground");
 				gameObject.GetComponent<BoxCollider2D>().enabled = true;
 				speed = 0;
-				gameObject.tag = "floor";
+				//gameObject.tag = "floor";
 				HalveCollider(bc,heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
 				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
@@ -91,7 +91,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
 			StartCoroutine (WaitTime (SinkTime));
-			gameObject.tag = "floor";
+			//gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 			HalveCollider(bc,heightChange);
@@ -107,7 +107,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("Ground");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
-			gameObject.tag = "floor";
+			//gameObject.tag = "floor";
 			HalveCollider(bc,heightChange);
 			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
@@ -123,5 +123,11 @@ public class ImpAI : DemonBehavior {
 	{
 		yield return new WaitForSeconds (num);
 		OnDeath ();
+	}
+
+	public override void OnDeath()
+	{
+		transform.DetachChildren ();
+		Destroy (gameObject);
 	}
 }

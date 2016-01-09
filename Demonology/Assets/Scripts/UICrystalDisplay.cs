@@ -8,6 +8,7 @@ public class UICrystalDisplay : MonoBehaviour {
 	private int[] playerMats;
 	public GameObject GameMenu;
 	public KeyCode menuKey;
+	public int crystalId;
 
 	void Start () {
 		crystalText = GetComponent<Text>();
@@ -17,9 +18,9 @@ public class UICrystalDisplay : MonoBehaviour {
 	void Update () {
 		if(DeadlyBehavior.Player)
 		playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior>().currentMats;
-		crystalText.text = playerMats[0].ToString();
+		crystalText.text = playerMats[crystalId].ToString();
 
-		if (Input.GetKeyUp (menuKey)) 
+		if (GameMenu != null && Input.GetKeyUp (menuKey)) 
 		{
 			UpdateMenu (GameMenu);
 		}
