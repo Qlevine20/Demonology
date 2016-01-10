@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 469950}
+  - 58: {fileID: 5802836}
   m_Layer: 0
   m_Name: GroundCheck (2)
   m_TagString: Untagged
@@ -23,6 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 433578}
+  - 58: {fileID: 5871666}
   m_Layer: 0
   m_Name: GroundCheck (1)
   m_TagString: Untagged
@@ -38,6 +40,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 490698}
+  - 58: {fileID: 5871622}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -56,7 +59,10 @@ GameObject:
   - 50: {fileID: 5019588}
   - 114: {fileID: 11425276}
   - 212: {fileID: 21285244}
-  - 61: {fileID: 6109764}
+  - 61: {fileID: 6157812}
+  - 58: {fileID: 5862312}
+  - 58: {fileID: 5888438}
+  - 58: {fileID: 5836688}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -131,7 +137,85 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6109764
+--- !u!58 &5802836
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110560}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
+--- !u!58 &5836688
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187882}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: .300000012}
+  serializedVersion: 2
+  m_Radius: .400000006
+--- !u!58 &5862312
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187882}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .200000003, y: -.699999988}
+  serializedVersion: 2
+  m_Radius: .200000003
+--- !u!58 &5871622
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175394}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
+--- !u!58 &5871666
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 111458}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .0500000007
+--- !u!58 &5888438
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187882}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -.200000003, y: -.699999988}
+  serializedVersion: 2
+  m_Radius: .200000003
+--- !u!61 &6157812
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -141,9 +225,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .000577449799, y: .000323295593}
+  m_Offset: {x: 0, y: -.300000012}
   serializedVersion: 2
-  m_Size: {x: .913534522, y: 1.70020854}
+  m_Size: {x: .699999988, y: .5}
 --- !u!114 &11425276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,6 +266,7 @@ MonoBehaviour:
   IgnorePlayerLayer:
     serializedVersion: 2
     m_Bits: 2305
+  crystalPickupSound: {fileID: 8300000, guid: 8ea701aa0b6c37c4398480929495c0de, type: 3}
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 256
@@ -191,7 +276,7 @@ MonoBehaviour:
   - {fileID: 469950}
   speed: 5
   jumpspeed: 15
-  ForceMult: 20
+  ForceMult: 15
 --- !u!212 &21285244
 SpriteRenderer:
   m_ObjectHideFlags: 1

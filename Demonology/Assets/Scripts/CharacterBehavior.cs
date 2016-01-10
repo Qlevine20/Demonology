@@ -22,6 +22,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
 	public LayerMask IgnorePlayerLayer;
+    public AudioClip crystalPickupSound;
 	
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
@@ -239,7 +240,11 @@ public class CharacterBehavior : DeadlyBehavior {
 		// If you collide with a crystal...
 		if (other.gameObject.tag == "crystal") 
 		{
-			// pick it up
+			//play a sound
+            if (gameObject != null) {
+                AudioSource.PlayClipAtPoint(crystalPickupSound, Camera.main.transform.position, 100.0f);
+            }
+            // pick it up
 			pickUpMat (other.gameObject);
 		}
 		// If you collide with the end of the stage...
