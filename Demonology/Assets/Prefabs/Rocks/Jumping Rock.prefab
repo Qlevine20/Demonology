@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21210260}
   - 60: {fileID: 6055186}
   - 68: {fileID: 6882070}
-  - 61: {fileID: 6134722}
   m_Layer: 8
   m_Name: Jumping Rock
   m_TagString: floor
@@ -80,19 +79,6 @@ PolygonCollider2D:
       - {x: .455000013, y: -1.10000002}
       - {x: .495000005, y: -.99000001}
       - {x: .495000005, y: -.709999979}
---- !u!61 &6134722
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197542}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0277408566}
-  serializedVersion: 2
-  m_Size: {x: 1.91000009, y: 2.49548173}
 --- !u!68 &6882070
 EdgeCollider2D:
   m_ObjectHideFlags: 1

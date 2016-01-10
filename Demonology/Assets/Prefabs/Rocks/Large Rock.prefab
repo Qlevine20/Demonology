@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 488716}
   - 212: {fileID: 21230302}
   - 68: {fileID: 6801416}
-  - 61: {fileID: 6145174}
   - 60: {fileID: 6037990}
   m_Layer: 8
   m_Name: Large Rock
@@ -207,19 +206,6 @@ PolygonCollider2D:
       - {x: 2.79500008, y: -4.30499983}
       - {x: 2.80500007, y: -4.28499985}
       - {x: 2.81500006, y: -3.95499992}
---- !u!61 &6145174
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106350}
-  m_Enabled: 0
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0134019852}
-  serializedVersion: 2
-  m_Size: {x: 10.3900003, y: 8.77680397}
 --- !u!68 &6801416
 EdgeCollider2D:
   m_ObjectHideFlags: 1
