@@ -367,10 +367,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	// FixedUpdate is called once per frame
 	void FixedUpdate () {
 		float move = Input.GetAxis ("Horizontal");
-		if(!WallColl || onGround())
-		{
-			rb.velocity = new Vector2(move * speed, rb.velocity.y);
-		}
+//		if(!WallColl || onGround())
+//		{
+		rb.velocity = new Vector2(move * speed, rb.velocity.y);
+//		}
 
 		if (move != 0) 
 		{
