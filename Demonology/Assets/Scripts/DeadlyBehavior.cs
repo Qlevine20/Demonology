@@ -4,9 +4,10 @@ using System.Collections;
 public class DeadlyBehavior : MonoBehaviour {
 
 
-    //List of all game objects that kill player instantly
 	public Animation DeathAnim;
+    //List of all game objects that kill player instantly
 	public GameObject[] DeadlyObs;
+
 	public static GameObject Player;
 
 	public virtual void Start()
@@ -25,6 +26,8 @@ public class DeadlyBehavior : MonoBehaviour {
 		Player = GameObject.FindGameObjectWithTag ("Player");
 	}
 
+
+    //Checks to see if the object has touched 
 	public virtual void CheckDeath(GameObject other, GameObject[]DeadlyObs)
 	{
 		for (int i = 0; i < DeadlyObs.Length; i++)

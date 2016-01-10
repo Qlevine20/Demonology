@@ -338,20 +338,17 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Check if the player is on the ground (and therefore allowed to jump)
 	private bool onGround()
 	{
-		if (rb.velocity.y <= 0) 
+		foreach(Transform t in groundChecks)
 		{
-			foreach(Transform t in groundChecks)
-			{
-				Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
+			Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
 				
-				for(int i =0;i<colliders.Length;i++)
+			for(int i =0;i<colliders.Length;i++)
+			{
+				if(colliders[i].gameObject!=gameObject)
 				{
-					if(colliders[i].gameObject!=gameObject)
-					{
-						return true;
-					}
+					return true;
 				}
-			} 
+			}
 		}
 		return false;
 	}

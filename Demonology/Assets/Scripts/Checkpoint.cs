@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class Checkpoint : MonoBehaviour {
 
-	public bool touched;
-	private Animator Anim;
+
+	public bool touched; //Bool to check if player touched Checkpoint
+	private Animator Anim; //Checkpoints Animator
+
 	void Start()
 	{
 		Anim = GetComponent<Animator> ();
@@ -16,31 +18,9 @@ public class Checkpoint : MonoBehaviour {
 		{
 			if(Anim!=null)
 			{
+                //Activates the Animator on the checkpoint game object when touched.
 				Anim.SetBool ("active",true);
 			}
 		}
 	}
-//	// Use this for initialization
-//	public GameObject player;
-//	//set for crystals[]
-//	//Keep track of crystals picked up until you hit a checkpoint, and then erase the set and start over.
-//	//If you respawn at a checkpoint, reinstantiate all the crystals in the set
-//
-//	void Start () {
-//		animator = GetComponent<Animator> ();
-//	}
-//	
-//	// Update is called once per frame
-//	void Update () {
-//
-//
-//
-//	}
-//
-//	void OnTriggerEnter2D(Collider2D other){
-//
-//		if (other.gameObject.tag == "Player") {
-//			animator.SetBool ("active", true);
-//		}
-//	}
 }
