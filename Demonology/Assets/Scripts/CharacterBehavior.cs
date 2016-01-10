@@ -4,14 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class CharacterBehavior : DeadlyBehavior {
-	
+
+	// KeyCode Assignments
 	public KeyCode Summon = KeyCode.Q;
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
 	public KeyCode jump = KeyCode.W;
 	public KeyCode crouch = KeyCode.S;
 	public KeyCode grab = KeyCode.G;
-	
+
 	public GameObject[] Minions;
 	public int[] currentMats;
 	public GameObject[] Demons;
@@ -26,7 +27,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private List<GameObject> PickUpList= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 	private Ray2D mP;
-	private bool WallColl;
+	//private bool WallColl;
 	private string HoldingImp;
 	
 	
@@ -56,8 +57,20 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static bool FacingRight;
 	public static bool Died;
 	
-	
-	
+
+	// struct for summoning materials
+	public struct summMaterials
+	{
+		public GameObject mat;
+		public int numOfMat;
+	}
+
+
+	//
+	// FUNCTIONS START HERE
+	//
+
+	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 
@@ -72,28 +85,18 @@ public class CharacterBehavior : DeadlyBehavior {
 		heightChange = (crouchHeight / standHeight) * bc.size.y;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
-	
-	
-	// Use this for initialization
-	
-	
-	public struct summMaterials
-	{
-		public GameObject mat;
-		public int numOfMat;
-	}
-	
-	void OnDrawGizmos()
-	{
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
 
-	}
+
+	//
+	// UPDATE FUNCTIONS START HERE
+	//
+
+	// Update is called once per frame
 	public override void Update()
 	{
 		base.Update ();
 
-
+		// Code for holding and throwing imps
 		if (HoldingImp!="") 
 		{
 			if(transform.childCount > 3)
@@ -110,8 +113,6 @@ public class CharacterBehavior : DeadlyBehavior {
 				{
 					float Change = Physics2D.Raycast (mP.origin,mP.direction,1.0f,IgnorePlayerLayer).distance;
 					transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (Change-0.5f).x,mP.GetPoint (Change-0.5f).y,0.0f);
-
-
 				}
 			}
 			else
@@ -120,24 +121,24 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 		}
 
-
-
-
+		// Code for recieving button input
 		if (Input.GetKeyDown (Summon)) 
 		{
+			// Summon a demon
 			summon();
 		}
 		if (Input.GetKeyDown (ShiftLeft)) 
 		{
+			// Cycle the demon selection wheel to the left
 			if (--selected < 0)
 			{
 				selected = Demons.Length-1;
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
-		
 		if (Input.GetKeyDown (ShiftRight)) 
 		{
+			// Cycle the demon selection wheel to the right
 			if (++selected >= Demons.Length)
 			{
 				selected = 0;
@@ -146,132 +147,149 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && HoldingImp == "stickImp") 
 		{
+			// Jump (this actually gets processed later, in FixedUpdate
 			jumpNow = true;
 		}
-	}
-	
-	public override void OnDeath()
-	{
-		if (DeathAnim != null) 
+		if (Input.GetMouseButtonDown (0)) 
 		{
-			DeathAnim.Play ();
+			// THROW THE IMP!
+			if(HoldingImp!="")
+			{
+				HoldingImp = "";
+				GameObject childImp = transform.GetChild (3).gameObject; 
+				childImp.transform.parent = null;
+				Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
+				childRb.isKinematic = false;
+				childRb.AddForce(mP.direction*ForceMult,ForceMode2D.Impulse);
+				childImp.GetComponent<BoxCollider2D>().enabled = true;
+			}
 		}
-		transform.SetParent(null);
-		if (!FacingRight) 
+	}
+
+	// FixedUpdate is called once per frame
+	void FixedUpdate () {
+		float move = Input.GetAxis ("Horizontal");
+		//		if(!WallColl || onGround())
+		//		{
+		rb.velocity = new Vector2(move * speed, rb.velocity.y);
+		//		}
+
+		// Check if you're holding a sticky imp
+		if (move != 0) 
 		{
+			CheckHoldingStickImp();
+		}
+
+		// Check if the sprite needs to flip
+		if (move > 0 && !FacingRight) {
+			Flip ();
+		} else if (move < 0 && FacingRight) {
 			Flip ();
 		}
-		currentMats[0] = CheckPointMatsCount[0];
-		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
-		if (PickUpList != null) 
-		{
-			foreach (GameObject g in PickUpList) {
-				g.SetActive(true);
-				//When there are more than one type of crystal this breaks
-			}
-			
-			PickUpList.Clear ();
+
+		// Dictate the player's direction
+		if (CharacterBehavior.FacingRight) {
+			Dir = Vector2.right;
+		} else {
+			Dir = Vector2.left;
 		}
-		//		List<string> minNames = new List<>;
-		//		foreach (GameObject min in Minions) 
-		//		{
-		//			minNames.Add (min.name);
-		//			GameObject[] d = GameObject.FindGameObjectsWithTag (min.tag);
-		//			foreach(GameObject minkill in d)
-		//			{
-		//				Destroy (minkill);
-		//			}
-		//		}
-		//		GameObject[] des = GameObject.FindGameObjectsWithTag("floor");
-		//		foreach(GameObject f in des)
-		//		{
-		//			if(minNames.Contains(f.name))
-		//			{
-		//				Destroy (f);
-		//			}
-		//		}
 		
-		
-		base.OnDeath();
-		Died = true;
-		
-		
-	}
-	public virtual void summon()
-	{
-		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
+		// If the player needs to jump now, JUMP!
+		if (jumpNow)
 		{
-			Instantiate (Demons[selected], transform.position,transform.rotation);
-			int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
-			for (int i=0; i<reqMats.Length; i++) 
-			{
-				currentMats[i] -= reqMats[i];
-			}
+			CheckHoldingStickImp();
+			//Force added for up direction
+			rb.velocity = new Vector2(rb.velocity.x,0);
+			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+			jumpNow = false;
+			//anim.SetBool ("Ground", false);
+		}
+
+		// Crouch (this doesn't do anything now, slated for removal
+		if (Input.GetKeyDown(crouch) && !isCrouched)
+		{
+			//change the size and offset of the collider2D
+			isCrouched = true;
+			HalveCollider(bc,heightChange);
+		}
+		if (Input.GetKeyUp(crouch) && isCrouched)
+		{
+			isCrouched = false;
+			DoubleCollider(bc,standHeight/crouchHeight);
 		}
 	}
+
+
+	//
+	// COLLISION FUNCTIONS START HERE!
+	//
 	
-	
+	// Collision code for entering a "trigger" colldier
 	public virtual void OnTriggerEnter2D (Collider2D other)
 	{
+		// If you collide with a checkpoint...
 		if(other.gameObject.tag == "checkpoint"){
+			// activate it
 			activeCheckpoint = other.gameObject;
 			CheckPointMatsCount[0] = currentMats[0];
 			PickUpList.Clear();
 			other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			other.gameObject.GetComponent<Checkpoint>().touched = true;
 		}
-		
+		// If you collide with a crystal...
 		if (other.gameObject.tag == "crystal") 
 		{
+			// pick it up
 			pickUpMat (other.gameObject);
 		}
+		// If you collide with the end of the stage...
 		if (other.gameObject.tag == "Finish") 
 		{
 			//Add go to next level code here
 			Application.LoadLevel (Application.loadedLevel);
 		}
-		
+		// If you collide with a "hard" object...
 		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
 		{
-			//Check to see if touching the floor
-			/*if ( rb.velocity.y <= 0.0f )
+			// die if you're falling too quickly
+			if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
-			}*/
+			}
 			if ( rb.velocity.y <= -25.0f )
 			{
 				OnDeath ();
 			}
 		}
-		//base.OnCollisionEnter2D (other);
-		
+		// If you collide with a moving platform..
 		if (other.gameObject.tag == "moving") 
 		{
+			// attach the character to it so they move with it
 			transform.SetParent(other.transform);
 		}
 	}
-	
+
+	// Collision code for exiting a "trigger" colldier
 	public virtual void OnTriggerExit2D(Collider2D other)
 	{
+		// If you exit a moving platform, detach from it
 		if (other.gameObject.tag == "moving") 
 		{
 			float xPos = transform.position.x;
 			transform.SetParent(null);
 			transform.position = new Vector3(xPos,transform.position.y,0.0f);
 		}
+		// If you exit the stage boundaries, DIE
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
 			OnDeath ();
 		}
-
-		//if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
-		//{
-		//	//Check to see if touching the floor
-		//}
 	}
-	
+
+	// Collision code that runs as long as you're touching a "trigger" collider
 	public void OnTriggerStay2D(Collider2D other)
 	{
+		// This whole function is for dealing with grabbing imps
 		if (other.gameObject.tag == "impTrigger") 
 		{
 			if (Input.GetKey (grab) && HoldingImp == "") 
@@ -291,59 +309,33 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 		}
 	}
-
-	void StickToImp(Collider2D imp)
-	{
-		rb.isKinematic = true;
-
-	}
 	
-	
+	// Collision code for making contact with an object
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
 		base.OnCollisionEnter2D (other);
-		if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
+		/*if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
 		{
 			WallColl = true;
-		}
+		}*/
 	}
-	
+
+	// Collision code for ceasing contact with an object
 	public virtual void OnCollisionExit2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
+		/*if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
 		{
 			WallColl = false;
-		}
+		}*/
 
 	}
-	public virtual void pickUpMat(GameObject pickUp)
-	{
-		int[] newMats = pickUp.GetComponent<CrystalScript>().newMats;
-		for (int i=0; i<currentMats.Length; i++) 
-		{
-			currentMats[i] += newMats[i];
-		}
-		if (PickUpList!=null) 
-		{
-			PickUpList.Add (pickUp);
-			pickUp.SetActive(false);
-		}
-	}
 	
-	public virtual bool checkMaterials()
-	{
-		int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
-		for (int i=0; i<reqMats.Length; i++) 
-		{
-			if(currentMats[i] < reqMats[i])
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+
+	//
+	// OTHER FUNCTIONS START HERE!
+	//
 	
-	
+	// Check if the player is on the ground (and therefore allowed to jump)
 	private bool onGround()
 	{
 		if (rb.velocity.y <= 0) 
@@ -364,76 +356,89 @@ public class CharacterBehavior : DeadlyBehavior {
 		return false;
 	}
 	
-	// FixedUpdate is called once per frame
-	void FixedUpdate () {
-		float move = Input.GetAxis ("Horizontal");
-//		if(!WallColl || onGround())
-//		{
-		rb.velocity = new Vector2(move * speed, rb.velocity.y);
-//		}
+	// Run this when the character "dies"
+	public override void OnDeath()
+	{
+		// Run the death animation (if it exists)
+		if (DeathAnim != null) 
+		{
+			DeathAnim.Play ();
+		}
+		transform.SetParent(null);
+		if (!FacingRight) 
+		{
+			Flip ();
+		}
+		// Reset the materials to the last checkpoint and respawn the player
+		currentMats[0] = CheckPointMatsCount[0];
+		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
+		if (PickUpList != null) 
+		{
+			foreach (GameObject g in PickUpList) {
+				g.SetActive(true);
+				//When there are more than one type of crystal this breaks
+			}
+			
+			PickUpList.Clear ();
+		}
+		
+		// Finish killing the player
+		base.OnDeath();
+		Died = true;
+	}
 
-		if (move != 0) 
+	// Summon a demon!
+	public virtual void summon()
+	{
+		// Make sure that you have the necessary materials for demon summoning
+		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
 		{
-			CheckHoldingStickImp();
-		}
-		
-		if (move > 0 && !FacingRight) {
-			Flip ();
-		} else if (move < 0 && FacingRight) {
-			Flip ();
-		}
-		
-		if (CharacterBehavior.FacingRight) {
-			Dir = Vector2.right;
-		} else {
-			Dir = Vector2.left;
-		}
-		
-		if (jumpNow)
-		{
-			CheckHoldingStickImp();
-			//Force added for up direction
-			rb.velocity = new Vector2(rb.velocity.x,0);
-			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-			jumpNow = false;
-			//anim.SetBool ("Ground", false);
-		}
-		
-		if (Input.GetKeyDown(crouch) && !isCrouched)
-		{
-			//change the size and offset of the collider2D
-			isCrouched = true;
-			HalveCollider(bc,heightChange);
-		}
-		if (Input.GetKeyUp(crouch) && isCrouched)
-		{
-			isCrouched = false;
-			DoubleCollider(bc,standHeight/crouchHeight);
-		}
-		if (Input.GetMouseButtonDown (0)) 
-		{
-			if(HoldingImp!="")
+			Instantiate (Demons[selected], transform.position,transform.rotation);
+			int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
+			for (int i=0; i<reqMats.Length; i++) 
 			{
-				HoldingImp = "";
-				GameObject childImp = transform.GetChild (3).gameObject; 
-				childImp.transform.parent = null;
-				Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
-				childRb.isKinematic = false;
-				childRb.AddForce(mP.direction*ForceMult,ForceMode2D.Impulse);
-				childImp.GetComponent<BoxCollider2D>().enabled = true;
+				currentMats[i] -= reqMats[i];
 			}
 		}
-
-
-
 	}
-	
+
+	// Pick up a material
+	public virtual void pickUpMat(GameObject pickUp)
+	{
+		int[] newMats = pickUp.GetComponent<CrystalScript>().newMats;
+		for (int i=0; i<currentMats.Length; i++) 
+		{
+			currentMats[i] += newMats[i];
+		}
+		if (PickUpList!=null) 
+		{
+			PickUpList.Add (pickUp);
+			pickUp.SetActive(false);
+		}
+	}
+
+	// Check is you have enough materials to summon the selected demon
+	public virtual bool checkMaterials()
+	{
+		int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
+		for (int i=0; i<reqMats.Length; i++) 
+		{
+			if(currentMats[i] < reqMats[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Grab an imp
 	void GrabImp(Collider2D imp)
 	{
 		imp.transform.parent.transform.parent = transform;
 		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
 	}
-	
+
+	// Check if you're holding a sticky imp
 	void CheckHoldingStickImp()
 	{
 		if(HoldingImp == "stickImp")
@@ -444,6 +449,13 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 	}
 	
+	// Stick to the sticky imp!
+	void StickToImp(Collider2D imp)
+	{
+		rb.isKinematic = true;
+	}
+
+	// Flip your direction
 	void Flip()
 	{
 		FacingRight = !FacingRight;
@@ -452,8 +464,17 @@ public class CharacterBehavior : DeadlyBehavior {
 		transform.localScale = theScale;
 	}	
 
+	// Convenience function
 	public Vector3 ConvertVector3(Vector3 prefix, float x, float y, float z)
 	{
 		return new Vector3 (prefix.x + x,prefix.y + y,prefix.z + z);
+	}
+
+	// Draw gizmos for imp throwing (doesn't occur during runtime)
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
+		
 	}
 }
