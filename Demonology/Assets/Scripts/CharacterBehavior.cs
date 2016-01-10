@@ -254,13 +254,13 @@ public class CharacterBehavior : DeadlyBehavior {
 			Application.LoadLevel (Application.loadedLevel);
 		}
 		// If you collide with a "hard" object...
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")
 		{
 			// die if you're falling too quickly
-			if ( rb.velocity.y <= 0.0f )
+			/*if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
-			}
+			}*/
 			if ( rb.velocity.y <= -25.0f )
 			{
 				OnDeath ();
