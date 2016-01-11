@@ -45,7 +45,7 @@ public class ImpAI : DemonBehavior {
 					Anim.SetBool ("Death", true);
 				}
 				gameObject.layer = LayerMask.NameToLayer ("Ground");
-				gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("Ground");
 				speed = 0;
                 dead = true;
 				//gameObject.tag = "floor";
@@ -115,7 +115,7 @@ public class ImpAI : DemonBehavior {
 				Anim.SetBool ("Death", true);
 			}
 			gameObject.layer = LayerMask.NameToLayer ("Ground");
-			gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("Ground");
 			speed = 0;
             dead = true;
 			//gameObject.tag = "floor";
