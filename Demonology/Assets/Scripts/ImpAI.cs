@@ -10,11 +10,13 @@ public class ImpAI : DemonBehavior {
 	private BoxCollider2D bc;
 	private float heightChange;
 	public float SinkTime = 3.0f;
+    public static Vector2 ImpScale;
+    public bool dead = false;
 
     // Use this for initialization
     public override void Start()
     {
-
+        ImpScale = transform.localScale;
 		bc = GetComponent<BoxCollider2D> ();
 		heightChange = (.5f) * bc.size.y;
 		speed = 2;
@@ -45,9 +47,13 @@ public class ImpAI : DemonBehavior {
 				gameObject.layer = LayerMask.NameToLayer ("Ground");
 				gameObject.GetComponent<BoxCollider2D>().enabled = true;
 				speed = 0;
+                dead = true;
 				//gameObject.tag = "floor";
-				HalveCollider(bc,heightChange);
-				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+				//HalveCollider(bc,heightChange);
+				//bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+                transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+                rb.freezeRotation = false;
+                bc.enabled = false;
 				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 			}
 		}
@@ -56,6 +62,7 @@ public class ImpAI : DemonBehavior {
 
 	public override void Update()
 	{
+        transform.position = new Vector3 (transform.position.x,transform.position.y,0.0f);
 		base.Update ();
 		if (CharacterBehavior.Died) 
 		{
@@ -93,9 +100,12 @@ public class ImpAI : DemonBehavior {
 			StartCoroutine (WaitTime (SinkTime));
 			//gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
-            AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-			HalveCollider(bc,heightChange);
-			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+            if (!dead)
+            {
+                AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+                HalveCollider(bc, heightChange);
+                bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+            }
 		} 
 		else if (other.gameObject.tag == "spike") {
 
@@ -107,9 +117,13 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("Ground");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
+            dead = true;
 			//gameObject.tag = "floor";
-			HalveCollider(bc,heightChange);
-			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+			//HalveCollider(bc,heightChange);
+			//bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
+            transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+            rb.freezeRotation = false;
+            bc.enabled = false;
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 		} 
 		else 

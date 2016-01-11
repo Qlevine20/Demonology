@@ -57,7 +57,9 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static Vector2 Dir;
 	public static bool FacingRight;
 	public static bool Died;
-	
+
+
+
 
 	// struct for summoning materials
 	public struct summMaterials
@@ -162,7 +164,15 @@ public class CharacterBehavior : DeadlyBehavior {
 				Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
 				childRb.isKinematic = false;
 				childRb.AddForce(mP.direction*ForceMult,ForceMode2D.Impulse);
-				childImp.GetComponent<BoxCollider2D>().enabled = true;
+                childImp.transform.localScale = ImpAI.ImpScale;
+                if (childImp.GetComponent<ImpAI>().dead == false)
+                {
+                    childImp.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                else
+                {
+                    childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+                }
 			}
 		}
 	}
@@ -300,8 +310,11 @@ public class CharacterBehavior : DeadlyBehavior {
 			if (Input.GetKey (grab) && HoldingImp == "") 
 			{
 				HoldingImp = other.transform.parent.gameObject.tag;
+                Vector2 origScale = other.transform.parent.localScale;
 				other.transform.parent.transform.parent = transform;
+                other.transform.parent.localScale = origScale;
 				other.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+                other.transform.GetComponent<CircleCollider2D>().enabled = false;
 				GrabImp(other);
 			}
 		}

@@ -29,6 +29,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 423432}
   - 61: {fileID: 6102168}
+  - 58: {fileID: 5809296}
   m_Layer: 9
   m_Name: ImpTrigger
   m_TagString: impTrigger
@@ -77,6 +78,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &5809296
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120082}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .150000006
 --- !u!61 &6102168
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -161,6 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
   SinkTime: 3
+  dead: 0
 --- !u!212 &21239902
 SpriteRenderer:
   m_ObjectHideFlags: 1

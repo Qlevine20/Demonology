@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 492672}
   - 61: {fileID: 6135302}
+  - 58: {fileID: 5813240}
   m_Layer: 9
   m_Name: ImpTrigger
   m_TagString: impTrigger
@@ -43,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.65670872, y: 1.32428241, z: 0}
+  m_LocalPosition: {x: 12.4488602, y: 3.32184672, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 492672}
@@ -77,6 +78,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &5813240
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157998}
+  m_Enabled: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .150000006
 --- !u!61 &6135302
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -161,6 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
   SinkTime: 1
+  dead: 0
   TimeToExp: 2
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
 --- !u!212 &21246288
@@ -242,6 +257,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
