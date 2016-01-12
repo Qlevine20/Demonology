@@ -39,22 +39,7 @@ public class ImpAI : DemonBehavior {
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
-				if (!dying)
-				{
-					dying = true;
-					Anim.SetBool ("Death", true);
-				}
-				gameObject.layer = LayerMask.NameToLayer ("Ground");
-                transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("Ground");
-				speed = 0;
-                dead = true;
-				//gameObject.tag = "floor";
-				//HalveCollider(bc,heightChange);
-				//bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
-                transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-                rb.freezeRotation = false;
-                bc.enabled = false;
-				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+                KillImp();
 			}
 		}
 	}
@@ -94,7 +79,7 @@ public class ImpAI : DemonBehavior {
 				dying = true;
 				Anim.SetBool ("Death", true);
 			}
-			gameObject.layer = LayerMask.NameToLayer ("Ground");
+			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
 			StartCoroutine (WaitTime (SinkTime));
@@ -108,23 +93,7 @@ public class ImpAI : DemonBehavior {
             }
 		} 
 		else if (other.gameObject.tag == "spike") {
-
-			if (!dying)
-			{
-				dying = true;
-				Anim.SetBool ("Death", true);
-			}
-			gameObject.layer = LayerMask.NameToLayer ("Ground");
-            transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("Ground");
-			speed = 0;
-            dead = true;
-			//gameObject.tag = "floor";
-			//HalveCollider(bc,heightChange);
-			//bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange/2));
-            transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-            rb.freezeRotation = false;
-            bc.enabled = false;
-            AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+            KillImp();
 		} 
 		else 
 		{
@@ -149,4 +118,21 @@ public class ImpAI : DemonBehavior {
 		}
 		Destroy (gameObject);
 	}
+
+    public void KillImp() 
+    {
+        if (!dying)
+        {
+            dying = true;
+            Anim.SetBool("Death", true);
+            AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+        }
+        gameObject.layer = LayerMask.NameToLayer("DeadImp");
+        transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
+        speed = 0;
+        dead = true;
+        transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+        rb.freezeRotation = false;
+        bc.enabled = false;
+    }
 }

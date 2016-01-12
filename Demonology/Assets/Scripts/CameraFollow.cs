@@ -15,7 +15,6 @@ public class CameraFollow : MonoBehaviour {
 			
 			if (Input.GetAxis ("Mouse ScrollWheel") > 0) 
 			{
-				Debug.Log(transform.position.z);
 				if(transform.position.z<-(maxZoomIn))
 				{
 					Vector3 point = GetComponent<Camera>().WorldToViewportPoint(DeadlyBehavior.Player.transform.position);

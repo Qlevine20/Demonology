@@ -2003,7 +2003,11 @@ Prefab:
       objectReference: {fileID: 8300000, guid: d302bba0bee5b654d8ace006bd66a630, type: 3}
     - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: whatIsGrounded.m_Bits
-      value: 256
+      value: 4352
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: IgnorePlayerLayer.m_Bits
+      value: 2305
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}

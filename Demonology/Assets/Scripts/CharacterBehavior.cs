@@ -58,6 +58,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static bool FacingRight;
 	public static bool Died;
 
+    private Animator PlayerAnim;
+    private Collider2D GrabbingImp = null;
+    private float Throwing = 0.0f;
+
 
 
 
@@ -76,7 +80,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
-
+        PlayerAnim = GetComponent<Animator>();
 		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
 		HoldingImp = "";
 		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
@@ -114,8 +118,17 @@ public class CharacterBehavior : DeadlyBehavior {
 				}
 				else
 				{
-					float Change = Physics2D.Raycast (mP.origin,mP.direction,1.0f,IgnorePlayerLayer).distance;
-					transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (Change-0.5f).x,mP.GetPoint (Change-0.5f).y,0.0f);
+                    if (!transform.GetChild(3).GetComponent<ImpAI>().dead)
+                    {
+                        float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
+                        transform.GetChild(3).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                    }
+                    else 
+                    {
+                        float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
+                        transform.GetChild(3).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                    }
+
 				}
 			}
 			else
@@ -153,37 +166,98 @@ public class CharacterBehavior : DeadlyBehavior {
 			// Jump (this actually gets processed later, in FixedUpdate
 			jumpNow = true;
 		}
-		if (Input.GetMouseButtonDown (0)) 
+
+		if (Input.GetMouseButtonDown (0) || Throwing != 0.0f) 
 		{
 			// THROW THE IMP!
-			if(HoldingImp!="")
+			if(HoldingImp!="" && Throwing == 0.0f)
 			{
-				HoldingImp = "";
-				GameObject childImp = transform.GetChild (3).gameObject; 
-				childImp.transform.parent = null;
-				Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
-				childRb.isKinematic = false;
-				childRb.AddForce(mP.direction*ForceMult,ForceMode2D.Impulse);
-                childImp.transform.localScale = ImpAI.ImpScale;
-                if (childImp.GetComponent<ImpAI>().dead == false)
-                {
-                    childImp.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                else
-                {
-                    childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-                }
+                ThrowImp(ForceMult);
+            }
+            if(Throwing != 0.0f)
+            {
+                Throwing = 0.0f;
+                ThrowImp(Throwing);
+
 			}
 		}
+
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            if (HoldingImp != "") 
+            {
+                Transform heldImp = transform.GetChild(3);
+                ThrowImp(ForceMult);
+                heldImp.GetComponent<ImpAI>().KillImp();
+                GrabImp(heldImp.FindChild("ImpTrigger").GetComponent<CircleCollider2D>());
+
+                
+            }
+
+        }
 	}
 
+    public void ThrowImp(float FM)
+    {
+        HoldingImp = "";
+        GameObject childImp = transform.GetChild(3).gameObject;
+        childImp.transform.parent = null;
+        Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
+        childRb.isKinematic = false;
+        childRb.AddForce(mP.direction * FM, ForceMode2D.Impulse);
+        childImp.transform.localScale = ImpAI.ImpScale;
+        if (childImp.GetComponent<ImpAI>().dead == false)
+        {
+            childImp.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else
+        {
+            childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+        }
+
+    }
+
 	// FixedUpdate is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () {     
 		float move = Input.GetAxis ("Horizontal");
 		//		if(!WallColl || onGround())
 		//		{
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
-		//		}
+        //		}
+
+        //Animations for moving left and right
+        if (PlayerAnim)
+        {
+            if (FacingRight && move != 0)
+            {
+                PlayerAnim.SetBool("moveRight", true);
+                PlayerAnim.SetBool("moveLeft", false);
+            }
+            else if (!FacingRight && move != 0)
+            {
+                PlayerAnim.SetBool("moveRight", false);
+                PlayerAnim.SetBool("moveLeft", true);
+            }
+            else
+            {
+                PlayerAnim.SetBool("moveRight", false);
+                PlayerAnim.SetBool("moveLeft", false);
+            }
+        }
+
+        if (Input.GetKeyDown(grab))
+        {
+            if (HoldingImp != "")
+            {
+                HoldingImp = "";
+                Throwing = 0.01f;
+
+            }
+            if (GrabbingImp)
+            {
+                GrabImp(GrabbingImp);
+            }
+        }
 
 		// Check if you're holding a sticky imp
 		if (move != 0) 
@@ -305,19 +379,11 @@ public class CharacterBehavior : DeadlyBehavior {
 	public void OnTriggerStay2D(Collider2D other)
 	{
 		// This whole function is for dealing with grabbing imps
-		if (other.gameObject.tag == "impTrigger") 
-		{
-			if (Input.GetKey (grab) && HoldingImp == "") 
-			{
-				HoldingImp = other.transform.parent.gameObject.tag;
-                Vector2 origScale = other.transform.parent.localScale;
-				other.transform.parent.transform.parent = transform;
-                other.transform.parent.localScale = origScale;
-				other.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-                other.transform.GetComponent<CircleCollider2D>().enabled = false;
-				GrabImp(other);
-			}
-		}
+        if(other.gameObject.tag == "impTrigger")
+        {
+             GrabbingImp = other;
+        }
+           
 		if (other.gameObject.tag == "stickImp") 
 		{
 			if(Input.GetKey (grab) && HoldingImp == "")
@@ -449,6 +515,13 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Grab an imp
 	void GrabImp(Collider2D imp)
 	{
+
+        HoldingImp = imp.transform.parent.gameObject.tag;
+        Vector2 origScale = imp.transform.parent.localScale;
+        imp.transform.parent.transform.parent = transform;
+        imp.transform.parent.localScale = origScale;
+        imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+        imp.transform.GetComponent<CircleCollider2D>().enabled = false;
 		imp.transform.parent.transform.parent = transform;
 		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
 	}
