@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 455360}
   - 198: {fileID: 19890896}
   - 199: {fileID: 19963290}
+  - 114: {fileID: 11423574}
   m_Layer: 0
   m_Name: ExpPart
   m_TagString: Untagged
@@ -29,6 +30,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11423574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098d78be213113b499efd12a08f237d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &19890896
 ParticleSystem:
   m_ObjectHideFlags: 1

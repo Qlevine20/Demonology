@@ -13,7 +13,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode crouch = KeyCode.S;
 	public KeyCode grab = KeyCode.G;
 
-	public GameObject[] Minions;
 	public int[] currentMats;
 	public GameObject[] Demons;
 	private int selected = 0;
@@ -26,6 +25,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
+	public static List<GameObject> KilledEnemies= new List<GameObject>();
 	public static int[] CheckPointMatsCount = new int[5];
 	private Ray2D mP;
 	//private bool WallColl;
@@ -318,6 +318,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			activeCheckpoint = other.gameObject;
 			CheckPointMatsCount[0] = currentMats[0];
 			PickUpList.Clear();
+			KilledEnemies.Clear ();
 			other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			other.gameObject.GetComponent<Checkpoint>().touched = true;
 		}
@@ -461,6 +462,13 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 			
 			PickUpList.Clear ();
+		}
+		if (KilledEnemies != null) 
+		{
+			foreach (GameObject g in KilledEnemies) {
+				g.SetActive (true);
+			}
+			KilledEnemies.Clear ();
 		}
 		
 		// Finish killing the player

@@ -40,7 +40,9 @@ public class BatBehavior : EnemyBehavior {
 			float dist;
 			int i = 0;
 			while (i < hitColliders.Length) {
-				if (hitColliders[i].gameObject.tag == "Player" || hitColliders[i].gameObject.tag == "imp"){
+				if (hitColliders[i].gameObject.tag == "Player" || 
+				    hitColliders[i].gameObject.tag == "imp" || 
+				    hitColliders[i].gameObject.tag == "stickImp"){
 					dist = DistanceBetween (transform.position, hitColliders[i].gameObject.transform.position);
 					if (dist < closestDist){
 						closestDist = dist;
@@ -79,15 +81,22 @@ public class BatBehavior : EnemyBehavior {
 	}
 
 
-	public void OnCollisionStay2D(Collision2D other)
+	// 
+	public void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "imp") {
+		if (other.gameObject.tag == "imp" || other.gameObject.tag == "stickImp") {
 			transform.SetParent(other.transform, true);
 			transform.localScale = new Vector3(7.0F/transform.parent.localScale.x, 7.0F/transform.parent.localScale.y, 0.0F);
+		}
+		if (other.gameObject.tag == "Player") {
+			if(transform.parent != null){
+				OnDeath ();
+			}
 		}
 	}
 
 
+	// Find the distance between two points
 	public float DistanceBetween (Vector2 pos1, Vector2 pos2)
 	{
 		float xPos = pos1.x - pos2.x;
@@ -96,6 +105,7 @@ public class BatBehavior : EnemyBehavior {
 	}
 
 
+	// Move in the direction of the given point, return true if you reach that point
 	public bool MoveBetweenPoints(Vector2 p)
 	{
 		transform.position = Vector3.MoveTowards (transform.position,new Vector3(p.x,p.y,0.0f),speed*Time.deltaTime);
@@ -107,6 +117,8 @@ public class BatBehavior : EnemyBehavior {
 		return false;
 	}
 
+
+	// Draw lines for the bat's preprogrammed flight path
 	public void OnDrawGizmos()
 	{
 		if (locs.Length < 1)

@@ -16,9 +16,10 @@ public class UICrystalDisplay : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(DeadlyBehavior.Player)
-		playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior>().currentMats;
-		crystalText.text = playerMats[crystalId].ToString();
+		if (DeadlyBehavior.Player) {
+			playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior> ().currentMats;
+			crystalText.text = playerMats [crystalId].ToString ();
+		}
 
 		if (GameMenu != null && Input.GetKeyUp (menuKey)) 
 		{
