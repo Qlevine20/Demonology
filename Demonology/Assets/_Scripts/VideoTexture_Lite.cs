@@ -37,20 +37,55 @@ public class VideoTexture_Lite : MonoBehaviour
 	
 	int intIndex = 0;
 	int lastIndex = -1;
+
+
+
+    public GUITexture backG;
+
 	
 	AttachedAudio myAudio = new AttachedAudio(); // Creates an audio class for audio management 
 			
 	
 	void Awake()
 	{
+        
+        int textureHeight = backG.texture.height;
+        int textureWidth = backG.texture.width;
+
+        int screenHeight = Screen.height; 
+        int screenWidth = Screen.width;
+
+        int screenAspectRatio = (screenWidth / screenHeight);
+        int textureAspectRatio = (textureWidth / textureHeight);
+
+        int scaledHeight;
+        int scaledWidth;
+        if (textureAspectRatio <= screenAspectRatio)
+         {
+             // The scaled size is based on the height
+             scaledHeight = screenHeight;
+             scaledWidth = (screenHeight * textureAspectRatio);
+         }
+         else
+         {
+             // The scaled size is based on the width
+             scaledWidth = screenWidth;
+             scaledHeight = (scaledWidth / textureAspectRatio);
+         }
+         float xPosition = screenWidth / 2 - (scaledWidth / 2);
+         backG.pixelInset = 
+             new Rect(xPosition, scaledHeight - scaledHeight, 
+             scaledWidth, scaledHeight);
+
 	// Application.targetFrameRate = 60; (Optional for smoother scrubbing on capable systems)
 		
 		audioAttached = GetComponent("AudioSource");
+        backG.transform.position = new Vector3(0,0,5.0f);
 		
 	// Zeros camera range - effectively blackens the screen
 	
-		GetComponent<Camera>().farClipPlane = 0;
-		GetComponent<Camera>().nearClipPlane = 0;
+        ////GetComponent<Camera>().farClipPlane = 0;
+        //GetComponent<Camera>().nearClipPlane = 0;
 	}
 	
 	void Start ()
@@ -91,9 +126,9 @@ public class VideoTexture_Lite : MonoBehaviour
 		index += FPS * Time.deltaTime;
 		
 		intIndex = (int)index;
-		
-		if (index >= lastFrame)
-				index = lastFrame;
+
+        if (index >= lastFrame)
+            index = firstFrame;
 				
 		if (intIndex != lastIndex)	
 		{
@@ -115,10 +150,16 @@ public class VideoTexture_Lite : MonoBehaviour
 	
 	void OnGUI()
 	{
-		if (enableReplay && showInstructions)
-			GUI.Box(new Rect(0, 0, Screen.width, Screen.height),"Click the left mouse button or touch the screen to rewind & replay");
-		if (intIndex <= lastFrame)
-			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height),newTex,ScaleMode.ScaleToFit,true,aspectRatio); // Actual video texture draw
+        if (intIndex <= lastFrame) 
+        {
+            backG.texture = newTex;
+        }
+
+        //backG.texture = newTex;
+        //if (enableReplay && showInstructions)
+        //    GUI.Box(new Rect(0, 0, Screen.width, Screen.height),"Click the left mouse button or touch the screen to rewind & replay");
+        //if (intIndex <= lastFrame)
+        //    GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height),newTex,ScaleMode.ScaleToFit,true,aspectRatio); // Actual video texture draw
 		
 	}
 }

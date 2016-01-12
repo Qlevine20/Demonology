@@ -36,16 +36,15 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	//player rigidbody and collider
 	private Rigidbody2D rb;
-	private BoxCollider2D bc;
+	//private BoxCollider2D bc;
 	
 	//player heights
-	private float crouchHeight = 1;
-	private float standHeight = 2;
-	private float heightChange;
+	//private float crouchHeight = 1;
+	//private float standHeight = 2;
 	private GameObject ImpSelect;
 	
 	// player crouch/jump info
-	private bool isCrouched = false;
+	//private bool isCrouched = false;
 	private bool jumpNow = false;
 	private float groundRadius = .1f;
 	public LayerMask whatIsGrounded;
@@ -88,8 +87,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		rb = GetComponent<Rigidbody2D> ();
 		Dir = Vector2.right;
 		rb = GetComponent<Rigidbody2D>();
-		bc = GetComponent<Collider2D>() as BoxCollider2D;
-		heightChange = (crouchHeight / standHeight) * bc.size.y;
+		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
 
@@ -291,17 +289,17 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 
 		// Crouch (this doesn't do anything now, slated for removal
-		if (Input.GetKeyDown(crouch) && !isCrouched)
-		{
-			//change the size and offset of the collider2D
-			isCrouched = true;
-			HalveCollider(bc,heightChange);
-		}
-		if (Input.GetKeyUp(crouch) && isCrouched)
-		{
-			isCrouched = false;
-			DoubleCollider(bc,standHeight/crouchHeight);
-		}
+        //if (Input.GetKeyDown(crouch) && !isCrouched)
+        //{
+        //    //change the size and offset of the collider2D
+        //    isCrouched = true;
+        //    HalveCollider(bc,heightChange);
+        //}
+        //if (Input.GetKeyUp(crouch) && isCrouched)
+        //{
+        //    isCrouched = false;
+        //    DoubleCollider(bc,standHeight/crouchHeight);
+        //}
 	}
 
 
