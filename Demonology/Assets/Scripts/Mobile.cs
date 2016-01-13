@@ -14,16 +14,20 @@ public class Mobile : DeadlyBehavior {
 	//Direction of the entity
 	public override void Start ()
 	{
+        //Grabs the direction the player is facing
 		mobFacingRight = CharacterBehavior.FacingRight;
 
+        //Flips the mobile objects sprite
 		if (!mobFacingRight)
 		{
 			Flip ();
 		}
 
+        //Mobile Animator
 		Anim = GetComponent<Animator> ();
-		base.Start ();
 		StartDir = CharacterBehavior.Dir;
+
+        base.Start();
 	}
 
 
@@ -31,9 +35,12 @@ public class Mobile : DeadlyBehavior {
 	{
 		if (!dying)
 		{
+            //Move the mobile
 			Movement (new Ray2D (transform.position, StartDir));
 		}
 	}
+
+    //Moves the mobile and the mobile changes direction if it hits a wall
     public virtual void Movement(Ray2D ry)
     {
 		//Casts a ray in front of the object to see if there are any obstacles blocking the path
@@ -52,10 +59,12 @@ public class Mobile : DeadlyBehavior {
 		}
 		//Move forward
 		transform.Translate(StartDir * speed * Time.deltaTime);
+
 		//Draws the Raycast so it is viewable in the editor
 		Debug.DrawRay (ry.origin, ry.direction,Color.red);
     }
 
+    //Flips the direction of the sprite
 	public virtual void Flip()
 	{
 		mobFacingRight = !mobFacingRight;

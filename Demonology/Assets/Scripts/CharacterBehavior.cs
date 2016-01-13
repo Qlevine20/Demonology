@@ -10,7 +10,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
 	public KeyCode jump = KeyCode.W;
-	public KeyCode crouch = KeyCode.S;
 	public KeyCode grab = KeyCode.G;
 
 	public int[] currentMats;
@@ -38,15 +37,11 @@ public class CharacterBehavior : DeadlyBehavior {
 	private Rigidbody2D rb;
 	//private BoxCollider2D bc;
 	
-	//player heights
-	//private float crouchHeight = 1;
-	//private float standHeight = 2;
 	private GameObject ImpSelect;
 	
-	// player crouch/jump info
-	//private bool isCrouched = false;
+	// player jump info
 	private bool jumpNow = false;
-	private float groundRadius = .1f;
+	private float groundRadius = .05f;
 	public LayerMask whatIsGrounded;
 	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
@@ -159,11 +154,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
-		if (Input.GetKeyDown (jump) && onGround ()||Input.GetKeyDown (jump) && HoldingImp == "stickImp") 
-		{
-			// Jump (this actually gets processed later, in FixedUpdate
-			jumpNow = true;
-		}
+
 
 		if (Input.GetMouseButtonDown (0) || Throwing != 0.0f) 
 		{
@@ -223,6 +214,19 @@ public class CharacterBehavior : DeadlyBehavior {
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
         //		}
 
+        if (onGround() || HoldingImp == "stickImp")
+        {
+            
+            float fall = Input.GetAxis("Vertical");
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            if (fall > 0) 
+            {
+                rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+            }
+            
+            // Jump (this actually gets processed later, in FixedUpdate
+            //jumpNow = true;
+        }
         //Animations for moving left and right
         if (PlayerAnim)
         {
@@ -243,6 +247,7 @@ public class CharacterBehavior : DeadlyBehavior {
             }
         }
 
+        //Grab an Imp or drop it
         if (Input.GetKeyDown(grab))
         {
             if (HoldingImp != "")
@@ -281,25 +286,12 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (jumpNow)
 		{
 			CheckHoldingStickImp();
-			//Force added for up direction
-			rb.velocity = new Vector2(rb.velocity.x,0);
-			rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-			jumpNow = false;
+            ////Force added for up direction
+            //rb.velocity = new Vector2(rb.velocity.x,0);
+            //rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+            //jumpNow = false;
 			//anim.SetBool ("Ground", false);
 		}
-
-		// Crouch (this doesn't do anything now, slated for removal
-        //if (Input.GetKeyDown(crouch) && !isCrouched)
-        //{
-        //    //change the size and offset of the collider2D
-        //    isCrouched = true;
-        //    HalveCollider(bc,heightChange);
-        //}
-        //if (Input.GetKeyUp(crouch) && isCrouched)
-        //{
-        //    isCrouched = false;
-        //    DoubleCollider(bc,standHeight/crouchHeight);
-        //}
 	}
 
 

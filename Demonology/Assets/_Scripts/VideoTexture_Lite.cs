@@ -48,7 +48,7 @@ public class VideoTexture_Lite : MonoBehaviour
 	
 	void Awake()
 	{
-        
+        //Resizing of Texture to fit screen
         int textureHeight = backG.texture.height;
         int textureWidth = backG.texture.width;
 
@@ -150,6 +150,7 @@ public class VideoTexture_Lite : MonoBehaviour
 	
 	void OnGUI()
 	{
+        //Grab GUITexture Object and change the attached texture
         if (intIndex <= lastFrame) 
         {
             backG.texture = newTex;
