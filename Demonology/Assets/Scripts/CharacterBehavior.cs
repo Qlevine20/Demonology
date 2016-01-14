@@ -99,7 +99,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		// Code for holding and throwing imps
 		if (HoldingImp!="") 
 		{
-			if(transform.childCount > 3)
+			if(transform.childCount > 4)
 			{
 	//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 	//			Gizmos.DrawRay (ray);
@@ -107,19 +107,19 @@ public class CharacterBehavior : DeadlyBehavior {
 				mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
 				if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
 				{
-					transform.GetChild (3).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
+					transform.GetChild(4).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
 				}
 				else
 				{
-                    if (!transform.GetChild(3).GetComponent<ImpAI>().dead)
+                    if (!transform.GetChild(4).GetComponent<ImpAI>().dead)
                     {
                         float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
-                        transform.GetChild(3).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                        transform.GetChild(4).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
                     }
                     else 
                     {
                         float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
-                        transform.GetChild(3).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                        transform.GetChild(4).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
                     }
 
 				}
@@ -175,7 +175,7 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             if (HoldingImp != "") 
             {
-                Transform heldImp = transform.GetChild(3);
+                Transform heldImp = transform.GetChild(4);
                 ThrowImp(ForceMult);
                 heldImp.GetComponent<ImpAI>().KillImp();
                 GrabImp(heldImp.FindChild("ImpTrigger").GetComponent<CircleCollider2D>());
@@ -189,12 +189,11 @@ public class CharacterBehavior : DeadlyBehavior {
     public void ThrowImp(float FM)
     {
         HoldingImp = "";
-        GameObject childImp = transform.GetChild(3).gameObject;
+        GameObject childImp = transform.GetChild(4).gameObject;
         childImp.transform.parent = null;
         Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
         childRb.isKinematic = false;
         childRb.AddForce(mP.direction * FM, ForceMode2D.Impulse);
-        childImp.transform.localScale = ImpAI.ImpScale;
         if (childImp.GetComponent<ImpAI>().dead == false)
         {
             childImp.GetComponent<BoxCollider2D>().enabled = true;
@@ -214,7 +213,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		rb.velocity = new Vector2(move * speed, rb.velocity.y);
         //		}
 
-        if (onGround() || HoldingImp == "stickImp")
+        if (onGround())
         {
             
             float fall = Input.GetAxis("Vertical");
@@ -472,12 +471,17 @@ public class CharacterBehavior : DeadlyBehavior {
 		// Make sure that you have the necessary materials for demon summoning
 		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
 		{
-			Instantiate (Demons[selected], transform.position,transform.rotation);
+
+			GameObject newImp = Instantiate (Demons[selected], transform.position,transform.rotation) as GameObject;
 			int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
 			for (int i=0; i<reqMats.Length; i++) 
 			{
 				currentMats[i] -= reqMats[i];
 			}
+            if (Demons[selected].tag == "stickImp")
+            {
+                GrabImp(newImp.transform.GetChild(0).GetComponent<BoxCollider2D>());
+            }
 		}
 	}
 
@@ -544,10 +548,11 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Flip your direction
 	void Flip()
 	{
-		FacingRight = !FacingRight;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+        FacingRight = !FacingRight;
+        Transform spriteHolder = transform.GetChild(0);
+        Vector3 theScale = spriteHolder.localScale;
+        theScale.x *= -1;
+        spriteHolder.localScale = theScale;
 	}	
 
 	// Convenience function
