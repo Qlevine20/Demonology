@@ -29,6 +29,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private Ray2D mP;
 	//private bool WallColl;
 	private string HoldingImp;
+    private bool HoldingStickImp;
 	
 	
 	Animator anim;
@@ -161,11 +162,19 @@ public class CharacterBehavior : DeadlyBehavior {
 			// THROW THE IMP!
 			if(HoldingImp!="" && Throwing == 0.0f)
 			{
+                if (HoldingImp == "stickImp") 
+                {
+                    transform.GetChild(4).GetComponent<StickImp>().Thrown = true;
+                }
                 ThrowImp(ForceMult);
             }
             if(Throwing != 0.0f)
             {
                 Throwing = 0.0f;
+                if (HoldingImp == "stickImp")
+                {
+                    transform.GetChild(4).GetComponent<StickImp>().Thrown = true;
+                }
                 ThrowImp(Throwing);
 
 			}
@@ -173,7 +182,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
         if (Input.GetMouseButtonDown(1)) 
         {
-            if (HoldingImp != "") 
+            if (HoldingImp != "" || HoldingImp != "StickImp") 
             {
                 Transform heldImp = transform.GetChild(4);
                 ThrowImp(ForceMult);
@@ -206,20 +215,27 @@ public class CharacterBehavior : DeadlyBehavior {
     }
 
 	// FixedUpdate is called once per frame
-	void FixedUpdate () {     
-		float move = Input.GetAxis ("Horizontal");
+	void FixedUpdate () {   
 		//		if(!WallColl || onGround())
 		//		{
-		rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        if (HoldingStickImp)
+        {
+            HoldingStickImp = false;
+            Input.ResetInputAxes();
+        }
+        float move = Input.GetAxis("Horizontal");
+
+        rb.velocity = new Vector2(move * speed, rb.velocity.y);
         //		}
 
-        if (onGround())
+        if (onGround() || HoldingStickImp)
         {
             
             float fall = Input.GetAxis("Vertical");
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            if (fall > 0) 
+            if (fall > 0 || HoldingStickImp) 
             {
+                HoldingStickImp = false;
                 rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
             }
             
@@ -245,27 +261,40 @@ public class CharacterBehavior : DeadlyBehavior {
                 PlayerAnim.SetBool("moveLeft", false);
             }
         }
-
+        
         //Grab an Imp or drop it
         if (Input.GetKeyDown(grab))
         {
-            if (HoldingImp != "")
+            Debug.Log(HoldingImp);
+            if (HoldingImp == "stickImp") 
+            {
+                if (transform.childCount > 4)
+                {
+                    HoldingImp = "";
+                    Throwing = 0.1f;
+                }
+                else
+                {
+                    GrabImp(GrabbingImp);
+                }
+            }
+            else if (HoldingImp != "" && HoldingImp != "stickImp")
             {
                 HoldingImp = "";
                 Throwing = 0.01f;
 
             }
-            if (GrabbingImp)
+            else if (GrabbingImp && HoldingImp != "stickImp")
             {
                 GrabImp(GrabbingImp);
             }
         }
 
 		// Check if you're holding a sticky imp
-		if (move != 0) 
-		{
-			CheckHoldingStickImp();
-		}
+        //if (move != 0) 
+        //{
+        //    CheckHoldingStickImp();
+        //}
 
 		// Check if the sprite needs to flip
 		if (move > 0 && !FacingRight) {
@@ -282,15 +311,15 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		
 		// If the player needs to jump now, JUMP!
-		if (jumpNow)
-		{
-			CheckHoldingStickImp();
-            ////Force added for up direction
-            //rb.velocity = new Vector2(rb.velocity.x,0);
-            //rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-            //jumpNow = false;
-			//anim.SetBool ("Ground", false);
-		}
+        //if (jumpNow)
+        //{
+        //    CheckHoldingStickImp();
+        //    ////Force added for up direction
+        //    //rb.velocity = new Vector2(rb.velocity.x,0);
+        //    //rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+        //    //jumpNow = false;
+        //    //anim.SetBool ("Ground", false);
+        //}
 	}
 
 
@@ -374,14 +403,14 @@ public class CharacterBehavior : DeadlyBehavior {
              GrabbingImp = other;
         }
            
-		if (other.gameObject.tag == "stickImp") 
-		{
-			if(Input.GetKey (grab) && HoldingImp == "")
-			{
-				HoldingImp = other.transform.parent.gameObject.tag;
-				StickToImp(other);
-			}
-		}
+        //if (other.gameObject.tag == "stickImp") 
+        //{
+        //    if(Input.GetKey (grab) && HoldingImp == "")
+        //    {
+        //        HoldingImp = other.transform.parent.gameObject.tag;
+        //        StickToImp(other);
+        //    }
+        //}
 	}
 	
 	// Collision code for making contact with an object
@@ -480,6 +509,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
             if (Demons[selected].tag == "stickImp")
             {
+                HoldingImp = "stickImp";
                 GrabImp(newImp.transform.GetChild(0).GetComponent<BoxCollider2D>());
             }
 		}
@@ -517,15 +547,37 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Grab an imp
 	void GrabImp(Collider2D imp)
 	{
-
-        HoldingImp = imp.transform.parent.gameObject.tag;
-        Vector2 origScale = imp.transform.parent.localScale;
-        imp.transform.parent.transform.parent = transform;
-        imp.transform.parent.localScale = origScale;
-        imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-        imp.transform.GetComponent<CircleCollider2D>().enabled = false;
-		imp.transform.parent.transform.parent = transform;
-		imp.transform.parent.GetComponent<Rigidbody2D> ().isKinematic = true;
+        if (imp.transform.parent.tag == "stickImp")
+        {
+            Debug.Log(imp.transform.parent.GetComponent<StickImp>().Thrown);
+            if (imp.transform.parent.GetComponent<StickImp>().Thrown)
+            {
+                
+                StickToImp(imp);
+            }
+            else
+            {
+                HoldingImp = imp.transform.parent.gameObject.tag;
+                Vector2 origScale = imp.transform.parent.localScale;
+                imp.transform.parent.transform.parent = transform;
+                imp.transform.parent.localScale = origScale;
+                imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+                imp.transform.GetComponent<CircleCollider2D>().enabled = false;
+                imp.transform.parent.transform.parent = transform;
+                imp.transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
+            }
+        }
+        else 
+        {
+            HoldingImp = imp.transform.parent.gameObject.tag;
+            Vector2 origScale = imp.transform.parent.localScale;
+            imp.transform.parent.transform.parent = transform;
+            imp.transform.parent.localScale = origScale;
+            imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+            imp.transform.GetComponent<CircleCollider2D>().enabled = false;
+            imp.transform.parent.transform.parent = transform;
+            imp.transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
+        }
 	}
 
 	// Check if you're holding a sticky imp
