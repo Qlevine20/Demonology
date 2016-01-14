@@ -42,7 +42,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	// player jump info
 	private bool jumpNow = false;
-	private float groundRadius = .05f;
+	private float groundRadius = .2f;
 	public LayerMask whatIsGrounded;
 	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
@@ -82,7 +82,6 @@ public class CharacterBehavior : DeadlyBehavior {
 		FacingRight = true;
 		rb = GetComponent<Rigidbody2D> ();
 		Dir = Vector2.right;
-		rb = GetComponent<Rigidbody2D>();
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
@@ -197,6 +196,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
     public void ThrowImp(float FM)
     {
+        GrabbingImp = null;
         HoldingImp = "";
         GameObject childImp = transform.GetChild(4).gameObject;
         childImp.transform.parent = null;
@@ -211,6 +211,7 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
         }
+        
 
     }
 
@@ -218,14 +219,17 @@ public class CharacterBehavior : DeadlyBehavior {
 	void FixedUpdate () {   
 		//		if(!WallColl || onGround())
 		//		{
-        if (HoldingStickImp)
-        {
-            HoldingStickImp = false;
-            Input.ResetInputAxes();
-        }
+        //if (HoldingStickImp)
+        //{
+        //    HoldingStickImp = false;
+        //    Input.ResetInputAxes();
+        //}
         float move = Input.GetAxis("Horizontal");
 
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        if (!HoldingStickImp)
+        {
+            rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        }
         //		}
 
         if (onGround() || HoldingStickImp)
@@ -233,10 +237,16 @@ public class CharacterBehavior : DeadlyBehavior {
             
             float fall = Input.GetAxis("Vertical");
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            if (fall > 0 || HoldingStickImp) 
+            if (fall > 0) 
             {
-                HoldingStickImp = false;
+                if (HoldingStickImp) 
+                {
+                    HoldingStickImp = false;
+                    rb.isKinematic = false;
+                }
+                
                 rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+                
             }
             
             // Jump (this actually gets processed later, in FixedUpdate
@@ -265,7 +275,6 @@ public class CharacterBehavior : DeadlyBehavior {
         //Grab an Imp or drop it
         if (Input.GetKeyDown(grab))
         {
-            Debug.Log(HoldingImp);
             if (HoldingImp == "stickImp") 
             {
                 if (transform.childCount > 4)
@@ -380,6 +389,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Collision code for exiting a "trigger" colldier
 	public virtual void OnTriggerExit2D(Collider2D other)
 	{
+        if (other.gameObject.tag == "impTrigger")
+        {
+            GrabbingImp = null;
+        }
 		// If you exit a moving platform, detach from it
 		if (other.gameObject.tag == "moving") 
 		{
@@ -402,7 +415,7 @@ public class CharacterBehavior : DeadlyBehavior {
         {
              GrabbingImp = other;
         }
-           
+    
         //if (other.gameObject.tag == "stickImp") 
         //{
         //    if(Input.GetKey (grab) && HoldingImp == "")
@@ -412,16 +425,15 @@ public class CharacterBehavior : DeadlyBehavior {
         //    }
         //}
 	}
-	
 	// Collision code for making contact with an object
-	public override void OnCollisionEnter2D(Collision2D other)
-	{
-		base.OnCollisionEnter2D (other);
-		/*if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
-		{
-			WallColl = true;
-		}*/
-	}
+    //public override void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    base.OnCollisionEnter2D (other);
+    //    /*if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
+    //    {
+    //        WallColl = true;
+    //    }*/
+    //}
 
 	// Collision code for ceasing contact with an object
 	public virtual void OnCollisionExit2D(Collision2D other)
@@ -549,7 +561,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	{
         if (imp.transform.parent.tag == "stickImp")
         {
-            Debug.Log(imp.transform.parent.GetComponent<StickImp>().Thrown);
             if (imp.transform.parent.GetComponent<StickImp>().Thrown)
             {
                 
@@ -594,6 +605,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Stick to the sticky imp!
 	void StickToImp(Collider2D imp)
 	{
+        HoldingStickImp = true;
 		rb.isKinematic = true;
 	}
 
