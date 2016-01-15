@@ -255,20 +255,14 @@ public class CharacterBehavior : DeadlyBehavior {
         //Animations for moving left and right
         if (PlayerAnim)
         {
-            if (FacingRight && move != 0)
+			print (move);
+            if (move != 0)
             {
-                PlayerAnim.SetBool("moveRight", true);
-                PlayerAnim.SetBool("moveLeft", false);
-            }
-            else if (!FacingRight && move != 0)
-            {
-                PlayerAnim.SetBool("moveRight", false);
-                PlayerAnim.SetBool("moveLeft", true);
+                PlayerAnim.SetBool("Move", true);
             }
             else
             {
-                PlayerAnim.SetBool("moveRight", false);
-                PlayerAnim.SetBool("moveLeft", false);
+                PlayerAnim.SetBool("Move", false);
             }
         }
         
