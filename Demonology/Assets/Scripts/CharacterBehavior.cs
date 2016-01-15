@@ -56,6 +56,7 @@ public class CharacterBehavior : DeadlyBehavior {
     private Animator PlayerAnim;
     private Collider2D GrabbingImp = null;
     private float Throwing = 0.0f;
+    private bool PressMove;
 
 
 
@@ -75,7 +76,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
-        PlayerAnim = GetComponent<Animator>();
+        PlayerAnim = transform.FindChild("CharSpriteHolder").GetComponent<Animator>();
 		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
 		HoldingImp = "";
 		ImpSelect = GameObject.FindGameObjectWithTag ("ImpSelect");
@@ -255,10 +256,18 @@ public class CharacterBehavior : DeadlyBehavior {
         //Animations for moving left and right
         if (PlayerAnim)
         {
-			print (move);
-            if (move != 0)
+            Debug.Log(move);
+            if (move!=0 && onGround())
             {
                 PlayerAnim.SetBool("Move", true);
+            }
+            else if (!onGround() && rb.velocity.y>0) 
+            {
+                PlayerAnim.SetBool("Jump", true);
+            }
+            else if (!onGround() && rb.velocity.y < 0) 
+            {
+                PlayerAnim.SetBool("Fall", true);
             }
             else
             {
@@ -369,6 +378,10 @@ public class CharacterBehavior : DeadlyBehavior {
 			}*/
 			if ( rb.velocity.y <= -25.0f )
 			{
+                if (PlayerAnim) 
+                {
+                    PlayerAnim.SetBool("FallDeath", true);
+                }
 				OnDeath ();
 			}
 		}
@@ -420,14 +433,15 @@ public class CharacterBehavior : DeadlyBehavior {
         //}
 	}
 	// Collision code for making contact with an object
-    //public override void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    base.OnCollisionEnter2D (other);
-    //    /*if (other.gameObject.tag == "floor" || other.gameObject.tag == "imp" || other.gameObject.tag == "moving") 
-    //    {
-    //        WallColl = true;
-    //    }*/
-    //}
+    public override void OnCollisionEnter2D(Collision2D other)
+    {
+       base.OnCollisionEnter2D (other);
+       if (onGround()) 
+       {
+           PlayerAnim.SetBool("Jump", false);
+           PlayerAnim.SetBool("Fall", false);
+       }
+    }
 
 	// Collision code for ceasing contact with an object
 	public virtual void OnCollisionExit2D(Collision2D other)
