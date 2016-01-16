@@ -4,11 +4,13 @@ using System.Collections;
 public class EnemyBehavior : MonoBehaviour {
 
 	protected Vector3 startPos;
+	protected Quaternion startRot;
 
 	// Use this for initialization
 	public virtual void Start () 
 	{
 		startPos = transform.position;
+		startRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -17,6 +19,16 @@ public class EnemyBehavior : MonoBehaviour {
 		if (CharacterBehavior.Died) 
 		{
 			transform.position = startPos;
+			transform.rotation = startRot;
+		}
+	}
+	
+	
+	public virtual void LateUpdate()
+	{
+		if (CharacterBehavior.Died) 
+		{
+			CharacterBehavior.Died = false;
 		}
 	}
 

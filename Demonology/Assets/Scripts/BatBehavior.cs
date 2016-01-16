@@ -72,15 +72,6 @@ public class BatBehavior : EnemyBehavior {
 	}
 
 
-	public virtual void LateUpdate()
-	{
-		if (CharacterBehavior.Died) 
-		{
-			CharacterBehavior.Died = false;
-		}
-	}
-
-
 	// 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
