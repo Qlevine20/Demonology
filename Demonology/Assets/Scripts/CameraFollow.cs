@@ -9,6 +9,8 @@ public class CameraFollow : MonoBehaviour {
     //For Camera Zooming
 	public float maxZoomOut;
 	public float maxZoomIn;
+    public int zoomSpeedMouse = 20;
+    public int zoomSpeedKeys = 4;
 	// Update is called once per frame
 	void Update () 
 	{
@@ -21,25 +23,39 @@ public class CameraFollow : MonoBehaviour {
                 //Zoom In
 				if(transform.position.z<-(maxZoomIn))
 				{
-                    Zoom(10);
+                    Zoom(zoomSpeedMouse);
 				}
 			}
-			
-			else if(Input.GetAxis ("Mouse ScrollWheel") < 0) 
-			{
+            else if (Input.GetAxis("ScrollKeys") > 0) 
+            {
+                if (transform.position.z < -(maxZoomIn))
+                {
+                    Zoom(zoomSpeedKeys);
+                }
+            }
+
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
                 //Zoom Out
-				if(transform.position.z>-(maxZoomOut))
-				{
-                    Zoom(-10);
-				}
-			}
-			else
-			{
+                if (transform.position.z > -(maxZoomOut))
+                {
+                    Zoom(-zoomSpeedMouse);
+                }
+            }
+            else if (Input.GetAxis("ScrollKeys") < 0)
+            {
+                if (transform.position.z > -(maxZoomOut))
+                {
+                    Zoom(-zoomSpeedKeys);
+                }
+            }
+            else
+            {
                 //Camera Move with player movement
                 Vector3 point = GetComponent<Camera>().WorldToViewportPoint(DeadlyBehavior.Player.transform.position);
-			    Vector3 delta = DeadlyBehavior.Player.transform.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.35f, point.z)); //(new Vector3(0.5, 0.5, point.z));
+                Vector3 delta = DeadlyBehavior.Player.transform.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, 0.35f, point.z)); //(new Vector3(0.5, 0.5, point.z));
                 CamDampMove(delta);
-			}
+            }
 		}
 		
 	}
