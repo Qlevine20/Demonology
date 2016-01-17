@@ -41,8 +41,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private GameObject ImpSelect;
 	
 	// player jump info
-	private bool jumpNow = false;
-	private float groundRadius = .2f;
+	private float groundRadius = .1f;
 	public LayerMask whatIsGrounded;
 	public Transform[] groundChecks;
 	public int speed = 10;//change in editor not here
@@ -256,7 +255,6 @@ public class CharacterBehavior : DeadlyBehavior {
         //Animations for moving left and right
         if (PlayerAnim)
         {
-            Debug.Log(move);
             if (move!=0 && onGround())
             {
                 PlayerAnim.SetBool("Move", true);
