@@ -9,12 +9,12 @@ public class DeadlyBehavior : MonoBehaviour {
 	public GameObject[] DeadlyObs;
 
 	public static GameObject Player;
-    private Animator PlayerAnim;
+    private Animator DeadlyPlayerAnim;
 
 	public virtual void Start()
 	{
 		Player = GameObject.FindGameObjectWithTag ("Player");
-        Player.GetComponent<Animator>();
+        DeadlyPlayerAnim = Player.GetComponent<Animator>();
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D other)
@@ -36,19 +36,19 @@ public class DeadlyBehavior : MonoBehaviour {
 		{
 			if(DeadlyObs[i].gameObject.tag == other.tag)
 			{
-                if(PlayerAnim)
+                if(DeadlyPlayerAnim)
                 {
                     if(other.tag == "magma")
                     {
-                        PlayerAnim.SetBool("LavaDeath",true);
+                        DeadlyPlayerAnim.SetBool("LavaDeath", true);
                     }
                     else if(other.tag == "spike")
                     {
-                        PlayerAnim.SetBool("SpikeDeath",true);
+                        DeadlyPlayerAnim.SetBool("SpikeDeath", true);
                     }
                     else if(other.tag == "enemy")
                     {
-                        PlayerAnim.SetBool("EnemyDeath",true);
+                        DeadlyPlayerAnim.SetBool("EnemyDeath", true);
                     }
                 }
 				OnDeath ();
