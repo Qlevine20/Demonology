@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &178968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 445006}
+  - 212: {fileID: 21278150}
+  - 68: {fileID: 6818506}
+  - 60: {fileID: 6054990}
+  m_Layer: 8
+  m_Name: Side Wall
+  m_TagString: floor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445006
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.5985947, y: -5.6491909, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!60 &6054990
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178968}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 1.18654251, y: -5.62757111}
+      - {x: 1.36486816, y: -5.04144287}
+      - {x: .974159241, y: -4.67840576}
+      - {x: .925647736, y: -4.24727345}
+      - {x: .846054077, y: -3.05214214}
+      - {x: .814959288, y: -2.54949355}
+      - {x: .717941284, y: -1.27693081}
+      - {x: .810752869, y: -.467841148}
+      - {x: 1.09589386, y: .719204903}
+      - {x: 1.0601387, y: 1.06186438}
+      - {x: .849468231, y: 1.25590277}
+      - {x: .823505402, y: 2.12329626}
+      - {x: .917106092, y: 2.25140738}
+      - {x: .917106092, y: 4.26029491}
+      - {x: .951155066, y: 5.92869329}
+      - {x: .915859222, y: 6.48156166}
+      - {x: 1.12231827, y: 7.13657618}
+      - {x: 1.35699844, y: 7.29231644}
+      - {x: 1.34574509, y: 7.56987858}
+      - {x: 1.39379132, y: 7.76733589}
+      - {x: 1.15544868, y: 7.49494457}
+      - {x: 1.42534637, y: 8.52154064}
+      - {x: 1.47385406, y: 8.71650124}
+      - {x: 1.02297592, y: 8.67091942}
+      - {x: .168029785, y: 8.55017567}
+      - {x: -.789060593, y: 8.37592506}
+      - {x: -1.14843559, y: 8.34216213}
+      - {x: -1.20451355, y: 8.03629494}
+      - {x: -1.24118996, y: 7.22255278}
+      - {x: -1.27990723, y: 5.97332382}
+      - {x: -1.27523994, y: 5.65801048}
+      - {x: -1.38764191, y: 4.90472794}
+      - {x: -1.61401939, y: 5.02679014}
+      - {x: -1.29607511, y: 3.91980553}
+      - {x: -1.10841179, y: 3.23711753}
+      - {x: -.94112587, y: 2.59827256}
+      - {x: -.858566284, y: 2.28841376}
+      - {x: -.845294952, y: 1.89552498}
+      - {x: -.741958618, y: 1.52829504}
+      - {x: -1.15987945, y: .514911294}
+      - {x: -1.33012414, y: -.778948545}
+      - {x: -1.56846666, y: -.676801682}
+      - {x: -1.49103546, y: -1.01729107}
+      - {x: -1.34208679, y: -1.94982481}
+      - {x: -1.32374954, y: -2.62271786}
+      - {x: -.844106674, y: -2.95854092}
+      - {x: -.519784927, y: -3.36495781}
+      - {x: -.509992599, y: -4.77246952}
+      - {x: -.129076004, y: -5.43852615}
+      - {x: -.503616333, y: -6.36422443}
+      - {x: -.672151566, y: -6.63536644}
+      - {x: -.62830925, y: -7.2159071}
+      - {x: -.512949467, y: -7.65683508}
+      - {x: -.161417007, y: -8.03137302}
+      - {x: .218248367, y: -8.47400951}
+      - {x: .307182312, y: -8.74002552}
+      - {x: .312311172, y: -8.18091583}
+      - {x: .409786224, y: -8.03538609}
+      - {x: .447257996, y: -7.84712887}
+      - {x: .617500305, y: -7.342309}
+      - {x: 1.04397202, y: -6.13784504}
+--- !u!68 &6818506
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178968}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 1.65106964, y: 8.84102058}
+  - {x: -1.38600159, y: 8.38829803}
+  - {x: -1.3106823, y: 7.1157136}
+  - {x: -1.40884018, y: 5.03952408}
+  - {x: -1.72722435, y: 5.15484953}
+  - {x: -1.42855453, y: 4.24260902}
+  - {x: -.866970062, y: 1.57952785}
+  - {x: -1.61549377, y: -.730341911}
+  - {x: -1.39317322, y: -2.63064098}
+  - {x: -.604564667, y: -3.36730099}
+  - {x: -.570234299, y: -4.77901936}
+  - {x: -.224369049, y: -5.46229839}
+  - {x: -.81461525, y: -6.68396378}
+  - {x: -.568483353, y: -7.70893955}
+  - {x: .100875854, y: -8.4235611}
+  - {x: .327936172, y: -8.99882507}
+  - {x: .358789444, y: -8.39344406}
+  - {x: 1.47432327, y: -5.00934792}
+  - {x: 1.07588196, y: -4.61248398}
+  - {x: .811248779, y: -.811187267}
+  - {x: 1.26537704, y: 1.00687075}
+  - {x: .946929932, y: 1.31001902}
+  - {x: 1.05808258, y: 6.81113958}
+  - {x: 1.48677826, y: 7.29158449}
+  - {x: 1.54255676, y: 8.76157856}
+--- !u!212 &21278150
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178968}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300046, guid: 370e5ebd8ea334feb8c27f4e61edeba6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 178968}
+  m_IsPrefabParent: 1
