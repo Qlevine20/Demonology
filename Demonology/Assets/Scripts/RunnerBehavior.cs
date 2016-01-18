@@ -78,11 +78,14 @@ public class RunnerBehavior : EnemyBehavior {
 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
-		//When colliding with magma kill imp, but body stays for a SinkTime
 		if (other.gameObject.tag == "magma" || other.gameObject.tag == "spike") {
 			OnDeath ();
 		}
-		
+
+		if (other.gameObject.tag == "imp" && charging == true) {
+			Rigidbody2D ragDoll = other.gameObject.GetComponent<Rigidbody2D>();
+			ragDoll.AddForce((Vector2.up*0.7f+facingDir) * 800.0f);
+		}
 	}
 
 	//Moves the mobile and the mobile changes direction if it hits a wall
@@ -94,8 +97,12 @@ public class RunnerBehavior : EnemyBehavior {
 			//Changes the Direction the object faces to the opposite of its current Direction
 			Flip();
 			facingDir = new Vector2(-facingDir.x,facingDir.y);
-			charging = false;
-			speed = defaultSpeed;
+			if(charging){
+				charging = false;
+				speed = defaultSpeed;
+				pause = true;
+				StartCoroutine (Stunned(1.5f));
+			}
 		}
 
 		//Move forward
@@ -111,7 +118,7 @@ public class RunnerBehavior : EnemyBehavior {
 		if (Physics2D.Raycast (ry.origin, ry.direction, targetDist, whatIsTarget)) 
 		{
 			pause = true;
-			StartCoroutine (WaitTime(0.4f));
+			StartCoroutine (PrepareToCharge(0.4f));
 		}
 		Debug.DrawRay (ry.origin, ry.direction*targetDist, Color.blue);
 	}
@@ -125,11 +132,17 @@ public class RunnerBehavior : EnemyBehavior {
 		transform.localScale = theScale;
 	}
 
-	public IEnumerator WaitTime(float num)
+	public IEnumerator PrepareToCharge(float num)
 	{
 		yield return new WaitForSeconds (num);
 		pause = false;
 		charging = true;
 		speed = 12;
+	}
+
+	public IEnumerator Stunned(float num)
+	{
+		yield return new WaitForSeconds (num);
+		pause = false;
 	}
 }
