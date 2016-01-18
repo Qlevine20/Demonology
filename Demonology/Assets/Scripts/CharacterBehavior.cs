@@ -364,7 +364,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "Finish") 
 		{
 			//Add go to next level code here
-			Application.LoadLevel (Application.loadedLevel);
+            Application.LoadLevel(Application.loadedLevel + 1) ;
 		}
 		// If you collide with a "hard" object...
 		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")

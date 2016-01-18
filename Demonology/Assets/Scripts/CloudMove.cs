@@ -12,26 +12,28 @@ public class CloudMove : MonoBehaviour {
         count = 0;
         rand = RandWait();
         cloudAnim = GetComponent<Animator>();
-        cloudAnim.SetBool("Flash", true);
         
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //count += Time.deltaTime;
+        count += Time.deltaTime;
         transform.Translate(-(speed * Time.deltaTime),0,0);
         if (transform.position.x < CloudsSpawner.leftX) 
         {
             Destroy(gameObject);
         }
-        //if (count > rand) 
-        //{
-        //    if (cloudAnim)
-        //    {
-        //        cloudAnim.SetBool("Flash", true);
-        //    }
-        //}
+        if (count > rand) 
+        {
+            if (cloudAnim)
+            {
+                cloudAnim.SetBool("Flash", true);
+                count = 0;
+                rand = RandWait();
+                //cloudAnim.SetBool("Flash", false);
+            }
+        }
 
 	}
 
@@ -39,6 +41,6 @@ public class CloudMove : MonoBehaviour {
 
     int RandWait()
     {
-        return Random.Range(0, 8);
+        return Random.Range(2, 4);
     }
 }

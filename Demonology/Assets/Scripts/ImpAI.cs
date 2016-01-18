@@ -152,7 +152,7 @@ public class ImpAI : DemonBehavior {
 		Destroy (gameObject);
 	}
 
-    public void KillImp() 
+    public virtual void KillImp() 
     {
         if (!dying)
         {
