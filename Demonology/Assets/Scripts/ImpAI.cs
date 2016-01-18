@@ -104,7 +104,7 @@ public class ImpAI : DemonBehavior {
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
         //When colliding with magma kill imp, but body stays for a SinkTime
-		if (other.gameObject.tag == "magma") {
+		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy") {
 			if (!dying)
 			{
 				dying = true;
@@ -132,7 +132,6 @@ public class ImpAI : DemonBehavior {
 		{
 			base.OnCollisionEnter2D (other);
 		}
-			
 	}
 
 
