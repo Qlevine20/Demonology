@@ -56,6 +56,10 @@ public class CharacterBehavior : DeadlyBehavior {
     private Collider2D GrabbingImp = null;
     private float Throwing = 0.0f;
     private bool PressMove;
+    private Ray2D checkWall;
+    public float checkWallDist = 1;
+    public LayerMask wallMasks;
+
 
 
 
@@ -74,6 +78,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
+        checkWall = new Ray2D(transform.position, -(transform.right));
 		base.Start ();
         PlayerAnim = transform.FindChild("CharSpriteHolder").GetComponent<Animator>();
 		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
@@ -86,7 +91,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 	}
 
-
+    
 	//
 	// UPDATE FUNCTIONS START HERE
 	//
@@ -225,10 +230,22 @@ public class CharacterBehavior : DeadlyBehavior {
         //    Input.ResetInputAxes();
         //}
         float move = Input.GetAxis("Horizontal");
-
+        //Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks).collider
         if (!HoldingStickImp)
         {
-            rb.velocity = new Vector2(move * speed, rb.velocity.y);
+
+            RaycastHit2D rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
+            Debug.Log(rayhit.distance);
+            if (rayhit)
+            {
+                Debug.Log("Colliding With Wall");
+                
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
+            }
+            else 
+            {
+                rb.velocity = new Vector2(move * speed, rb.velocity.y);
+            }
         }
         //		}
 
@@ -635,7 +652,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.yellow;
-		Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
+		//Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
+        Gizmos.DrawRay(transform.position,checkWall.direction);
 		
 	}
 }
