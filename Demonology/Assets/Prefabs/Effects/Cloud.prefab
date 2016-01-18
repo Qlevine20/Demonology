@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 454498}
   - 212: {fileID: 21239208}
   - 114: {fileID: 11483592}
+  - 114: {fileID: 11423566}
   - 95: {fileID: 9515888}
   m_Layer: 0
   m_Name: Cloud
@@ -47,6 +48,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11423566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc577524f32b904c970e59c6da8d0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningStrikes:
+  - {fileID: 8300000, guid: 1b168ae78ff2efc46bdd273b0f9b969a, type: 3}
+  - {fileID: 8300000, guid: a49a8edd1d6af4c40a0a5e1a553417bd, type: 3}
 --- !u!114 &11483592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,6 +108,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: lightningStrikes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
@@ -104,6 +123,14 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lightningStrikes.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b168ae78ff2efc46bdd273b0f9b969a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: lightningStrikes.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: a49a8edd1d6af4c40a0a5e1a553417bd, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 152392}
