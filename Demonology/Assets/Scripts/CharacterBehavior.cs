@@ -355,7 +355,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			//play a sound
             if (gameObject != null) {
-                AudioSource.PlayClipAtPoint(crystalPickupSound, Camera.main.transform.position, 100.0f);
+                AudioSource.PlayClipAtPoint(crystalPickupSound, Camera.main.transform.position, 75.0f);
             }
             // pick it up
 			pickUpMat (other.gameObject);
