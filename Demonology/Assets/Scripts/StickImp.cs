@@ -35,6 +35,11 @@ public class StickImp : ImpAI {
 	}
     public override void OnDeath()
     {
+        Destroy(gameObject);
+    }
+    public override void KillImp()
+    {
+        Destroy(gameObject);
     }
 
 }
