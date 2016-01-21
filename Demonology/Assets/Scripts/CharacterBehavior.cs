@@ -235,10 +235,10 @@ public class CharacterBehavior : DeadlyBehavior {
         {
 
             RaycastHit2D rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
-            Debug.Log(rayhit.distance);
+            //Debug.Log(rayhit.distance);
             if (rayhit)
             {
-                Debug.Log("Colliding With Wall");
+                //Debug.Log("Colliding With Wall");
                 
                 rb.velocity = new Vector2(0.0f, rb.velocity.y);
             }
@@ -386,11 +386,12 @@ public class CharacterBehavior : DeadlyBehavior {
 		// If you collide with a "hard" object...
 		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")
 		{
-			// die if you're falling too quickly
+			// fall death if you're falling too quickly
 			/*if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
 			}*/
+			print (rb.velocity.y);
 			if ( rb.velocity.y <= -25.0f )
 			{
                 if (PlayerAnim) 

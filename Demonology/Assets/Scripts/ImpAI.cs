@@ -144,11 +144,11 @@ public class ImpAI : DemonBehavior {
 
 	public override void OnDeath()
 	{
-		//for (int i=0; i<transform.childCount; i++) {
-		//	if ( transform.GetChild(i).tag == "magma" ){
-		//		transform.GetChild (i--).parent = null;
-		//	}
-		//}
+		for (int i=0; i<transform.childCount; i++) {
+			if ( transform.GetChild(i).tag == "enemy" ){
+				transform.GetChild (i--).parent = null;
+			}
+		}
 		Destroy (gameObject);
 	}
 
