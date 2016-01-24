@@ -30,6 +30,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	//private bool WallColl;
 	private string HoldingImp;
     private bool HoldingStickImp;
+    private RaycastHit2D rayhit;
 	
 	
 	Animator anim;
@@ -59,6 +60,7 @@ public class CharacterBehavior : DeadlyBehavior {
     private Ray2D checkWall;
     public float checkWallDist = 1;
     public LayerMask wallMasks;
+    private float right = 1;
 
 
 
@@ -78,7 +80,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
-        checkWall = new Ray2D(transform.position, -(transform.right));
+        checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
         PlayerAnim = transform.FindChild("CharSpriteHolder").GetComponent<Animator>();
 		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
@@ -100,7 +102,9 @@ public class CharacterBehavior : DeadlyBehavior {
 	public override void Update()
 	{
 		base.Update ();
-
+        checkWall.origin = transform.position;
+        rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
+        Debug.DrawRay(checkWall.origin,checkWall.direction);
 		// Code for holding and throwing imps
 		if (HoldingImp!="") 
 		{
@@ -234,15 +238,19 @@ public class CharacterBehavior : DeadlyBehavior {
         if (!HoldingStickImp)
         {
 
-            RaycastHit2D rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
-            //Debug.Log(rayhit.distance);
-            if (rayhit)
+            
+            
+            if (rayhit.distance == checkWallDist)
             {
-                //Debug.Log("Colliding With Wall");
+                Debug.Log("Colliding With Wall");
                 
                 rb.velocity = new Vector2(0.0f, rb.velocity.y);
             }
-            else 
+            else if (rayhit.distance != 0) 
+            {
+                rb.velocity = new Vector2(right*(-1.0f * rayhit.distance), rb.velocity.y);
+            }
+            else
             {
                 rb.velocity = new Vector2(move * speed, rb.velocity.y);
             }
@@ -391,7 +399,6 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
 				print(rb.velocity.y);
 			}*/
-			print (rb.velocity.y);
 			if ( rb.velocity.y <= -25.0f )
 			{
                 if (PlayerAnim) 
@@ -636,11 +643,14 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Flip your direction
 	void Flip()
 	{
+        
         FacingRight = !FacingRight;
         Transform spriteHolder = transform.GetChild(0);
         Vector3 theScale = spriteHolder.localScale;
         theScale.x *= -1;
         spriteHolder.localScale = theScale;
+        right = -right;
+        checkWall = new Ray2D(transform.position, right*(transform.right));
 	}	
 
 	// Convenience function
@@ -654,7 +664,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	{
 		Gizmos.color = Color.yellow;
 		//Gizmos.DrawRay (new Vector3(mP.origin.x,mP.origin.y,0.0f),new Vector3(mP.direction.x,mP.direction.y,0.0f));
-        Gizmos.DrawRay(transform.position,checkWall.direction);
+        //Gizmos.DrawRay(transform.position,checkWall.direction);
 		
 	}
 }
