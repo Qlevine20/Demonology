@@ -262,7 +262,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0769999996, y: -1.20000005, z: 0}
+  m_LocalPosition: {x: .0769999996, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425892}
@@ -313,7 +313,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .216000006, y: -1.20000005, z: 0}
+  m_LocalPosition: {x: .351000011, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425892}
@@ -362,7 +362,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.116999999, y: -1.19000006, z: 0}
+  m_LocalPosition: {x: -.199000001, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425892}
@@ -526,7 +526,7 @@ MonoBehaviour:
   speed: 5
   jumpspeed: 15
   ForceMult: 15
-  checkWallDist: 4
+  checkWallDist: .5
   wallMasks:
     serializedVersion: 2
     m_Bits: 256

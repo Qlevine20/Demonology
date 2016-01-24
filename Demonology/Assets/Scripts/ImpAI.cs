@@ -165,7 +165,8 @@ public class ImpAI : DemonBehavior {
         speed = 0;
         dead = true;
         transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-        rb.freezeRotation = false;
-        bc.enabled = false;
+        //Roll Imps:
+        //rb.freezeRotation = false;
+        //bc.enabled = false;
     }
 }
