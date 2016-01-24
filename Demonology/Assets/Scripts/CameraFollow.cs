@@ -11,6 +11,8 @@ public class CameraFollow : MonoBehaviour {
 	public float maxZoomIn;
     public int zoomSpeedMouse = 20;
     public int zoomSpeedKeys = 4;
+    public KeyCode downZoom = KeyCode.X;
+    public float downZoomDistance = 1;
 	// Update is called once per frame
 	void Update () 
 	{
@@ -48,6 +50,13 @@ public class CameraFollow : MonoBehaviour {
                 {
                     Zoom(-zoomSpeedKeys);
                 }
+            }
+
+            else if (Input.GetKey(downZoom)) 
+            {
+                Vector3 point = GetComponent<Camera>().WorldToViewportPoint(DeadlyBehavior.Player.transform.position);
+                Vector3 delta = DeadlyBehavior.Player.transform.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0.5f, downZoomDistance, point.z)); //(new Vector3(0.5, 0.5, point.z));
+                CamDampMove(delta);
             }
             else
             {

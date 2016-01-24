@@ -113,6 +113,7 @@ public class ImpAI : DemonBehavior {
 			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			speed = 0;
+            rb.velocity = Vector3.zero;
 			StartCoroutine (WaitTime (SinkTime));
 			//gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
