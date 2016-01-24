@@ -21,6 +21,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public GameObject CrystalPrefab;
 	public LayerMask IgnorePlayerLayer;
     public AudioClip crystalPickupSound;
+    public AudioClip crystalFizzleSound;
 	
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
@@ -555,7 +556,10 @@ public class CharacterBehavior : DeadlyBehavior {
                 HoldingImp = "stickImp";
                 GrabImp(newImp.transform.GetChild(0).GetComponent<BoxCollider2D>());
             }
-		}
+        }   
+        else {
+            AudioSource.PlayClipAtPoint(crystalFizzleSound, transform.position);
+        }
 	}
 
 	// Pick up a material

@@ -514,7 +514,8 @@ MonoBehaviour:
   IgnorePlayerLayer:
     serializedVersion: 2
     m_Bits: 2305
-  crystalPickupSound: {fileID: 8300000, guid: d302bba0bee5b654d8ace006bd66a630, type: 3}
+  crystalPickupSound: {fileID: 8300000, guid: 8ea701aa0b6c37c4398480929495c0de, type: 3}
+  crystalFizzleSound: {fileID: 8300000, guid: daeb04c163e01eb498ee963349923595, type: 3}
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 4352
@@ -841,6 +842,14 @@ Prefab:
       propertyPath: DeadlyObs.Array.data[2]
       value: 
       objectReference: {fileID: 139866, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
+    - target: {fileID: 0}
+      propertyPath: crystalPickupSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ea701aa0b6c37c4398480929495c0de, type: 3}
+    - target: {fileID: 0}
+      propertyPath: crystalFizzleSound
+      value: 
+      objectReference: {fileID: 8300000, guid: daeb04c163e01eb498ee963349923595, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
