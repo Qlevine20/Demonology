@@ -62,7 +62,9 @@ public class ImpAI : DemonBehavior {
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
-                KillImp();
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				KillImp();
 			}
 		}
 	}
@@ -76,7 +78,6 @@ public class ImpAI : DemonBehavior {
 		if (CharacterBehavior.Died) 
 		{
 			OnDeath ();
-
 		}
 	}
 
