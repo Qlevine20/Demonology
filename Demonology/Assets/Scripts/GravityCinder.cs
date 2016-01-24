@@ -8,6 +8,7 @@ public class GravityCinder : MonoBehaviour {
 	public float pauseTime = 2f;
 	public float lowerThresh;
 	public float startVel = 0.0f;
+	public float xVel = 0.0f;
 
 	private Vector2 startPos;
 	private bool dead = false;
@@ -20,7 +21,7 @@ public class GravityCinder : MonoBehaviour {
 		cParts = GetComponent<ParticleSystem>();
 		rigid = GetComponent<Rigidbody2D>();
 		gravitySave = rigid.gravityScale;
-		rigid.velocity = new Vector2(0.0f, startVel);
+		rigid.velocity = new Vector2(xVel, startVel);
 	}
 
 	// Update is called once per frame
@@ -50,7 +51,7 @@ public class GravityCinder : MonoBehaviour {
 		cParts.enableEmission = true;
 		yield return new WaitForSeconds (0.1f);
 		rigid.gravityScale = gravitySave;
-		rigid.velocity = new Vector2(0.0f, startVel);
+		rigid.velocity = new Vector2(xVel, startVel);
 		dead = false;
 	}
 

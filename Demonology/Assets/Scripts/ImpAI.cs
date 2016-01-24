@@ -58,11 +58,13 @@ public class ImpAI : DemonBehavior {
 		}
 
         //Fall Death
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
-                KillImp();
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				KillImp();
 			}
 		}
 	}
@@ -76,7 +78,6 @@ public class ImpAI : DemonBehavior {
 		if (CharacterBehavior.Died) 
 		{
 			OnDeath ();
-
 		}
 	}
 
