@@ -28,7 +28,7 @@ public class BatBehavior : EnemyBehavior {
 			Pos = 0;
 		}
 
-		if (transform.parent != null) {
+		if (transform.parent != null && transform.parent.gameObject.tag == "imp") {
 			return;
 		}
 
@@ -80,7 +80,7 @@ public class BatBehavior : EnemyBehavior {
 			transform.localScale = new Vector3(7.0F/transform.parent.localScale.x, 7.0F/transform.parent.localScale.y, 0.0F);
 		}
 		if (other.gameObject.tag == "Player") {
-			if(transform.parent != null){
+			if(transform.parent != null && transform.parent.gameObject.tag == "imp"){
 				OnDeath ();
 			}
 		}

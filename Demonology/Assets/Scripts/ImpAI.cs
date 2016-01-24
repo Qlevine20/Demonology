@@ -58,7 +58,7 @@ public class ImpAI : DemonBehavior {
 		}
 
         //Fall Death
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="imp"|| other.gameObject.tag == "moving")
+		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
