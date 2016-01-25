@@ -55,6 +55,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	public static Vector2 Dir;
 	public static bool FacingRight;
+    public static bool Dying;
 	public static bool Died;
 
     private Animator PlayerAnim;
@@ -85,6 +86,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
+        Dying = false;
         checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
         PlayerAnim = transform.FindChild("CharSpriteHolder").GetComponent<Animator>();
@@ -424,7 +426,7 @@ public class CharacterBehavior : DeadlyBehavior {
 				if (PlayerAnim) {
 					PlayerAnim.SetBool ("FallDeath", true);
 				}
-				OnDeath ();
+				//OnDeath ();
 			}
 		}
 		// If you collide with a moving platform..
@@ -434,7 +436,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		if (other.gameObject.tag == "magma") {
 			// lava always kills
-			OnDeath ();
+			//OnDeath ();
 		}
 	}
 

@@ -10,12 +10,13 @@ public class DeadlyBehavior : MonoBehaviour {
 
 	public static GameObject Player;
     private Animator DeadlyPlayerAnim;
+    private GameObject spriteHolder;
 
 	public virtual void Start()
 	{
 		Player = GameObject.FindGameObjectWithTag ("Player");
-        DeadlyPlayerAnim = 
-Player.GetComponent<Animator>();
+        spriteHolder = GameObject.FindGameObjectWithTag("SpriteHolder");
+        DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D other)
@@ -27,12 +28,14 @@ Player.GetComponent<Animator>();
 	public virtual void Update()
 	{
 		Player = GameObject.FindGameObjectWithTag ("Player");
+        spriteHolder = GameObject.FindGameObjectWithTag("SpriteHolder");
 	}
 
 
     //Checks to see if the object has touched 
 	public virtual void CheckDeath(GameObject other, GameObject[]DeadlyObs)
 	{
+        DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
 		for (int i = 0; i < DeadlyObs.Length; i++)
 		{
 			if(DeadlyObs[i].gameObject.tag == other.tag)
@@ -41,18 +44,32 @@ Player.GetComponent<Animator>();
                 {
                     if(other.tag == "magma")
                     {
-                        DeadlyPlayerAnim.SetBool("LavaDeath", true);
+                        
+                        if (!CharacterBehavior.Dying)
+                        {
+                            DeadlyPlayerAnim.SetBool("LavaDeath", true);
+                            CharacterBehavior.Dying = true;
+                        }
                     }
                     else if(other.tag == "spike")
                     {
-                        DeadlyPlayerAnim.SetBool("SpikeDeath", true);
+                        if (!CharacterBehavior.Dying)
+                        {
+                            DeadlyPlayerAnim.SetBool("SpikeDeath", true);
+                            CharacterBehavior.Dying = true;
+                        }
+                        
                     }
                     else if(other.tag == "enemy")
                     {
-                        DeadlyPlayerAnim.SetBool("EnemyDeath", true);
+                        if (!CharacterBehavior.Dying)
+                        {
+                            DeadlyPlayerAnim.SetBool("EnemyDeath", true);
+                            CharacterBehavior.Dying = true;
+                        }
                     }
                 }
-				OnDeath ();
+				//OnDeath ();
 			}
 		}
 	}

@@ -171,7 +171,6 @@ GameObject:
   - 58: {fileID: 5846528}
   - 58: {fileID: 5849900}
   - 58: {fileID: 5878646}
-  - 95: {fileID: 9508454}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -190,7 +189,7 @@ GameObject:
   - 95: {fileID: 9527934}
   m_Layer: 9
   m_Name: CharSpriteHolder
-  m_TagString: Untagged
+  m_TagString: SpriteHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -447,23 +446,6 @@ BoxCollider2D:
   m_Offset: {x: .0321969986, y: -.381163597}
   serializedVersion: 2
   m_Size: {x: .528156281, y: 1.03655434}
---- !u!95 &9508454
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187882}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9527934
 Animator:
   serializedVersion: 3
@@ -502,6 +484,7 @@ MonoBehaviour:
   ShiftRight: 114
   jump: 119
   grab: 103
+  killSelf: 107
   currentMats: 0000000000000000000000000000000000000000
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
