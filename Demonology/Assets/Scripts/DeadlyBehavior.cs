@@ -14,7 +14,8 @@ public class DeadlyBehavior : MonoBehaviour {
 	public virtual void Start()
 	{
 		Player = GameObject.FindGameObjectWithTag ("Player");
-        DeadlyPlayerAnim = Player.GetComponent<Animator>();
+        DeadlyPlayerAnim = 
+Player.GetComponent<Animator>();
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D other)
