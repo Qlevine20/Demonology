@@ -417,6 +417,10 @@ public class CharacterBehavior : DeadlyBehavior {
 			// attach the character to it so they move with it
 			transform.SetParent (other.transform);
 		}
+		if (other.gameObject.tag == "magma") {
+			// lava always kills
+			OnDeath ();
+		}
 	}
 
 	// Collision code for exiting a "trigger" colldier
