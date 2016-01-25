@@ -264,7 +264,10 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             
             float fall = Input.GetAxis("Vertical");
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            if (rb.velocity.y >= 0) 
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            };
             if (fall > 0) 
             {
                 if (HoldingStickImp) 
