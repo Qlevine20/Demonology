@@ -11,6 +11,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode ShiftRight = KeyCode.R;
 	public KeyCode jump = KeyCode.W;
 	public KeyCode grab = KeyCode.G;
+    public KeyCode killSelf = KeyCode.K;
 
 	public int[] currentMats;
 	public GameObject[] Demons;
@@ -64,6 +65,7 @@ public class CharacterBehavior : DeadlyBehavior {
     public float checkWallDist = 1;
     public LayerMask wallMasks;
     private float right = 1;
+    private float holdDown = 0;
 
 
 
@@ -166,6 +168,19 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
+
+        if (Input.GetKey(killSelf)) 
+        {
+            holdDown += Time.deltaTime;
+            if (holdDown > 1.0f) 
+            {
+                OnDeath();
+            }
+        }
+        if (Input.GetKeyUp(killSelf)) 
+        {
+            holdDown = 0;
+        }
 
 
 		if (Input.GetMouseButtonDown (0) || Throwing != 0.0f) 

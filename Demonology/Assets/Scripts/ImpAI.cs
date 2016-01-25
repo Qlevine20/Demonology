@@ -101,7 +101,6 @@ public class ImpAI : DemonBehavior {
 			transform.parent = null;
 		}
 	}
-
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
         //When colliding with magma kill imp, but body stays for a SinkTime
@@ -121,8 +120,10 @@ public class ImpAI : DemonBehavior {
             if (!dead)
             {
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-                HalveCollider(bc, heightChange);
-                bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+                HalveCollider(bc, .04f);
+                transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+                rb.isKinematic = true;
+                //bc.offset = new Vector2(bc.offset.x, bc.offset.y);
             }
 		} 
         //Collision with Spike kills imp
