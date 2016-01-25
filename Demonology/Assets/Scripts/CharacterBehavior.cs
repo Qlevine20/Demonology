@@ -17,7 +17,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public GameObject[] Demons;
 	private int selected = 0;
 	public static GameObject activeCheckpoint;
-	public int maxMins = 5;
+	//public int maxMins = 5;
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
 	public LayerMask IgnorePlayerLayer;
@@ -563,7 +563,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public virtual void summon()
 	{
 		// Make sure that you have the necessary materials for demon summoning
-		if(checkMaterials() && GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins)
+		if(checkMaterials() /*&& GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins*/)
 		{
 
 			GameObject newImp = Instantiate (Demons[selected], transform.position,transform.rotation) as GameObject;
