@@ -380,39 +380,39 @@ public class CharacterBehavior : DeadlyBehavior {
 			if (gameObject != null) {
 				AudioSource.PlayClipAtPoint (altarActivateSound, Camera.main.transform.position, 75.0f);
 			}
-			// If you collide with a crystal...
-			if (other.gameObject.tag == "crystal") {
-				//play a sound
-				if (gameObject != null) {
-					AudioSource.PlayClipAtPoint (crystalPickupSound, Camera.main.transform.position, 75.0f);
-				}
-				// pick it up
-				pickUpMat (other.gameObject);
+		}
+		// If you collide with a crystal...
+		if (other.gameObject.tag == "crystal") {
+			//play a sound
+			if (gameObject != null) {
+				AudioSource.PlayClipAtPoint (crystalPickupSound, Camera.main.transform.position, 75.0f);
 			}
-			// If you collide with the end of the stage...
-			if (other.gameObject.tag == "Finish") {
-				//Add go to next level code here
-				Application.LoadLevel (Application.loadedLevel + 1);
-			}
-			// If you collide with a "hard" object...
-			if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
-				// fall death if you're falling too quickly
-				/*if ( rb.velocity.y <= 0.0f )
+			// pick it up
+			pickUpMat (other.gameObject);
+		}
+		// If you collide with the end of the stage...
+		if (other.gameObject.tag == "Finish") {
+			//Add go to next level code here
+			Application.LoadLevel (Application.loadedLevel + 1);
+		}
+		// If you collide with a "hard" object...
+		if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
+			// fall death if you're falling too quickly
+			/*if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
 			}*/
-				if (rb.velocity.y <= -25.0f) {
-					if (PlayerAnim) {
-						PlayerAnim.SetBool ("FallDeath", true);
-					}
-					OnDeath ();
+			if (rb.velocity.y <= -25.0f) {
+				if (PlayerAnim) {
+					PlayerAnim.SetBool ("FallDeath", true);
 				}
+				OnDeath ();
 			}
-			// If you collide with a moving platform..
-			if (other.gameObject.tag == "moving") {
-				// attach the character to it so they move with it
-				transform.SetParent (other.transform);
-			}
+		}
+		// If you collide with a moving platform..
+		if (other.gameObject.tag == "moving") {
+			// attach the character to it so they move with it
+			transform.SetParent (other.transform);
 		}
 	}
 
