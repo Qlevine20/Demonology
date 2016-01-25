@@ -21,12 +21,7 @@ public class BatBehavior : EnemyBehavior {
 	// Update is called once per frame
 	public override void Update ()
 	{
-		if (CharacterBehavior.Died) 
-		{
-			transform.position = startPos;
-			ArrayDir = 1;
-			Pos = 0;
-		}
+		base.Update ();
 
 		if (transform.parent != null && transform.parent.gameObject.tag == "imp") {
 			return;
@@ -121,5 +116,11 @@ public class BatBehavior : EnemyBehavior {
 		{
 			Gizmos.DrawLine(locs[i - 1], locs[i]);
 		}
+	}
+
+	public override void OnRespawn()
+	{
+		ArrayDir = 1;
+		Pos = 0;
 	}
 }

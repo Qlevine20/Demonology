@@ -20,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour {
 		{
 			transform.position = startPos;
 			transform.rotation = startRot;
+			OnRespawn ();
 		}
 	}
 	
@@ -36,5 +37,10 @@ public class EnemyBehavior : MonoBehaviour {
 	{
 		CharacterBehavior.KilledEnemies.Add (gameObject);
 		gameObject.SetActive (false);
+	}
+
+	public virtual void OnRespawn()
+	{
+
 	}
 }

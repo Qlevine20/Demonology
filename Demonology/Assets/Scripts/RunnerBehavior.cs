@@ -32,18 +32,14 @@ public class RunnerBehavior : EnemyBehavior {
 		}
 	}
 
-	// Update is called once per frame
-	public override void Update () 
+	// call this when the enemy respawns
+	public override void OnRespawn () 
 	{
-		base.Update ();
-		if (CharacterBehavior.Died) 
-		{
-			facingDir = Vector2.right;
-			pause = false;
-			charging = false;
-			speed = defaultSpeed;
-			facingDir = defaultDir;
-		}
+		facingDir = Vector2.right;
+		pause = false;
+		charging = false;
+		speed = defaultSpeed;
+		facingDir = defaultDir;
 	}
 	
 	public void FixedUpdate()
