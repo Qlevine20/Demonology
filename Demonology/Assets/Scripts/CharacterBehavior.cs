@@ -413,7 +413,16 @@ public class CharacterBehavior : DeadlyBehavior {
 		// If you collide with the end of the stage...
 		if (other.gameObject.tag == "Finish") {
 			//Add go to next level code here
-			Application.LoadLevel (Application.loadedLevel + 1);
+            if (Application.loadedLevel+1 < Application.levelCount)
+            {
+                Debug.Log(Application.levelCount);
+                Debug.Log(Application.loadedLevel+1);
+                Application.LoadLevel(Application.loadedLevel + 1);
+            }
+            else 
+            {
+                Application.LoadLevel(0);
+            }
 		}
 		// If you collide with a "hard" object...
 		if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {

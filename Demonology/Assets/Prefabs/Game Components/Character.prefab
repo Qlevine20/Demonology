@@ -491,7 +491,6 @@ MonoBehaviour:
   - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   - {fileID: 198696, guid: a2ca9c2abda6fb1429cbbb4c0f3c062d, type: 2}
   - {fileID: 134596, guid: 01c7110a8b56c1d4f95bcab9caca242e, type: 2}
-  maxMins: 5
   PlayerPrefab: {fileID: 187882}
   CrystalPrefab: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   IgnorePlayerLayer:
@@ -510,7 +509,7 @@ MonoBehaviour:
   speed: 5
   jumpspeed: 15
   ForceMult: 15
-  checkWallDist: .5
+  checkWallDist: 1
   wallMasks:
     serializedVersion: 2
     m_Bits: 256

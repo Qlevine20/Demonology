@@ -35,7 +35,10 @@ public class DeadlyBehavior : MonoBehaviour {
     //Checks to see if the object has touched 
 	public virtual void CheckDeath(GameObject other, GameObject[]DeadlyObs)
 	{
-        DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
+        if (Player)
+        {
+            DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
+        }
 		for (int i = 0; i < DeadlyObs.Length; i++)
 		{
 			if(DeadlyObs[i].gameObject.tag == other.tag)
