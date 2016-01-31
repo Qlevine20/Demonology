@@ -158,7 +158,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   dying: 0
-  reqMats: 0100000000000000000000000000000000000000
+  reqMats: 0000000000000000000000000100000000000000
   reqMatsName:
   - Imp
   - Stuff
@@ -174,7 +174,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
-  SinkTime: 1
+  SinkTime: 0
   dead: 0
   TimeToExp: 2
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
@@ -245,7 +245,7 @@ Prefab:
       objectReference: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
     - target: {fileID: 0}
       propertyPath: SinkTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
@@ -261,6 +261,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: imp
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMats.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: reqMats.Array.data[3]
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

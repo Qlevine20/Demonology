@@ -3,11 +3,11 @@ using System.Collections;
 
 public class RunnerBehavior : EnemyBehavior {
 
-	public float speed;
+	public float speed = 2f;
 	private float defaultSpeed;
 
-	public float wallDist;
-	public float targetDist;
+	public float wallDist = 4f;
+	public float targetDist = 1.3f;
 	private Vector2 facingDir;
 	private Vector2 defaultDir;
 	public bool mobFacingRight;
@@ -17,8 +17,6 @@ public class RunnerBehavior : EnemyBehavior {
 	private bool pause = false;
 	private bool charging = false;
 	private Rigidbody2D rb;
-
-	public GameObject Demons;
 
 	// Use this for initialization
 	public override void Start () {
@@ -35,6 +33,7 @@ public class RunnerBehavior : EnemyBehavior {
 	// call this when the enemy respawns
 	public override void OnRespawn () 
 	{
+		base.OnRespawn ();
 		facingDir = Vector2.right;
 		pause = false;
 		charging = false;
@@ -74,7 +73,7 @@ public class RunnerBehavior : EnemyBehavior {
 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "magma" || other.gameObject.tag == "spike") {
+		if (other.gameObject.tag == "magma" || other.gameObject.tag == "spike" || other.gameObject.tag == "explosion") {
 			OnDeath ();
 		}
 

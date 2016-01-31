@@ -112,8 +112,10 @@ public class ImpAI : DemonBehavior {
 			}
 			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
-			speed = 0;
-            rb.velocity = Vector3.zero;
+			//speed = 0;
+			if ( other.gameObject.tag == "magma" ){
+				rb.velocity = Vector3.zero;
+			}
 			StartCoroutine (WaitTime (SinkTime));
 			//gameObject.tag = "floor";
 			Anim.SetBool ("Death", true);
@@ -122,14 +124,18 @@ public class ImpAI : DemonBehavior {
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
                 HalveCollider(bc, .04f);
                 transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
-                rb.isKinematic = true;
+				if ( other.gameObject.tag == "magma" ){
+					rb.isKinematic = true;
+				}
                 //bc.offset = new Vector2(bc.offset.x, bc.offset.y);
             }
 		} 
         //Collision with Spike kills imp
 		else if (other.gameObject.tag == "spike") 
         {
-            KillImp();
+			rb.velocity = Vector3.zero;
+			rb.isKinematic = true;
+			KillImp();
 		} 
 		else 
 		{
@@ -165,7 +171,7 @@ public class ImpAI : DemonBehavior {
         }
         gameObject.layer = LayerMask.NameToLayer("DeadImp");
         transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
-        speed = 0;
+        //speed = 0;
         dead = true;
         transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
         //Roll Imps:
