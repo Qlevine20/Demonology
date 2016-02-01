@@ -9,7 +9,12 @@ public class EnterDeath : StateMachineBehaviour {
 
         CharacterBehavior.Dying = true;
         DeadlyBehavior.Player.GetComponent<CharacterBehavior>().enabled = false;
-        Debug.Log("here");
+        //Collider2D[] all_collider = DeadlyBehavior.Player.GetComponentsInChildren<Collider2D>();
+        //foreach(Collider2D coll in all_collider)
+        //{
+        //    coll.enabled = false;
+        //}
+
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
