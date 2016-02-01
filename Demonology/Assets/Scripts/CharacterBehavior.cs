@@ -176,7 +176,9 @@ public class CharacterBehavior : DeadlyBehavior {
             holdDown += Time.deltaTime;
             if (holdDown > 1.0f) 
             {
-                OnDeath();
+                //OnDeath();
+				PlayerAnim.SetBool("EnemyDeath", true);
+
             }
         }
         if (Input.GetKeyUp(killSelf)) 
@@ -466,7 +468,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		// If you exit the stage boundaries, DIE
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
-			OnDeath ();
+			//OnDeath ();
+			PlayerAnim.SetBool ("FallDeath", true);
 		}
 	}
 
@@ -566,8 +569,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		
 		// Finish killing the player
-		base.OnDeath();
 		Died = true;
+		base.OnDeath();
 	}
 
 	// Summon a demon!

@@ -77,7 +77,7 @@ public class ImpAI : DemonBehavior {
         //Check if player is dead and kill Imp() if player died
 		if (CharacterBehavior.Died) 
 		{
-			OnDeath ();
+			CharacterBehavior.Died = false;
 		}
 	}
 
@@ -87,7 +87,7 @@ public class ImpAI : DemonBehavior {
         //Check if player dead and make sure player Died is false when player respawns
 		if (CharacterBehavior.Died) 
 		{
-			CharacterBehavior.Died = false;
+			OnDeath ();
 		}
 	}
 
@@ -104,7 +104,7 @@ public class ImpAI : DemonBehavior {
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
         //When colliding with magma kill imp, but body stays for a SinkTime
-		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy") {
+		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy" || other.gameObject.tag == "impkiller") {
 			if (!dying)
 			{
 				dying = true;
@@ -154,7 +154,7 @@ public class ImpAI : DemonBehavior {
 	public override void OnDeath()
 	{
 		for (int i=0; i<transform.childCount; i++) {
-			if ( transform.GetChild(i).tag == "enemy" ){
+			if ( transform.GetChild(i).tag == "enemy" || transform.GetChild (i).tag == "impkiller" ){
 				transform.GetChild (i--).parent = null;
 			}
 		}

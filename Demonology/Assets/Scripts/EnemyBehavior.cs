@@ -18,7 +18,7 @@ public class EnemyBehavior : MonoBehaviour {
 	{
 		if (CharacterBehavior.Died) 
 		{
-			OnRespawn ();
+			CharacterBehavior.Died = false;
 		}
 	}
 	
@@ -27,7 +27,7 @@ public class EnemyBehavior : MonoBehaviour {
 	{
 		if (CharacterBehavior.Died) 
 		{
-			CharacterBehavior.Died = false;
+			OnRespawn ();
 		}
 	}
 

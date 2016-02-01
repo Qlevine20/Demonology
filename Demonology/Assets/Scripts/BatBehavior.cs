@@ -26,6 +26,8 @@ public class BatBehavior : EnemyBehavior {
 
 		if (transform.parent != null && transform.parent.gameObject.tag == "imp") {
 			return;
+		} else {
+			gameObject.tag = "enemy";
 		}
 
 		Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, targetRange);
@@ -74,6 +76,7 @@ public class BatBehavior : EnemyBehavior {
 		if (other.gameObject.tag == "imp" || other.gameObject.tag == "stickImp") {
 			transform.SetParent(other.transform, true);
 			transform.localScale = new Vector3(7.0F/transform.parent.localScale.x, 7.0F/transform.parent.localScale.y, 0.0F);
+			gameObject.tag = "impkiller";
 		}
 		if (other.gameObject.tag == "Player") {
 			if(transform.parent != null && transform.parent.gameObject.tag == "imp"){

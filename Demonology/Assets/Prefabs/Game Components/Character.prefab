@@ -483,7 +483,7 @@ MonoBehaviour:
   ShiftLeft: 101
   ShiftRight: 114
   jump: 119
-  grab: 103
+  grab: 102
   killSelf: 107
   currentMats: 0000000000000000000000000000000000000000
   Demons:
@@ -837,6 +837,10 @@ Prefab:
       propertyPath: altarActivateSound
       value: 
       objectReference: {fileID: 8300000, guid: 5f8de2defb89e4a858d56738ae7a926f, type: 3}
+    - target: {fileID: 0}
+      propertyPath: grab
+      value: 102
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
