@@ -48,6 +48,7 @@ public class GravityCinder : EnemyBehavior {
 
 	public override void OnRespawn()
 	{
+		base.OnRespawn ();
 		StopAllCoroutines ();
 
 		dead = true;
