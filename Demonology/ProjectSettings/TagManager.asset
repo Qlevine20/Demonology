@@ -19,6 +19,7 @@ TagManager:
   - SpriteHolder
   - explosion
   - impkiller
+  - Body
   layers:
   - Default
   - TransparentFX
@@ -56,14 +57,17 @@ TagManager:
   - name: DisplayBehind
     uniqueID: 1487389849
     locked: 0
-  - name: Rocks
-    uniqueID: 1355959129
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 2415477393
+    locked: 0
+  - name: Lava
+    uniqueID: 3476399911
+    locked: 0
+  - name: Rocks
+    uniqueID: 1355959129
     locked: 0
   - name: DisplayFront
     uniqueID: 771353653

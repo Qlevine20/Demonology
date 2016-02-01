@@ -67,6 +67,25 @@ public class ImpAI : DemonBehavior {
 				KillImp();
 			}
 		}
+
+		//Fog death
+		if (other.gameObject.tag == "impkiller") {
+			if (!dying)
+			{
+				dying = true;
+				Anim.SetBool ("Death", true);
+			}
+			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
+			gameObject.GetComponent<BoxCollider2D>().enabled = true;
+			StartCoroutine (WaitTime (SinkTime));
+			Anim.SetBool ("Death", true);
+			if (!dead)
+			{
+				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+				HalveCollider(bc, .04f);
+				transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+			}
+		}
 	}
 
 
