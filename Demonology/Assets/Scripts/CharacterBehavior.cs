@@ -392,7 +392,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "checkpoint") {
 			// activate it
 			activeCheckpoint = other.gameObject;
-			CheckPointMatsCount [0] = currentMats [0];
+			CheckPointMatsCount = currentMats;
 			PickUpList.Clear ();
 			KilledEnemies.Clear ();
 			other.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
@@ -546,7 +546,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			Flip ();
 		}
 		// Reset the materials to the last checkpoint and respawn the player
-		currentMats[0] = CheckPointMatsCount[0];
+		currentMats = CheckPointMatsCount;
 		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
 		if (PickUpList != null) 
 		{

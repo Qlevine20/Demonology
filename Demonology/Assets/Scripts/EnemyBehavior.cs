@@ -18,8 +18,6 @@ public class EnemyBehavior : MonoBehaviour {
 	{
 		if (CharacterBehavior.Died) 
 		{
-			transform.position = startPos;
-			transform.rotation = startRot;
 			OnRespawn ();
 		}
 	}
@@ -41,6 +39,7 @@ public class EnemyBehavior : MonoBehaviour {
 
 	public virtual void OnRespawn()
 	{
-
+		transform.position = startPos;
+		transform.rotation = startRot;
 	}
 }

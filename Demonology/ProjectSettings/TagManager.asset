@@ -17,7 +17,7 @@ TagManager:
   - impTrigger
   - enemy
   - SpriteHolder
-  - Body
+  - explosion
   layers:
   - Default
   - TransparentFX
@@ -52,11 +52,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: DisplayBehind
+    uniqueID: 1487389849
     locked: 0
   - name: Rocks
     uniqueID: 1355959129
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 2415477393

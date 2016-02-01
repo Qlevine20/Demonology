@@ -7,6 +7,7 @@ public class BatBehavior : EnemyBehavior {
 
 	public Vector2[] locs;
 	public float speed;
+	public float targetRange = 4.0f;
 	protected int Pos;
 	protected int ArrayDir;
 
@@ -27,7 +28,7 @@ public class BatBehavior : EnemyBehavior {
 			return;
 		}
 
-		Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 4.0f);
+		Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, targetRange);
 		bool foundTarget = false;
 		if (hitColliders.Length != 0) {
 			GameObject closestTarget = hitColliders[0].gameObject;
@@ -79,6 +80,9 @@ public class BatBehavior : EnemyBehavior {
 				OnDeath ();
 			}
 		}
+		if (other.gameObject.tag == "explosion" || other.gameObject.tag == "magma") {
+			OnDeath ();
+		}
 	}
 
 
@@ -120,6 +124,7 @@ public class BatBehavior : EnemyBehavior {
 
 	public override void OnRespawn()
 	{
+		base.OnRespawn ();
 		ArrayDir = 1;
 		Pos = 0;
 	}
