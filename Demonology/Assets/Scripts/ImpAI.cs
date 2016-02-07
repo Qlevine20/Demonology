@@ -123,6 +123,12 @@ public class ImpAI : DemonBehavior {
 	{
         //When colliding with magma kill imp, but body stays for a SinkTime
 		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy" || other.gameObject.tag == "impkiller") {
+			RunnerBehavior isARunner = other.gameObject.GetComponent<RunnerBehavior>();
+			if (isARunner != null) {
+				KillImp ();
+				return;
+			}
+
 			if (!dying)
 			{
 				dying = true;

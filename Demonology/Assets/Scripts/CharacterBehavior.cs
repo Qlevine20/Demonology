@@ -9,8 +9,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode Summon = KeyCode.Q;
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
-	public KeyCode jump = KeyCode.W;
-	public KeyCode grab = KeyCode.G;
+	public KeyCode jumpButton = KeyCode.W;
+	public KeyCode grabButton = KeyCode.G;
     public KeyCode killSelf = KeyCode.K;
 
 	public int[] currentMats;
@@ -325,7 +325,7 @@ public class CharacterBehavior : DeadlyBehavior {
         }
         
         //Grab an Imp or drop it
-        if (Input.GetKeyDown(grab))
+        if (Input.GetKeyDown(grabButton))
         {
             if (HoldingImp == "stickImp") 
             {
@@ -531,7 +531,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	//
 	
 	// Check if the player is on the ground (and therefore allowed to jump)
-	private bool onGround()
+	public bool onGround()
 	{
 		foreach(Transform t in groundChecks)
 		{
@@ -566,7 +566,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			currentMats[i] = CheckPointMatsCount[i];
 		}
 		//currentMats = CheckPointMatsCount;
-		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
+		GameObject newPlayer = (GameObject)Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
 		if (PickUpList != null) 
 		{
 			foreach (GameObject g in PickUpList) {
@@ -586,6 +586,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		
 		// Finish killing the player
 		Died = true;
+		newPlayer.name = "Character";
 		base.OnDeath();
 	}
 
