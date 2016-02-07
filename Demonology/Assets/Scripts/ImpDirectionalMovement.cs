@@ -5,7 +5,7 @@ public class ImpDirectionalMovement : ImpAI {
 
 	Vector2 OldDir;
 	CharacterBehavior player;
-	private Rigidbody2D rb;
+	//private Rigidbody2D rb;
 	public int jumpspeed = 5;
 
 	public override void Start ()

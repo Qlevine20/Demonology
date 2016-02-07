@@ -10,8 +10,8 @@ public class ImpAI : DemonBehavior {
     public AudioClip[] impDeaths;
 
     //Imp Components
-	private Rigidbody2D rb;
-	private BoxCollider2D bc;
+	protected Rigidbody2D rb;
+	protected BoxCollider2D bc;
 
     //dead Imp information
 	private float heightChange;

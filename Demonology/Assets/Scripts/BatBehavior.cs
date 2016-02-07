@@ -8,6 +8,7 @@ public class BatBehavior : EnemyBehavior {
 	public Vector2[] locs;
 	public float speed;
 	public float targetRange = 4.0f;
+	public bool mobFacingRight;
 	protected int Pos;
 	protected int ArrayDir;
 
@@ -17,6 +18,10 @@ public class BatBehavior : EnemyBehavior {
 		locs [0] = transform.position;
 		ArrayDir = 1;
 		Pos = 0;
+
+		if (!mobFacingRight) {
+			Flip ();
+		}
 	}
 
 	// Update is called once per frame
@@ -53,7 +58,8 @@ public class BatBehavior : EnemyBehavior {
 			if (closestDist < 100.0f){
 				foundTarget = true;
 				Vector2 p = closestTarget.transform.position;
-				transform.position = Vector3.MoveTowards (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
+				//transform.position = Vector3.MoveTowards (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
+				SmartMove (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
 			}
 		}
 		if (!foundTarget) {
@@ -101,7 +107,8 @@ public class BatBehavior : EnemyBehavior {
 	// Move in the direction of the given point, return true if you reach that point
 	public bool MoveBetweenPoints(Vector2 p)
 	{
-		transform.position = Vector3.MoveTowards (transform.position,new Vector3(p.x,p.y,0.0f),speed*Time.deltaTime);
+		//transform.position = Vector3.MoveTowards (transform.position,new Vector3(p.x,p.y,0.0f),speed*Time.deltaTime);
+		SmartMove (transform.position, new Vector3 (p.x, p.y, 0.0f), speed * Time.deltaTime);
 		if (transform.position == new Vector3(p.x,p.y,0.0f)) 
 		{
 			return true;
@@ -130,5 +137,23 @@ public class BatBehavior : EnemyBehavior {
 		base.OnRespawn ();
 		ArrayDir = 1;
 		Pos = 0;
+	}
+
+	//Flips the direction of the sprite
+	public virtual void Flip()
+	{
+		mobFacingRight = !mobFacingRight;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
+	private void SmartMove(Vector3 oldPos, Vector3 moveToPos, float moveDist)
+	{
+		Vector3 newPos = Vector3.MoveTowards (oldPos, moveToPos, moveDist);
+		if ((mobFacingRight && (newPos.x < oldPos.x)) || (!mobFacingRight && (newPos.x > oldPos.x))) {
+			Flip ();
+		}
+		transform.position = newPos;
 	}
 }
