@@ -82,7 +82,7 @@ public class ImpAI : DemonBehavior {
 			if (!dead)
 			{
 				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-				HalveCollider(bc, .04f);
+				//HalveCollider(bc, .04f);
 				transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
 			}
 		}
@@ -92,12 +92,11 @@ public class ImpAI : DemonBehavior {
 	public override void Update()
 	{
         base.Update();
-		
         //Check if player is dead and kill Imp() if player died
-		if (CharacterBehavior.Died) 
+		/*if (CharacterBehavior.Died) 
 		{
 			CharacterBehavior.Died = false;
-		}
+		}*/
 	}
 
 

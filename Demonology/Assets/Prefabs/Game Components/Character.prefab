@@ -479,6 +479,7 @@ MonoBehaviour:
   - {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
   - {fileID: 105602, guid: 6b36c82d142b3cd43825f31284eba71a, type: 2}
   - {fileID: 139866, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
+  - {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
   Summon: 113
   ShiftLeft: 101
   ShiftRight: 114
@@ -738,7 +739,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: DeadlyObs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -841,6 +842,10 @@ Prefab:
       propertyPath: grab
       value: 102
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[3]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
