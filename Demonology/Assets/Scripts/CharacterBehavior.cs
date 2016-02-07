@@ -176,7 +176,9 @@ public class CharacterBehavior : DeadlyBehavior {
             holdDown += Time.deltaTime;
             if (holdDown > 1.0f) 
             {
-                OnDeath();
+                //OnDeath();
+				PlayerAnim.SetBool("EnemyDeath", true);
+
             }
         }
         if (Input.GetKeyUp(killSelf)) 
@@ -204,7 +206,6 @@ public class CharacterBehavior : DeadlyBehavior {
                     transform.GetChild(4).GetComponent<StickImp>().Thrown = true;
                 }
                 ThrowImp(Throwing);
-
 			}
 		}
 
@@ -216,11 +217,13 @@ public class CharacterBehavior : DeadlyBehavior {
                 ThrowImp(ForceMult);
                 heldImp.GetComponent<ImpAI>().KillImp();
                 GrabImp(heldImp.FindChild("ImpTrigger").GetComponent<CircleCollider2D>());
-
-                
             }
-
         }
+
+		if (Died) 
+		{
+			Died = false;
+		}
 	}
 
     public void ThrowImp(float FM)
@@ -392,7 +395,10 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "checkpoint") {
 			// activate it
 			activeCheckpoint = other.gameObject;
-			CheckPointMatsCount = currentMats;
+			for(int i=0; i<currentMats.Length; i++){
+				CheckPointMatsCount[i] = currentMats[i];
+			}
+			//CheckPointMatsCount = currentMats;
 			PickUpList.Clear ();
 			KilledEnemies.Clear ();
 			other.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
@@ -447,6 +453,15 @@ public class CharacterBehavior : DeadlyBehavior {
 			// lava always kills
 			//OnDeath ();
 		}
+		// If you collide with deadly fog...
+		if (other.gameObject.tag == "playerkiller") {
+			//die, obviously
+			if (!CharacterBehavior.Dying)
+			{
+				PlayerAnim.SetBool("EnemyDeath", true);
+				CharacterBehavior.Dying = true;
+			}
+		}
 	}
 
 	// Collision code for exiting a "trigger" colldier
@@ -466,7 +481,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		// If you exit the stage boundaries, DIE
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
-			OnDeath ();
+			//OnDeath ();
+			PlayerAnim.SetBool ("FallDeath", true);
 		}
 	}
 
@@ -546,7 +562,10 @@ public class CharacterBehavior : DeadlyBehavior {
 			Flip ();
 		}
 		// Reset the materials to the last checkpoint and respawn the player
-		currentMats = CheckPointMatsCount;
+		for(int i=0; i<currentMats.Length; i++){
+			currentMats[i] = CheckPointMatsCount[i];
+		}
+		//currentMats = CheckPointMatsCount;
 		Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
 		if (PickUpList != null) 
 		{
@@ -566,8 +585,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 		
 		// Finish killing the player
-		base.OnDeath();
 		Died = true;
+		base.OnDeath();
 	}
 
 	// Summon a demon!

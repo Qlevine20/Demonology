@@ -16,10 +16,10 @@ public class EnemyBehavior : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () 
 	{
-		if (CharacterBehavior.Died) 
+		/*if (CharacterBehavior.Died) 
 		{
-			OnRespawn ();
-		}
+			CharacterBehavior.Died = false;
+		}*/
 	}
 	
 	
@@ -27,7 +27,7 @@ public class EnemyBehavior : MonoBehaviour {
 	{
 		if (CharacterBehavior.Died) 
 		{
-			CharacterBehavior.Died = false;
+			OnRespawn ();
 		}
 	}
 

@@ -67,18 +67,36 @@ public class ImpAI : DemonBehavior {
 				KillImp();
 			}
 		}
+
+		//Fog death
+		if (other.gameObject.tag == "impkiller") {
+			if (!dying)
+			{
+				dying = true;
+				Anim.SetBool ("Death", true);
+			}
+			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
+			gameObject.GetComponent<BoxCollider2D>().enabled = true;
+			StartCoroutine (WaitTime (SinkTime));
+			Anim.SetBool ("Death", true);
+			if (!dead)
+			{
+				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+				//HalveCollider(bc, .04f);
+				transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+			}
+		}
 	}
 
 
 	public override void Update()
 	{
         base.Update();
-		
         //Check if player is dead and kill Imp() if player died
-		if (CharacterBehavior.Died) 
+		/*if (CharacterBehavior.Died) 
 		{
-			OnDeath ();
-		}
+			CharacterBehavior.Died = false;
+		}*/
 	}
 
 
@@ -87,7 +105,7 @@ public class ImpAI : DemonBehavior {
         //Check if player dead and make sure player Died is false when player respawns
 		if (CharacterBehavior.Died) 
 		{
-			CharacterBehavior.Died = false;
+			OnDeath ();
 		}
 	}
 
@@ -104,7 +122,7 @@ public class ImpAI : DemonBehavior {
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
         //When colliding with magma kill imp, but body stays for a SinkTime
-		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy") {
+		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy" || other.gameObject.tag == "impkiller") {
 			if (!dying)
 			{
 				dying = true;
@@ -154,7 +172,7 @@ public class ImpAI : DemonBehavior {
 	public override void OnDeath()
 	{
 		for (int i=0; i<transform.childCount; i++) {
-			if ( transform.GetChild(i).tag == "enemy" ){
+			if ( transform.GetChild(i).tag == "enemy" || transform.GetChild (i).tag == "impkiller" ){
 				transform.GetChild (i--).parent = null;
 			}
 		}

@@ -7,7 +7,13 @@ public class CallDeath : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         DeadlyBehavior.Player.GetComponent<CharacterBehavior>().enabled = true;
+        //Collider2D[] all_collider = DeadlyBehavior.Player.GetComponentsInChildren<Collider2D>();
+        //foreach (Collider2D coll in all_collider)
+        //{
+        //    coll.enabled = true;
+        //}
         animator.gameObject.transform.parent.GetComponent<CharacterBehavior>().OnDeath();
+
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

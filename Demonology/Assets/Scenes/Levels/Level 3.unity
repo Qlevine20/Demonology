@@ -172,7 +172,7 @@ Transform:
   - {fileID: 1418104723}
   - {fileID: 2094130161}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1001 &87904037
 Prefab:
   m_ObjectHideFlags: 0
@@ -2617,6 +2617,10 @@ Prefab:
     - target: {fileID: 6021856, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[108].x
       value: .0549325943
+      objectReference: {fileID: 0}
+    - target: {fileID: 21291050, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
+      propertyPath: m_SortingLayerID
+      value: 771353653
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6894528, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
