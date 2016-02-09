@@ -265,7 +265,6 @@ public class CharacterBehavior : DeadlyBehavior {
             
             if (rayhit.distance == checkWallDist)
             {
-                Debug.Log("Colliding With Wall");
                 
                 rb.velocity = new Vector2(0.0f, rb.velocity.y);
             }
@@ -421,8 +420,6 @@ public class CharacterBehavior : DeadlyBehavior {
 			//Add go to next level code here
             if (Application.loadedLevel+1 < Application.levelCount)
             {
-                Debug.Log(Application.levelCount);
-                Debug.Log(Application.loadedLevel+1);
                 Application.LoadLevel(Application.loadedLevel + 1);
             }
             else 
@@ -566,28 +563,37 @@ public class CharacterBehavior : DeadlyBehavior {
 			currentMats[i] = CheckPointMatsCount[i];
 		}
 		//currentMats = CheckPointMatsCount;
-		GameObject newPlayer = (GameObject)Instantiate (PlayerPrefab, new Vector3 (activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y+2, 0.0f), Quaternion.identity);
-		if (PickUpList != null) 
-		{
-			foreach (GameObject g in PickUpList) {
-				g.SetActive(true);
-				//When there are more than one type of crystal this breaks
-			}
-			
-			PickUpList.Clear ();
-		}
-		if (KilledEnemies != null) 
-		{
-			foreach (GameObject g in KilledEnemies) {
-				g.SetActive (true);
-			}
-			KilledEnemies.Clear ();
-		}
-		
-		// Finish killing the player
-		Died = true;
-		newPlayer.name = "Character";
-		base.OnDeath();
+        if (!activeCheckpoint)
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
+        else
+        {
+            GameObject newPlayer = (GameObject)Instantiate(PlayerPrefab, new Vector3(activeCheckpoint.transform.position.x, activeCheckpoint.transform.position.y + 2, 0.0f), Quaternion.identity);
+            if (PickUpList != null)
+            {
+                foreach (GameObject g in PickUpList)
+                {
+                    g.SetActive(true);
+                    //When there are more than one type of crystal this breaks
+                }
+
+                PickUpList.Clear();
+            }
+            if (KilledEnemies != null)
+            {
+                foreach (GameObject g in KilledEnemies)
+                {
+                    g.SetActive(true);
+                }
+                KilledEnemies.Clear();
+            }
+
+            // Finish killing the player
+            Died = true;
+            newPlayer.name = "Character";
+            base.OnDeath();
+        }
 	}
 
 	// Summon a demon!

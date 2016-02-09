@@ -483,22 +483,20 @@ MonoBehaviour:
   Summon: 113
   ShiftLeft: 101
   ShiftRight: 114
-  jump: 119
-  grab: 102
+  jumpButton: 119
+  grabButton: 103
   killSelf: 107
   currentMats: 0000000000000000000000000000000000000000
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
-  - {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
   - {fileID: 198696, guid: a2ca9c2abda6fb1429cbbb4c0f3c062d, type: 2}
-  - {fileID: 134596, guid: 01c7110a8b56c1d4f95bcab9caca242e, type: 2}
   PlayerPrefab: {fileID: 187882}
   CrystalPrefab: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   IgnorePlayerLayer:
     serializedVersion: 2
     m_Bits: 2305
   crystalPickupSound: {fileID: 8300000, guid: a1b3d1da7e8da4147ac1b49ff0a303aa, type: 3}
-  crystalFizzleSound: {fileID: 8300000, guid: daeb04c163e01eb498ee963349923595, type: 3}
+  crystalFizzleSound: {fileID: 8300000, guid: f3d2dadf86a59a24c858165aee19c105, type: 3}
   altarActivateSound: {fileID: 8300000, guid: 5f8de2defb89e4a858d56738ae7a926f, type: 3}
   whatIsGrounded:
     serializedVersion: 2
