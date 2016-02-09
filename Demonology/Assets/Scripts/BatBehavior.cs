@@ -11,6 +11,7 @@ public class BatBehavior : EnemyBehavior {
 	public bool mobFacingRight;
 	protected int Pos;
 	protected int ArrayDir;
+	protected Vector3 startScale;
 
 	public override void Start()
 	{
@@ -18,6 +19,7 @@ public class BatBehavior : EnemyBehavior {
 		locs [0] = transform.position;
 		ArrayDir = 1;
 		Pos = 0;
+		startScale = transform.localScale;
 
 		if (!mobFacingRight) {
 			Flip ();
@@ -81,7 +83,9 @@ public class BatBehavior : EnemyBehavior {
 	{
 		if (other.gameObject.tag == "imp" || other.gameObject.tag == "stickImp") {
 			transform.SetParent(other.transform, true);
-			transform.localScale = new Vector3(7.0F/transform.parent.localScale.x, 7.0F/transform.parent.localScale.y, 0.0F);
+			transform.localScale = new Vector3(startScale.x/transform.parent.localScale.x, 
+			                                   startScale.y/transform.parent.localScale.y, 
+			                                   0.0F);
 			gameObject.tag = "impkiller";
 		}
 		if (other.gameObject.tag == "Player") {
