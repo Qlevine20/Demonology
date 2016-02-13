@@ -46,9 +46,10 @@ public class CharacterBehavior : DeadlyBehavior {
 	private GameObject ImpSelect;
 	
 	// player jump info
-	private float groundRadius = .1f;
+	private float groundRadius = .2f;
 	public LayerMask whatIsGrounded;
-	public Transform[] groundChecks;
+	//public Transform[] groundChecks;
+    public Transform[] GroundedEnds;
 	public int speed = 10;//change in editor not here
 	public int jumpspeed = 10;//change in editor not here
 	public float ForceMult;
@@ -86,6 +87,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
+        
         Dying = false;
         checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
@@ -108,7 +110,20 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Update is called once per frame
 	public override void Update()
 	{
+
+        if (Input.GetKeyDown(jumpButton))
+        {
+            if (onGround())
+            {
+                rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+            }
+        }
 		base.Update ();
+        foreach (Transform t in GroundedEnds) 
+        {
+            Debug.DrawLine(this.transform.position, t.position, Color.green);
+        }
+        
         checkWall.origin = transform.position;
         rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
         Debug.DrawRay(checkWall.origin,checkWall.direction);
@@ -258,50 +273,57 @@ public class CharacterBehavior : DeadlyBehavior {
         //}
         float move = Input.GetAxis("Horizontal");
         //Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks).collider
-        if (!HoldingStickImp)
+        if (move > 0 && FacingRight || move < 0 && !FacingRight)
         {
 
-            
-            
+
+
             if (rayhit.distance == checkWallDist)
             {
-                
+
                 rb.velocity = new Vector2(0.0f, rb.velocity.y);
             }
-            else if (rayhit.distance != 0) 
+            else if (rayhit.distance != 0)
             {
-                rb.velocity = new Vector2(right*(-1.0f * rayhit.distance), rb.velocity.y);
+                rb.velocity = new Vector2(right * (-1.0f * rayhit.distance), rb.velocity.y);
             }
             else
             {
                 rb.velocity = new Vector2(move * speed, rb.velocity.y);
             }
         }
-        //		}
-
-        if (onGround() || HoldingStickImp)
+        else
         {
-            
-            float fall = Input.GetAxis("Vertical");
-            if (rb.velocity.y >= 0) 
+            if (rayhit.distance == checkWallDist)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-            };
-            if (fall > 0) 
-            {
-                if (HoldingStickImp) 
-                {
-                    HoldingStickImp = false;
-                    rb.isKinematic = false;
-                }
-                
-                rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-                
+
+                rb.velocity = new Vector2(0.0f, rb.velocity.y);
             }
+            else if (rayhit.distance != 0)
+            {
+                rb.velocity = new Vector2(right * (-1.0f * rayhit.distance), rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(move * (speed / 2), rb.velocity.y);
+            }
+        }
+
+
+        
+            
+            //if (rb.velocity.y >= 0) 
+            //{
+            //    rb.velocity = new Vector2(rb.velocity.x, 0);
+            //};
+
+
+                
+                
+                
             
             // Jump (this actually gets processed later, in FixedUpdate
             //jumpNow = true;
-        }
         //Animations for moving left and right
         if (PlayerAnim)
         {
@@ -309,11 +331,11 @@ public class CharacterBehavior : DeadlyBehavior {
             {
                 PlayerAnim.SetBool("Move", true);
             }
-            else if (!onGround() && rb.velocity.y>0) 
+            else if (!onGround() && rb.velocity.y>0 && !PlayerAnim.GetBool("Jump")) 
             {
                 PlayerAnim.SetBool("Jump", true);
             }
-            else if (!onGround() && rb.velocity.y < 0) 
+            else if (!onGround() && rb.velocity.y <= 0 && !PlayerAnim.GetBool("Fall")) 
             {
                 PlayerAnim.SetBool("Fall", true);
             }
@@ -335,6 +357,7 @@ public class CharacterBehavior : DeadlyBehavior {
                 }
                 else
                 {
+                    
                     GrabImp(GrabbingImp);
                 }
             }
@@ -358,9 +381,17 @@ public class CharacterBehavior : DeadlyBehavior {
 
 		// Check if the sprite needs to flip
 		if (move > 0 && !FacingRight) {
-			Flip ();
-		} else if (move < 0 && FacingRight) {
-			Flip ();
+            if (onGround())
+            {
+                Flip();
+            }
+		} 
+        else if (move < 0 && FacingRight) 
+        {
+            if (onGround())
+            {
+                Flip();
+            }
 		}
 
 		// Dictate the player's direction
@@ -529,20 +560,28 @@ public class CharacterBehavior : DeadlyBehavior {
 	
 	// Check if the player is on the ground (and therefore allowed to jump)
 	public bool onGround()
-	{
-		foreach(Transform t in groundChecks)
-		{
-			Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
+    {
+        foreach (Transform t in GroundedEnds) 
+        {
+            if(Physics2D.Linecast(this.transform.position, t.position, whatIsGrounded))
+                return true;
+        }
+        return false;
+        
+
+    //    foreach(Transform t in groundChecks)
+    //    {
+    //        Collider2D[] colliders = Physics2D.OverlapCircleAll(t.position,groundRadius,whatIsGrounded);
 				
-			for(int i =0;i<colliders.Length;i++)
-			{
-				if(colliders[i].gameObject!=gameObject)
-				{
-					return true;
-				}
-			}
-		}
-		return false;
+    //        for(int i =0;i<colliders.Length;i++)
+    //        {
+    //            if(colliders[i].gameObject!=gameObject)
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //    return false;
 	}
 	
 	// Run this when the character "dies"
@@ -705,14 +744,14 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Flip your direction
 	void Flip()
 	{
-        
+
         FacingRight = !FacingRight;
         Transform spriteHolder = transform.GetChild(0);
         Vector3 theScale = spriteHolder.localScale;
         theScale.x *= -1;
         spriteHolder.localScale = theScale;
         right = -right;
-        checkWall = new Ray2D(transform.position, right*(transform.right));
+        checkWall = new Ray2D(transform.position, right * (transform.right));
 	}	
 
 	// Convenience function

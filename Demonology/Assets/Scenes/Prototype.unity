@@ -1533,6 +1533,10 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 22c47e031b1634a96aefc7bbc6f65075, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &855781670 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 469950, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
 --- !u!1 &870748210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +1968,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: GroundedEnds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 425892, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_LocalPosition.x
       value: 11.0889997
@@ -2095,6 +2103,70 @@ Prefab:
     - target: {fileID: 462908, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_LocalPosition.y
       value: 1.54000163
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063822, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_GravityScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: jumpspeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 175394, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Name
+      value: End
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: GroundedEnd
+      value: 
+      objectReference: {fileID: 1882623495}
+    - target: {fileID: 490698, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.90799999
+      objectReference: {fileID: 0}
+    - target: {fileID: 490698, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .0719999969
+      objectReference: {fileID: 0}
+    - target: {fileID: 111458, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Name
+      value: End1
+      objectReference: {fileID: 0}
+    - target: {fileID: 110560, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_Name
+      value: End2
+      objectReference: {fileID: 0}
+    - target: {fileID: 433578, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.91799998
+      objectReference: {fileID: 0}
+    - target: {fileID: 433578, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.263000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 469950, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.89300001
+      objectReference: {fileID: 0}
+    - target: {fileID: 469950, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .395000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: GroundedEnds.Array.data[0]
+      value: 
+      objectReference: {fileID: 1882623495}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: GroundedEnds.Array.data[1]
+      value: 
+      objectReference: {fileID: 1543377566}
+    - target: {fileID: 11425276, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: GroundedEnds.Array.data[2]
+      value: 
+      objectReference: {fileID: 855781670}
+    - target: {fileID: 5063822, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
@@ -2830,6 +2902,10 @@ MonoBehaviour:
   GameMenu: {fileID: 537857857}
   menuKey: 27
   crystalId: 0
+--- !u!4 &1543377566 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 433578, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
 --- !u!4 &1545703831 stripped
 Transform:
   m_PrefabParentObject: {fileID: 430832, guid: 9c1e3f175b595c34fb94198b1e7fb6dd, type: 2}
@@ -3515,6 +3591,10 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 430832, guid: 9c1e3f175b595c34fb94198b1e7fb6dd, type: 2}
   m_PrefabInternal: {fileID: 688822645}
+--- !u!4 &1882623495 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 490698, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
+  m_PrefabInternal: {fileID: 1031428909}
 --- !u!1 &1894053176
 GameObject:
   m_ObjectHideFlags: 0
