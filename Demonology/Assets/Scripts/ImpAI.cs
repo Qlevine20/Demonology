@@ -15,6 +15,7 @@ public class ImpAI : DemonBehavior {
 
     //dead Imp information
 	private float heightChange;
+    private bool lava = false;
 	public float SinkTime = 3.0f;
     public static Vector2 ImpScale;
     public bool dead = false;
@@ -92,6 +93,10 @@ public class ImpAI : DemonBehavior {
 	public override void Update()
 	{
         base.Update();
+        if (dying && lava) 
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/2, transform.position.z);
+        }
         //Check if player is dead and kill Imp() if player died
 		/*if (CharacterBehavior.Died) 
 		{
@@ -129,29 +134,33 @@ public class ImpAI : DemonBehavior {
 				return;
 			}
 
-			if (!dying)
+			if (!dying && other.gameObject.tag != "magma")
 			{
+                Anim.SetBool("Death", true);
 				dying = true;
-				Anim.SetBool ("Death", true);
+				
 			}
-			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			//speed = 0;
-			if ( other.gameObject.tag == "magma" ){
-				rb.velocity = Vector3.zero;
-			}
 			StartCoroutine (WaitTime (SinkTime));
 			//gameObject.tag = "floor";
-			Anim.SetBool ("Death", true);
-            if (!dead)
+			//Anim.SetBool ("Death", true);
+            if (!dead && other.gameObject.tag != "magma")
             {
+                
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
                 HalveCollider(bc, .04f);
                 transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
-				if ( other.gameObject.tag == "magma" ){
-					rb.isKinematic = true;
-				}
                 //bc.offset = new Vector2(bc.offset.x, bc.offset.y);
+            }
+            if (other.gameObject.tag == "magma")
+            {
+                Anim.SetBool("lava", true);
+                dying = true;
+                AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
+                gameObject.layer = LayerMask.NameToLayer("DeadLavaImp");
+                lava = true;
+                rb.isKinematic = true;
             }
 		} 
         //Collision with Spike kills imp
@@ -197,7 +206,7 @@ public class ImpAI : DemonBehavior {
         transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
         //speed = 0;
         dead = true;
-        transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+        //transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
         //Roll Imps:
         //rb.freezeRotation = false;
         //bc.enabled = false;

@@ -24,6 +24,7 @@ public class CharacterBehavior : DeadlyBehavior {
     public AudioClip crystalPickupSound;
     public AudioClip crystalFizzleSound;
 	public AudioClip altarActivateSound;
+    public Camera ImpThrowCam;
 
 	
 	
@@ -132,9 +133,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			if(transform.childCount > 4)
 			{
-	//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	//			Gizmos.DrawRay (ray);
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Ray ray = ImpThrowCam.ScreenPointToRay(Input.mousePosition);
 				mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
 				if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
 				{
@@ -434,14 +433,14 @@ public class CharacterBehavior : DeadlyBehavior {
 			other.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
 			other.gameObject.GetComponent<Checkpoint> ().touched = true;
 			if (gameObject != null) {
-				AudioSource.PlayClipAtPoint (altarActivateSound, Camera.main.transform.position, 75.0f);
+				AudioSource.PlayClipAtPoint (altarActivateSound, ImpThrowCam.transform.position, 75.0f);
 			}
 		}
 		// If you collide with a crystal...
 		if (other.gameObject.tag == "crystal") {
 			//play a sound
 			if (gameObject != null) {
-				AudioSource.PlayClipAtPoint (crystalPickupSound, Camera.main.transform.position, 75.0f);
+				AudioSource.PlayClipAtPoint (crystalPickupSound, ImpThrowCam.transform.position, 75.0f);
 			}
 			// pick it up
 			pickUpMat (other.gameObject);
