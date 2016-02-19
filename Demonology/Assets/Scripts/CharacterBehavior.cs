@@ -101,6 +101,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		Dir = Vector2.right;
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+		ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();
 	}
 
     
@@ -191,7 +192,10 @@ public class CharacterBehavior : DeadlyBehavior {
             if (holdDown > 1.0f) 
             {
                 //OnDeath();
-				PlayerAnim.SetBool("EnemyDeath", true);
+				if (!CharacterBehavior.Dying){
+					PlayerAnim.SetBool("EnemyDeath", true);
+					CharacterBehavior.Dying = true;
+				}
 
             }
         }
@@ -465,8 +469,9 @@ public class CharacterBehavior : DeadlyBehavior {
 				print(rb.velocity.y);
 			}*/
 			if (rb.velocity.y <= -25.0f) {
-				if (PlayerAnim) {
+				if (PlayerAnim && !CharacterBehavior.Dying) {
 					PlayerAnim.SetBool ("FallDeath", true);
+					CharacterBehavior.Dying = true;
 				}
 				//OnDeath ();
 			}
@@ -477,7 +482,11 @@ public class CharacterBehavior : DeadlyBehavior {
 			transform.SetParent (other.transform);
 		}
 		if (other.gameObject.tag == "magma") {
-			// lava always kills
+			// it's a cinder! it always kills
+			if (!CharacterBehavior.Dying){
+				PlayerAnim.SetBool ("EnemyDeath", true);
+				CharacterBehavior.Dying = true;
+			}
 			//OnDeath ();
 		}
 		// If you collide with deadly fog...
@@ -509,7 +518,10 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
 			//OnDeath ();
-			PlayerAnim.SetBool ("FallDeath", true);
+			if (!CharacterBehavior.Dying){
+				PlayerAnim.SetBool ("FallDeath", true);
+				CharacterBehavior.Dying = true;
+			}
 		}
 	}
 

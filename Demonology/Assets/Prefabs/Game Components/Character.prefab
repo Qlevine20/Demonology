@@ -484,7 +484,7 @@ MonoBehaviour:
   ShiftLeft: 101
   ShiftRight: 114
   jumpButton: 119
-  grabButton: 103
+  grabButton: 102
   killSelf: 107
   currentMats: 0000000000000000000000000000000000000000
   Demons:
@@ -845,6 +845,10 @@ Prefab:
       propertyPath: DeadlyObs.Array.data[3]
       value: 
       objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: grabButton
+      value: 102
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}

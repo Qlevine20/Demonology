@@ -69,6 +69,16 @@ public class RunnerBehavior : EnemyBehavior {
 				OnDeath();
 			}
 		}
+
+		if (other.gameObject.tag == "Untagged") {
+			RunnerBarrier barrier = other.gameObject.GetComponent<RunnerBarrier>();
+			if (barrier != null) {
+				if (!charging && (mobFacingRight != barrier.goRight)) {
+					Flip ();
+					facingDir = new Vector2(-facingDir.x,facingDir.y);
+				}
+			}
+		}
 	}
 
 	public void OnCollisionEnter2D(Collision2D other)
