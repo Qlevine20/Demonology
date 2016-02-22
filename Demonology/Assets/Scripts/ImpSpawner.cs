@@ -6,13 +6,14 @@ public class ImpSpawner : MonoBehaviour{
 	
 	public GameObject Player;
 	public GameObject Imp;
-	public int waitTime;
+	public float waitTime;
 	public float counter = 0;
 	private bool CheckCreate;
+	public bool leftSpawner = false;
 
 
 	void Start(){
-		waitTime = 3f;
+		waitTime = 3.0f;
 	}
 
 	void Update(){
@@ -38,8 +39,16 @@ public class ImpSpawner : MonoBehaviour{
 		{
 			if (Player!=null)
 			{
-				//This is where I need to fix the "actually choosing an imp to spawn" problem
-				Instantiate(Imp, transform.position, transform.rotation);
+				GameObject SpawnedImp = Instantiate(Imp, transform.position, transform.rotation) as GameObject;
+				if(leftSpawner){
+					Transform spriteHolder = SpawnedImp.transform;
+					Vector3 theScale = spriteHolder.localScale;
+					theScale.x *= -1;
+					spriteHolder.localScale = theScale;
+
+
+					SpawnedImp.GetComponent<Mobile>().changeDir = true;
+				}
 				return true;
 			}
 		}

@@ -10,6 +10,7 @@ public class Mobile : DeadlyBehavior {
 	public bool mobFacingRight;
 	public LayerMask whatIsWall;
 	public bool dying = false;
+	public bool changeDir = false;
 
 	//Direction of the entity
 	public override void Start ()
@@ -25,7 +26,11 @@ public class Mobile : DeadlyBehavior {
 
         //Mobile Animator
 		Anim = GetComponent<Animator> ();
-		StartDir = CharacterBehavior.Dir;
+		if (changeDir) {
+			StartDir = -(CharacterBehavior.Dir);
+		} else {
+			StartDir = CharacterBehavior.Dir;
+		}
 
         base.Start();
 	}
