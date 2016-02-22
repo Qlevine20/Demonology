@@ -15,7 +15,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	public int[] currentMats;
 	public GameObject[] Demons;
-	private int selected = 0;
+	public int selected = 0;
 	public static GameObject activeCheckpoint;
 	//public int maxMins = 5;
 	public GameObject PlayerPrefab;
@@ -642,6 +642,7 @@ public class CharacterBehavior : DeadlyBehavior {
             // Finish killing the player
             Died = true;
             newPlayer.name = "Character";
+			newPlayer.gameObject.GetComponent<CharacterBehavior>().selected = selected;
             base.OnDeath();
         }
 	}

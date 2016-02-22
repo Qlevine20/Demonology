@@ -388,7 +388,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 4
+  m_GravityScale: 3.5
   m_IsKinematic: 0
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -490,6 +490,7 @@ MonoBehaviour:
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
   - {fileID: 198696, guid: a2ca9c2abda6fb1429cbbb4c0f3c062d, type: 2}
+  selected: 0
   PlayerPrefab: {fileID: 187882}
   CrystalPrefab: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   IgnorePlayerLayer:
@@ -767,7 +768,7 @@ Prefab:
       objectReference: {fileID: 187048, guid: 00e205fd8c400cf45863c188ebc4a2b0, type: 2}
     - target: {fileID: 0}
       propertyPath: m_GravityScale
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mass
