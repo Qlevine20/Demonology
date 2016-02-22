@@ -3,9 +3,9 @@ using System.Collections;
 
 
 public class ImpSpawner : MonoBehaviour{
-
-	public GameObject Spawned;
+	
 	public GameObject Player;
+	public GameObject Imp;
 	public int waitTime;
 	public float counter = 0;
 	private bool CheckCreate;
@@ -39,7 +39,7 @@ public class ImpSpawner : MonoBehaviour{
 			if (Player!=null)
 			{
 				//This is where I need to fix the "actually choosing an imp to spawn" problem
-				Instantiate(CharacterBehavior.Demons[0], transform.position, transform.rotation);
+				Instantiate(Imp, transform.position, transform.rotation);
 				return true;
 			}
 		}
