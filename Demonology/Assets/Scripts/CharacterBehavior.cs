@@ -15,7 +15,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	public int[] currentMats;
 	public GameObject[] Demons;
-	private int selected = 0;
+	public int selected = 0;
 	public static GameObject activeCheckpoint;
 	//public int maxMins = 5;
 	public GameObject PlayerPrefab;
@@ -24,6 +24,7 @@ public class CharacterBehavior : DeadlyBehavior {
     public AudioClip crystalPickupSound;
     public AudioClip crystalFizzleSound;
 	public AudioClip altarActivateSound;
+    public Camera ImpThrowCam;
 
 	
 	
@@ -100,6 +101,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		Dir = Vector2.right;
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+		ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();
 	}
 
     
@@ -132,9 +134,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		{
 			if(transform.childCount > 4)
 			{
-	//			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	//			Gizmos.DrawRay (ray);
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Ray ray = ImpThrowCam.ScreenPointToRay(Input.mousePosition);
 				mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
 				if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
 				{
@@ -192,7 +192,10 @@ public class CharacterBehavior : DeadlyBehavior {
             if (holdDown > 1.0f) 
             {
                 //OnDeath();
-				PlayerAnim.SetBool("EnemyDeath", true);
+				if (!CharacterBehavior.Dying){
+					PlayerAnim.SetBool("EnemyDeath", true);
+					CharacterBehavior.Dying = true;
+				}
 
             }
         }
@@ -434,14 +437,14 @@ public class CharacterBehavior : DeadlyBehavior {
 			other.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
 			other.gameObject.GetComponent<Checkpoint> ().touched = true;
 			if (gameObject != null) {
-				AudioSource.PlayClipAtPoint (altarActivateSound, Camera.main.transform.position, 75.0f);
+				AudioSource.PlayClipAtPoint (altarActivateSound, ImpThrowCam.transform.position, 75.0f);
 			}
 		}
 		// If you collide with a crystal...
 		if (other.gameObject.tag == "crystal") {
 			//play a sound
 			if (gameObject != null) {
-				AudioSource.PlayClipAtPoint (crystalPickupSound, Camera.main.transform.position, 75.0f);
+				AudioSource.PlayClipAtPoint (crystalPickupSound, ImpThrowCam.transform.position, 75.0f);
 			}
 			// pick it up
 			pickUpMat (other.gameObject);
@@ -466,8 +469,9 @@ public class CharacterBehavior : DeadlyBehavior {
 				print(rb.velocity.y);
 			}*/
 			if (rb.velocity.y <= -25.0f) {
-				if (PlayerAnim) {
+				if (PlayerAnim && !CharacterBehavior.Dying) {
 					PlayerAnim.SetBool ("FallDeath", true);
+					CharacterBehavior.Dying = true;
 				}
 				//OnDeath ();
 			}
@@ -478,7 +482,11 @@ public class CharacterBehavior : DeadlyBehavior {
 			transform.SetParent (other.transform);
 		}
 		if (other.gameObject.tag == "magma") {
-			// lava always kills
+			// it's a cinder! it always kills
+			if (!CharacterBehavior.Dying){
+				PlayerAnim.SetBool ("EnemyDeath", true);
+				CharacterBehavior.Dying = true;
+			}
 			//OnDeath ();
 		}
 		// If you collide with deadly fog...
@@ -510,7 +518,10 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "DeathBoundary") 
 		{
 			//OnDeath ();
-			PlayerAnim.SetBool ("FallDeath", true);
+			if (!CharacterBehavior.Dying){
+				PlayerAnim.SetBool ("FallDeath", true);
+				CharacterBehavior.Dying = true;
+			}
 		}
 	}
 
@@ -631,6 +642,7 @@ public class CharacterBehavior : DeadlyBehavior {
             // Finish killing the player
             Died = true;
             newPlayer.name = "Character";
+			newPlayer.gameObject.GetComponent<CharacterBehavior>().selected = selected;
             base.OnDeath();
         }
 	}

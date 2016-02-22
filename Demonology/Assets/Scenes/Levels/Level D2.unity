@@ -480,7 +480,7 @@ Transform:
   - {fileID: 297015009}
   - {fileID: 1088428778}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &297015009 stripped
 Transform:
   m_PrefabParentObject: {fileID: 440206, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
@@ -1070,7 +1070,7 @@ Transform:
   - {fileID: 249063277}
   - {fileID: 1057160087}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1001 &619814138
 Prefab:
   m_ObjectHideFlags: 0
@@ -1350,7 +1350,7 @@ Transform:
   - {fileID: 1051561533}
   - {fileID: 496368977}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &994383469 stripped
 Transform:
   m_PrefabParentObject: {fileID: 440206, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
@@ -1787,7 +1787,7 @@ Transform:
   - {fileID: 98025006}
   - {fileID: 2014175550}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &1296791343 stripped
 Transform:
   m_PrefabParentObject: {fileID: 453518, guid: 5ff243c8e6f74c64681f0794c2985f85, type: 2}
@@ -2314,7 +2314,7 @@ Transform:
   - {fileID: 1827795324}
   - {fileID: 1566741320}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &1656069999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,6 +2867,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1869596097}
+--- !u!1001 &1903702932
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 426770, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 834c89debfca53545bad7fc74eca080e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1944914573 stripped
 Transform:
   m_PrefabParentObject: {fileID: 453518, guid: 5ff243c8e6f74c64681f0794c2985f85, type: 2}
@@ -3228,7 +3270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1001 &2061117718
 Prefab:
   m_ObjectHideFlags: 0
@@ -3387,7 +3429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422316, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 422316, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3407,7 +3449,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422316, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11462212, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
       propertyPath: maxZoomOut
