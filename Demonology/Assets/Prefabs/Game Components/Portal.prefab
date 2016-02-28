@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11417272}
   m_Layer: 0
   m_Name: Portal
-  m_TagString: Finish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.6999969, y: -0, z: -8.77999973}
+  m_LocalPosition: {x: 66.6999969, y: -22.4500008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,8 +58,9 @@ MonoBehaviour:
   Player: {fileID: 187882, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
   Imp: {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
   waitTime: 3
-  counter: 0
-  leftSpawner: 0
+  leftSpawner: 1
+  maxSpawn: 5
+  spawnCount: 0
 --- !u!198 &19871936
 ParticleSystem:
   m_ObjectHideFlags: 1
