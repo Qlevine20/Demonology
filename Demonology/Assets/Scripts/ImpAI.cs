@@ -14,7 +14,7 @@ public class ImpAI : DemonBehavior {
 	protected BoxCollider2D bc;
 
     //dead Imp information
-	private float heightChange;
+	public float heightChange;
     private bool lava = false;
 	public float SinkTime = 3.0f;
     public static Vector2 ImpScale;
@@ -33,7 +33,6 @@ public class ImpAI : DemonBehavior {
         //Height change of collider after Imp dies
 		heightChange = (.5f) * bc.size.y;
 
-
 		speed = 2;
 
         //Ignore Collisions with these layers
@@ -43,13 +42,13 @@ public class ImpAI : DemonBehavior {
         //Play sound when created
         AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
 
-
         //Call Parent class Start() funciton
         base.Start();
         
     }
-	// Update is called once per frame
 
+
+	// Update is called once per frame
 	public virtual void OnTriggerEnter2D(Collider2D other)
 	{
         //When on a moving platform
@@ -59,13 +58,15 @@ public class ImpAI : DemonBehavior {
 		}
 
         //Fall Death
-		if (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving")
+		if (!dead && (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving"))
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				KillImp();
+				print ("Imp death via falling!");
+				print (other.gameObject.name);
 			}
 		}
 
@@ -83,8 +84,10 @@ public class ImpAI : DemonBehavior {
 			if (!dead)
 			{
 				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-				//HalveCollider(bc, .04f);
-				transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
+				print ("Imp death via fog!");
 			}
 		}
 	}
@@ -95,7 +98,7 @@ public class ImpAI : DemonBehavior {
         base.Update();
         if (dying && lava) 
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/2, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/6, transform.position.z);
         }
         //Check if player is dead and kill Imp() if player died
 		/*if (CharacterBehavior.Died) 
@@ -138,7 +141,6 @@ public class ImpAI : DemonBehavior {
 			{
                 Anim.SetBool("Death", true);
 				dying = true;
-				
 			}
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			//speed = 0;
@@ -147,16 +149,20 @@ public class ImpAI : DemonBehavior {
 			//Anim.SetBool ("Death", true);
             if (!dead && other.gameObject.tag != "magma")
             {
-                
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
-                HalveCollider(bc, .04f);
-                transform.position = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
-                //bc.offset = new Vector2(bc.offset.x, bc.offset.y);
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
             }
             if (other.gameObject.tag == "magma")
             {
-                Anim.SetBool("lava", true);
+				print ("Imp death via magma!");
+
+				Anim.SetBool("Death", true);
                 dying = true;
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
                 gameObject.layer = LayerMask.NameToLayer("DeadLavaImp");
                 lava = true;
@@ -166,8 +172,13 @@ public class ImpAI : DemonBehavior {
         //Collision with Spike kills imp
 		else if (other.gameObject.tag == "spike") 
         {
+			print ("Imp death via spike!");
+
 			rb.velocity = Vector3.zero;
 			rb.isKinematic = true;
+			HalveCollider(bc, heightChange);
+			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+			transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
 			KillImp();
 		} 
 		else 

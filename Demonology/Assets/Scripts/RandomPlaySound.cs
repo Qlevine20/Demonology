@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RandomPlaySound : MonoBehaviour {
 
-	public AudioClip music1;
+	/*public AudioClip music1;
 	public AudioClip music2; 
 	public AudioClip music3; 
 	private int randomMusic = 0;
@@ -22,9 +22,9 @@ public class RandomPlaySound : MonoBehaviour {
 		{
 			randomTime = Random.Range(60.0, 180.0);
 			timeCounter = 0.0;
-			audio.Stop();
+			GetComponent<AudioSource>().Stop();
 			ChooseMusic();
-			audio.Play();
+			GetComponent<AudioSource>().Play();
 		}
 		
 		timeCounter += Time.deltaTime;
@@ -37,18 +37,18 @@ public class RandomPlaySound : MonoBehaviour {
 		switch (randomMusic)
 		{
 		case 0: 
-			audio.clip = music1; 
+			GetComponent<AudioSource>().clip = music1; 
 			break;
 		case 1: 
-			audio.clip = music2; 
+			GetComponent<AudioSource>().clip = music2; 
 			break;
 		case 2: 
-			audio.clip = music3; 
+			GetComponent<AudioSource>().clip = music3; 
 			break;
 		}
 		
 		Debug.Log( "Current Clip = music" + (randomMusic + 1) );
-	}
+	}*/
 
 }
 
