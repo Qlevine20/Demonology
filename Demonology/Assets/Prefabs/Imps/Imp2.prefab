@@ -103,7 +103,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .400000006, y: .600000024}
+  m_Size: {x: 2.5, y: 1}
 --- !u!61 &6189372
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -158,6 +158,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   dying: 0
+  changeDir: 0
   reqMats: 0000000001000000000000000000000000000000
   reqMatsName:
   - Imp
@@ -174,6 +175,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
+  heightChange: 0
   SinkTime: 4
   dead: 0
   jumpspeed: 5
@@ -341,11 +343,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.y
-      value: .642702401
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.x
-      value: .410223991
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z

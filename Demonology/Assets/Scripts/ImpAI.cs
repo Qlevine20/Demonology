@@ -65,8 +65,7 @@ public class ImpAI : DemonBehavior {
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				KillImp();
-				print ("Imp death via falling!");
-				print (other.gameObject.name);
+				//print ("Imp death via falling!");
 			}
 		}
 
@@ -87,7 +86,7 @@ public class ImpAI : DemonBehavior {
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
-				print ("Imp death via fog!");
+				//print ("Imp death via fog!");
 			}
 		}
 	}
@@ -156,13 +155,15 @@ public class ImpAI : DemonBehavior {
             }
             if (other.gameObject.tag == "magma")
             {
-				print ("Imp death via magma!");
+				//print ("Imp death via magma!");
 
 				Anim.SetBool("Death", true);
                 dying = true;
-				HalveCollider(bc, heightChange);
-				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
-				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
+				if (!dead) {
+					HalveCollider(bc, heightChange);
+					bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+					transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
+				}
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
                 gameObject.layer = LayerMask.NameToLayer("DeadLavaImp");
                 lava = true;
@@ -172,14 +173,17 @@ public class ImpAI : DemonBehavior {
         //Collision with Spike kills imp
 		else if (other.gameObject.tag == "spike") 
         {
-			print ("Imp death via spike!");
+			if(!dead)
+			{
+				//print ("Imp death via spike!");
 
-			rb.velocity = Vector3.zero;
-			rb.isKinematic = true;
-			HalveCollider(bc, heightChange);
-			bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
-			transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
-			KillImp();
+				rb.velocity = Vector3.zero;
+				rb.isKinematic = true;
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
+				KillImp();
+			}
 		} 
 		else 
 		{

@@ -5,7 +5,7 @@ public class Mobile : DeadlyBehavior {
 
     public float speed = 0;
     public float wallDist = .1f;
-	private Vector2 StartDir;
+	protected Vector2 StartDir;
 	public Animator Anim;
 	public bool mobFacingRight;
 	public LayerMask whatIsWall;
@@ -55,8 +55,6 @@ public class Mobile : DeadlyBehavior {
 			Flip();
 
 			StartDir = new Vector2(-StartDir.x,StartDir.y);
-
-
 		}
 		if(Anim!=null)
 		{

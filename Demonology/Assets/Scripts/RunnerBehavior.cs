@@ -34,7 +34,7 @@ public class RunnerBehavior : EnemyBehavior {
 	public override void OnRespawn () 
 	{
 		base.OnRespawn ();
-		facingDir = Vector2.right;
+		mobFacingRight = (Vector2.right == defaultDir);
 		pause = false;
 		charging = false;
 		speed = defaultSpeed;

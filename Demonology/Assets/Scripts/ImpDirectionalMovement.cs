@@ -42,7 +42,7 @@ public class ImpDirectionalMovement : ImpAI {
 	public override void FixedUpdate () {
 		base.FixedUpdate ();
 		float fall = Input.GetAxis ("Vertical");
-		if (fall > 0 && rb.velocity.y >= 0.0f && player.onGround()) {
+		if (!dead && fall > 0 && rb.velocity.y >= 0.0f && player.onGround()) {
 			rb.AddForce (new Vector2 (0, jumpspeed), ForceMode2D.Impulse);
 		}
 	}

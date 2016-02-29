@@ -498,6 +498,17 @@ public class CharacterBehavior : DeadlyBehavior {
 				CharacterBehavior.Dying = true;
 			}
 		}
+		// If you collide with imp-killing fog...
+		if (other.gameObject.tag == "impkiller") {
+			//all of your crystals vanish! bwahahaha!
+			BatBehavior isABat = other.gameObject.GetComponent<BatBehavior> ();
+			if (isABat == null) {
+				for(int i=0; i<currentMats.Length; i++){
+					currentMats[i] = 0;
+				}
+				return;
+			}
+		}
 	}
 
 	// Collision code for exiting a "trigger" colldier
