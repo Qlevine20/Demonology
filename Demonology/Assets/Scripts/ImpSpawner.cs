@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 
@@ -14,9 +15,12 @@ public class ImpSpawner : MonoBehaviour{
 	public int spawnCount = 0;
 	public int sinkingTime = 5;
 
+	public float activeRange = 15.0f;
+
 
 	void Start(){
 		//waitTime = 3.0f;
+		Player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	void Update(){
@@ -25,11 +29,13 @@ public class ImpSpawner : MonoBehaviour{
 			Player = GameObject.FindGameObjectWithTag("Player");
 		}
 
-		counter += Time.deltaTime;
-		CheckCreate = RandomSpawnImp(counter);
-		if (CheckCreate) 
-		{
-			counter = 0;
+		if (DistanceBetween (transform.position, Player.transform.position) < activeRange) {
+			counter += Time.deltaTime;
+			CheckCreate = RandomSpawnImp(counter);
+			if (CheckCreate) 
+			{
+				counter = 0;
+			}
 		}
 	}
 
@@ -67,7 +73,13 @@ public class ImpSpawner : MonoBehaviour{
 	}
 
 
-
+	// Find the distance between two points
+	public float DistanceBetween (Vector2 pos1, Vector2 pos2)
+	{
+		float xPos = pos1.x - pos2.x;
+		float yPos = pos1.y - pos2.y;
+		return (float)Math.Sqrt (xPos*xPos + yPos*yPos);
+	}
 }
 
 

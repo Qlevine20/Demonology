@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 434992}
   - 212: {fileID: 21275094}
+  - 114: {fileID: 11400086}
   m_Layer: 0
   m_Name: HelperImp
   m_TagString: Untagged
@@ -81,6 +82,19 @@ Transform:
   - {fileID: 22439126}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11400086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd75333c9fae4d342aca13b609a34f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Poof: {fileID: 164534, guid: 942a8f442f68fdf4bab49e4114ec6526, type: 2}
+  activeRange: 10
 --- !u!114 &11452834
 MonoBehaviour:
   m_ObjectHideFlags: 1
