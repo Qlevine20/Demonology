@@ -4449,6 +4449,10 @@ Prefab:
       propertyPath: sinkingTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11417272, guid: 990dfc239293d5c4986decef095c6f03, type: 2}
+      propertyPath: activeRange
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 990dfc239293d5c4986decef095c6f03, type: 2}
   m_IsPrefabParent: 0
@@ -4637,7 +4641,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11417272, guid: 990dfc239293d5c4986decef095c6f03, type: 2}
       propertyPath: waitTime
-      value: .800000012
+      value: .699999988
       objectReference: {fileID: 0}
     - target: {fileID: 11417272, guid: 990dfc239293d5c4986decef095c6f03, type: 2}
       propertyPath: maxSpawn

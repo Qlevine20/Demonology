@@ -21,6 +21,7 @@ public class ImpSpawner : MonoBehaviour{
 	void Start(){
 		//waitTime = 3.0f;
 		Player = GameObject.FindGameObjectWithTag("Player");
+		counter = waitTime;
 	}
 
 	void Update(){
