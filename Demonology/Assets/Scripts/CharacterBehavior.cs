@@ -12,6 +12,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode jumpButton = KeyCode.W;
 	public KeyCode grabButton = KeyCode.G;
     public KeyCode killSelf = KeyCode.K;
+    public KeyCode climb = KeyCode.C;
 
 	public int[] currentMats;
 	public GameObject[] Demons;
@@ -21,6 +22,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public GameObject PlayerPrefab;
 	public GameObject CrystalPrefab;
 	public LayerMask IgnorePlayerLayer;
+    public LayerMask checkMasks;
     public AudioClip crystalPickupSound;
     public AudioClip crystalFizzleSound;
 	public AudioClip altarActivateSound;
@@ -36,6 +38,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	private string HoldingImp;
     private bool HoldingStickImp;
     private RaycastHit2D rayhit;
+    private RaycastHit2D feet_check;
+    private GameObject cdImp;
 	
 	
 	Animator anim;
@@ -113,6 +117,8 @@ public class CharacterBehavior : DeadlyBehavior {
 	public override void Update()
 	{
 
+
+
         if (Input.GetKeyDown(jumpButton))
         {
             if (onGround())
@@ -123,12 +129,28 @@ public class CharacterBehavior : DeadlyBehavior {
 		base.Update ();
         foreach (Transform t in GroundedEnds) 
         {
-            Debug.DrawLine(this.transform.position, t.position, Color.green);
+            //Debug.DrawLine(this.transform.position, t.position, Color.green);
         }
         
         checkWall.origin = transform.position;
         rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
-        Debug.DrawRay(checkWall.origin,checkWall.direction);
+        feet_check = Physics2D.Raycast(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction, checkWallDist,checkMasks);
+       // Debug.DrawRay(checkWall.origin,checkWall.direction);
+        //Debug.DrawRay(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction);
+        if (feet_check.collider != null) 
+        {
+            //Debug.Log(feet_check.point);
+            //Debug.Log(feet_check.collider.gameObject.transform.position.y);
+            if (feet_check.collider.gameObject.tag != "impTrigger" && !(Input.GetKey(climb)))
+            {
+                RaycastHit2D check_empty = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, checkMasks);
+                if (check_empty.collider == null && Mathf.Abs(Input.GetAxis("Horizontal")) > .5f)
+                {
+                    //RaycastHit2D newLoc = Physics2D.Raycast(
+                    transform.position = new Vector3(transform.position.x, transform.position.y + .3f);
+                }
+            }
+        }
 		// Code for holding and throwing imps
 		if (HoldingImp!="") 
 		{
@@ -562,6 +584,10 @@ public class CharacterBehavior : DeadlyBehavior {
        {
            PlayerAnim.SetBool("Jump", false);
            PlayerAnim.SetBool("Fall", false);
+       }
+       if (other.gameObject.layer == 12) 
+       {
+           cdImp = other.gameObject;
        }
     }
 

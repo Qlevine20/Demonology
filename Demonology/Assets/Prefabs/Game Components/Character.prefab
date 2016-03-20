@@ -486,6 +486,7 @@ MonoBehaviour:
   jumpButton: 119
   grabButton: 102
   killSelf: 107
+  climb: 99
   currentMats: 0000000000000000000000000000000000000000
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
@@ -496,6 +497,9 @@ MonoBehaviour:
   IgnorePlayerLayer:
     serializedVersion: 2
     m_Bits: 2305
+  checkMasks:
+    serializedVersion: 2
+    m_Bits: 4096
   crystalPickupSound: {fileID: 8300000, guid: a1b3d1da7e8da4147ac1b49ff0a303aa, type: 3}
   crystalFizzleSound: {fileID: 8300000, guid: f3d2dadf86a59a24c858165aee19c105, type: 3}
   altarActivateSound: {fileID: 8300000, guid: 5f8de2defb89e4a858d56738ae7a926f, type: 3}

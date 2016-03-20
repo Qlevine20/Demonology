@@ -218,7 +218,7 @@ public class ImpAI : DemonBehavior {
             AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
         }
         gameObject.layer = LayerMask.NameToLayer("DeadImp");
-        transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
+        //transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
         //speed = 0;
         dead = true;
         //transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
