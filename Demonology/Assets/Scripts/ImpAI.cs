@@ -19,6 +19,7 @@ public class ImpAI : DemonBehavior {
 	public float SinkTime = 3.0f;
     public static Vector2 ImpScale;
     public bool dead = false;
+    public float sinkDiv = 1;
 
     // Use this for initialization
     public override void Start()
@@ -97,7 +98,7 @@ public class ImpAI : DemonBehavior {
         base.Update();
         if (dying && lava) 
         {
-            //transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/6, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/sinkDiv, transform.position.z);
         }
         //Check if player is dead and kill Imp() if player died
 		/*if (CharacterBehavior.Died) 
@@ -157,16 +158,18 @@ public class ImpAI : DemonBehavior {
             {
 				//print ("Imp death via magma!");
 
-				Anim.SetBool("Death", true);
+				//Anim.SetBool("Death", true);
                 dying = true;
-				if (!dead) {
-					HalveCollider(bc, heightChange);
-					bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
-					transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
-				}
+                //if (!dead) {
+                //    HalveCollider(bc, heightChange);
+                //    bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+                //    transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
+                //}
+                Anim.SetBool("lava", true);
+                lava = true;
                 AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
                 gameObject.layer = LayerMask.NameToLayer("DeadLavaImp");
-                lava = true;
+               
                 rb.isKinematic = true;
             }
 		} 
