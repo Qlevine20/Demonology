@@ -9,6 +9,7 @@ public class UICrystalDisplay : MonoBehaviour {
 	public GameObject GameMenu;
 	public KeyCode menuKey;
 	public int crystalId;
+    public GameObject LevelsScreen;
 
 	void Start () {
 		crystalText = GetComponent<Text>();
@@ -46,4 +47,20 @@ public class UICrystalDisplay : MonoBehaviour {
 		Application.LoadLevel ("Main Menu");
 		Time.timeScale = 1.0f;
 	}
+
+    public void ToLevelsScreen(GameObject menu) 
+    {
+        LevelsScreen.SetActive(true);
+        menu.SetActive(false);
+    }
+    public void ExitLevelsScreen(GameObject menu) 
+    {
+        menu.SetActive(true);
+        LevelsScreen.SetActive(false);
+    }
+    public void LevelButton(int level) 
+    {
+        Time.timeScale = 1.0f;
+        Application.LoadLevel(level);
+    }
 }

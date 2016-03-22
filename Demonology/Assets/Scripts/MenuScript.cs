@@ -74,6 +74,11 @@ public class MenuScript : MonoBehaviour {
         creditsButton.interactable = false;
     }
 
+    public void LoadLevelButton(int level) 
+    {
+        Application.LoadLevel(level);
+    }
+
 	public void StartLevel()
 	{
 		Application.LoadLevel (1);
