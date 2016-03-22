@@ -124,6 +124,7 @@ public class CharacterBehavior : DeadlyBehavior {
             if (onGround())
             {
                 rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+                PlayerAnim.SetBool("Jump", true);
             }
         }
 		base.Update ();
@@ -356,10 +357,10 @@ public class CharacterBehavior : DeadlyBehavior {
             {
                 PlayerAnim.SetBool("Move", true);
             }
-            else if (!onGround() && rb.velocity.y>0 && !PlayerAnim.GetBool("Jump")) 
-            {
-                PlayerAnim.SetBool("Jump", true);
-            }
+            //else if (!onGround() && rb.velocity.y>0 && !PlayerAnim.GetBool("Jump")) 
+            //{
+            //    PlayerAnim.SetBool("Jump", true);
+            //}
             else if (!onGround() && rb.velocity.y <= 0 && !PlayerAnim.GetBool("Fall")) 
             {
                 PlayerAnim.SetBool("Fall", true);
