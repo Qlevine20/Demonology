@@ -5,6 +5,7 @@ public class ExitScript : MonoBehaviour
 {
 
     public GameObject PowerCrystal;
+    public GameObject Exit;
 
     // Use this for initialization
     void Start()
@@ -15,10 +16,11 @@ public class ExitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        PowerCrystal = GameObject.FindGameObjectWithTag("PowerCrystal");
+        
         if (PowerCrystal == null)
         {
-            PowerCrystal = GameObject.FindGameObjectWithTag("PowerCrystal");
+            transform.gameObject.tag = "Finish";
         }
 
         //once no more crystals, activate the exit
