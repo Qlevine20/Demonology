@@ -58,13 +58,16 @@ public class ImpSpawner : MonoBehaviour{
 			{
 				GameObject SpawnedImp = Instantiate(Imp, transform.position, transform.rotation) as GameObject;
 				spawnCount++;
-				if(leftSpawner == CharacterBehavior.FacingRight){
-					Transform spriteHolder = SpawnedImp.transform;
-					Vector3 theScale = spriteHolder.localScale;
-					theScale.x *= -1;
-					spriteHolder.localScale = theScale;
+				if(leftSpawner && CharacterBehavior.FacingRight){
+                    SpawnedImp.GetComponent<Mobile>().changeDir = true;
+                    SpawnedImp.GetComponent<Mobile>().Flip();
+                    
+                    //Transform spriteHolder = SpawnedImp.transform;
+                    //Vector3 theScale = spriteHolder.localScale;
+                    //theScale.x *= -1;
+                    //spriteHolder.localScale = theScale;
 
-					SpawnedImp.GetComponent<Mobile>().changeDir = true;
+                    //SpawnedImp.GetComponent<Mobile>().changeDir = true;
 				}
 				SpawnedImp.GetComponent<ImpAI>().SinkTime = sinkingTime;
 				return true;

@@ -5,7 +5,7 @@ public class Mobile : DeadlyBehavior {
 
     public float speed = 0;
     public float wallDist = .1f;
-	protected Vector2 StartDir;
+	protected Vector2 StartDir = CharacterBehavior.Dir;
 	public Animator Anim;
 	public bool mobFacingRight;
 	public LayerMask whatIsWall;
@@ -73,6 +73,7 @@ public class Mobile : DeadlyBehavior {
     public virtual void Movement(Ray2D ry)
     {
         Debug.DrawRay(ry.origin, ry.direction, Color.green);
+        checkWall.direction = ry.direction;
 		//Casts a ray in front of the object to see if there are any obstacles blocking the path
 		if (Physics2D.Raycast(new Vector2(ry.origin.x,ry.origin.y-.5f),ry.direction,wallDist,whatIsWall)) 
 		{
@@ -80,7 +81,7 @@ public class Mobile : DeadlyBehavior {
 			//Changes the Direction the object faces to the opposite of its current Direction
 			Flip();
 
-			StartDir = new Vector2(-StartDir.x,StartDir.y);
+			
 		}
 		if(Anim!=null)
 		{
@@ -101,7 +102,10 @@ public class Mobile : DeadlyBehavior {
 		theScale.x *= -1;
 		transform.localScale = theScale;
         right = -right;
-        checkWall = new Ray2D(transform.position, right * (transform.right));
+        StartDir = new Vector2(-(StartDir.x), StartDir.y);
+        checkWall = new Ray2D(transform.position, StartDir);
+       
+        
 	}
 
 }

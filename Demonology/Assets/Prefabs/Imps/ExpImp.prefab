@@ -76,7 +76,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &5813240
 CircleCollider2D:
@@ -159,6 +159,10 @@ MonoBehaviour:
     m_Bits: 256
   dying: 0
   changeDir: 0
+  checkWallDist: 1
+  checkMasks:
+    serializedVersion: 2
+    m_Bits: 20480
   reqMats: 0000000000000000000000000100000000000000
   reqMatsName:
   - Imp
@@ -178,6 +182,7 @@ MonoBehaviour:
   heightChange: 0
   SinkTime: 0
   dead: 0
+  sinkDiv: 1
   TimeToExp: 2
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
   whatIsTrigger:
@@ -290,6 +295,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: checkMasks.m_Bits
+      value: 20480
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
