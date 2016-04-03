@@ -13,8 +13,14 @@ public class MenuScript : MonoBehaviour {
     public GameObject MainMenu;
     public GameObject LevelsScreen;
     public GameObject CreditsScreen;
+    public static int levelNum;
 	// Use this for initialization
 	void Start () {
+        RectTransform lvlButt = levelsButton.GetComponent<RectTransform>();
+        RectTransform CredButt = creditsButton.GetComponent<RectTransform>();
+        lvlButt.position = new Vector3(lvlButt.position.x + Screen.width / 5, lvlButt.position.y);
+        CredButt.position = new Vector3(CredButt.position.x - Screen.width / 5, CredButt.position.y);
+
 		startButton = startButton.GetComponent<Button> ();
 		quitButton = quitButton.GetComponent<Button> ();
         controlsButton = controlsButton.GetComponent<Button>();
@@ -76,12 +82,14 @@ public class MenuScript : MonoBehaviour {
 
     public void LoadLevelButton(int level) 
     {
-        Application.LoadLevel(level);
+        levelNum = level;
+        Application.LoadLevel(10);
     }
 
 	public void StartLevel()
 	{
-		Application.LoadLevel (1);
+        levelNum = 1;
+		Application.LoadLevel (10);
 	}
 
 	public void QuitGame()

@@ -879,7 +879,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 355, y: 100}
+  m_AnchoredPosition: {x: 125, y: 100}
   m_SizeDelta: {x: 222, y: 72}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &1194670945
@@ -1287,7 +1287,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -355, y: 100}
+  m_AnchoredPosition: {x: -125, y: 100}
   m_SizeDelta: {x: 222, y: 72}
   m_Pivot: {x: .5, y: .5}
 --- !u!95 &2008006826
@@ -1396,6 +1396,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2037159198}
   - 131: {fileID: 2037159197}
+  - 114: {fileID: 2037159199}
   m_Layer: 0
   m_Name: GUITexture
   m_TagString: Untagged
@@ -1434,6 +1435,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &2037159199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037159196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcc090f7c1629b469648c82d0527268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPS: 30
+  firstFrame: 0
+  lastFrame: 125
+  FileName: Demonology Title Background
+  digitsFormat: 0000
+  DigitsLocation: 1
+  aspectRatio: 1.77999997
+  enableAudio: 0
+  enableReplay: 1
+  showInstructions: 1
+  backG: {fileID: 2037159197}
 --- !u!1001 &2071504776
 Prefab:
   m_ObjectHideFlags: 0
