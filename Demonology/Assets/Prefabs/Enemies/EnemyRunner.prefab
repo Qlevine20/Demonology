@@ -81,6 +81,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 1536
+  PlayerSeen: {fileID: 8300000, guid: 4840dfddaa7dff548bab6b627e4ebbe7, type: 3}
 --- !u!212 &21242958
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -158,6 +159,10 @@ Prefab:
       propertyPath: m_TagString
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PlayerSeen
+      value: 
+      objectReference: {fileID: 8300000, guid: 4840dfddaa7dff548bab6b627e4ebbe7, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148966}

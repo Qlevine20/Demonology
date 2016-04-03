@@ -327,6 +327,7 @@ MonoBehaviour:
   speed: 2
   targetRange: 4
   mobFacingRight: 0
+  PlayerFoundSound: {fileID: 8300000, guid: 71946a52043d4d34ca276fa3fa221d24, type: 3}
 --- !u!212 &21207196
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -612,6 +613,10 @@ Prefab:
       propertyPath: m_Constraints
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PlayerFoundSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 71946a52043d4d34ca276fa3fa221d24, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139866}
