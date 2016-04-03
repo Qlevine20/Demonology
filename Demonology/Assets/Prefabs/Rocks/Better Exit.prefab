@@ -11,6 +11,7 @@ GameObject:
   - 199: {fileID: 19993248}
   - 198: {fileID: 19883688}
   - 58: {fileID: 5809028}
+  - 114: {fileID: 11424586}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Finish
@@ -353,6 +354,18 @@ PolygonCollider2D:
       - {x: 12.1695518, y: -11.6985836}
       - {x: 12.1695518, y: -10.879631}
       - {x: 12.0402431, y: -10.9227343}
+--- !u!114 &11424586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9122d5fe42e3a4bb4df7679eb84bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerCrystal: {fileID: 0}
 --- !u!198 &19883688
 ParticleSystem:
   m_ObjectHideFlags: 1
