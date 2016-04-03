@@ -61,6 +61,7 @@ public class UICrystalDisplay : MonoBehaviour {
     public void LevelButton(int level) 
     {
         Time.timeScale = 1.0f;
-        Application.LoadLevel(level);
+        MenuScript.levelNum = level;
+        Application.LoadLevel(10);
     }
 }

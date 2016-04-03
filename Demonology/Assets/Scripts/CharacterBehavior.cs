@@ -92,7 +92,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
-        
+        MenuScript.levelNum = Application.loadedLevel;
         Dying = false;
         checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
