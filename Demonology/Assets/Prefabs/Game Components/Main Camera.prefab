@@ -309,7 +309,7 @@ MonoBehaviour:
   maxZoomIn: 5
   zoomSpeedMouse: 20
   zoomSpeedKeys: 4
-  downZoom: 120
+  downZoom: 115
   downZoomDistance: .800000012
 --- !u!124 &12421296
 Behaviour:
@@ -348,6 +348,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: downZoom
+      value: 115
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
