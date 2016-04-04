@@ -12,9 +12,12 @@ public class BatBehavior : EnemyBehavior {
 	protected int Pos;
 	protected int ArrayDir;
 	protected Vector3 startScale;
+    public AudioClip PlayerFoundSound;
+    private bool FirstSight;
 
 	public override void Start()
 	{
+        FirstSight = false;
 		base.Start ();
 		locs [0] = transform.position;
 		ArrayDir = 1;
@@ -57,12 +60,22 @@ public class BatBehavior : EnemyBehavior {
 				i++;
 			}
 
-			if (closestDist < 100.0f){
-				foundTarget = true;
-				Vector2 p = closestTarget.transform.position;
-				//transform.position = Vector3.MoveTowards (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
-				SmartMove (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
-			}
+            if (closestDist < 100.0f)
+            {
+                foundTarget = true;
+                Vector2 p = closestTarget.transform.position;
+                //transform.position = Vector3.MoveTowards (transform.position, new Vector3(p.x,p.y,0.0f), speed*Time.deltaTime);
+                if (FirstSight == false)
+                {
+                    FirstSight = true;
+                    AudioSource.PlayClipAtPoint(PlayerFoundSound, Camera.main.transform.position,100.0f);
+                }
+                SmartMove(transform.position, new Vector3(p.x, p.y, 0.0f), speed * Time.deltaTime);
+            }
+            else 
+            {
+                FirstSight = false;
+            }
 		}
 		if (!foundTarget) {
 			if (MoveBetweenPoints (locs [Pos])) 

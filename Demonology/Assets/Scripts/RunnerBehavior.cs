@@ -17,6 +17,7 @@ public class RunnerBehavior : EnemyBehavior {
 	private bool pause = false;
 	private bool charging = false;
 	private Rigidbody2D rb;
+    public AudioClip PlayerSeen;
 
 	// Use this for initialization
 	public override void Start () {
@@ -140,6 +141,7 @@ public class RunnerBehavior : EnemyBehavior {
 	public IEnumerator PrepareToCharge(float num)
 	{
 		yield return new WaitForSeconds (num);
+        AudioSource.PlayClipAtPoint(PlayerSeen, Camera.main.transform.position);
 		pause = false;
 		charging = true;
 		speed = 12;
