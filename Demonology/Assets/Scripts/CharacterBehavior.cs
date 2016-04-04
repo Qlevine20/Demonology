@@ -488,12 +488,12 @@ public class CharacterBehavior : DeadlyBehavior {
             }
 		}
 		// If you collide with a "hard" object...
-		if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
+		/*if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
 			// fall death if you're falling too quickly
-			/*if ( rb.velocity.y <= 0.0f )
+			if ( rb.velocity.y <= 0.0f )
 			{
 				print(rb.velocity.y);
-			}*/
+			}
 			if (rb.velocity.y <= -25.0f) {
 				if (PlayerAnim && !CharacterBehavior.Dying) {
 					PlayerAnim.SetBool ("FallDeath", true);
@@ -501,13 +501,13 @@ public class CharacterBehavior : DeadlyBehavior {
 				}
 				//OnDeath ();
 			}
-		}
+		}*/
 		// If you collide with a moving platform..
 		if (other.gameObject.tag == "moving") {
 			// attach the character to it so they move with it
 			transform.SetParent (other.transform);
 		}
-		if (other.gameObject.tag == "magma") {
+		if (other.gameObject.tag == "cinder") {
 			// it's a cinder! it always kills
 			if (!CharacterBehavior.Dying){
 				PlayerAnim.SetBool ("EnemyDeath", true);
@@ -580,19 +580,29 @@ public class CharacterBehavior : DeadlyBehavior {
         //    }
         //}
 	}
+
 	// Collision code for making contact with an object
     public override void OnCollisionEnter2D(Collision2D other)
     {
-       base.OnCollisionEnter2D (other);
-       if (onGround()) 
-       {
-           PlayerAnim.SetBool("Jump", false);
-           PlayerAnim.SetBool("Fall", false);
-       }
-       if (other.gameObject.layer == 12) 
-       {
-           cdImp = other.gameObject;
-       }
+		base.OnCollisionEnter2D (other);
+		if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
+			// fall death if you're falling too quickly
+			if (other.relativeVelocity.y <= -25.0f) {
+				if (PlayerAnim && !CharacterBehavior.Dying) {
+					PlayerAnim.SetBool ("FallDeath", true);
+					CharacterBehavior.Dying = true;
+				}
+			}
+		}
+		if (onGround()) 
+		{
+		   PlayerAnim.SetBool("Jump", false);
+		   PlayerAnim.SetBool("Fall", false);
+		}
+		if (other.gameObject.layer == 12) 
+		{
+		   cdImp = other.gameObject;
+		}
     }
 
 	// Collision code for ceasing contact with an object

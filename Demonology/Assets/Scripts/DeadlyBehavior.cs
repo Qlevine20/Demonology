@@ -45,9 +45,9 @@ public class DeadlyBehavior : MonoBehaviour {
 			{
                 if(DeadlyPlayerAnim)
                 {
-                    if(other.tag == "magma")
+                    if(other.tag == "magma" || other.tag == "cinder")
                     {
-						if (other.gameObject.GetComponent<GravityCinder>() != null) {
+						if (other.tag == "cinder") {
 							// that's no magma, it's a gravity cinder!
 							if (!CharacterBehavior.Dying)
 							{

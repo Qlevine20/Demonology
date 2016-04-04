@@ -319,7 +319,7 @@ Transform:
   - {fileID: 1411750783}
   - {fileID: 686435172}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
 --- !u!1001 &97870508
 Prefab:
   m_ObjectHideFlags: 0
@@ -1477,41 +1477,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 404800, guid: a78000afef9bf8b4f9131837da058a9c, type: 2}
   m_PrefabInternal: {fileID: 950735829}
---- !u!1 &1008952266 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 140388, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
-  m_PrefabInternal: {fileID: 1448288019}
---- !u!68 &1008952267
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1008952266}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-  - {x: -24.2460175, y: -3.49892211}
-  - {x: -23.2067337, y: -3.32768941}
-  - {x: -21.3164177, y: -3.77860951}
-  - {x: -20.2267265, y: -3.61769414}
-  - {x: -13.5748339, y: -3.6395762}
-  - {x: -12.4449949, y: -3.21059918}
-  - {x: -6.9280386, y: -3.19316792}
-  - {x: -2.97979069, y: -3.35058808}
-  - {x: -1.78356266, y: -3.04059458}
-  - {x: -.212522507, y: -3.06374097}
-  - {x: 1.4478693, y: -3.22600293}
-  - {x: 2.16372061, y: -3.02674007}
-  - {x: 3.59713936, y: -3.15582395}
-  - {x: 4.83509636, y: -3.1422801}
-  - {x: 5.55278635, y: -2.89783955}
-  - {x: 10.8595142, y: -2.8237462}
-  - {x: 11.5863752, y: -2.84279656}
-  - {x: 14.1880426, y: -2.55718398}
-  - {x: 14.3504438, y: .614348471}
 --- !u!1001 &1010740789
 Prefab:
   m_ObjectHideFlags: 0
@@ -2928,6 +2893,14 @@ Prefab:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[85].y
       value: -3.23421836
       objectReference: {fileID: 0}
+    - target: {fileID: 6871322, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6871322, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6894528, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
     - {fileID: 6889698, guid: 300b0df961bba47b4a23ab1d0eab3e9e, type: 2}
@@ -3264,11 +3237,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 440206, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 26.7295151
+      value: 26.6800003
       objectReference: {fileID: 0}
     - target: {fileID: 440206, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -18.4758854
+      value: -18.3700008
       objectReference: {fileID: 0}
     - target: {fileID: 440206, guid: 2700de19ed8a93a419c43373727994d0, type: 2}
       propertyPath: m_LocalPosition.z
