@@ -507,7 +507,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			// attach the character to it so they move with it
 			transform.SetParent (other.transform);
 		}
-		if (other.gameObject.tag == "magma") {
+		if (other.gameObject.tag == "cinder") {
 			// it's a cinder! it always kills
 			if (!CharacterBehavior.Dying){
 				PlayerAnim.SetBool ("EnemyDeath", true);

@@ -16,7 +16,7 @@ GameObject:
   - 82: {fileID: 8299426}
   m_Layer: 0
   m_Name: GravityCinder
-  m_TagString: magma
+  m_TagString: cinder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1254,6 +1254,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ColorBySpeedModule.gradient.maxGradient.key1.rgba
       value: 4278197740
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: cinder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

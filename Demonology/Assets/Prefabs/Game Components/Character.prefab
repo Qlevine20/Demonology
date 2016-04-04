@@ -480,6 +480,7 @@ MonoBehaviour:
   - {fileID: 105602, guid: 6b36c82d142b3cd43825f31284eba71a, type: 2}
   - {fileID: 139866, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
   - {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+  - {fileID: 180814, guid: 4a8d5896ec63b2d41a47abbf3085e68e, type: 2}
   Summon: 113
   ShiftLeft: 101
   ShiftRight: 114
@@ -743,7 +744,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: DeadlyObs.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -858,6 +859,170 @@ Prefab:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[5]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[6]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[7]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[8]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[9]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[10]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[11]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[12]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[13]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[14]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[15]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[16]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[17]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[18]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[19]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[20]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[21]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[22]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[23]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[24]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[25]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[26]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[27]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[28]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[29]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[30]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[31]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[32]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[33]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[34]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[35]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[36]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[37]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[38]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[39]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[40]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[41]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[42]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[43]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[44]
+      value: 
+      objectReference: {fileID: 149506, guid: 1dc103e2e9705b346bfd1a053ed516e3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeadlyObs.Array.data[4]
+      value: 
+      objectReference: {fileID: 180814, guid: 4a8d5896ec63b2d41a47abbf3085e68e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
