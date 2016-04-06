@@ -28,19 +28,27 @@ public class UICrystalDisplay : MonoBehaviour {
 		}
 	}
 
-	public void UpdateMenu(GameObject menu)
-	{
-		if(menu.activeSelf)
-		{
-			menu.SetActive(false);
-			Time.timeScale = 1.0f;
-		}
-		else
-		{
-			menu.SetActive(true);
-			Time.timeScale = 0;
-		}
-	}
+    public void UpdateMenu(GameObject menu)
+    {
+        if (LevelsScreen.activeSelf)
+        {
+            LevelsScreen.SetActive(false);
+            menu.SetActive(true);
+        }
+        else
+        {
+            if (menu.activeSelf)
+            {
+                menu.SetActive(false);
+                Time.timeScale = 1.0f;
+            }
+            else
+            {
+                menu.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+   }
 
 	public void ExitToMainMenu()
 	{
@@ -50,13 +58,13 @@ public class UICrystalDisplay : MonoBehaviour {
 
     public void ToLevelsScreen(GameObject menu) 
     {
-        LevelsScreen.SetActive(true);
         menu.SetActive(false);
+        LevelsScreen.SetActive(true);
+        
     }
     public void ExitLevelsScreen(GameObject menu) 
     {
-        menu.SetActive(true);
-        LevelsScreen.SetActive(false);
+        UpdateMenu(GameMenu);
     }
     public void LevelButton(int level) 
     {
