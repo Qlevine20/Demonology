@@ -22,11 +22,13 @@ public class ExitScript : MonoBehaviour
         PowerCrystal = GameObject.FindGameObjectWithTag("PowerCrystal");
         
 		//once no more crystals, activate the exit
-        if (PowerCrystal == null)
-        {
-            transform.gameObject.tag = "Finish";
+        if (PowerCrystal == null) {
+			transform.gameObject.tag = "Finish";
 			cParts.enableEmission = true;
-        }
+		} else {
+			transform.gameObject.tag = "Untagged";
+			cParts.enableEmission = false;
+		}
 
     }
 }

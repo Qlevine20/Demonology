@@ -24,10 +24,12 @@ public class RunnerBehavior : EnemyBehavior {
 		base.Start ();
 		defaultSpeed = speed;
 		rb = GetComponent<Rigidbody2D>();
+		defaultDir = facingDir = Vector2.left;
 		if (mobFacingRight) {
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
 			defaultDir = facingDir = Vector2.right;
-		} else {
-			defaultDir = facingDir = Vector2.left;
 		}
 	}
 
@@ -39,7 +41,12 @@ public class RunnerBehavior : EnemyBehavior {
 		pause = false;
 		charging = false;
 		speed = defaultSpeed;
-		facingDir = defaultDir;
+		if (facingDir != defaultDir) {
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
+			facingDir = defaultDir;
+		}
 	}
 	
 	public void FixedUpdate()
@@ -84,7 +91,7 @@ public class RunnerBehavior : EnemyBehavior {
 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "magma" || other.gameObject.tag == "spike" || other.gameObject.tag == "explosion") {
+		if (other.gameObject.tag == "magma" || other.gameObject.tag == "spike" || other.gameObject.tag == "explosion" || other.gameObject.tag == "cinder") {
 			OnDeath ();
 		}
 
