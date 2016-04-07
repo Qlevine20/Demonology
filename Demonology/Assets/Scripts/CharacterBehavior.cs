@@ -13,6 +13,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode grabButton = KeyCode.G;
     public KeyCode killSelf = KeyCode.K;
     public KeyCode climb = KeyCode.C;
+    public KeyCode modifier = KeyCode.LeftShift;
 
 	public int[] currentMats;
 	public GameObject[] Demons;
@@ -188,11 +189,15 @@ public class CharacterBehavior : DeadlyBehavior {
 		}
 
 		// Code for recieving button input
-		if (Input.GetKeyDown (Summon)) 
+		if (Input.GetKeyDown (Summon) && Input.GetKey(modifier) && HoldingImp=="") 
 		{
+            summon(true);
 			// Summon a demon
-			summon();
 		}
+        if (Input.GetKeyDown(Summon) && !Input.GetKey(modifier) && HoldingImp == "") 
+        {
+            summon(false);
+        }
 		if (Input.GetKeyDown (ShiftLeft)) 
 		{
 			// Cycle the demon selection wheel to the left
@@ -699,7 +704,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	}
 
 	// Summon a demon!
-	public virtual void summon()
+	public virtual void summon(bool Grab)
 	{
 		// Make sure that you have the necessary materials for demon summoning
 		if(checkMaterials() /*&& GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins*/)
@@ -711,9 +716,8 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
 				currentMats[i] -= reqMats[i];
 			}
-            if (Demons[selected].tag == "stickImp")
+            if (Grab)
             {
-                HoldingImp = "stickImp";
                 GrabImp(newImp.transform.GetChild(0).GetComponent<BoxCollider2D>());
             }
         }   
