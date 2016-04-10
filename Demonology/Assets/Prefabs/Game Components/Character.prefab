@@ -216,8 +216,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120076}
-  m_LocalRotation: {x: 0, y: 0, z: -.25292635, w: .967485547}
-  m_LocalPosition: {x: -.550000012, y: 10.0900002, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .130871594, w: .991399348}
+  m_LocalPosition: {x: -.550000489, y: 10.0900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 468364}
@@ -242,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.54999995, y: .0700000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 474842}
@@ -404,7 +404,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -.25, y: -1.10000002}
+  m_Offset: {x: -.25, y: -1}
   serializedVersion: 2
   m_Radius: .200000003
 --- !u!58 &5849900
@@ -417,7 +417,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .300000012, y: -1.10000002}
+  m_Offset: {x: .300000012, y: -1}
   serializedVersion: 2
   m_Radius: .200000003
 --- !u!58 &5878646
@@ -488,6 +488,7 @@ MonoBehaviour:
   grabButton: 102
   killSelf: 107
   climb: 99
+  modifier: 304
   currentMats: 0000000000000000000000000000000000000000
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
