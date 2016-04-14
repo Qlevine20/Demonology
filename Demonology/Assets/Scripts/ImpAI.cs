@@ -78,6 +78,7 @@ public class ImpAI : DemonBehavior {
 				Anim.SetBool ("Death", true);
 			}
 			gameObject.layer = LayerMask.NameToLayer ("DeadImp");
+			//transform.FindChild("ImpTrigger").gameObject.layer = LayerMask.NameToLayer("DeadImp");
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 			StartCoroutine (WaitTime (SinkTime));
 			Anim.SetBool ("Death", true);

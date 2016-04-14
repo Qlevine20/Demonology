@@ -14,16 +14,18 @@ public class RunnerBehavior : EnemyBehavior {
 	public LayerMask whatIsWall;
 	public LayerMask whatIsTarget;
 
-	private bool pause = false;
-	private bool charging = false;
+	public bool pause = false;
+	public bool charging = false;
 	private Rigidbody2D rb;
     public AudioClip PlayerSeen;
+	private Animator runAnim;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 		defaultSpeed = speed;
 		rb = GetComponent<Rigidbody2D>();
+		runAnim = GetComponent<Animator>();
 		defaultDir = facingDir = Vector2.left;
 		if (mobFacingRight) {
 			Vector3 theScale = transform.localScale;
@@ -37,6 +39,7 @@ public class RunnerBehavior : EnemyBehavior {
 	public override void OnRespawn () 
 	{
 		base.OnRespawn ();
+		StopAllCoroutines ();
 		mobFacingRight = (Vector2.right == defaultDir);
 		pause = false;
 		charging = false;
@@ -51,6 +54,8 @@ public class RunnerBehavior : EnemyBehavior {
 	
 	public void FixedUpdate()
 	{
+		runAnim.speed = speed / defaultSpeed;
+
 		if (!pause)
 		{
 			//Move the mobile
@@ -87,6 +92,10 @@ public class RunnerBehavior : EnemyBehavior {
 				}
 			}
 		}
+
+		if (other.gameObject.tag == "explosion") {
+			OnDeath ();
+		}
 	}
 
 	public void OnCollisionEnter2D(Collision2D other)
@@ -95,7 +104,7 @@ public class RunnerBehavior : EnemyBehavior {
 			OnDeath ();
 		}
 
-		if (other.gameObject.tag == "imp" && charging == true) {
+		if ((other.gameObject.tag == "imp" || other.gameObject.tag == "Player") && charging == true) {
 			Rigidbody2D ragDoll = other.gameObject.GetComponent<Rigidbody2D>();
 			ragDoll.AddForce((Vector2.up*0.7f+facingDir) * 800.0f);
 		}
@@ -108,13 +117,15 @@ public class RunnerBehavior : EnemyBehavior {
 		if (Physics2D.Raycast(ry.origin,ry.direction,wallDist,whatIsWall)) 
 		{
 			//Changes the Direction the object faces to the opposite of its current Direction
-			Flip();
-			facingDir = new Vector2(-facingDir.x,facingDir.y);
-			if(charging){
+			if (charging) {
 				charging = false;
-				speed = defaultSpeed;
+				//speed = defaultSpeed;
+				speed = 0;
 				pause = true;
-				StartCoroutine (Stunned(1.5f));
+				StartCoroutine (Stunned (1.5f));
+			} else {
+				Flip ();
+				facingDir = new Vector2 (-facingDir.x, facingDir.y);
 			}
 		}
 
@@ -131,6 +142,7 @@ public class RunnerBehavior : EnemyBehavior {
 		if (Physics2D.Raycast (ry.origin, ry.direction, targetDist, whatIsTarget)) 
 		{
 			pause = true;
+			speed = 0;
 			StartCoroutine (PrepareToCharge(0.4f));
 		}
 		Debug.DrawRay (ry.origin, ry.direction*targetDist, Color.blue);
@@ -143,6 +155,9 @@ public class RunnerBehavior : EnemyBehavior {
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+		Vector3 thePos = transform.position;
+		thePos.x += (facingDir.x / Vector2.right.x) * 0.106f;
+		transform.position = thePos;
 	}
 
 	public IEnumerator PrepareToCharge(float num)
@@ -156,7 +171,16 @@ public class RunnerBehavior : EnemyBehavior {
 
 	public IEnumerator Stunned(float num)
 	{
+		yield return new WaitForSeconds (num-0.2f);
+		Flip ();
+		facingDir = new Vector2 (-facingDir.x, facingDir.y);
+		StartCoroutine (Recovering (0.2f));
+	}
+
+	public IEnumerator Recovering(float num)
+	{
 		yield return new WaitForSeconds (num);
 		pause = false;
+		speed = defaultSpeed;
 	}
 }

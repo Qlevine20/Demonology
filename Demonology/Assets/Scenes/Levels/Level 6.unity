@@ -65,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -84,9 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!1001 &75895769
 Prefab:
   m_ObjectHideFlags: 0
@@ -1589,6 +1587,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1762,6 +1761,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 608010578}
     m_Modifications:
+    - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
+      propertyPath: locs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 490970, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 12
@@ -1796,7 +1799,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
       propertyPath: locs.Array.data[0].x
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
       propertyPath: locs.Array.data[1].x
@@ -1813,6 +1816,14 @@ Prefab:
     - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
       propertyPath: speed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
+      propertyPath: locs.Array.data[2].x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439252, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
+      propertyPath: locs.Array.data[2].y
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51366c168e1101544b9ed4a9306fa2b1, type: 2}
@@ -1900,7 +1911,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425892, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5019588, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_CollisionDetection

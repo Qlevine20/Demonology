@@ -59,6 +59,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public int speed = 10;//change in editor not here
 	public int jumpspeed = 10;//change in editor not here
 	public float ForceMult;
+	public float fallCheck;
 	
 	public static Vector2 Dir;
 	public static bool FacingRight;
@@ -107,6 +108,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();
+		fallCheck = transform.position.y;
+		transform.GetChild (4).gameObject.SetActive (false);
 	}
 
     
@@ -117,7 +120,19 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Update is called once per frame
 	public override void Update()
 	{
+		// new fall death code
+		if (onGround ()) {
+			float newGround = transform.position.y;
+			if (fallCheck - 10 > newGround) {
+				CharacterBehavior.Dying = true;
+				PlayerAnim.SetBool ("FallDeath", true);
+			}
+			fallCheck = newGround;
+		}
 
+		if (Dying) {
+			transform.GetChild (4).gameObject.SetActive (true);
+		}
 
         foreach (KeyCode k in jumpButton)
         {
@@ -165,19 +180,19 @@ public class CharacterBehavior : DeadlyBehavior {
 				mP = new Ray2D (new Vector2 (ray.origin.x, ray.origin.y-2.5f), new Vector2 (ray.direction.x, ray.direction.y));
 				if(Physics2D.Raycast (mP.origin,mP.direction,3.0f,IgnorePlayerLayer).collider == null)
 				{
-					transform.GetChild(4).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
+					transform.GetChild(5).transform.position = new Vector3(mP.GetPoint (2.0f).x,mP.GetPoint (2.0f).y,0.0f);
 				}
 				else
 				{
-                    if (!transform.GetChild(4).GetComponent<ImpAI>().dead)
+                    if (!transform.GetChild(5).GetComponent<ImpAI>().dead)
                     {
                         float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
-                        transform.GetChild(4).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                        transform.GetChild(5).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
                     }
                     else 
                     {
                         float Change = Physics2D.Raycast(mP.origin, mP.direction, 1.0f, IgnorePlayerLayer).distance;
-                        transform.GetChild(4).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
+                        transform.GetChild(5).transform.position = new Vector3(mP.GetPoint(Change - 0.5f).x, mP.GetPoint(Change - 0.5f).y, 0.0f);
                     }
 
 				}
@@ -198,18 +213,18 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             summon(false);
         }
-		if (Input.GetKeyDown (ShiftLeft)) 
+		if (Input.GetKeyDown (ShiftRight)) 
 		{
-			// Cycle the demon selection wheel to the left
+			// Cycle the demon selection wheel to the left (NOW REVERSED!)
 			if (--selected < 0)
 			{
 				selected = Demons.Length-1;
 			}
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
-		if (Input.GetKeyDown (ShiftRight)) 
+		if (Input.GetKeyDown (ShiftLeft)) 
 		{
-			// Cycle the demon selection wheel to the right
+			// Cycle the demon selection wheel to the right (reversed, CONSIDER REMOVING!)
 			if (++selected >= Demons.Length)
 			{
 				selected = 0;
@@ -243,7 +258,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			{
                 if (HoldingImp == "stickImp") 
                 {
-                    transform.GetChild(4).GetComponent<StickImp>().Thrown = true;
+                    transform.GetChild(5).GetComponent<StickImp>().Thrown = true;
                 }
                 ThrowImp(ForceMult);
             }
@@ -252,7 +267,7 @@ public class CharacterBehavior : DeadlyBehavior {
                 Throwing = 0.0f;
                 if (HoldingImp == "stickImp")
                 {
-                    transform.GetChild(4).GetComponent<StickImp>().Thrown = true;
+                    transform.GetChild(5).GetComponent<StickImp>().Thrown = true;
                 }
                 ThrowImp(Throwing);
 			}
@@ -262,10 +277,16 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             if (HoldingImp != "" || HoldingImp != "StickImp") 
             {
-                Transform heldImp = transform.GetChild(4);
-                ThrowImp(ForceMult);
-                heldImp.GetComponent<ImpAI>().KillImp();
-                GrabImp(heldImp.FindChild("ImpTrigger").GetComponent<CircleCollider2D>());
+                Transform heldImp = transform.GetChild(5);
+				if (heldImp != null) {
+					ThrowImp (ForceMult);
+					heldImp.GetComponent<ImpAI> ().KillImp ();
+					GrabImp (heldImp.FindChild ("ImpTrigger").GetComponent<BoxCollider2D> ());
+
+					BoxCollider2D bc = heldImp.GetComponent<ImpAI> ().GetComponent<BoxCollider2D> ();
+					heldImp.GetComponent<ImpAI> ().HalveCollider (bc, heldImp.GetComponent<ImpAI> ().heightChange);
+					bc.offset = new Vector2 (bc.offset.x, bc.offset.y + (heldImp.GetComponent<ImpAI> ().heightChange / 2));
+				}
             }
         }
 
@@ -279,19 +300,19 @@ public class CharacterBehavior : DeadlyBehavior {
     {
         GrabbingImp = null;
         HoldingImp = "";
-        GameObject childImp = transform.GetChild(4).gameObject;
+        GameObject childImp = transform.GetChild(5).gameObject;
         childImp.transform.parent = null;
         Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
         childRb.isKinematic = false;
         childRb.AddForce(mP.direction * FM, ForceMode2D.Impulse);
-        if (childImp.GetComponent<ImpAI>().dead == false)
-        {
+        //if (childImp.GetComponent<ImpAI>().dead == false)
+        //{
             childImp.GetComponent<BoxCollider2D>().enabled = true;
-        }
-        else
-        {
-            childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-        }
+        //}
+        //else
+        //{
+            //childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
+        //}
         
 
     }
@@ -590,15 +611,18 @@ public class CharacterBehavior : DeadlyBehavior {
     public override void OnCollisionEnter2D(Collision2D other)
     {
 		base.OnCollisionEnter2D (other);
-		if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
+
+		/*if (other.gameObject.tag == "floor" || other.gameObject.tag == "impTrigger" || other.gameObject.tag == "moving") {
 			// fall death if you're falling too quickly
+			//print(other.relativeVelocity.y);
 			if (other.relativeVelocity.y <= -25.0f) {
 				if (PlayerAnim && !CharacterBehavior.Dying) {
+					//print ("Death by falling!  Eeheehee!");
 					PlayerAnim.SetBool ("FallDeath", true);
 					CharacterBehavior.Dying = true;
 				}
 			}
-		}
+		}*/
 		if (onGround()) 
 		{
 		   PlayerAnim.SetBool("Jump", false);

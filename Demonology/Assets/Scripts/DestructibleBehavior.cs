@@ -15,6 +15,13 @@ public class DestructibleBehavior : EnemyBehavior {
 		}
 	}
 
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "explosion") {
+			OnDeath ();
+		}
+	}
+
 	public override void OnRespawn()
 	{
 		base.OnRespawn ();

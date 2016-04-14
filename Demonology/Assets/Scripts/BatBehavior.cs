@@ -24,8 +24,11 @@ public class BatBehavior : EnemyBehavior {
 		Pos = 0;
 		startScale = transform.localScale;
 
-		if (!mobFacingRight) {
-			Flip ();
+		if (mobFacingRight) {
+			//Flip ();
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
 		}
 	}
 
@@ -107,6 +110,13 @@ public class BatBehavior : EnemyBehavior {
 			}
 		}
 		if (other.gameObject.tag == "explosion" || other.gameObject.tag == "magma") {
+			OnDeath ();
+		}
+	}
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "explosion") {
 			OnDeath ();
 		}
 	}
