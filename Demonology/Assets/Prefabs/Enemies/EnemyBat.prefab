@@ -246,7 +246,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 1, z: 0}
+  m_LocalPosition: {x: 70, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458938}
@@ -322,9 +322,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locs:
-  - {x: 5, y: 1}
-  - {x: 14, y: 1}
-  speed: 2
+  - {x: 70, y: -1}
+  - {x: 60, y: -1}
+  speed: 3
   targetRange: 4
   mobFacingRight: 0
   PlayerFoundSound: {fileID: 8300000, guid: 71946a52043d4d34ca276fa3fa221d24, type: 3}

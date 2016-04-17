@@ -56,4 +56,18 @@ public class MovingBlock : MonoBehaviour {
 
 		return false;
 	}
+
+
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.tag == "floor" && other.gameObject.layer == 15) {
+			ArrayDir = -ArrayDir;
+			Pos += ArrayDir;
+			if (Pos >= locs.Length || Pos < 0) 
+			{
+				ArrayDir = -ArrayDir;
+				Pos += ArrayDir*2;
+			}
+		}
+	}
 }

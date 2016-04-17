@@ -58,7 +58,7 @@ public class ImpSpawner : MonoBehaviour{
 			{
 				GameObject SpawnedImp = Instantiate(Imp, transform.position, transform.rotation) as GameObject;
 				spawnCount++;
-				if(leftSpawner && CharacterBehavior.FacingRight){
+				if(leftSpawner == CharacterBehavior.FacingRight){
                     SpawnedImp.GetComponent<Mobile>().changeDir = true;
                     SpawnedImp.GetComponent<Mobile>().Flip();
                     
