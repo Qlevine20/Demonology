@@ -71,7 +71,7 @@ public class ImpAI : DemonBehavior {
 		}
 
 		//Fog death
-		if (other.gameObject.tag == "impkiller") {
+		if (other.gameObject.tag == "impkiller" && (Mathf.Abs(transform.position.x-other.transform.position.x) <= 1.1f)) {
 			if (!dying)
 			{
 				dying = true;

@@ -15,6 +15,7 @@ public class BatBehavior : EnemyBehavior {
     public AudioClip PlayerFoundSound;
     private bool FirstSight;
 	private Animator batAnim;
+	public GameObject Poof;
 
 	public override void Start()
 	{
@@ -174,6 +175,12 @@ public class BatBehavior : EnemyBehavior {
 		base.OnRespawn ();
 		ArrayDir = 1;
 		Pos = 0;
+	}
+
+	public override void OnDeath()
+	{
+		base.OnDeath ();
+		Instantiate (Poof, transform.position, Quaternion.identity);
 	}
 
 	//Flips the direction of the sprite

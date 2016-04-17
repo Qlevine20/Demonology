@@ -733,6 +733,26 @@ Prefab:
       propertyPath: m_Name
       value: Side Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6818506, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054990, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[44].x
+      value: -1.24557436
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054990, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[44].y
+      value: -2.45171046
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054990, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[45].x
+      value: -.902737916
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054990, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[45].y
+      value: -2.97075582
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea20a7fadbe5e49388bd0046b4170383, type: 2}
   m_IsPrefabParent: 0
@@ -1412,7 +1432,7 @@ Transform:
   - {fileID: 2145854721}
   - {fileID: 2147467763}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!1001 &870692909
 Prefab:
   m_ObjectHideFlags: 0
@@ -3289,7 +3309,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &2109501563
 Prefab:
   m_ObjectHideFlags: 0
