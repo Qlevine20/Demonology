@@ -123,7 +123,7 @@ public class ImpAI : DemonBehavior {
 
         //When exiting a platform the imp must de-parent platform
         //Potential bug when player holding imp on moving platform
-		if (other.gameObject.tag == "moving" && transform.parent.tag == "moving") 
+		if (other.gameObject.tag == "moving" && transform.parent != null && transform.parent.tag == "moving") 
 		{
 			transform.parent = null;
 		}
@@ -209,6 +209,12 @@ public class ImpAI : DemonBehavior {
 			if ( transform.GetChild(i).tag == "enemy" || transform.GetChild (i).tag == "impkiller" ){
 				transform.GetChild (i--).parent = null;
 			}
+		}
+		if (transform.parent != null && transform.parent.tag == "Player") {
+			CharacterBehavior playerChar = transform.parent.GetComponent<CharacterBehavior>();
+			playerChar.GrabbingImp = null;
+			playerChar.HoldingImp = "";
+			transform.parent = null;
 		}
 		Destroy (gameObject);
 	}
