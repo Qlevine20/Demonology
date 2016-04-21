@@ -1,26 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovingBlock : MonoBehaviour {
+public class MovingBlock : EnemyBehavior {
 	
 	public Vector2[] locs;
 	public float speed;
+	public bool autoStart = false;
+
 	//Array Position
 	protected int Pos;
 	protected int ArrayDir;
+	protected bool Moving;
 
 	// Use this for initialization
 	public virtual void Start () {
+		base.Start ();
 		locs [0] = transform.position;
 		ArrayDir = 1;
 		Pos = 0;
+		Moving = autoStart;
 	}
 	
 	// Update is called once per frame
 	public virtual void Update ()
 	{
-		if (MoveBetweenPoints (locs [Pos])) 
+		if (Moving && MoveBetweenPoints (locs [Pos])) 
 		{
+			if(!autoStart && Pos == 0 && (ArrayDir < 0))
+			{
+				Moving = false;
+			}
+
 			Pos += ArrayDir;
 
 			if (Pos >= locs.Length || Pos < 0) 
@@ -28,6 +38,13 @@ public class MovingBlock : MonoBehaviour {
 				ArrayDir = -ArrayDir;
 				Pos += ArrayDir*2;
 			}
+		}
+	}
+
+	public void OnCollisionEnter2D(Collision2D other)
+	{
+		if (!autoStart && (other.gameObject.tag == "imp" || other.gameObject.tag == "Player")) {
+			Moving = true;
 		}
 	}
 
@@ -60,7 +77,7 @@ public class MovingBlock : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "floor" && other.gameObject.layer == 15) {
+		if ((other.gameObject.tag == "floor" || other.gameObject.tag == "spike")&& other.gameObject.layer == 15) {
 			ArrayDir = -ArrayDir;
 			Pos += ArrayDir;
 			if (Pos >= locs.Length || Pos < 0) 
@@ -69,5 +86,14 @@ public class MovingBlock : MonoBehaviour {
 				Pos += ArrayDir*2;
 			}
 		}
+	}
+
+
+	public override void OnRespawn () 
+	{
+		base.OnRespawn ();
+		ArrayDir = 1;
+		Pos = 0;
+		Moving = autoStart;
 	}
 }
