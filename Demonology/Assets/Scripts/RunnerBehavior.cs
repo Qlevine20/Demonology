@@ -19,6 +19,7 @@ public class RunnerBehavior : EnemyBehavior {
 	private Rigidbody2D rb;
     public AudioClip PlayerSeen;
 	private Animator runAnim;
+	public GameObject Poof;
 
 	// Use this for initialization
 	public override void Start () {
@@ -52,6 +53,12 @@ public class RunnerBehavior : EnemyBehavior {
 		}
 	}
 	
+	public override void OnDeath()
+	{
+		base.OnDeath ();
+		Instantiate (Poof, transform.position, Quaternion.identity);
+	}
+	
 	public void FixedUpdate()
 	{
 		runAnim.speed = speed / defaultSpeed;
@@ -60,7 +67,7 @@ public class RunnerBehavior : EnemyBehavior {
 		{
 			//Move the mobile
 			Movement (new Ray2D (transform.position, facingDir));
-			if (!charging){
+			if (!charging && !pause){
 				Seek (new Ray2D (transform.position, facingDir));
 			}
 		}
@@ -119,7 +126,6 @@ public class RunnerBehavior : EnemyBehavior {
 			//Changes the Direction the object faces to the opposite of its current Direction
 			if (charging) {
 				charging = false;
-				//speed = defaultSpeed;
 				speed = 0;
 				pause = true;
 				StartCoroutine (Stunned (1.5f));
@@ -136,6 +142,7 @@ public class RunnerBehavior : EnemyBehavior {
 		Debug.DrawRay (ry.origin, ry.direction*wallDist, Color.red);
 	}
 
+
 	//Look for prey!
 	public void Seek(Ray2D ry)
 	{
@@ -143,10 +150,12 @@ public class RunnerBehavior : EnemyBehavior {
 		{
 			pause = true;
 			speed = 0;
+			charging = true;
 			StartCoroutine (PrepareToCharge(0.4f));
 		}
 		Debug.DrawRay (ry.origin, ry.direction*targetDist, Color.blue);
 	}
+
 	
 	//Flips the direction of the sprite
 	public void Flip()
@@ -160,14 +169,17 @@ public class RunnerBehavior : EnemyBehavior {
 		transform.position = thePos;
 	}
 
+
 	public IEnumerator PrepareToCharge(float num)
 	{
+		//charging = true;
 		yield return new WaitForSeconds (num);
         AudioSource.PlayClipAtPoint(PlayerSeen, Camera.main.transform.position);
 		pause = false;
-		charging = true;
 		speed = 12;
+		StopAllCoroutines ();
 	}
+
 
 	public IEnumerator Stunned(float num)
 	{
@@ -176,6 +188,7 @@ public class RunnerBehavior : EnemyBehavior {
 		facingDir = new Vector2 (-facingDir.x, facingDir.y);
 		StartCoroutine (Recovering (0.2f));
 	}
+
 
 	public IEnumerator Recovering(float num)
 	{

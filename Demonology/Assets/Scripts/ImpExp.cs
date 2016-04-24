@@ -3,17 +3,17 @@ using System.Collections;
 
 public class ImpExp : ImpAI {
 
-	public float TimeToExp;
+	//public float TimeToExp;
 	public GameObject Psyst;
-	private float CurrTime;
+	//private float CurrTime;
 	public LayerMask whatIsTrigger;
 
 	// Use this for initialization
 	public override void Start () 
 	{
-		CurrTime = 0;
+		//CurrTime = 0;
 		base.Start ();
-		WaitTime (TimeToExp);
+		//WaitTime (TimeToExp);
 	}
 
 	public override void OnDeath()
@@ -25,16 +25,26 @@ public class ImpExp : ImpAI {
 	public override void Update()
 	{
 		base.Update ();
-		CurrTime += Time.deltaTime;
-		CheckExp ();
+		//CurrTime += Time.deltaTime;
+		//CheckExp ();
 	}
 
-	public void CheckExp()
+	/*public void CheckExp()
 	{
 		if (CurrTime >= TimeToExp) 
 		{
 			OnDeath ();
 		}
+	}*/
+
+	public override void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.gameObject.layer == 15) {
+			OnDeath ();
+			return;
+		}
+
+		base.OnTriggerEnter2D (other);
 	}
 
 	//Moves the mobile and the mobile changes direction if it hits a wall

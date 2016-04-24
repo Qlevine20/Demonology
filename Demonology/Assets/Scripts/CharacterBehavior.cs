@@ -36,7 +36,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static int[] CheckPointMatsCount = new int[5];
 	private Ray2D mP;
 	//private bool WallColl;
-	private string HoldingImp;
+	public string HoldingImp;
     private bool HoldingStickImp;
     private RaycastHit2D rayhit;
     private RaycastHit2D feet_check;
@@ -67,7 +67,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static bool Died;
 
     private Animator PlayerAnim;
-    private Collider2D GrabbingImp = null;
+    public Collider2D GrabbingImp = null;
     private float Throwing = 0.0f;
     private bool PressMove;
     private Ray2D checkWall;

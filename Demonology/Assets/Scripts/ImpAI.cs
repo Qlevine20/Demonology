@@ -53,7 +53,7 @@ public class ImpAI : DemonBehavior {
 	public virtual void OnTriggerEnter2D(Collider2D other)
 	{
         //When on a moving platform
-		if (other.gameObject.tag == "moving") 
+		if (other.gameObject.tag == "moving" && transform.parent == null) 
 		{
 			transform.parent = other.transform;
 		}
@@ -71,7 +71,7 @@ public class ImpAI : DemonBehavior {
 		}
 
 		//Fog death
-		if (other.gameObject.tag == "impkiller") {
+		if (other.gameObject.tag == "impkiller" && (Mathf.Abs(transform.position.x-other.transform.position.x) <= 1.1f)) {
 			if (!dying)
 			{
 				dying = true;
@@ -123,7 +123,7 @@ public class ImpAI : DemonBehavior {
 
         //When exiting a platform the imp must de-parent platform
         //Potential bug when player holding imp on moving platform
-		if (other.gameObject.tag == "moving") 
+		if (other.gameObject.tag == "moving" && transform.parent != null && transform.parent.tag == "moving") 
 		{
 			transform.parent = null;
 		}
@@ -209,6 +209,12 @@ public class ImpAI : DemonBehavior {
 			if ( transform.GetChild(i).tag == "enemy" || transform.GetChild (i).tag == "impkiller" ){
 				transform.GetChild (i--).parent = null;
 			}
+		}
+		if (transform.parent != null && transform.parent.tag == "Player") {
+			CharacterBehavior playerChar = transform.parent.GetComponent<CharacterBehavior>();
+			playerChar.GrabbingImp = null;
+			playerChar.HoldingImp = "";
+			transform.parent = null;
 		}
 		Destroy (gameObject);
 	}

@@ -31,7 +31,7 @@ public class ImpDirectionalMovement : ImpAI {
 		base.OnTriggerEnter2D (other);
 
 		// If the imp collides with a crystal, pick it up for the player
-		if (other.gameObject.tag == "crystal") {
+		if (!dead && other.gameObject.tag == "crystal") {
 			if (gameObject != null) {
 				AudioSource.PlayClipAtPoint (player.crystalPickupSound, Camera.main.transform.position, 75.0f);
 			}

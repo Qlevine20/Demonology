@@ -14,6 +14,8 @@ public class BatBehavior : EnemyBehavior {
 	protected Vector3 startScale;
     public AudioClip PlayerFoundSound;
     private bool FirstSight;
+	private Animator batAnim;
+	public GameObject Poof;
 
 	public override void Start()
 	{
@@ -23,6 +25,7 @@ public class BatBehavior : EnemyBehavior {
 		ArrayDir = 1;
 		Pos = 0;
 		startScale = transform.localScale;
+		batAnim = GetComponent<Animator>();
 
 		if (mobFacingRight) {
 			//Flip ();
@@ -37,10 +40,17 @@ public class BatBehavior : EnemyBehavior {
 	{
 		base.Update ();
 
+		if (mobFacingRight ^ (transform.localScale.x < 0f)) {
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
+		}
+
 		if (transform.parent != null && transform.parent.gameObject.tag == "imp") {
 			return;
 		} else {
 			gameObject.tag = "enemy";
+			batAnim.SetBool("Eating", false);
 		}
 
 		Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, targetRange);
@@ -103,6 +113,7 @@ public class BatBehavior : EnemyBehavior {
 			                                   startScale.y/transform.parent.localScale.y, 
 			                                   0.0F);
 			gameObject.tag = "impkiller";
+			batAnim.SetBool("Eating", true);
 		}
 		if (other.gameObject.tag == "Player") {
 			if(transform.parent != null && transform.parent.gameObject.tag == "imp"){
@@ -164,6 +175,12 @@ public class BatBehavior : EnemyBehavior {
 		base.OnRespawn ();
 		ArrayDir = 1;
 		Pos = 0;
+	}
+
+	public override void OnDeath()
+	{
+		base.OnDeath ();
+		Instantiate (Poof, transform.position, Quaternion.identity);
 	}
 
 	//Flips the direction of the sprite
