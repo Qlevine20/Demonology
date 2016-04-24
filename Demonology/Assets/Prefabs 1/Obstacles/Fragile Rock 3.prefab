@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &182754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 405376}
+  - 212: {fileID: 21220820}
+  - 60: {fileID: 6067606}
+  - 60: {fileID: 6089694}
+  - 114: {fileID: 11418470}
+  - 50: {fileID: 5030772}
+  m_Layer: 15
+  m_Name: Fragile Rock 3
+  m_TagString: floor
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405376
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.35, y: 9.95, z: 0}
+  m_LocalScale: {x: 1.5, y: -1.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!50 &5030772
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!60 &6067606
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.639843, y: -1.6225777}
+      - {x: 0.57156754, y: -1.5284371}
+      - {x: 0.505703, y: -1.3691406}
+      - {x: 0.37156296, y: -0.9691405}
+      - {x: 0.29812622, y: -0.6464076}
+      - {x: 0.27984238, y: -0.50742245}
+      - {x: 0.27156067, y: -0.1957035}
+      - {x: 0.19356918, y: 0.080794334}
+      - {x: 0.20580292, y: 0.7252245}
+      - {x: 0.1637497, y: 0.91166496}
+      - {x: 0.13660431, y: 1.1695986}
+      - {x: 0.01499939, y: 1.5576372}
+      - {x: -0.07120514, y: 2.0760288}
+      - {x: -0.15361786, y: 2.1877651}
+      - {x: -0.2020073, y: 1.9206266}
+      - {x: -0.22660828, y: 1.7558041}
+      - {x: -0.26741028, y: 1.3439713}
+      - {x: -0.20452118, y: 0.9577713}
+      - {x: -0.20452118, y: 0.07777023}
+      - {x: -0.2741127, y: -0.2877941}
+      - {x: -0.29729462, y: -0.6611457}
+      - {x: -0.37483978, y: -1.0929794}
+      - {x: -0.4072914, y: -1.4260836}
+      - {x: -0.47161865, y: -1.6262331}
+      - {x: -0.50839996, y: -1.6936688}
+      - {x: -0.7317467, y: -1.9460835}
+      - {x: -0.765, y: -2.035}
+      - {x: -0.635, y: -2.025}
+      - {x: -0.525, y: -2.065}
+      - {x: -0.315, y: -2.075}
+      - {x: -0.035, y: -2.085}
+      - {x: 0.025, y: -2.095}
+      - {x: 0.575, y: -2.095}
+      - {x: 0.635, y: -2.085}
+      - {x: 0.755, y: -2.075}
+      - {x: 0.765, y: -2.055}
+--- !u!60 &6089694
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 0.765, y: -1.785}
+      - {x: 0.675, y: -1.605}
+      - {x: 0.595, y: -1.505}
+      - {x: 0.535, y: -1.375}
+      - {x: 0.395, y: -0.975}
+      - {x: 0.365, y: -0.765}
+      - {x: 0.345, y: -0.705}
+      - {x: 0.315, y: -0.525}
+      - {x: 0.295, y: -0.225}
+      - {x: 0.235, y: 0.045}
+      - {x: 0.225, y: 0.055}
+      - {x: 0.225, y: 0.735}
+      - {x: 0.215, y: 0.785}
+      - {x: 0.155, y: 1.165}
+      - {x: 0.125, y: 1.325}
+      - {x: 0.015, y: 1.645}
+      - {x: 0.005, y: 1.795}
+      - {x: -0.055, y: 2.055}
+      - {x: -0.085, y: 2.145}
+      - {x: -0.125, y: 2.195}
+      - {x: -0.175, y: 2.195}
+      - {x: -0.195, y: 2.105}
+      - {x: -0.225, y: 1.985}
+      - {x: -0.245, y: 1.765}
+      - {x: -0.285, y: 1.425}
+      - {x: -0.295, y: 1.275}
+      - {x: -0.235, y: 0.955}
+      - {x: -0.225, y: 0.945}
+      - {x: -0.225, y: 0.085}
+      - {x: -0.235, y: 0.075}
+      - {x: -0.265, y: -0.045}
+      - {x: -0.285, y: -0.165}
+      - {x: -0.305, y: -0.395}
+      - {x: -0.325, y: -0.675}
+      - {x: -0.405, y: -1.165}
+      - {x: -0.435, y: -1.415}
+      - {x: -0.455, y: -1.495}
+      - {x: -0.535, y: -1.685}
+      - {x: -0.765, y: -1.935}
+      - {x: -0.765, y: -2.035}
+      - {x: -0.635, y: -2.025}
+      - {x: -0.525, y: -2.065}
+      - {x: -0.315, y: -2.075}
+      - {x: -0.035, y: -2.085}
+      - {x: 0.025, y: -2.095}
+      - {x: 0.575, y: -2.095}
+      - {x: 0.635, y: -2.085}
+      - {x: 0.755, y: -2.075}
+      - {x: 0.765, y: -2.055}
+--- !u!114 &11418470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84dd37e321120da48bda9a28532f1f8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!212 &21220820
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182754}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1487389849
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300004, guid: 9e81264c9c87846cd9398b6ad1835665, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 182754}
+  m_IsPrefabParent: 1

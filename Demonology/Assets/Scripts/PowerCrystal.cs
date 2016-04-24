@@ -11,5 +11,11 @@ public class PowerCrystal : EnemyBehavior
             Instantiate(PartEffect, transform.position,Quaternion.identity);
             OnDeath();
         }
+
+		if (other.gameObject.tag == "imp" && !other.gameObject.GetComponent<ImpAI>().dead)
+		{
+			Instantiate(PartEffect, transform.position,Quaternion.identity);
+			OnDeath();
+		}
 	}
 }

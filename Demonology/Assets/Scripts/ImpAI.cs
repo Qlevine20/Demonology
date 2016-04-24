@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+//using System;
 using System.Collections;
 
 public class ImpAI : DemonBehavior {
@@ -20,6 +21,8 @@ public class ImpAI : DemonBehavior {
     public static Vector2 ImpScale;
     public bool dead = false;
     public float sinkDiv = 1;
+
+	public CharacterBehavior player;
 
     // Use this for initialization
     public override void Start()
@@ -43,9 +46,11 @@ public class ImpAI : DemonBehavior {
         //Play sound when created
         AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
 
+		//Obtain player
+		player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
+
         //Call Parent class Start() funciton
         base.Start();
-        
     }
 
 
@@ -71,7 +76,7 @@ public class ImpAI : DemonBehavior {
 		}
 
 		//Fog death
-		if (other.gameObject.tag == "impkiller" && (Mathf.Abs(transform.position.x-other.transform.position.x) <= 1.1f)) {
+		if (other.gameObject.tag == "impkiller" /*&& (Mathf.Abs(transform.position.x-other.transform.position.x) <= 1.1f)*/) {
 			if (!dying)
 			{
 				dying = true;
@@ -236,4 +241,46 @@ public class ImpAI : DemonBehavior {
         //rb.freezeRotation = false;
         //bc.enabled = false;
     }
+
+
+	public virtual void OnMouseDown()
+	{
+
+		Vector3 mouse_po = Input.mousePosition;
+		//mouse_po = Camera.main.WorldToScreenPoint (mouse_po);
+		mouse_po = Camera.main.ScreenToWorldPoint (new Vector3 (mouse_po.x, mouse_po.y, Camera.main.nearClipPlane));
+		mouse_po.z = 0f;
+
+		print ("Testing");
+		print (DistanceBetween (player.transform.position, transform.position));
+		print (DistanceBetween (player.transform.position, mouse_po));
+		print (Mathf.Abs(transform.position.x-mouse_po.x));
+
+		if (//(Mathf.Abs(transform.position.x-mouse_po.x) <= 1.1f) &&
+			(player.HoldingImp == "") && 
+			DistanceBetween (player.transform.position, transform.position) <= 4.0f)
+		{
+			/*player.HoldingImp = gameObject.tag;
+			Vector2 origScale = transform.localScale;
+			transform.parent = player.transform;
+			transform.localScale = origScale;
+			GetComponent<BoxCollider2D> ().enabled = false;
+			transform.GetChild(0).GetComponent<CircleCollider2D> ().enabled = false;
+			transform.parent = player.transform;
+			GetComponent<Rigidbody2D> ().isKinematic = true;*/
+
+			player.GrabImp (transform.GetChild(0).GetComponent<Collider2D>());
+			player.mouseDelay = true;
+
+			//print (transform.parent.name);
+		}
+	}
+
+	// Find the distance between two points
+	public float DistanceBetween (Vector2 pos1, Vector2 pos2)
+	{
+		float xPos = pos1.x - pos2.x;
+		float yPos = pos1.y - pos2.y;
+		return (float)System.Math.Sqrt (xPos*xPos + yPos*yPos);
+	}
 }

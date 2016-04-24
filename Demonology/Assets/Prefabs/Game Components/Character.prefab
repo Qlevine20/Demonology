@@ -529,7 +529,7 @@ MonoBehaviour:
   CrystalPrefab: {fileID: 106174, guid: 14f6e2840a27da54dbb0229830075cce, type: 2}
   IgnorePlayerLayer:
     serializedVersion: 2
-    m_Bits: 2305
+    m_Bits: 256
   checkMasks:
     serializedVersion: 2
     m_Bits: 20480
@@ -537,6 +537,7 @@ MonoBehaviour:
   crystalFizzleSound: {fileID: 8300000, guid: f3d2dadf86a59a24c858165aee19c105, type: 3}
   altarActivateSound: {fileID: 8300000, guid: 5f8de2defb89e4a858d56738ae7a926f, type: 3}
   ImpThrowCam: {fileID: 0}
+  HoldingImp: 
   whatIsGrounded:
     serializedVersion: 2
     m_Bits: 20736
@@ -548,10 +549,12 @@ MonoBehaviour:
   jumpspeed: 15
   ForceMult: 15
   fallCheck: 0
+  GrabbingImp: {fileID: 0}
   checkWallDist: .600000024
   wallMasks:
     serializedVersion: 2
     m_Bits: 256
+  mouseDelay: 0
 --- !u!198 &19820470
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2139,6 +2142,10 @@ Prefab:
       propertyPath: Demons.Array.data[2]
       value: 
       objectReference: {fileID: 116858, guid: 087a4e00a40110c4387338ff9acf7674, type: 2}
+    - target: {fileID: 0}
+      propertyPath: IgnorePlayerLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}
