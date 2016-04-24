@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &101876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 454024}
+  - 212: {fileID: 21207004}
+  - 60: {fileID: 6014328}
+  m_Layer: 8
+  m_Name: Rock 10
+  m_TagString: spike
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &454024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.8157501, y: -2.52656913, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!60 &6014328
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101876}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 1.25619066, y: .663351715}
+      - {x: .91570127, y: 1.00384116}
+      - {x: 1.05189705, y: 1.61672211}
+      - {x: .91570127, y: 1.61672211}
+      - {x: .609260798, y: 1.44647741}
+      - {x: .404967129, y: 1.20813477}
+      - {x: .439016044, y: 1.07193899}
+      - {x: .33686924, y: 1.07193899}
+      - {x: .370918185, y: 1.65077102}
+      - {x: .0985266343, y: 2.12745619}
+      - {x: -.0376691371, y: 2.05935836}
+      - {x: -.0376691371, y: 1.82101572}
+      - {x: -.105767019, y: 1.68481994}
+      - {x: -.0376691371, y: 1.99126041}
+      - {x: -.0376691371, y: 2.12745619}
+      - {x: -.139815971, y: 2.19555402}
+      - {x: -.378158569, y: 1.92316258}
+      - {x: -.548403263, y: 1.58267319}
+      - {x: -.752696931, y: 2.12745619}
+      - {x: -.88889271, y: 2.26365209}
+      - {x: -1.05913746, y: 2.26365209}
+      - {x: -1.22938216, y: 1.65077102}
+      - {x: -1.22938216, y: -.494312346}
+      - {x: -.820794821, y: -.834801793}
+      - {x: -.514354348, y: -1.00504649}
+      - {x: .0985266343, y: -2.2308085}
+      - {x: .370918185, y: -2.2308085}
+      - {x: .711407602, y: -.494312346}
+      - {x: 1.05189705, y: -.426214457}
+      - {x: 1.25619066, y: .0164217986}
+--- !u!212 &21207004
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101876}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300018, guid: 370e5ebd8ea334feb8c27f4e61edeba6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 101876}
+  m_IsPrefabParent: 1
