@@ -4,7 +4,7 @@ using System.Collections;
 public class ImpDirectionalMovement : ImpAI {
 
 	Vector2 OldDir;
-	CharacterBehavior player;
+	//CharacterBehavior player;
 	//private Rigidbody2D rb;
 	public int jumpspeed = 5;
 
@@ -12,7 +12,7 @@ public class ImpDirectionalMovement : ImpAI {
 	{
 		base.Start ();
 		OldDir = CharacterBehavior.Dir;
-		player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
+		//player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
 		rb = GetComponent<Rigidbody2D> ();
 	}
 

@@ -10,7 +10,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
 	public KeyCode[] jumpButton;
-	public KeyCode grabButton = KeyCode.G;
+	public KeyCode grabButton = KeyCode.F;
     public KeyCode killSelf = KeyCode.K;
     public KeyCode climb = KeyCode.C;
     public KeyCode modifier = KeyCode.LeftShift;
@@ -76,6 +76,7 @@ public class CharacterBehavior : DeadlyBehavior {
     private float right = 1;
     private float holdDown = 0;
 
+	public bool mouseDelay = false;
 
 
 
@@ -251,7 +252,7 @@ public class CharacterBehavior : DeadlyBehavior {
         }
 
 
-		if (Input.GetMouseButtonDown (0) || Throwing != 0.0f) 
+		if ((Input.GetMouseButtonDown (0) && !mouseDelay) || Throwing != 0.0f) 
 		{
 			// THROW THE IMP!
 			if(HoldingImp!="" && Throwing == 0.0f)
@@ -289,6 +290,10 @@ public class CharacterBehavior : DeadlyBehavior {
 				}
             }
         }
+
+		if (mouseDelay) {
+			mouseDelay = false;
+		}
 
 		if (Died) 
 		{
@@ -403,7 +408,7 @@ public class CharacterBehavior : DeadlyBehavior {
         //Grab an Imp or drop it
         if (Input.GetKeyDown(grabButton))
         {
-            if (HoldingImp == "stickImp") 
+            /*if (HoldingImp == "stickImp") 
             {
                 if (transform.childCount > 4)
                 {
@@ -416,7 +421,7 @@ public class CharacterBehavior : DeadlyBehavior {
                     GrabImp(GrabbingImp);
                 }
             }
-            else if (HoldingImp != "" && HoldingImp != "stickImp")
+            else */if (HoldingImp != "" && HoldingImp != "stickImp")
             {
                 HoldingImp = "";
                 Throwing = 0.01f;
@@ -780,7 +785,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	}
 
 	// Grab an imp
-	void GrabImp(Collider2D imp)
+	public void GrabImp(Collider2D imp)
 	{
         if (imp.transform.parent.tag == "stickImp")
         {
