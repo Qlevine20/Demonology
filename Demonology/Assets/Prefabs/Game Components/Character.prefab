@@ -519,7 +519,7 @@ MonoBehaviour:
   killSelf: 107
   climb: 99
   modifier: 304
-  currentMats: 0000000000000000000000000000000000000000
+  currentMats: 000000000000000000000000
   Demons:
   - {fileID: 178706, guid: 9c21bd7de532ee047920f90c9dcb1bd2, type: 2}
   - {fileID: 198696, guid: a2ca9c2abda6fb1429cbbb4c0f3c062d, type: 2}
@@ -1860,6 +1860,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: DeadlyObs.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: currentMats.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString

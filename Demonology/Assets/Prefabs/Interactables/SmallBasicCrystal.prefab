@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dcbc64a9d938c4cbc215873d25d75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMats: 0100000000000000000000000000000000000000
+  newMats: 010000000000000000000000
 --- !u!212 &21290306
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -123,6 +123,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: newMats.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
