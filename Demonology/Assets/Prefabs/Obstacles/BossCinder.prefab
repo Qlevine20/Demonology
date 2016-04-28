@@ -44,7 +44,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -143,11 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c577ef16096ff4db55232f08ab072e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseTime: 2
-  initialDelay: -1
-  lowerThresh: 0
-  startVel: 0
-  xVel: 0
+  speed: 10
+  initialDelay: 1
 --- !u!198 &19842988
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1226,6 +1223,22 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

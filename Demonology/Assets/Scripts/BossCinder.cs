@@ -1,94 +1,79 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossCinder : EnemyBehavior {
+public class BossCinder : MonoBehaviour {
 
 	private ParticleSystem cParts;
-	private Rigidbody2D rigid;
-	public float pauseTime = 2f;
-	public float initialDelay = -1f;
-	public float lowerThresh;
-	public float startVel = 0.0f;
-	public float xVel = 0.0f;
-	
-	//private Vector2 startPos;
 	private bool dead = false;
-	private float gravitySave;
+	private Vector3 targetPos;
+	public float speed = 5f;
+	public float initialDelay = 0.5f;
 	
 	
 	// Use this for initialization
-	public override void Start () {
-		base.Start ();
-		if (initialDelay < 0) {
-			initialDelay = pauseTime;
-		}
-		
-		//startPos = transform.position;
+	public void Start () {
 		cParts = GetComponent<ParticleSystem>();
-		rigid = GetComponent<Rigidbody2D>();
-		gravitySave = rigid.gravityScale;
-		rigid.velocity = new Vector2(xVel, startVel);
-		
+		//targetPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
+
 		dead = true;
-		rigid.gravityScale = 0.0f;
-		rigid.velocity = new Vector2(0.0f, 0.0f);
 		cParts.enableEmission = false;
-		StartCoroutine (Regen (initialDelay));
+		StartCoroutine (Fire (initialDelay));
 	}
 	
 	// Update is called once per frame
-	public override void Update () {
-		base.Update ();
-		if (!dead && transform.position.y < lowerThresh) {
-			StartCoroutine (ResetPos ());
+	public void Update () {
+		if (!dead) {
+			SmartMove (transform.position, transform.position-targetPos, speed*Time.deltaTime);
+		}
+	}
+
+	public virtual void LateUpdate()
+	{
+		if (CharacterBehavior.Died) 
+		{
+			Destroy(gameObject);
 		}
 	}
 	
-	public void OnCollisionEnter2D(Collision2D other)
+	//public void OnCollisionEnter2D(Collision2D other)
+	public void OnTriggerEnter2D(Collider2D other)
 	{
-		if (!dead && (rigid.velocity.y <= 0.0f) ) {
-			StartCoroutine (ResetPos ());
+		print ("triggercollide");
+		if (!dead && 
+			(other.tag == "floor" ||
+			//other.tag == "imp" ||
+			other.tag == "spike" ||
+			other.tag == "moving" ||
+			//other.tag == "enemy" ||
+			other.tag == "PowerCrystal" ||
+			other.tag == "DeadImp")) {
+			print ("die");
+			StartCoroutine (FadeOut ());
 		}
 	}
-	
-	public override void OnRespawn()
+
+	private void SmartMove(Vector3 oldPos, Vector3 moveToPos, float moveDist)
 	{
-		base.OnRespawn ();
-		StopAllCoroutines ();
-		
-		dead = true;
-		rigid.gravityScale = 0.0f;
-		rigid.velocity = new Vector2(0.0f, 0.0f);
-		cParts.enableEmission = false;
-		cParts.Clear ();
-		
-		StartCoroutine (Regen (initialDelay));
+		Vector3 newPos = Vector3.MoveTowards (oldPos, moveToPos, moveDist);
+		transform.position = newPos;
 	}
 	
-	public IEnumerator ResetPos()
+	public IEnumerator Fire(float num)
 	{
-		dead = true;
-		rigid.gravityScale = 0.0f;
-		rigid.velocity = new Vector2(0.0f, 0.0f);
-		cParts.enableEmission = false;
-		yield return new WaitForSeconds (0.5f);
-		transform.position = startPos;
-		cParts.Clear ();
-		StartCoroutine (Regen (pauseTime));
-	}
-	
-	public IEnumerator Regen(float num)
-	{
-		yield return new WaitForSeconds (num);
 		cParts.enableEmission = true;
-		yield return new WaitForSeconds (0.1f);
-		rigid.gravityScale = gravitySave;
-		rigid.velocity = new Vector2(xVel, startVel);
+		yield return new WaitForSeconds (num);
+		targetPos = transform.position - GameObject.FindGameObjectWithTag ("Player").transform.position;
+		targetPos = targetPos.normalized;
 		dead = false;
 	}
 	
-	public void OnDrawGizmos()
+	public IEnumerator FadeOut()
 	{
-		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, lowerThresh));
+		dead = true;
+		cParts.enableEmission = false;
+		gameObject.tag = "Untagged";
+		yield return new WaitForSeconds (0.5f);
+		cParts.Clear ();
+		Destroy (gameObject);
 	}
 }

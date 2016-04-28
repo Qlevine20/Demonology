@@ -67,7 +67,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	public static bool Died;
 
     private Animator PlayerAnim;
-    public Collider2D GrabbingImp = null;
     private float Throwing = 0.0f;
     private bool PressMove;
     private Ray2D checkWall;
@@ -251,6 +250,21 @@ public class CharacterBehavior : DeadlyBehavior {
             holdDown = 0;
         }
 
+		//Grab an Imp or drop it
+		if (Input.GetKeyDown(grabButton))
+		{
+			if (HoldingImp != "" && HoldingImp != "stickImp")
+			{
+				HoldingImp = "";
+				Throwing = 0.01f;
+				
+			}
+			else if (HoldingImp != "stickImp")
+			{
+				summon (true);
+			}
+		}
+
 
 		if ((Input.GetMouseButtonDown (0) && !mouseDelay) || Throwing != 0.0f) 
 		{
@@ -303,7 +317,6 @@ public class CharacterBehavior : DeadlyBehavior {
 
     public void ThrowImp(float FM)
     {
-        GrabbingImp = null;
         HoldingImp = "";
         GameObject childImp = transform.GetChild(5).gameObject;
         childImp.transform.parent = null;
@@ -369,21 +382,6 @@ public class CharacterBehavior : DeadlyBehavior {
             }
         }
 
-
-        
-            
-            //if (rb.velocity.y >= 0) 
-            //{
-            //    rb.velocity = new Vector2(rb.velocity.x, 0);
-            //};
-
-
-                
-                
-                
-            
-            // Jump (this actually gets processed later, in FixedUpdate
-            //jumpNow = true;
         //Animations for moving left and right
         if (PlayerAnim)
         {
@@ -404,40 +402,6 @@ public class CharacterBehavior : DeadlyBehavior {
                 PlayerAnim.SetBool("Move", false);
             }
         }
-        
-        //Grab an Imp or drop it
-        if (Input.GetKeyDown(grabButton))
-        {
-            /*if (HoldingImp == "stickImp") 
-            {
-                if (transform.childCount > 4)
-                {
-                    HoldingImp = "";
-                    Throwing = 0.1f;
-                }
-                else
-                {
-                    
-                    GrabImp(GrabbingImp);
-                }
-            }
-            else */if (HoldingImp != "" && HoldingImp != "stickImp")
-            {
-                HoldingImp = "";
-                Throwing = 0.01f;
-
-            }
-            else if (GrabbingImp && HoldingImp != "stickImp")
-            {
-                GrabImp(GrabbingImp);
-            }
-        }
-
-		// Check if you're holding a sticky imp
-        //if (move != 0) 
-        //{
-        //    CheckHoldingStickImp();
-        //}
 
 		// Check if the sprite needs to flip
 		if (move > 0 && !FacingRight) {
@@ -571,11 +535,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Collision code for exiting a "trigger" colldier
 	public virtual void OnTriggerExit2D(Collider2D other)
 	{
-        if (other.gameObject.tag == "impTrigger")
-        {
-            GrabbingImp = null;
-        }
-		// If you exit a moving platform, detach from it
+        // If you exit a moving platform, detach from it
 		if (other.gameObject.tag == "moving") 
 		{
 			float xPos = transform.position.x;
@@ -591,25 +551,6 @@ public class CharacterBehavior : DeadlyBehavior {
 				CharacterBehavior.Dying = true;
 			}
 		}
-	}
-
-	// Collision code that runs as long as you're touching a "trigger" collider
-	public void OnTriggerStay2D(Collider2D other)
-	{
-		// This whole function is for dealing with grabbing imps
-        if(other.gameObject.tag == "impTrigger")
-        {
-             GrabbingImp = other;
-        }
-    
-        //if (other.gameObject.tag == "stickImp") 
-        //{
-        //    if(Input.GetKey (grab) && HoldingImp == "")
-        //    {
-        //        HoldingImp = other.transform.parent.gameObject.tag;
-        //        StickToImp(other);
-        //    }
-        //}
 	}
 
 	// Collision code for making contact with an object

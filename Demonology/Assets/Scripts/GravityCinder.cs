@@ -42,6 +42,11 @@ public class GravityCinder : EnemyBehavior {
 		if (!dead && transform.position.y < lowerThresh) {
 			StartCoroutine (ResetPos ());
 		}
+		if (dead) {
+			gameObject.tag = "Untagged";
+		} else {
+			gameObject.tag = "cinder";
+		}
 	}
 
 	public void OnCollisionEnter2D(Collision2D other)

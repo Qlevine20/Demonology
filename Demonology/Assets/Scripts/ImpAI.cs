@@ -217,7 +217,7 @@ public class ImpAI : DemonBehavior {
 		}
 		if (transform.parent != null && transform.parent.tag == "Player") {
 			CharacterBehavior playerChar = transform.parent.GetComponent<CharacterBehavior>();
-			playerChar.GrabbingImp = null;
+			//playerChar.GrabbingImp = null;
 			playerChar.HoldingImp = "";
 			transform.parent = null;
 		}
@@ -247,32 +247,14 @@ public class ImpAI : DemonBehavior {
 	{
 
 		Vector3 mouse_po = Input.mousePosition;
-		//mouse_po = Camera.main.WorldToScreenPoint (mouse_po);
 		mouse_po = Camera.main.ScreenToWorldPoint (new Vector3 (mouse_po.x, mouse_po.y, Camera.main.nearClipPlane));
 		mouse_po.z = 0f;
 
-		print ("Testing");
-		print (DistanceBetween (player.transform.position, transform.position));
-		print (DistanceBetween (player.transform.position, mouse_po));
-		print (Mathf.Abs(transform.position.x-mouse_po.x));
-
-		if (//(Mathf.Abs(transform.position.x-mouse_po.x) <= 1.1f) &&
-			(player.HoldingImp == "") && 
+		if ((player.HoldingImp == "") && 
 			DistanceBetween (player.transform.position, transform.position) <= 4.0f)
 		{
-			/*player.HoldingImp = gameObject.tag;
-			Vector2 origScale = transform.localScale;
-			transform.parent = player.transform;
-			transform.localScale = origScale;
-			GetComponent<BoxCollider2D> ().enabled = false;
-			transform.GetChild(0).GetComponent<CircleCollider2D> ().enabled = false;
-			transform.parent = player.transform;
-			GetComponent<Rigidbody2D> ().isKinematic = true;*/
-
 			player.GrabImp (transform.GetChild(0).GetComponent<Collider2D>());
 			player.mouseDelay = true;
-
-			//print (transform.parent.name);
 		}
 	}
 
