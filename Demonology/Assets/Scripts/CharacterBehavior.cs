@@ -27,6 +27,8 @@ public class CharacterBehavior : DeadlyBehavior {
     public AudioClip crystalPickupSound;
     public AudioClip crystalFizzleSound;
 	public AudioClip altarActivateSound;
+    public AudioClip playerImpFogSound;
+    public AudioClip playerPlayerFogSound;
     public Camera ImpThrowCam;
 
 
@@ -250,8 +252,8 @@ public class CharacterBehavior : DeadlyBehavior {
 				if (!CharacterBehavior.Dying){
 					PlayerAnim.SetBool("EnemyDeath", true);
 					CharacterBehavior.Dying = true;
+					transform.GetChild (4).gameObject.SetActive (true);
 				}
-
             }
         }
         if (Input.GetKeyUp(killSelf)) 
@@ -533,6 +535,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			//die, obviously
 			if (!CharacterBehavior.Dying)
 			{
+                AudioSource.PlayClipAtPoint(playerPlayerFogSound, transform.position);
 				PlayerAnim.SetBool("EnemyDeath", true);
 				CharacterBehavior.Dying = true;
 			}
@@ -545,6 +548,7 @@ public class CharacterBehavior : DeadlyBehavior {
 				for(int i=0; i<currentMats.Length; i++){
 					currentMats[i] = 0;
 				}
+                AudioSource.PlayClipAtPoint(playerImpFogSound, transform.position);
 				return;
 			}
 		}
