@@ -24,6 +24,8 @@ public class ImpAI : DemonBehavior {
 
 	public CharacterBehavior player;
 
+	public bool persist = false;
+
     // Use this for initialization
     public override void Start()
     {
@@ -117,7 +119,7 @@ public class ImpAI : DemonBehavior {
 	public virtual void LateUpdate()
 	{
         //Check if player dead and make sure player Died is false when player respawns
-		if (CharacterBehavior.Died) 
+		if (CharacterBehavior.Died && !persist) 
 		{
 			OnDeath ();
 		}
