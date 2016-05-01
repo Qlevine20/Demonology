@@ -70,6 +70,6 @@ public class UICrystalDisplay : MonoBehaviour {
     {
         Time.timeScale = 1.0f;
         MenuScript.levelNum = level;
-        Application.LoadLevel(10);
+        Application.LoadLevel("LoadingScreen");
     }
 }

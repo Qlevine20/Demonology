@@ -14,9 +14,12 @@ public class DeadlyBehavior : MonoBehaviour {
 
 	public virtual void Start()
 	{
-		Player = GameObject.FindGameObjectWithTag ("Player");
-        spriteHolder = GameObject.FindGameObjectWithTag("SpriteHolder");
-        DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+            spriteHolder = GameObject.FindGameObjectWithTag("SpriteHolder");
+            DeadlyPlayerAnim = spriteHolder.GetComponent<Animator>();
+        }
 	}
 
     public virtual void OnCollisionEnter2D(Collision2D other)

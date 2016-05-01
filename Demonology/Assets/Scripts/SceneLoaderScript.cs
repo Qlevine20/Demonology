@@ -6,10 +6,36 @@ public class SceneLoaderScript : MonoBehaviour {
 
     private bool loadScene = false;
     [SerializeField]
-    private Text loadingText;
+    private Text LoadingText;
+    [SerializeField]
+    private Text ImpsKilledText;
+    [SerializeField]
+    private Text TimesPlayerKilledText;
+    public ImpSpawner impSpawner;
+    public int mult;
+    private bool Begin = false;
+    public float min;
+    public float max;
 
 
-    // Updates once per frame
+    void Start() 
+    {
+        ImpsKilledText.text = CharacterBehavior.ImpsKilled.ToString();
+        TimesPlayerKilledText.text = CharacterBehavior.TimesPlayerDied.ToString();
+        if (mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) > min && mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) < max) 
+        {
+            impSpawner.waitTime = mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled);
+        }
+        else if (mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) <= min) 
+        {
+            impSpawner.waitTime = min;
+        }
+        else if (mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) >= max) 
+        {
+            impSpawner.waitTime = max;
+        }
+       
+    }
     void Update()
     {
 
@@ -21,7 +47,7 @@ public class SceneLoaderScript : MonoBehaviour {
             loadScene = true;
 
             // ...change the instruction text to read "Loading..."
-            loadingText.text = "Loading...";
+            LoadingText.text = "Loading...";
 
             // ...and start a coroutine that will load the desired scene.
             StartCoroutine(LoadNewScene());
@@ -33,8 +59,9 @@ public class SceneLoaderScript : MonoBehaviour {
         {
 
             // ...then pulse the transparency of the loading text to let the player know that the computer is still working.
-            loadingText.color = new Color(loadingText.color.r, loadingText.color.g, loadingText.color.b, Mathf.PingPong(Time.time, 1));
-
+            LoadingText.color = new Color(LoadingText.color.r, LoadingText.color.g, LoadingText.color.b, Mathf.PingPong(Time.time, 1));
+            ImpsKilledText.color = new Color(ImpsKilledText.color.r, ImpsKilledText.color.g, ImpsKilledText.color.b, Mathf.PingPong(Time.time, 1));
+            TimesPlayerKilledText.color = new Color(TimesPlayerKilledText.color.r, TimesPlayerKilledText.color.g, TimesPlayerKilledText.color.b, Mathf.PingPong(Time.time, 1));
         }
 
     }
@@ -46,7 +73,7 @@ public class SceneLoaderScript : MonoBehaviour {
 
         // This line waits for 3 seconds before executing the next line in the coroutine.
         // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(8);
 
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
         AsyncOperation async = Application.LoadLevelAsync(MenuScript.levelNum);

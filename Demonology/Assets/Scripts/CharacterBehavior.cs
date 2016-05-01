@@ -31,6 +31,9 @@ public class CharacterBehavior : DeadlyBehavior {
     public AudioClip playerPlayerFogSound;
     public Camera ImpThrowCam;
 
+
+    public static int ImpsKilled = 0;
+    public static int TimesPlayerDied = 0;
 	
 	
 	private List<GameObject> PickUpList= new List<GameObject>();
@@ -96,7 +99,10 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
-        MenuScript.levelNum = Application.loadedLevel;
+        if (Application.loadedLevelName != "LoadingScreen")
+        {
+            MenuScript.levelNum = Application.loadedLevel;
+        }
         Dying = false;
         checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
@@ -109,7 +115,10 @@ public class CharacterBehavior : DeadlyBehavior {
 		Dir = Vector2.right;
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
 		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
-		ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();
+        if (GameObject.Find("ImpThrowCam") != null)
+        {
+            ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();
+        }
 		fallCheck = transform.position.y;
 		transform.GetChild (4).gameObject.SetActive (false);
 	}
@@ -250,6 +259,14 @@ public class CharacterBehavior : DeadlyBehavior {
         if (Input.GetKeyUp(killSelf)) 
         {
             holdDown = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U)) 
+        {
+            Debug.Log("Imp Deaths");
+            Debug.Log(ImpsKilled);
+            Debug.Log("Player Deaths");
+            Debug.Log(TimesPlayerDied);
         }
 
 		//Grab an Imp or drop it
@@ -477,7 +494,8 @@ public class CharacterBehavior : DeadlyBehavior {
 			//Add go to next level code here
             if (Application.loadedLevel+1 < Application.levelCount)
             {
-                Application.LoadLevel(Application.loadedLevel + 1);
+                MenuScript.levelNum = Application.loadedLevel + 1;
+                Application.LoadLevel("LoadingScreen");
             }
             else 
             {
@@ -673,6 +691,7 @@ public class CharacterBehavior : DeadlyBehavior {
             Died = true;
             newPlayer.name = "Character";
 			newPlayer.gameObject.GetComponent<CharacterBehavior>().selected = selected;
+            TimesPlayerDied++;
             base.OnDeath();
         }
 	}
