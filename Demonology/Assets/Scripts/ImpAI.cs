@@ -9,6 +9,7 @@ public class ImpAI : DemonBehavior {
     //Audio Components
     public AudioClip[] impSummons;
     public AudioClip[] impDeaths;
+    public AudioClip   impFogDeathSound;
 
     //Imp Components
 	protected Rigidbody2D rb;
@@ -89,6 +90,7 @@ public class ImpAI : DemonBehavior {
 			Anim.SetBool ("Death", true);
 			if (!dead)
 			{
+                AudioSource.PlayClipAtPoint(impFogDeathSound, transform.position);
 				AudioSource.PlayClipAtPoint(impDeaths[Random.Range(0, impDeaths.Length)], transform.position);
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));

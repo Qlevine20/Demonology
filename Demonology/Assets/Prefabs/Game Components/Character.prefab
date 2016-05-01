@@ -536,6 +536,9 @@ MonoBehaviour:
   crystalPickupSound: {fileID: 8300000, guid: a1b3d1da7e8da4147ac1b49ff0a303aa, type: 3}
   crystalFizzleSound: {fileID: 8300000, guid: f3d2dadf86a59a24c858165aee19c105, type: 3}
   altarActivateSound: {fileID: 8300000, guid: 5f8de2defb89e4a858d56738ae7a926f, type: 3}
+  playerImpFogSound: {fileID: 8300000, guid: 8f85b09bd9f202b409c5ab3672b4d1d0, type: 3}
+  playerPlayerFogSound: {fileID: 8300000, guid: bb896413d2f3e6d478b9113798222dec,
+    type: 3}
   ImpThrowCam: {fileID: 0}
   HoldingImp: 
   whatIsGrounded:
@@ -549,7 +552,6 @@ MonoBehaviour:
   jumpspeed: 15
   ForceMult: 15
   fallCheck: 0
-  GrabbingImp: {fileID: 0}
   checkWallDist: .600000024
   wallMasks:
     serializedVersion: 2
@@ -2150,6 +2152,14 @@ Prefab:
       propertyPath: IgnorePlayerLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerPlayerFogSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bb896413d2f3e6d478b9113798222dec, type: 3}
+    - target: {fileID: 0}
+      propertyPath: playerImpFogSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f85b09bd9f202b409c5ab3672b4d1d0, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187882}

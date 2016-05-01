@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 36c2f0eb1c88dca4f9cd0fb66d95d450, type: 3}
   - {fileID: 8300000, guid: 5bdd97b96f3d9154c821009669cb89ca, type: 3}
   - {fileID: 8300000, guid: dd0ed426f6be88d4eb5b379150d31cab, type: 3}
+  impFogDeathSound: {fileID: 8300000, guid: bb896413d2f3e6d478b9113798222dec, type: 3}
   heightChange: 0
   SinkTime: 5
   dead: 0
@@ -397,6 +398,10 @@ Prefab:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: impFogDeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bb896413d2f3e6d478b9113798222dec, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116858}
