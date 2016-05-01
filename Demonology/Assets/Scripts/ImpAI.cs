@@ -23,8 +23,8 @@ public class ImpAI : DemonBehavior {
     public float sinkDiv = 1;
 
 	public CharacterBehavior player;
-
 	public bool persist = false;
+	public FadeObjectInOut fader;
 
     // Use this for initialization
     public override void Start()
@@ -35,6 +35,7 @@ public class ImpAI : DemonBehavior {
         //Imp Components
 		bc = GetComponent<BoxCollider2D> ();
         rb = GetComponent<Rigidbody2D>();
+		fader = GetComponent<FadeObjectInOut> ();
 
         //Height change of collider after Imp dies
 		heightChange = (.5f) * bc.size.y;
@@ -209,7 +210,9 @@ public class ImpAI : DemonBehavior {
     //Functions
 	public override IEnumerator WaitTime(float num)
 	{
-		yield return new WaitForSeconds (num);
+		yield return new WaitForSeconds (num-0.3f);
+		fader.FadeOut (0.3f);
+		yield return new WaitForSeconds (0.3f);
 		OnDeath ();
 	}
 
@@ -250,7 +253,6 @@ public class ImpAI : DemonBehavior {
 
 	public virtual void OnMouseDown()
 	{
-
 		Vector3 mouse_po = Input.mousePosition;
 		mouse_po = Camera.main.ScreenToWorldPoint (new Vector3 (mouse_po.x, mouse_po.y, Camera.main.nearClipPlane));
 		mouse_po.z = 0f;
