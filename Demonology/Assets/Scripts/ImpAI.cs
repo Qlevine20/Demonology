@@ -187,7 +187,10 @@ public class ImpAI : DemonBehavior {
 				//print ("Imp death via spike!");
 
 				rb.velocity = Vector3.zero;
-				rb.isKinematic = true;
+				if(other.gameObject.layer != 15)
+				{
+					rb.isKinematic = true;
+				}
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);

@@ -540,7 +540,7 @@ MonoBehaviour:
   HoldingImp: 
   whatIsGrounded:
     serializedVersion: 2
-    m_Bits: 20736
+    m_Bits: 53504
   GroundedEnds:
   - {fileID: 490698}
   - {fileID: 433578}
@@ -549,7 +549,6 @@ MonoBehaviour:
   jumpspeed: 15
   ForceMult: 15
   fallCheck: 0
-  GrabbingImp: {fileID: 0}
   checkWallDist: .600000024
   wallMasks:
     serializedVersion: 2
@@ -1932,7 +1931,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: whatIsGrounded.m_Bits
-      value: 256
+      value: 53504
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Minions.Array.data[3]

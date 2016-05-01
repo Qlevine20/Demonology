@@ -241,8 +241,8 @@ public class CharacterBehavior : DeadlyBehavior {
 				if (!CharacterBehavior.Dying){
 					PlayerAnim.SetBool("EnemyDeath", true);
 					CharacterBehavior.Dying = true;
+					transform.GetChild (4).gameObject.SetActive (true);
 				}
-
             }
         }
         if (Input.GetKeyUp(killSelf)) 

@@ -6,6 +6,7 @@ public class MovingBlock : EnemyBehavior {
 	public Vector2[] locs;
 	public float speed;
 	public bool autoStart = false;
+	public bool pauseEachPoint = false;
 
 	//Array Position
 	protected int Pos;
@@ -26,9 +27,10 @@ public class MovingBlock : EnemyBehavior {
 	{
 		if (Moving && MoveBetweenPoints (locs [Pos])) 
 		{
-			if(!autoStart && Pos == 0 && (ArrayDir < 0))
+			if((!autoStart && Pos == 0 && (ArrayDir < 0)) || (pauseEachPoint && Pos != 0))
 			{
 				Moving = false;
+				print ("check");
 			}
 
 			Pos += ArrayDir;
@@ -43,7 +45,7 @@ public class MovingBlock : EnemyBehavior {
 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
-		if (!autoStart && (other.gameObject.tag == "imp" || other.gameObject.tag == "Player")) {
+		if ((!autoStart || pauseEachPoint) && (other.gameObject.tag == "imp" || other.gameObject.tag == "Player")) {
 			Moving = true;
 		}
 	}
