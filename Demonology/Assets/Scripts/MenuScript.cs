@@ -14,6 +14,7 @@ public class MenuScript : MonoBehaviour {
     public GameObject LevelsScreen;
     public GameObject CreditsScreen;
     public static int levelNum;
+    
 	// Use this for initialization
 	void Start () {
         RectTransform lvlButt = levelsButton.GetComponent<RectTransform>();
@@ -83,13 +84,13 @@ public class MenuScript : MonoBehaviour {
     public void LoadLevelButton(int level) 
     {
         levelNum = level;
-        Application.LoadLevel(10);
+        Application.LoadLevel("LoadingScreen");
     }
 
 	public void StartLevel()
 	{
         levelNum = 1;
-		Application.LoadLevel (10);
+		Application.LoadLevel ("LoadingScreen");
 	}
 
 	public void QuitGame()

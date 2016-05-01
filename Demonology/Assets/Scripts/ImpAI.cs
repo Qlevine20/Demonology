@@ -47,7 +47,10 @@ public class ImpAI : DemonBehavior {
         AudioSource.PlayClipAtPoint(impSummons[Random.Range(0, impSummons.Length)], transform.position);
 
 		//Obtain player
-		player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
+        if (GameObject.Find("Character") != null)
+        {
+            player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
+        }
 
         //Call Parent class Start() funciton
         base.Start();
@@ -192,6 +195,7 @@ public class ImpAI : DemonBehavior {
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				transform.position = new Vector3(transform.position.x, transform.position.y - heightChange, transform.position.z);
 				KillImp();
+                CharacterBehavior.ImpsKilled++;
 			}
 		} 
 		else 
@@ -221,6 +225,10 @@ public class ImpAI : DemonBehavior {
 			playerChar.HoldingImp = "";
 			transform.parent = null;
 		}
+        if (Application.loadedLevelName != "LoadingScreen")
+        {
+            CharacterBehavior.ImpsKilled++;
+        }
 		Destroy (gameObject);
 	}
 

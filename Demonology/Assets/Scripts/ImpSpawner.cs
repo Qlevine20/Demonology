@@ -14,6 +14,7 @@ public class ImpSpawner : MonoBehaviour{
 	public int maxSpawn = 0;
 	public int spawnCount = 0;
 	public int sinkingTime = 5;
+    public bool LoadingScreen = false;
 
 	public float activeRange = 15.0f;
 
@@ -25,12 +26,12 @@ public class ImpSpawner : MonoBehaviour{
 	}
 
 	void Update(){
-		if (Player == null) 
+		if (Player == null && !LoadingScreen) 
 		{
 			Player = GameObject.FindGameObjectWithTag("Player");
 		}
 
-		if (DistanceBetween (transform.position, Player.transform.position) < activeRange) {
+		if (LoadingScreen || DistanceBetween (transform.position, Player.transform.position) < activeRange) {
 			counter += Time.deltaTime;
 			CheckCreate = RandomSpawnImp(counter);
 			if (CheckCreate) 
@@ -54,7 +55,7 @@ public class ImpSpawner : MonoBehaviour{
 	{
 		if (counter > waitTime && (maxSpawn == 0 || spawnCount < maxSpawn)) 
 		{
-			if (Player!=null)
+			if (Player!=null || LoadingScreen)
 			{
 				GameObject SpawnedImp = Instantiate(Imp, transform.position, transform.rotation) as GameObject;
 				spawnCount++;
