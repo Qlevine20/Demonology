@@ -30,6 +30,7 @@ GameObject:
   - 61: {fileID: 6157490}
   - 114: {fileID: 11451082}
   - 95: {fileID: 9503124}
+  - 114: {fileID: 11435910}
   m_Layer: 10
   m_Name: ExpImp
   m_TagString: imp
@@ -134,6 +135,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11435910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0beaacf715d0ac448addb74707578472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11451082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,6 +195,8 @@ MonoBehaviour:
   dead: 0
   sinkDiv: 1
   player: {fileID: 0}
+  persist: 0
+  fader: {fileID: 0}
   Psyst: {fileID: 165060, guid: 46f6cb96797a2734cbc0d16bb125289a, type: 2}
   whatIsTrigger:
     serializedVersion: 2

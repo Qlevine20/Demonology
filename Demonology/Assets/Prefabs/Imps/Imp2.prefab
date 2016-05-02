@@ -13,6 +13,7 @@ GameObject:
   - 61: {fileID: 6189372}
   - 114: {fileID: 11400966}
   - 95: {fileID: 9584654}
+  - 114: {fileID: 11452796}
   m_Layer: 10
   m_Name: Imp2
   m_TagString: imp
@@ -183,7 +184,20 @@ MonoBehaviour:
   dead: 0
   sinkDiv: 3
   player: {fileID: 0}
+  persist: 0
+  fader: {fileID: 0}
   jumpspeed: 5
+--- !u!114 &11452796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0beaacf715d0ac448addb74707578472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21239902
 SpriteRenderer:
   m_ObjectHideFlags: 1

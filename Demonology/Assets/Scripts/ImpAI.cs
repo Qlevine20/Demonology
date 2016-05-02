@@ -217,7 +217,9 @@ public class ImpAI : DemonBehavior {
 	public override IEnumerator WaitTime(float num)
 	{
 		yield return new WaitForSeconds (num-0.3f);
-		fader.FadeOut (0.3f);
+		if (fader != null) {
+			fader.FadeOut (0.3f);
+		}
 		yield return new WaitForSeconds (0.3f);
 		OnDeath ();
 	}
