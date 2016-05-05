@@ -114,7 +114,9 @@ public class CharacterBehavior : DeadlyBehavior {
 		rb = GetComponent<Rigidbody2D> ();
 		Dir = Vector2.right;
 		//bc = GetComponent<Collider2D>() as BoxCollider2D;
-		ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+		if (ImpSelect != null) {
+			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
+		}
         if (GameObject.Find("ImpThrowCam") != null)
         {
             ImpThrowCam = GameObject.Find("ImpThrowCam").GetComponent<Camera>();

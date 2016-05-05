@@ -7,13 +7,14 @@ public class ImpSpawner : MonoBehaviour{
 	
 	public GameObject Player;
 	public GameObject Imp;
+	public float startDelay = 0.0f;
 	public float waitTime = 3.0f;
 	private float counter = 0;
 	private bool CheckCreate;
 	public bool leftSpawner = false;
 	public int maxSpawn = 0;
 	public int spawnCount = 0;
-	public int sinkingTime = 5;
+	public float sinkingTime = 5;
     public bool LoadingScreen = false;
 
 	public float activeRange = 15.0f;
@@ -22,7 +23,7 @@ public class ImpSpawner : MonoBehaviour{
 	void Start(){
 		//waitTime = 3.0f;
 		Player = GameObject.FindGameObjectWithTag("Player");
-		counter = waitTime;
+		counter = waitTime - startDelay;
 	}
 
 	void Update(){

@@ -41,7 +41,7 @@ public class ImpAI : DemonBehavior {
         //Height change of collider after Imp dies
 		heightChange = (.5f) * bc.size.y;
 
-		speed = 2;
+		//speed = 2;
 
         //Ignore Collisions with these layers
         Physics2D.IgnoreLayerCollision(10, 9);
