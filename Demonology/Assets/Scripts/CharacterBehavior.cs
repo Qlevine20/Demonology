@@ -76,6 +76,7 @@ public class CharacterBehavior : DeadlyBehavior {
     private Ray2D checkWall;
     public float checkWallDist = 1;
     public LayerMask wallMasks;
+    public Vector2 BoxVec;
     private float right = 1;
     private float holdDown = 0;
 
@@ -165,7 +166,7 @@ public class CharacterBehavior : DeadlyBehavior {
         //}
         
         checkWall.origin = transform.position;
-        rayhit = Physics2D.BoxCast(checkWall.origin,new Vector2(.05f,2f), 0.0f, checkWall.direction, checkWallDist, wallMasks);
+        rayhit = Physics2D.BoxCast(new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), BoxVec, 0.0f, checkWall.direction, checkWallDist, wallMasks);
         feet_check = Physics2D.Raycast(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction, checkWallDist,checkMasks);
         //Debug.DrawRay(checkWall.origin,checkWall.direction,Color.green);
         //Debug.DrawRay(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction);
