@@ -26,6 +26,10 @@ public class ImpAI : DemonBehavior {
 	public CharacterBehavior player;
 	public bool persist = false;
 	public FadeObjectInOut fader;
+	private float distToGround;
+	private float fallCheck;
+	public Transform[] ImpGroundChecks;
+	public LayerMask ImpWhatIsGrounded;
 
     // Use this for initialization
     public override void Start()
@@ -56,9 +60,39 @@ public class ImpAI : DemonBehavior {
             player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
         }
 
+		distToGround = GetComponent<Collider2D> ().bounds.extents.y;
+		fallCheck = transform.position.y;
+
         //Call Parent class Start() funciton
         base.Start();
     }
+
+	
+	public override void Update()
+	{
+		base.Update();
+		if (dying && lava) 
+		{
+			transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/sinkDiv, transform.position.z);
+		}
+		
+		// new fall death code
+		if (onGround ()) {
+			float newGround = transform.position.y;
+			if (fallCheck - 7 > newGround) {
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				KillImp();
+			}
+			fallCheck = newGround;
+		}
+		
+		//Check if player is dead and kill Imp() if player died
+		/*if (CharacterBehavior.Died) 
+		{
+			CharacterBehavior.Died = false;
+		}*/
+	}
 
 
 	// Update is called once per frame
@@ -71,16 +105,17 @@ public class ImpAI : DemonBehavior {
 		}
 
         //Fall Death
-		if (!dead && (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger"|| other.gameObject.tag == "moving"))
+		/*if (!dead && (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger" || other.gameObject.tag == "moving"))
 		{
 			if ( rb.velocity.y <= -15.0f )
 			{
 				HalveCollider(bc, heightChange);
 				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
 				KillImp();
+				print (rb.velocity.y);
 				//print ("Imp death via falling!");
 			}
-		}
+		}*/
 
 		//Fog death
 		if (other.gameObject.tag == "impkiller" /*&& (Mathf.Abs(transform.position.x-other.transform.position.x) <= 1.1f)*/) {
@@ -107,21 +142,6 @@ public class ImpAI : DemonBehavior {
 	}
 
 
-	public override void Update()
-	{
-        base.Update();
-        if (dying && lava) 
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - (Time.deltaTime)/sinkDiv, transform.position.z);
-        }
-        //Check if player is dead and kill Imp() if player died
-		/*if (CharacterBehavior.Died) 
-		{
-			CharacterBehavior.Died = false;
-		}*/
-	}
-
-
 	public virtual void LateUpdate()
 	{
         //Check if player dead and make sure player Died is false when player respawns
@@ -143,7 +163,20 @@ public class ImpAI : DemonBehavior {
 	}
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
-        //When colliding with magma kill imp, but body stays for a SinkTime
+		//Fall Death
+		/*if (!dead && (other.gameObject.tag == "imp"  ||  other.gameObject.tag=="impTrigger"))
+		{
+			print (other.relativeVelocity.y);
+			if ( other.relativeVelocity.y <= -15.0f )
+			{
+				HalveCollider(bc, heightChange);
+				bc.offset = new Vector2(bc.offset.x, bc.offset.y + (heightChange / 2));
+				KillImp();
+				//print ("Imp death via falling!");
+			}
+		}*/
+
+		//When colliding with magma kill imp, but body stays for a SinkTime
 		if (other.gameObject.tag == "magma" || other.gameObject.tag == "enemy" || other.gameObject.tag == "impkiller" || other.gameObject.tag == "cinder") {
 			RunnerBehavior isARunner = other.gameObject.GetComponent<RunnerBehavior>();
 			if (isARunner != null) {
@@ -263,6 +296,8 @@ public class ImpAI : DemonBehavior {
     }
 
 
+
+
 	public virtual void OnMouseDown()
 	{
 		Vector3 mouse_po = Input.mousePosition;
@@ -283,5 +318,20 @@ public class ImpAI : DemonBehavior {
 		float xPos = pos1.x - pos2.x;
 		float yPos = pos1.y - pos2.y;
 		return (float)System.Math.Sqrt (xPos*xPos + yPos*yPos);
+	}
+
+
+	private bool onGround() {
+		foreach (Transform t in ImpGroundChecks) 
+		{
+			Debug.DrawLine (transform.position,t.position);
+			if(Physics2D.Linecast(this.transform.position, t.position, ImpWhatIsGrounded))
+				return true;
+		}
+		return false;
+
+		//bool checkTrue = Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f);
+		//print (checkTrue);
+		//return checkTrue;	
 	}
 }
