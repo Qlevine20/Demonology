@@ -4,7 +4,7 @@ using System.Collections;
 public class CinderBehavior : MovingBlock {
 
 	public ParticleSystem cParts;
-    private ParticleSystem.EmissionModule em;
+    //private ParticleSystem.EmissionModule em;
 	public float pauseTime = 2f;
 	private bool wait = false;
 
@@ -25,13 +25,15 @@ public class CinderBehavior : MovingBlock {
 	public IEnumerator WaitTime()
 	{
 		wait = true;
-        em = cParts.emission;
-		em.enabled = false;
+        //em = cParts.emission;
+		//em.enabled = false;
+		cParts.enableEmission = false;
 		yield return new WaitForSeconds (0.5f);
 		transform.position = locs [0];
 		cParts.Clear ();
 		yield return new WaitForSeconds (pauseTime);
-		em.enabled = true;
+		//em.enabled = true;
+		cParts.enableEmission = true;
 		yield return new WaitForSeconds (0.1f);
 		wait = false;
 	}

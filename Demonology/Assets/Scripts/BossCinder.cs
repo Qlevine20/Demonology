@@ -4,7 +4,7 @@ using System.Collections;
 public class BossCinder : MonoBehaviour {
 
 	private ParticleSystem cParts;
-    private ParticleSystem.EmissionModule em;
+    //private ParticleSystem.EmissionModule em;
 	private bool dead = false;
 	private Vector3 targetPos;
 	public float speed = 5f;
@@ -14,11 +14,12 @@ public class BossCinder : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 		cParts = GetComponent<ParticleSystem>();
-        em = cParts.emission;
+        //em = cParts.emission;
 		//targetPos = GameObject.FindGameObjectWithTag ("Player").transform.position;
 
 		dead = true;
-        em.enabled = false;
+        //em.enabled = false;
+		cParts.enableEmission = false;
 		StartCoroutine (Fire (initialDelay));
 	}
 	
@@ -63,7 +64,8 @@ public class BossCinder : MonoBehaviour {
 	public IEnumerator Fire(float num)
 	{
         
-		em.enabled = true;
+		//em.enabled = true;
+		cParts.enableEmission = true;
 		yield return new WaitForSeconds (num);
 		targetPos = transform.position - GameObject.FindGameObjectWithTag ("Player").transform.position;
 		targetPos = targetPos.normalized;
@@ -73,7 +75,8 @@ public class BossCinder : MonoBehaviour {
 	public IEnumerator FadeOut()
 	{
 		dead = true;
-		em.enabled = false;
+		//em.enabled = false;
+		cParts.enableEmission = false;
 		gameObject.tag = "Untagged";
 		yield return new WaitForSeconds (0.5f);
 		cParts.Clear ();
