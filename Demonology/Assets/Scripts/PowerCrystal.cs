@@ -7,6 +7,7 @@ public class PowerCrystal : EnemyBehavior
 	public GameObject PartEffect;
 	public GameObject bauble;
 	Animator anim;
+	public AudioClip shatterSound;
 
 	public override void Start()
 	{
@@ -34,7 +35,8 @@ public class PowerCrystal : EnemyBehavior
 			bauble = GameObject.Find("Bauble (0)");
 			break;
 		}
-		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 1);
+		StartCoroutine (PhaseOn ((baubleNumber+1) * 0.5f));
+		//bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 1);
 	}
 
 	public void OnTriggerEnter2D(Collider2D other)
@@ -55,12 +57,21 @@ public class PowerCrystal : EnemyBehavior
 	public override void OnDeath ()
 	{
 		base.OnDeath ();
+		AudioSource.PlayClipAtPoint(shatterSound, Camera.main.transform.position);
 		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 2);
 	}
 
 	public override void OnRespawn ()
 	{
 		base.OnRespawn ();
+		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 1);
+	}
+
+	public IEnumerator PhaseOn(float num)
+	{
+		yield return new WaitForSeconds (num-0.02f);
+		bauble.transform.GetChild (0).gameObject.SetActive (true);
+		yield return new WaitForSeconds (0.02f);
 		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 1);
 	}
 }
