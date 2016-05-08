@@ -1548,6 +1548,10 @@ Prefab:
       propertyPath: m_Name
       value: Power Crystal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11413726, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
+      propertyPath: baubleNumber
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
   m_IsPrefabParent: 0
@@ -2241,6 +2245,10 @@ Prefab:
     - target: {fileID: 114420, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
       propertyPath: m_Name
       value: Power Crystal (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413726, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
+      propertyPath: baubleNumber
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
@@ -4901,6 +4909,11 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!20 &1716495543 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2060798, guid: 10db66a8869e26d4b9d6fe9d40310e57,
+    type: 2}
+  m_PrefabInternal: {fileID: 2145854720}
 --- !u!4 &1716495551 stripped
 Transform:
   m_PrefabParentObject: {fileID: 422316, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
@@ -5612,6 +5625,10 @@ Prefab:
       propertyPath: m_Name
       value: Power Crystal (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 11413726, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
+      propertyPath: baubleNumber
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7c8877e7396bb64d973e732af25e9a0, type: 2}
   m_IsPrefabParent: 0
@@ -5696,6 +5713,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 22309338, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1716495543}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
   m_IsPrefabParent: 0
