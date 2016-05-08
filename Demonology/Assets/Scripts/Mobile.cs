@@ -45,7 +45,7 @@ public class Mobile : DeadlyBehavior {
     public override void Update() 
     {
         base.Update();
-        feet_check = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - .2f), checkWall.direction, checkWallDist, checkMasks);
+        feet_check = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - .5f), checkWall.direction, checkWallDist, checkMasks);
         Debug.DrawRay(new Vector2(transform.position.x, transform.position.y - .5f), checkWall.direction,Color.blue);
         if (feet_check.collider != null)
         {

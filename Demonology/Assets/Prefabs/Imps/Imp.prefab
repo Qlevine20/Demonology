@@ -278,6 +278,8 @@ MonoBehaviour:
   SinkTime: 5
   dead: 0
   sinkDiv: 3
+  held: 0
+  DropKill: 0
   player: {fileID: 0}
   persist: 0
   fader: {fileID: 0}
@@ -287,7 +289,7 @@ MonoBehaviour:
   - {fileID: 404254}
   ImpWhatIsGrounded:
     serializedVersion: 2
-    m_Bits: 53504
+    m_Bits: 37120
 --- !u!212 &21225998
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -404,6 +406,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ImpWhatIsGrounded.m_Bits
+      value: 37120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

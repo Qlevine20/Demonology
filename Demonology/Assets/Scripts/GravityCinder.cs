@@ -98,6 +98,11 @@ public class GravityCinder : EnemyBehavior {
 		dead = false;
 	}
 
+    public void StartCo() 
+    {
+        StartCoroutine(ResetPos());
+    }
+
 	public void OnDrawGizmos()
 	{
 		Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, lowerThresh));

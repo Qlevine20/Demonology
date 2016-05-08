@@ -22,6 +22,9 @@ public class ImpAI : DemonBehavior {
     public static Vector2 ImpScale;
     public bool dead = false;
     public float sinkDiv = 1;
+    public bool held = false;
+    public bool DropKill = false;
+    
 
 	public CharacterBehavior player;
 	public bool persist = false;
@@ -101,6 +104,12 @@ public class ImpAI : DemonBehavior {
 		{
 			transform.parent = other.transform;
 		}
+
+        if (held && other.gameObject.tag == "cinder") 
+        {
+            other.GetComponent<GravityCinder>().StartCo();
+            DropKill = true;
+        }
 
         //Fall Death
 		/*if (!dead && (other.gameObject.tag == "floor"  ||  other.gameObject.tag=="impTrigger" || other.gameObject.tag == "moving"))
