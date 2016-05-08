@@ -216,6 +216,14 @@ public class CharacterBehavior : DeadlyBehavior {
 			}
 		}
 
+        if (HoldingImp != "" && transform.GetChild(transform.childCount - 1).GetComponent<ImpAI>().DropKill == true) 
+        {
+            
+            HoldingImp = "";
+            Throwing = 0.01f;
+            
+        }
+
 		// Code for recieving button input
 		if (Input.GetKeyDown (Summon) && Input.GetKey(modifier) && HoldingImp=="") 
 		{
@@ -292,10 +300,6 @@ public class CharacterBehavior : DeadlyBehavior {
 			// THROW THE IMP!
 			if(HoldingImp!="" && Throwing == 0.0f)
 			{
-                if (HoldingImp == "stickImp") 
-                {
-                    transform.GetChild(5).GetComponent<StickImp>().Thrown = true;
-                }
                 ThrowImp(ForceMult);
             }
             if(Throwing != 0.0f)
@@ -340,6 +344,7 @@ public class CharacterBehavior : DeadlyBehavior {
     {
         HoldingImp = "";
         GameObject childImp = transform.GetChild(5).gameObject;
+        childImp.GetComponent<ImpAI>().held = false;
         childImp.transform.parent = null;
         Rigidbody2D childRb = childImp.GetComponent<Rigidbody2D>();
         childRb.isKinematic = false;
@@ -352,7 +357,10 @@ public class CharacterBehavior : DeadlyBehavior {
         //{
             //childImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
         //}
-        
+            if (childImp.GetComponent<ImpAI>().DropKill == true) 
+            {
+                Destroy(childImp);
+            }
 
     }
 
@@ -756,6 +764,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
         
         HoldingImp = imp.transform.parent.gameObject.tag;
+        imp.transform.parent.gameObject.GetComponent<ImpAI>().held = true;
         Vector2 origScale = imp.transform.parent.localScale;
         imp.transform.parent.transform.parent = transform;
         imp.transform.parent.localScale = origScale;
