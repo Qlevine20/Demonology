@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 498202}
   - 212: {fileID: 21232662}
+  - 60: {fileID: 6075234}
+  - 68: {fileID: 6807342}
   m_Layer: 8
   m_Name: Rock 51
   m_TagString: floor
@@ -23,11 +25,66 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.8157501, y: -2.52656913, z: 0}
+  m_LocalPosition: {x: 81.4499969, y: -80.3000031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!60 &6075234
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190414}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 3.03927732, y: .322616935}
+      - {x: 2.73146462, y: .59195286}
+      - {x: 2.3851757, y: 1.32300746}
+      - {x: 1.84650385, y: 1.59234345}
+      - {x: 1.46173823, y: 1.59234345}
+      - {x: 1.46173823, y: 1.55386686}
+      - {x: .730683625, y: 1.59234345}
+      - {x: -.115800731, y: 1.59234345}
+      - {x: -1.42400384, y: 1.36148405}
+      - {x: -2.11658192, y: 1.59234345}
+      - {x: -2.23201156, y: 1.59234345}
+      - {x: -2.3474412, y: 1.47691381}
+      - {x: -2.3859179, y: .745859087}
+      - {x: -2.69373035, y: .168710694}
+      - {x: -2.80915999, y: -.216054901}
+      - {x: -2.80915999, y: -.600820482}
+      - {x: -2.11658192, y: -1.10101581}
+      - {x: -.269706964, y: -.908632994}
+      - {x: .576777339, y: -.870156407}
+      - {x: .961542964, y: -1.02406263}
+      - {x: 1.42326164, y: -1.56273448}
+      - {x: 1.61564445, y: -1.56273448}
+      - {x: 1.76955068, y: -1.13949239}
+      - {x: 2.69298816, y: -.754726768}
+      - {x: 3.03927732, y: -.600820482}
+--- !u!68 &6807342
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190414}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -2.25618744, y: 1.48761749}
+  - {x: -1.59142303, y: 1.2629776}
+  - {x: -.135566711, y: 1.54781342}
+  - {x: 2.06098175, y: 1.66266632}
+  - {x: 3.05949402, y: .416534424}
 --- !u!212 &21232662
 SpriteRenderer:
   m_ObjectHideFlags: 1
