@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 431036}
   - 212: {fileID: 21283350}
+  - 68: {fileID: 6876246}
   m_Layer: 8
   m_Name: Rock 101
   m_TagString: floor
@@ -28,6 +29,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!68 &6876246
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180652}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -2.73000002, y: 0}
+  - {x: 2.73000002, y: 0}
 --- !u!212 &21283350
 SpriteRenderer:
   m_ObjectHideFlags: 1
