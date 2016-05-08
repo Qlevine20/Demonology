@@ -14,7 +14,7 @@ public class MovingBlock : EnemyBehavior {
 	protected bool Moving;
 
 	// Use this for initialization
-	public virtual void Start () {
+	public override void Start () {
 		base.Start ();
 		locs [0] = transform.position;
 		ArrayDir = 1;
@@ -23,7 +23,7 @@ public class MovingBlock : EnemyBehavior {
 	}
 	
 	// Update is called once per frame
-	public virtual void Update ()
+	public override void Update ()
 	{
 		if (Moving && MoveBetweenPoints (locs [Pos])) 
 		{

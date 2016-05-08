@@ -13,7 +13,7 @@ public class SceneLoaderScript : MonoBehaviour {
     private Text TimesPlayerKilledText;
     public ImpSpawner impSpawner;
     public int mult;
-    private bool Begin = false;
+    //private bool Begin = false;
     public float min;
     public float max;
 

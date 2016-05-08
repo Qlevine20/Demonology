@@ -16,18 +16,17 @@ public class FauxCharacter : DeadlyBehavior {
 	public AudioClip playerPlayerFogSound;
 	public Camera ImpThrowCam;
 	
-	private Ray2D mP;
+	//private Ray2D mP;
 
 	public string HoldingImp;
 	private RaycastHit2D rayhit;
 	private RaycastHit2D feet_check;
-	private GameObject cdImp;
+	//private GameObject cdImp;
 	
 	Animator anim;
 	private Rigidbody2D rb;
 	
 	// player jump info
-	private float groundRadius = .2f;
 	public LayerMask whatIsGrounded;
 	public Transform[] GroundedEnds;
 	public int speed = 10;//change in editor not here
@@ -39,13 +38,13 @@ public class FauxCharacter : DeadlyBehavior {
 	public bool FacingRight = true;
 	
 	private Animator PlayerAnim;
-	private float Throwing = 0.0f;
+	//private float Throwing = 0.0f;
 	private bool PressMove;
 	private Ray2D checkWall;
 	public float checkWallDist = 1;
 	public LayerMask wallMasks;
 	private float right = 1;
-	private float holdDown = 0;
+	//private float holdDown = 0;
 
 	public bool Dying;
 	public float moveNow = 0f;
@@ -60,7 +59,7 @@ public class FauxCharacter : DeadlyBehavior {
 		checkWall = new Ray2D(transform.position, (transform.right));
 		base.Start ();
 		PlayerAnim = transform.FindChild("CharSpriteHolder").GetComponent<Animator>();
-		mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
+		//mP = new Ray2D (new Vector2 (0, 0), new Vector2 (0, 0));
 		HoldingImp = "";
 
 		if (FacingRight == true) {
@@ -284,10 +283,10 @@ public class FauxCharacter : DeadlyBehavior {
 			PlayerAnim.SetBool("Jump", false);
 			PlayerAnim.SetBool("Fall", false);
 		}
-		if (other.gameObject.layer == 12) 
-		{
-			cdImp = other.gameObject;
-		}
+        //if (other.gameObject.layer == 12) 
+        //{
+        //    cdImp = other.gameObject;
+        //}
 		if (other.gameObject.tag == "imp" || other.gameObject.tag == "impTrigger") {
 			rb.AddForce((Vector2.up*0.7f+Dir*5f) * 80000.0f);
 			moveNow = 0f;

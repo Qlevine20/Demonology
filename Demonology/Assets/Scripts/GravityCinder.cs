@@ -4,6 +4,7 @@ using System.Collections;
 public class GravityCinder : EnemyBehavior {
 	
 	private ParticleSystem cParts;
+    private ParticleSystem.EmissionModule em;
 	private Rigidbody2D rigid;
 	public float pauseTime = 2f;
 	public float initialDelay = -1f;
@@ -19,6 +20,7 @@ public class GravityCinder : EnemyBehavior {
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
+        em = cParts.emission;
 		if (initialDelay < 0) {
 			initialDelay = pauseTime;
 		}
@@ -32,7 +34,7 @@ public class GravityCinder : EnemyBehavior {
 		dead = true;
 		rigid.gravityScale = 0.0f;
 		rigid.velocity = new Vector2(0.0f, 0.0f);
-		cParts.enableEmission = false;
+		em.enabled = false;
 		StartCoroutine (Regen (initialDelay));
 	}
 
@@ -64,7 +66,7 @@ public class GravityCinder : EnemyBehavior {
 		dead = true;
 		rigid.gravityScale = 0.0f;
 		rigid.velocity = new Vector2(0.0f, 0.0f);
-		cParts.enableEmission = false;
+		em.enabled = false;
 		cParts.Clear ();
 
 		StartCoroutine (Regen (initialDelay));
@@ -75,7 +77,7 @@ public class GravityCinder : EnemyBehavior {
 		dead = true;
 		rigid.gravityScale = 0.0f;
 		rigid.velocity = new Vector2(0.0f, 0.0f);
-		cParts.enableEmission = false;
+		em.enabled = false;
 		yield return new WaitForSeconds (0.5f);
 		transform.position = startPos;
 		cParts.Clear ();
@@ -85,7 +87,7 @@ public class GravityCinder : EnemyBehavior {
 	public IEnumerator Regen(float num)
 	{
 		yield return new WaitForSeconds (num);
-		cParts.enableEmission = true;
+		em.enabled = true;
 		yield return new WaitForSeconds (0.1f);
 		rigid.gravityScale = gravitySave;
 		rigid.velocity = new Vector2(xVel, startVel);

@@ -42,10 +42,9 @@ public class CharacterBehavior : DeadlyBehavior {
 	private Ray2D mP;
 	//private bool WallColl;
 	public string HoldingImp;
-    private bool HoldingStickImp;
     private RaycastHit2D rayhit;
     private RaycastHit2D feet_check;
-    private GameObject cdImp;
+    //private GameObject cdImp;
 	
 	
 	Animator anim;
@@ -57,7 +56,7 @@ public class CharacterBehavior : DeadlyBehavior {
 	private GameObject ImpSelect;
 	
 	// player jump info
-	private float groundRadius = .2f;
+    //private float groundRadius = .2f;
 	public LayerMask whatIsGrounded;
 	//public Transform[] groundChecks;
     public Transform[] GroundedEnds;
@@ -160,15 +159,15 @@ public class CharacterBehavior : DeadlyBehavior {
             }
         }
 		base.Update ();
-        foreach (Transform t in GroundedEnds) 
-        {
-            //Debug.DrawLine(this.transform.position, t.position, Color.green);
-        }
+        //foreach (Transform t in GroundedEnds) 
+        //{
+        //    //Debug.DrawLine(this.transform.position, t.position, Color.green);
+        //}
         
         checkWall.origin = transform.position;
-        rayhit = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, wallMasks);
+        rayhit = Physics2D.BoxCast(checkWall.origin,new Vector2(.05f,2f), 0.0f, checkWall.direction, checkWallDist, wallMasks);
         feet_check = Physics2D.Raycast(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction, checkWallDist,checkMasks);
-       // Debug.DrawRay(checkWall.origin,checkWall.direction);
+        //Debug.DrawRay(checkWall.origin,checkWall.direction,Color.green);
         //Debug.DrawRay(new Vector2(checkWall.origin.x , checkWall.origin.y - 1.2f), checkWall.direction);
         if (feet_check.collider != null) 
         {
@@ -414,7 +413,7 @@ public class CharacterBehavior : DeadlyBehavior {
             //{
             //    PlayerAnim.SetBool("Jump", true);
             //}
-            else if (!onGround() && rb.velocity.y <= 0 && !PlayerAnim.GetBool("Fall")) 
+            else if (!onGround() && rb.velocity.y <= -2f && !PlayerAnim.GetBool("Fall")) 
             {
                 PlayerAnim.SetBool("Fall", true);
             }
@@ -598,10 +597,10 @@ public class CharacterBehavior : DeadlyBehavior {
 		   PlayerAnim.SetBool("Jump", false);
 		   PlayerAnim.SetBool("Fall", false);
 		}
-		if (other.gameObject.layer == 12) 
-		{
-		   cdImp = other.gameObject;
-		}
+        //if (other.gameObject.layer == 12) 
+        //{
+        //   cdImp = other.gameObject;
+        //}
     }
 
 	// Collision code for ceasing contact with an object
@@ -753,55 +752,20 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Grab an imp
 	public void GrabImp(Collider2D imp)
 	{
-        if (imp.transform.parent.tag == "stickImp")
-        {
-            if (imp.transform.parent.GetComponent<StickImp>().Thrown)
-            {
-                
-                StickToImp(imp);
-            }
-            else
-            {
-                HoldingImp = imp.transform.parent.gameObject.tag;
-                Vector2 origScale = imp.transform.parent.localScale;
-                imp.transform.parent.transform.parent = transform;
-                imp.transform.parent.localScale = origScale;
-                imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-                imp.transform.GetComponent<CircleCollider2D>().enabled = false;
-                imp.transform.parent.transform.parent = transform;
-                imp.transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
-            }
-        }
-        else 
-        {
-            HoldingImp = imp.transform.parent.gameObject.tag;
-            Vector2 origScale = imp.transform.parent.localScale;
-            imp.transform.parent.transform.parent = transform;
-            imp.transform.parent.localScale = origScale;
-            imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-            imp.transform.GetComponent<CircleCollider2D>().enabled = false;
-            imp.transform.parent.transform.parent = transform;
-            imp.transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
-        }
+
+        
+        HoldingImp = imp.transform.parent.gameObject.tag;
+        Vector2 origScale = imp.transform.parent.localScale;
+        imp.transform.parent.transform.parent = transform;
+        imp.transform.parent.localScale = origScale;
+        imp.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
+        imp.transform.GetComponent<CircleCollider2D>().enabled = false;
+        imp.transform.parent.transform.parent = transform;
+        imp.transform.parent.GetComponent<Rigidbody2D>().isKinematic = true;
+        
 	}
 
-	// Check if you're holding a sticky imp
-	void CheckHoldingStickImp()
-	{
-		if(HoldingImp == "stickImp")
-		{
-			HoldingImp = "";
-			rb.isKinematic = false;
-			
-		}
-	}
-	
-	// Stick to the sticky imp!
-	void StickToImp(Collider2D imp)
-	{
-        HoldingStickImp = true;
-		rb.isKinematic = true;
-	}
+
 
 	// Flip your direction
 	void Flip()

@@ -3,16 +3,18 @@ using System.Collections;
 
 public class ExitScript : MonoBehaviour
 {
-
+    
     public GameObject PowerCrystal;
     //public GameObject Exit;
 	private ParticleSystem cParts;
+    private ParticleSystem.EmissionModule em;
 
     // Use this for initialization
     void Start()
     {
 		cParts = GetComponent<ParticleSystem>();
-		cParts.enableEmission = false;
+        em = cParts.emission;
+		em.enabled = false;
 		transform.gameObject.tag = "Untagged";
     }
 
@@ -24,10 +26,10 @@ public class ExitScript : MonoBehaviour
 		//once no more crystals, activate the exit
         if (PowerCrystal == null) {
 			transform.gameObject.tag = "Finish";
-			cParts.enableEmission = true;
+			em.enabled = true;
 		} else {
 			transform.gameObject.tag = "Untagged";
-			cParts.enableEmission = false;
+			em.enabled = false;
 		}
 
     }

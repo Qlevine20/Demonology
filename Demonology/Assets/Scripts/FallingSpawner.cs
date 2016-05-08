@@ -8,9 +8,9 @@ public class FallingSpawner : MonoBehaviour {
 	public float spawnRate = 0.5f;
 
 	// Use this for initialization
-	void Start () {
-		float timer = 0.0f;
-	}
+    //void Start () {
+    //    float timer = 0.0f;
+    //}
 	
 	// Update is called once per frame
 	void Update () {
