@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 428768}
+  m_Layer: 0
+  m_Name: GroundCheckImp (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 864586104465068316, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &140026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 404254}
+  m_Layer: 0
+  m_Name: GroundCheckImp (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 2270504221434485236, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &142450
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +68,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &179120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 459882}
+  m_Layer: 0
+  m_Name: GroundCheckImp
+  m_TagString: Untagged
+  m_Icon: {fileID: -3114416830163030229, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &404254
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .101999998, y: -.370000005, z: 0}
+  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_Children: []
+  m_Father: {fileID: 421424}
+  m_RootOrder: 3
 --- !u!4 &421424
 Transform:
   m_ObjectHideFlags: 1
@@ -45,12 +102,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 297.912781, y: 40.0463028, z: 0}
+  m_LocalPosition: {x: 123.290283, y: -7.67037487, z: 0}
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 1}
   m_Children:
   - {fileID: 433266}
+  - {fileID: 459882}
+  - {fileID: 428768}
+  - {fileID: 404254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &428768
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0170000009, y: -.370000005, z: 0}
+  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_Children: []
+  m_Father: {fileID: 421424}
+  m_RootOrder: 2
 --- !u!4 &433266
 Transform:
   m_ObjectHideFlags: 1
@@ -63,6 +135,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 421424}
   m_RootOrder: 0
+--- !u!4 &459882
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0860000029, y: -.370000005, z: 0}
+  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_Children: []
+  m_Father: {fileID: 421424}
+  m_RootOrder: 1
 --- !u!50 &5013202
 Rigidbody2D:
   serializedVersion: 2
@@ -197,6 +281,13 @@ MonoBehaviour:
   player: {fileID: 0}
   persist: 0
   fader: {fileID: 0}
+  ImpGroundChecks:
+  - {fileID: 459882}
+  - {fileID: 428768}
+  - {fileID: 404254}
+  ImpWhatIsGrounded:
+    serializedVersion: 2
+    m_Bits: 53504
 --- !u!212 &21225998
 SpriteRenderer:
   m_ObjectHideFlags: 1

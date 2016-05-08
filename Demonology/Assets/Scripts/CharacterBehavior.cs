@@ -310,7 +310,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
         if (Input.GetMouseButtonDown(1)) 
         {
-            if (HoldingImp != "" || HoldingImp != "StickImp") 
+            if (HoldingImp != "") 
             {
                 Transform heldImp = transform.GetChild(5);
 				if (heldImp != null) {
