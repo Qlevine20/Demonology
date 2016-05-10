@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 408648}
   - 212: {fileID: 21203026}
+  - 60: {fileID: 6083358}
   m_Layer: 8
   m_Name: Rock 35
   m_TagString: floor
@@ -28,6 +29,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!60 &6083358
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134096}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: 2.15763712, y: -.580210745}
+      - {x: 2.23459005, y: -.387827963}
+      - {x: 2.23459005, y: .227797017}
+      - {x: 1.77287138, y: .727992296}
+      - {x: .887910485, y: 1.18971097}
+      - {x: .0414261781, y: 1.34361732}
+      - {x: -1.69001901, y: 1.34361732}
+      - {x: -1.76697218, y: 1.30514073}
+      - {x: -1.80544877, y: 1.18971097}
+      - {x: -2.1902144, y: .843421996}
+      - {x: -2.1902144, y: .0354142152}
+      - {x: -2.11326122, y: -.156968579}
+      - {x: -1.30525339, y: -.580210745}
+      - {x: -.843534708, y: -.888023257}
+      - {x: -.112480059, y: -1.31126535}
+      - {x: .195332423, y: -1.31126535}
+      - {x: .426191777, y: -1.11888266}
+      - {x: .61857456, y: -.695640445}
+      - {x: 1.9267776, y: -.618687332}
 --- !u!212 &21203026
 SpriteRenderer:
   m_ObjectHideFlags: 1
