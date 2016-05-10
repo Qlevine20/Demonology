@@ -30,7 +30,7 @@ public class MovingBlock : EnemyBehavior {
 			if((!autoStart && Pos == 0 && (ArrayDir < 0)) || (pauseEachPoint && Pos != 0))
 			{
 				Moving = false;
-				print ("check");
+				//print ("check");
 			}
 
 			Pos += ArrayDir;

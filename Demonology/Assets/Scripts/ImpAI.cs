@@ -29,7 +29,6 @@ public class ImpAI : DemonBehavior {
 	public CharacterBehavior player;
 	public bool persist = false;
 	public FadeObjectInOut fader;
-	private float distToGround;
 	private float fallCheck;
 	public Transform[] ImpGroundChecks;
 	public LayerMask ImpWhatIsGrounded;
@@ -63,7 +62,6 @@ public class ImpAI : DemonBehavior {
             player = GameObject.Find("Character").GetComponent<CharacterBehavior>();
         }
 
-		distToGround = GetComponent<Collider2D> ().bounds.extents.y;
 		fallCheck = transform.position.y;
 
         //Call Parent class Start() funciton
