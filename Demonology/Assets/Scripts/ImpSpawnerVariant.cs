@@ -55,9 +55,10 @@ public class ImpSpawnerVariant : MonoBehaviour{
 					SpawnedImp.GetComponent<Mobile>().speed = 20f;
 					//SpawnedImp.GetComponent<Rigidbody2D>().mass = 1000f;
 					SpawnedImp.transform.FindChild("ImpTrigger").GetComponent<CircleCollider2D>().enabled = true;
-					print ("SHOOT!");
+					//print ("SHOOT!");
 				}
 			}
+			SpawnedImp.transform.parent = transform.parent;
 			return true;
 		}
 		return false;
