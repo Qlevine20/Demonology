@@ -25,17 +25,12 @@ public class ImpExp : ImpAI {
 	public override void Update()
 	{
 		base.Update ();
-		//CurrTime += Time.deltaTime;
-		//CheckExp ();
 	}
 
-	/*public void CheckExp()
+	public override void KillImp() 
 	{
-		if (CurrTime >= TimeToExp) 
-		{
-			OnDeath ();
-		}
-	}*/
+		OnDeath ();
+	}
 
 	public override void OnTriggerEnter2D (Collider2D other)
 	{

@@ -8,6 +8,7 @@ public class PowerCrystal : EnemyBehavior
 	public GameObject bauble;
 	Animator anim;
 	public AudioClip shatterSound;
+	public GameObject impFaller;
 
 	public override void Start()
 	{
@@ -59,12 +60,27 @@ public class PowerCrystal : EnemyBehavior
 		base.OnDeath ();
 		AudioSource.PlayClipAtPoint(shatterSound, Camera.main.transform.position);
 		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 2);
+
+		if (GetComponent<CrystalScript> () != null) {
+			int[] newMats = GetComponent<CrystalScript> ().newMats;
+			CharacterBehavior player = GameObject.Find("Character").GetComponent<CharacterBehavior>();;
+			for (int i=0; i<player.currentMats.Length; i++) {
+				player.currentMats [i] += newMats [i];
+			}
+			if(impFaller != null) {
+				impFaller.SetActive(true);
+			}
+			//transform.GetChild(0).parent = null;
+		}
 	}
 
 	public override void OnRespawn ()
 	{
 		base.OnRespawn ();
 		bauble.GetComponent<Animator> ().SetInteger ("ActiveColor", 1);
+		if(impFaller != null) {
+			impFaller.SetActive(false);
+		}
 	}
 
 	public IEnumerator PhaseOn(float num)

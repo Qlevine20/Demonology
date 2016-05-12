@@ -256,11 +256,13 @@ public class ImpAI : DemonBehavior {
     //Functions
 	public override IEnumerator WaitTime(float num)
 	{
-		yield return new WaitForSeconds (num-0.3f);
-		if (fader != null) {
-			fader.FadeOut (0.3f);
+		if (num > 0f) {
+			yield return new WaitForSeconds (num - 0.3f);
+			if (fader != null) {
+				fader.FadeOut (0.3f);
+			}
+			yield return new WaitForSeconds (0.3f);
 		}
-		yield return new WaitForSeconds (0.3f);
 		OnDeath ();
 	}
 

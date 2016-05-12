@@ -13,6 +13,7 @@ public class BatBehavior : EnemyBehavior {
 	protected int ArrayDir;
 	protected Vector3 startScale;
     public AudioClip PlayerFoundSound;
+	public AudioClip DeathSound;
     private bool FirstSight;
 	private Animator batAnim;
 	public GameObject Poof;
@@ -181,6 +182,7 @@ public class BatBehavior : EnemyBehavior {
 	{
 		base.OnDeath ();
 		Instantiate (Poof, transform.position, Quaternion.identity);
+		AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position,100.0f);
 	}
 
 	//Flips the direction of the sprite
