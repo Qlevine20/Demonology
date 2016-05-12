@@ -16,7 +16,7 @@ public class RotateFall : MonoBehaviour {
 	void Update () {
 		transform.Rotate (0,0,360*rotateSpeed*Time.deltaTime);
 		lifeTime -= Time.deltaTime;
-		if (lifeTime <= 0f) {
+		if (lifeTime <= 0f || CharacterBehavior.Died) {
 			Destroy(gameObject);
 		}
 	}

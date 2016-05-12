@@ -712,12 +712,13 @@ public class CharacterBehavior : DeadlyBehavior {
 		// Make sure that you have the necessary materials for demon summoning
 		if(checkMaterials() /*&& GameObject.FindGameObjectsWithTag(Demons[selected].tag).Length<maxMins*/)
 		{
-
 			GameObject newImp = Instantiate (Demons[selected], transform.position,transform.rotation) as GameObject;
 			int[] reqMats = Demons[selected].GetComponent<DemonBehavior>().reqMats;
 			for (int i=0; i<reqMats.Length; i++) 
 			{
-				currentMats[i] -= reqMats[i];
+				if (currentMats[i] < 9000) {
+					currentMats[i] -= reqMats[i];
+				}
 			}
             if (Grab)
             {
@@ -761,8 +762,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	// Grab an imp
 	public void GrabImp(Collider2D imp)
 	{
-
-        
         HoldingImp = imp.transform.parent.gameObject.tag;
         imp.transform.parent.gameObject.GetComponent<ImpAI>().held = true;
         Vector2 origScale = imp.transform.parent.localScale;

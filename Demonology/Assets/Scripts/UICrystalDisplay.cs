@@ -21,7 +21,12 @@ public class UICrystalDisplay : MonoBehaviour
         if (DeadlyBehavior.Player)
         {
             playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior>().currentMats;
-            crystalText.text = playerMats[crystalId].ToString();
+			if (playerMats[crystalId] < 9000) {
+				crystalText.text = playerMats [crystalId].ToString ();
+			}
+			else {
+				crystalText.text = "∞";
+			}
         }
     }
 }

@@ -18,6 +18,7 @@ public class RunnerBehavior : EnemyBehavior {
 	public bool charging = false;
 	private Rigidbody2D rb;
     public AudioClip PlayerSeen;
+	public AudioClip DeathSound;
 	private Animator runAnim;
 	public GameObject Poof;
 
@@ -57,6 +58,7 @@ public class RunnerBehavior : EnemyBehavior {
 	{
 		base.OnDeath ();
 		Instantiate (Poof, transform.position, Quaternion.identity);
+		AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position,100.0f);
 	}
 	
 	public void FixedUpdate()
