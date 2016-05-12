@@ -591,6 +591,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 455868}
+  - 114: {fileID: 11466690}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -2138,7 +2139,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2202,7 +2203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2300,7 +2301,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2353,7 +2354,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2605,7 +2606,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2712,7 +2713,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2811,10 +2812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9c5af3bbb31424ba906e321ed5e061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameMenu: {fileID: 150436}
-  menuKey: 27
   crystalId: 0
-  LevelsScreen: {fileID: 120720}
 --- !u!114 &11421282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2882,7 +2880,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -2988,7 +2986,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: UpdateMenu
         m_Mode: 2
         m_Arguments:
@@ -3127,7 +3125,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: ToLevelsScreen
         m_Mode: 2
         m_Arguments:
@@ -3207,7 +3205,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: ExitLevelsScreen
         m_Mode: 2
         m_Arguments:
@@ -3354,7 +3352,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -3526,7 +3524,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -3660,7 +3658,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -3711,10 +3709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9c5af3bbb31424ba906e321ed5e061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameMenu: {fileID: 0}
-  menuKey: 27
   crystalId: 1
-  LevelsScreen: {fileID: 0}
 --- !u!114 &11462088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3753,6 +3748,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11466690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e44951f3ecf29d408a5eee227d7cf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameMenu: {fileID: 150436}
+  menuKey: 27
+  LevelsScreen: {fileID: 120720}
 --- !u!114 &11469866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3847,7 +3856,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:
@@ -4024,10 +4033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9c5af3bbb31424ba906e321ed5e061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameMenu: {fileID: 0}
-  menuKey: 27
   crystalId: 2
-  LevelsScreen: {fileID: 0}
 --- !u!114 &11493938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4069,8 +4075,8 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 1
+  m_ReferenceResolution: {x: 1366, y: 768}
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -4116,7 +4122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: ExitToMainMenu
         m_Mode: 1
         m_Arguments:
@@ -4196,7 +4202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419424}
+      - m_Target: {fileID: 11466690}
         m_MethodName: LevelButton
         m_Mode: 3
         m_Arguments:

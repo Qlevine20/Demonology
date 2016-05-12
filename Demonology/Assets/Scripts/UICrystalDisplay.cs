@@ -2,74 +2,26 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class UICrystalDisplay : MonoBehaviour {
-	
-	private Text crystalText;
-	private int[] playerMats;
-	public GameObject GameMenu;
-	public KeyCode menuKey;
-	public int crystalId;
-    public GameObject LevelsScreen;
+public class UICrystalDisplay : MonoBehaviour
+{
 
-	void Start () {
-		crystalText = GetComponent<Text>();
-	}
+    private Text crystalText;
+    private int[] playerMats;
 
-	// Update is called once per frame
-	void Update () {
-		if (DeadlyBehavior.Player) {
-			playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior> ().currentMats;
-			crystalText.text = playerMats [crystalId].ToString ();
-		}
+    public int crystalId;
 
-		if (GameMenu != null && Input.GetKeyUp (menuKey)) 
-		{
-			UpdateMenu (GameMenu);
-		}
-	}
-
-    public void UpdateMenu(GameObject menu)
+    void Start()
     {
-        if (LevelsScreen.activeSelf)
-        {
-            LevelsScreen.SetActive(false);
-            menu.SetActive(true);
-        }
-        else
-        {
-            if (menu.activeSelf)
-            {
-                menu.SetActive(false);
-                Time.timeScale = 1.0f;
-            }
-            else
-            {
-                menu.SetActive(true);
-                Time.timeScale = 0;
-            }
-        }
-   }
-
-	public void ExitToMainMenu()
-	{
-		Application.LoadLevel ("Main Menu");
-		Time.timeScale = 1.0f;
-	}
-
-    public void ToLevelsScreen(GameObject menu) 
-    {
-        menu.SetActive(false);
-        LevelsScreen.SetActive(true);
-        
+        crystalText = GetComponent<Text>();
     }
-    public void ExitLevelsScreen(GameObject menu) 
+
+    // Update is called once per frame
+    void Update()
     {
-        UpdateMenu(GameMenu);
-    }
-    public void LevelButton(int level) 
-    {
-        Time.timeScale = 1.0f;
-        MenuScript.levelNum = level;
-        Application.LoadLevel("LoadingScreen");
+        if (DeadlyBehavior.Player)
+        {
+            playerMats = DeadlyBehavior.Player.GetComponent<CharacterBehavior>().currentMats;
+            crystalText.text = playerMats[crystalId].ToString();
+        }
     }
 }

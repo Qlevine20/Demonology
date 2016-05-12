@@ -23,7 +23,7 @@ public class LevelReScale : MonoBehaviour {
             }
             if (currC < (columnSize)/2)
             {
-                buttonRect.anchoredPosition = new Vector2(-buttonRect.rect.width * (((columnSize)/2) - currC), buttonRect.rect.height * currR);
+                buttonRect.anchoredPosition = new Vector2(-buttonRect.rect.width * (((columnSize)/2) - currC), (buttonRect.rect.height * currR) - 200);
             }
             else if (currC == (columnSize-1) / 2.0f)
             {
@@ -33,7 +33,7 @@ public class LevelReScale : MonoBehaviour {
             else
             {
                 
-                buttonRect.anchoredPosition = new Vector2(buttonRect.rect.width * (currC - (columnSize/2)), buttonRect.rect.height * currR);
+                buttonRect.anchoredPosition = new Vector2(buttonRect.rect.width * (currC - (columnSize/2)), (buttonRect.rect.height * currR) - 200);
             }
             if (PersistantBehavoir.levelsEarned < levelNum) 
             {
@@ -48,7 +48,6 @@ public class LevelReScale : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
+
