@@ -869,31 +869,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 441656, guid: b0c8ddbeeaf0bb244a7d490fc399f2cb, type: 2}
   m_PrefabInternal: {fileID: 344217644}
---- !u!1 &356283858 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 138812, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
-  m_PrefabInternal: {fileID: 1989627012}
---- !u!114 &356283863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 356283858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
 --- !u!1001 &371228359
 Prefab:
   m_ObjectHideFlags: 0
@@ -2224,6 +2199,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8c4d6119c2e24e6e9619cab35d42f87, type: 2}
   m_IsPrefabParent: 0
+--- !u!20 &1905590416 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2060798, guid: 10db66a8869e26d4b9d6fe9d40310e57,
+    type: 2}
+  m_PrefabInternal: {fileID: 2145854720}
 --- !u!1 &1989407416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,15 +2281,7 @@ Prefab:
     - target: {fileID: 22309338, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 2145854721}
-    - target: {fileID: 22309338, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22491538, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -71.8999023
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1905590416}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
   m_IsPrefabParent: 0
@@ -2409,8 +2381,3 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10db66a8869e26d4b9d6fe9d40310e57, type: 2}
   m_IsPrefabParent: 0
---- !u!20 &2145854721 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 2060798, guid: 10db66a8869e26d4b9d6fe9d40310e57,
-    type: 2}
-  m_PrefabInternal: {fileID: 2145854720}
