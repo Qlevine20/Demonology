@@ -277,7 +277,7 @@ public class ImpAI : DemonBehavior {
 			playerChar.HoldingImp = "";
 			transform.parent = null;
 		}
-        if (Application.loadedLevelName != "LoadingScreen")
+        if (Application.loadedLevelName != "LoadingScreen" && Application.loadedLevelName != "OpeningScene")
         {
             CharacterBehavior.ImpsKilled++;
         }
