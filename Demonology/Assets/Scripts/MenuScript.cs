@@ -17,8 +17,8 @@ public class MenuScript : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-        RectTransform lvlButt = levelsButton.GetComponent<RectTransform>();
-        RectTransform CredButt = creditsButton.GetComponent<RectTransform>();
+        //RectTransform lvlButt = levelsButton.GetComponent<RectTransform>();
+        //RectTransform CredButt = creditsButton.GetComponent<RectTransform>();
         //lvlButt.position = new Vector3(lvlButt.position.x + Screen.width / 5, lvlButt.position.y);
         //CredButt.position = new Vector3(CredButt.position.x - Screen.width / 5, CredButt.position.y);
 

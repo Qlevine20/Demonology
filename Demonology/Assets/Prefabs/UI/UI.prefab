@@ -347,6 +347,7 @@ GameObject:
   - 223: {fileID: 22309338}
   - 114: {fileID: 11499022}
   - 114: {fileID: 11494106}
+  - 114: {fileID: 11420070}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2419,6 +2420,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crystalId: 0
+--- !u!114 &11420070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba0f34cebce6ae4fb7f4835b83bd581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  Jump: {fileID: 0}
+  Summon: {fileID: 0}
+  ChangeImp: {fileID: 0}
+  SummonHand: {fileID: 0}
+  PushImp: {fileID: 0}
+  KillImp: {fileID: 0}
+  GrabImp: {fileID: 0}
+  LookDown: {fileID: 0}
+  KillYourself: {fileID: 0}
 --- !u!114 &11422272
 MonoBehaviour:
   m_ObjectHideFlags: 1
