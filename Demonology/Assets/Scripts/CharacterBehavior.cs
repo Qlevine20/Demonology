@@ -174,7 +174,7 @@ public class CharacterBehavior : DeadlyBehavior {
         {
             //Debug.Log(feet_check.point);
             //Debug.Log(feet_check.collider.gameObject.transform.position.y);
-            if (feet_check.collider.gameObject.tag != "impTrigger" && !(Input.GetKey(climb) || Input.GetKeyDown(KeyManagerScript.keys["PushImp"])))
+            if (feet_check.collider.gameObject.tag != "impTrigger" && !(Input.GetKey(climb) || Input.GetKey(KeyManagerScript.keys["PushImp"])))
             {
                 RaycastHit2D check_empty = Physics2D.Raycast(checkWall.origin, checkWall.direction, checkWallDist, checkMasks);
                 if (check_empty.collider == null && Mathf.Abs(Input.GetAxis("Horizontal")) > .5f)
@@ -225,12 +225,12 @@ public class CharacterBehavior : DeadlyBehavior {
         }
 
 		// Code for recieving button input
-		if ((Input.GetKeyDown (Summon) || Input.GetKeyDown(KeyManagerScript.keys["Summon"])) && (Input.GetKey(modifier) || Input.GetKeyDown(KeyManagerScript.keys["Mod"])) && HoldingImp=="") 
+		if ((Input.GetKeyDown (Summon) || Input.GetKeyDown(KeyManagerScript.keys["Summon"])) && (Input.GetKey(modifier) || Input.GetKey(KeyManagerScript.keys["Mod"])) && HoldingImp=="") 
 		{
             summon(true);
 			// Summon a demon
 		}
-        if ((Input.GetKeyDown(Summon) || Input.GetKeyDown(KeyManagerScript.keys["Summon"])) && !(Input.GetKey(modifier) || Input.GetKeyDown(KeyManagerScript.keys["Mod"])) && HoldingImp == "") 
+        if ((Input.GetKeyDown(Summon) || Input.GetKeyDown(KeyManagerScript.keys["Summon"])) && !(Input.GetKey(modifier) || Input.GetKey(KeyManagerScript.keys["Mod"])) && HoldingImp == "") 
         {
             summon(false);
         }
@@ -253,7 +253,7 @@ public class CharacterBehavior : DeadlyBehavior {
 			ImpSelect.GetComponent<Image> ().color = Demons [selected].GetComponent<SpriteRenderer> ().color;
 		}
 
-        if (Input.GetKey(killSelf) || Input.GetKeyDown(KeyManagerScript.keys["KillYourself"])) 
+        if (Input.GetKey(killSelf) || Input.GetKey(KeyManagerScript.keys["KillYourself"])) 
         {
             holdDown += Time.deltaTime;
             if (holdDown > 1.0f) 
@@ -266,7 +266,7 @@ public class CharacterBehavior : DeadlyBehavior {
 				}
             }
         }
-        if (Input.GetKeyUp(killSelf) || Input.GetKeyDown(KeyManagerScript.keys["KillYourself"])) 
+        if (Input.GetKeyUp(killSelf) || Input.GetKeyUp(KeyManagerScript.keys["KillYourself"])) 
         {
             holdDown = 0;
         }

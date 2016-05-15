@@ -10,6 +10,7 @@ public class KeyManagerScript : MonoBehaviour {
     private GameObject currentKey;
     private Color32 currColor = new Color32(10, 10, 255, 255);
     private Color32 clicked = new Color32(10, 10, 255, 255);
+    public GameObject JumpButt;
 	// Use this for initialization
 	void Start () {
         if (keys.Count == 0)
@@ -18,11 +19,11 @@ public class KeyManagerScript : MonoBehaviour {
             keys.Add("Jump", KeyCode.W);
             keys.Add("Summon", KeyCode.Q);
             keys.Add("ChangeImp", KeyCode.E);
-            keys.Add("SummonHand", KeyCode.Q);
+            keys.Add("SummonHand", KeyCode.F);
             keys.Add("PushImp", KeyCode.RightShift);
             keys.Add("LookDown", KeyCode.S);
             keys.Add("KillYourself", KeyCode.K);
-            currColor = GameObject.Find("Jump").GetComponent<Image>().color;
+            currColor = JumpButt.GetComponent<Image>().color;
         }
 	}
 	

@@ -6,6 +6,7 @@ public class UIScript : MonoBehaviour {
     public GameObject GameMenu;
     public KeyCode menuKey;
     public GameObject LevelsScreen;
+    public GameObject ControlsScreen;
 	// Use this for initialization
 	void Start () {
 	
@@ -28,17 +29,32 @@ public class UIScript : MonoBehaviour {
             LevelsScreen.SetActive(false);
             menu.SetActive(true);
         }
+        else if (ControlsScreen.activeSelf) 
+        {
+            ControlsScreen.SetActive(false);
+            menu.SetActive(true);
+        }
         else
         {
             if (menu.activeSelf)
             {
                 menu.SetActive(false);
                 Time.timeScale = 1.0f;
+                if(GameObject.Find("Character"))
+                {
+                    GameObject Char = GameObject.Find("Character");
+                    Char.GetComponent<CharacterBehavior>().enabled = true;
+                }
             }
             else
             {
                 menu.SetActive(true);
                 Time.timeScale = 0;
+                if (GameObject.Find("Character")) 
+                {
+                    GameObject Char = GameObject.Find("Character");
+                    Char.GetComponent<CharacterBehavior>().enabled = false;
+                }
             }
         }
     }
@@ -60,6 +76,16 @@ public class UIScript : MonoBehaviour {
         UpdateMenu(GameMenu);
     }
 
+    public void ToControlsScreen(GameObject menu) 
+    {
+        menu.SetActive(false);
+        ControlsScreen.SetActive(true);
+    }
+
+    public void ExitControlsScreen(GameObject menu) 
+    {
+        UpdateMenu(GameMenu);
+    }
     public void LevelButton(int level)
     {
         Time.timeScale = 1.0f;
