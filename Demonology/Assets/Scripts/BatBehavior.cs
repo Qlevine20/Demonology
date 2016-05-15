@@ -17,6 +17,7 @@ public class BatBehavior : EnemyBehavior {
     private bool FirstSight;
 	private Animator batAnim;
 	public GameObject Poof;
+	private Rigidbody2D rb;
 
 	public override void Start()
 	{
@@ -27,6 +28,7 @@ public class BatBehavior : EnemyBehavior {
 		Pos = 0;
 		startScale = transform.localScale;
 		batAnim = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody2D>();
 
 		if (mobFacingRight) {
 			//Flip ();
@@ -52,6 +54,10 @@ public class BatBehavior : EnemyBehavior {
 		} else {
 			gameObject.tag = "enemy";
 			batAnim.SetBool("Eating", false);
+			rb.gravityScale = 0f;
+			Vector3 newSpeed = rb.velocity;
+			newSpeed.y = 0f;
+			rb.velocity = newSpeed;
 		}
 
 		Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, targetRange);
@@ -115,6 +121,11 @@ public class BatBehavior : EnemyBehavior {
 			                                   0.0F);
 			gameObject.tag = "impkiller";
 			batAnim.SetBool("Eating", true);
+			Rigidbody2D impBody = other.gameObject.GetComponent<Rigidbody2D>();
+			rb.gravityScale = impBody.gravityScale;
+			Vector3 newSpeed = impBody.velocity;
+			newSpeed.x = 0f;
+			impBody.velocity = newSpeed;
 		}
 		if (other.gameObject.tag == "Player") {
 			if(transform.parent != null && transform.parent.gameObject.tag == "imp"){
