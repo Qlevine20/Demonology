@@ -267,13 +267,15 @@ MonoBehaviour:
   SinkTime: 5
   dead: 0
   sinkDiv: 3
+  held: 0
+  DropKill: 0
   player: {fileID: 0}
   persist: 0
   fader: {fileID: 0}
   ImpGroundChecks: []
   ImpWhatIsGrounded:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 53504
   jumpspeed: 5
 --- !u!114 &11452796
 MonoBehaviour:
@@ -504,6 +506,10 @@ Prefab:
       propertyPath: impFogDeathSound
       value: 
       objectReference: {fileID: 8300000, guid: bb896413d2f3e6d478b9113798222dec, type: 3}
+    - target: {fileID: 0}
+      propertyPath: ImpWhatIsGrounded.m_Bits
+      value: 53504
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 116858}

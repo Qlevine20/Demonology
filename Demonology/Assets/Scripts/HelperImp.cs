@@ -37,6 +37,13 @@ public class HelperImp : MonoBehaviour {
 			active = false;
 			Instantiate (Poof, transform.position, Quaternion.identity);
 		}
+
+
+		if (transform.GetChild(0).gameObject.activeSelf && (GameObject.Find ("LevelsScreen") == null || !GameObject.Find ("LevelsScreen").activeSelf)) {
+			transform.GetChild(0).GetChild (0).gameObject.SetActive(true);
+		} else if (transform.GetChild(0).gameObject.activeSelf && GameObject.Find ("LevelsScreen").activeSelf) {
+			transform.GetChild(0).GetChild (0).gameObject.SetActive(false);
+		}
 	}
 
 

@@ -303,6 +303,7 @@ MonoBehaviour:
   pause: 0
   charging: 0
   PlayerSeen: {fileID: 8300000, guid: 4840dfddaa7dff548bab6b627e4ebbe7, type: 3}
+  DeathSound: {fileID: 8300000, guid: 2eb121e3c786b5746b279e185d19d7b4, type: 3}
   Poof: {fileID: 141226, guid: e646e1068fb9f5644a0937f8f8fe930a, type: 2}
 --- !u!212 &21230688
 SpriteRenderer:
@@ -531,6 +532,10 @@ Prefab:
       propertyPath: Poof
       value: 
       objectReference: {fileID: 141226, guid: e646e1068fb9f5644a0937f8f8fe930a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2eb121e3c786b5746b279e185d19d7b4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148966}
