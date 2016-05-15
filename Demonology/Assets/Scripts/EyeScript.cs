@@ -34,9 +34,10 @@ public class EyeScript : MonoBehaviour
 
 
             Vector3 Diff = transform.position - LeftEye.transform.position;
+			//Vector2 Diffp = new Vector2(Player.transform.position.x - transform.position.x, Player.transform.position.y - transform.position.y);
 
-            Vector3 Lvector = new Vector3(LeftEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), LeftEye.transform.position.y + ((Player.transform.position.y)), LeftPupil.transform.position.z);
-            Vector3 Rvector = new Vector3(RightEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), RightEye.transform.position.y + ((Player.transform.position.y)), RightPupil.transform.position.z);
+            Vector3 Lvector = new Vector3(LeftEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), (LeftEye.transform.position.y + ((Player.transform.position.y))) / divider, LeftPupil.transform.position.z);
+            Vector3 Rvector = new Vector3(RightEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), (RightEye.transform.position.y + ((Player.transform.position.y))) / divider, RightPupil.transform.position.z);
 
 
             if (Vector3.Distance(LeftEye.transform.position, Lvector) * .9f < radius)
