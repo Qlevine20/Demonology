@@ -271,16 +271,16 @@ public class CharacterBehavior : DeadlyBehavior {
             holdDown = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.U)) 
-        {
-            Debug.Log("Imp Deaths");
-            Debug.Log(ImpsKilled);
-            Debug.Log("Player Deaths");
-            Debug.Log(TimesPlayerDied);
-        }
+        //if (Input.GetKeyDown(KeyCode.U)) 
+        //{
+        //    Debug.Log("Imp Deaths");
+        //    Debug.Log(ImpsKilled);
+        //    Debug.Log("Player Deaths");
+        //    Debug.Log(TimesPlayerDied);
+        //}
 
 		//Grab an Imp or drop it
-        if (Input.GetKeyDown(grabButton) || Input.GetKeyDown(KeyManagerScript.keys["GrabImp"]))
+        if (Input.GetKeyDown(grabButton))
 		{
 			if (HoldingImp != "" && HoldingImp != "stickImp")
 			{
