@@ -88,6 +88,7 @@ public class UIScript : MonoBehaviour {
     }
     public void LevelButton(int level)
     {
+        Debug.Log("Button Pressed");
         Time.timeScale = 1.0f;
         MenuScript.levelNum = level;
         Application.LoadLevel("LoadingScreen");

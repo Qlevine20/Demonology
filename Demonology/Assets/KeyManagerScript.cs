@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KeyManagerScript : MonoBehaviour {
 
     public static Dictionary<string, KeyCode> keys = new Dictionary<string,KeyCode>();
-    public Text Mod, Jump, Summon, ChangeImp, SummonHand, PushImp, LookDown, KillYourself;
+    public Text Mod, Jump, AltJump, Summon, ChangeImp, SummonHand, PushImp, LookDown, KillYourself;
     private GameObject currentKey;
     private Color32 currColor = new Color32(10, 10, 255, 255);
     private Color32 clicked = new Color32(10, 10, 255, 255);
@@ -17,10 +17,11 @@ public class KeyManagerScript : MonoBehaviour {
         {
             keys.Add("Mod", KeyCode.LeftShift);
             keys.Add("Jump", KeyCode.W);
+            keys.Add("AltJump", KeyCode.Space);
             keys.Add("Summon", KeyCode.Q);
             keys.Add("ChangeImp", KeyCode.E);
             keys.Add("SummonHand", KeyCode.F);
-            keys.Add("PushImp", KeyCode.RightShift);
+            keys.Add("PushImp", KeyCode.LeftShift);
             keys.Add("LookDown", KeyCode.S);
             keys.Add("KillYourself", KeyCode.K);
             currColor = JumpButt.GetComponent<Image>().color;
@@ -33,6 +34,7 @@ public class KeyManagerScript : MonoBehaviour {
         {
             Mod.text = keys["Mod"].ToString();
             Jump.text = keys["Jump"].ToString();
+            AltJump.text = keys["AltJump"].ToString();
             Summon.text = keys["Summon"].ToString();
             ChangeImp.text = keys["ChangeImp"].ToString();
             SummonHand.text = keys["SummonHand"].ToString();

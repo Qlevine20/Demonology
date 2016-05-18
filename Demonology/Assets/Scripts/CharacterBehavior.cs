@@ -9,7 +9,6 @@ public class CharacterBehavior : DeadlyBehavior {
 	public KeyCode Summon = KeyCode.Q;
 	public KeyCode ShiftLeft = KeyCode.E;
 	public KeyCode ShiftRight = KeyCode.R;
-	public KeyCode[] jumpButton;
 	public KeyCode grabButton = KeyCode.F;
     public KeyCode killSelf = KeyCode.K;
     public KeyCode climb = KeyCode.C;
@@ -146,17 +145,12 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (Dying) {
 			transform.GetChild (4).gameObject.SetActive (true);
 		}
-
-        foreach (KeyCode k in jumpButton)
+        if (Input.GetKeyDown(KeyManagerScript.keys["AltJump"]) && !Input.GetKeyDown(KeyManagerScript.keys["Jump"]) || Input.GetKeyDown(KeyManagerScript.keys["Jump"]) && !Input.GetKeyDown(KeyManagerScript.keys["AltJump"]))
         {
-            if (Input.GetKeyDown(k) || Input.GetKeyDown(KeyManagerScript.keys["Jump"]))
+            if (onGround())
             {
-                if (onGround())
-                {
-                    rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
-                    PlayerAnim.SetBool("Jump", true);
-                    break;
-                }
+                rb.AddForce(new Vector2(0, jumpspeed), ForceMode2D.Impulse);
+                PlayerAnim.SetBool("Jump", true);
             }
         }
 		base.Update ();
