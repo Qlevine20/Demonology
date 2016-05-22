@@ -548,7 +548,8 @@ public class CharacterBehavior : DeadlyBehavior {
 		if (other.gameObject.tag == "impkiller") {
 			//all of your crystals vanish! bwahahaha!
 			BatBehavior isABat = other.gameObject.GetComponent<BatBehavior> ();
-			if (isABat == null) {
+			FinalBossBehavior isABoss = other.gameObject.GetComponent<FinalBossBehavior> ();
+			if (isABat == null && isABoss == null) {
 				for(int i=0; i<currentMats.Length; i++){
 					currentMats[i] = 0;
 				}

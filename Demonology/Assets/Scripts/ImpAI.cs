@@ -107,7 +107,11 @@ public class ImpAI : DemonBehavior {
 
         if (held && other.gameObject.tag == "cinder") 
         {
-            other.GetComponent<GravityCinder>().StartCo();
+			if (other.GetComponent<GravityCinder> () != null) {
+				other.GetComponent<GravityCinder> ().StartCo ();
+			} else if (other.GetComponent<BossCinder> () != null) {
+				other.GetComponent<GravityCinder> ().StartCo ();
+			}
             DropKill = true;
         }
 
