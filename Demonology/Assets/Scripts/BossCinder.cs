@@ -41,7 +41,7 @@ public class BossCinder : MonoBehaviour {
 	//public void OnCollisionEnter2D(Collision2D other)
 	public void OnTriggerEnter2D(Collider2D other)
 	{
-		print ("triggercollide");
+		//print ("triggercollide");
 		if (!dead && 
 			(other.tag == "floor" ||
 			//other.tag == "imp" ||
@@ -50,7 +50,7 @@ public class BossCinder : MonoBehaviour {
 			//other.tag == "enemy" ||
 			other.tag == "PowerCrystal" ||
 			other.tag == "DeadImp")) {
-			print ("die");
+			//print ("die");
 			StartCoroutine (FadeOut ());
 		}
 	}
@@ -81,5 +81,10 @@ public class BossCinder : MonoBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		cParts.Clear ();
 		Destroy (gameObject);
+	}
+
+	public void StartCo() 
+	{
+		StartCoroutine(FadeOut());
 	}
 }
