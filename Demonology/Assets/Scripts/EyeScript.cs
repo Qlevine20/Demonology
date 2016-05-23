@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EyeScript : MonoBehaviour
 {
-
+	public GameObject BossObject;
     public GameObject RightEye;
     public GameObject LeftEye;
     private Transform Player;
@@ -22,6 +22,12 @@ public class EyeScript : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         LeftPupil = LeftEye.transform.FindChild("EyePupil");
         RightPupil = RightEye.transform.FindChild("EyePupil");
+
+		ParticleSystem cParts = GetComponent<ParticleSystem> ();
+		if (cParts != null) {
+			cParts.enableEmission = false;
+			cParts.Clear ();
+		}
     }
 
     // Update is called once per frame
@@ -34,10 +40,11 @@ public class EyeScript : MonoBehaviour
 
 
             Vector3 Diff = transform.position - LeftEye.transform.position;
-			//Vector2 Diffp = new Vector2(Player.transform.position.x - transform.position.x, Player.transform.position.y - transform.position.y);
+			Vector2 Diffp = new Vector2(Player.transform.position.x - transform.position.x, Player.transform.position.y - transform.position.y);
 
-            Vector3 Lvector = new Vector3(LeftEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), (LeftEye.transform.position.y + ((Player.transform.position.y))) / divider, LeftPupil.transform.position.z);
-            Vector3 Rvector = new Vector3(RightEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), (RightEye.transform.position.y + ((Player.transform.position.y))) / divider, RightPupil.transform.position.z);
+			Vector3 Lvector = new Vector3(LeftEye.transform.position.x + (Diffp.x / divider), LeftEye.transform.position.y + (Diffp.y / divider), LeftPupil.transform.position.z);
+			Vector3 Rvector = new Vector3(RightEye.transform.position.x + (Diffp.x / divider), RightEye.transform.position.y + (Diffp.y / divider), RightEye.transform.position.z);
+            //Vector3 Rvector = new Vector3(RightEye.transform.position.x + ((Player.transform.position.x + Diff.x) / divider), (RightEye.transform.position.y + ((Player.transform.position.y))) / divider, RightPupil.transform.position.z);
 
 
             if (Vector3.Distance(LeftEye.transform.position, Lvector) * .9f < radius)
@@ -50,5 +57,42 @@ public class EyeScript : MonoBehaviour
         {
             Player = GameObject.FindGameObjectWithTag("Player").transform;
         }
+
+
+		if (gameObject.name != "Boss" && GameObject.FindGameObjectWithTag ("PowerCrystal") == null) {
+			//GameObject.Find ("Boss").SetActive(true);
+			if (BossObject != null) {
+				StartCoroutine (SwitchToBoss ());
+			}
+		} else if (gameObject.name != "Boss"){
+			if (LeftEye.activeSelf != true) {
+				LeftEye.SetActive (true);
+				LeftEye.GetComponent<FadeObjectInOut> ().FadeIn(0f);
+				LeftEye.GetComponent<ParticleSystem> ().enableEmission = true;
+			}
+			if (RightEye.activeSelf != true) {
+				RightEye.SetActive (true);
+				RightEye.GetComponent<FadeObjectInOut> ().FadeIn(0f);
+				RightEye.GetComponent<ParticleSystem> ().enableEmission = true;
+			}
+			if ( GetComponent<ParticleSystem> ().enableEmission == true )
+			GetComponent<ParticleSystem> ().enableEmission = false;
+		}
     }
+
+	public IEnumerator SwitchToBoss()
+	{
+		GetComponent<ParticleSystem> ().enableEmission = true;
+		LeftEye.GetComponent<ParticleSystem> ().enableEmission = false;
+		RightEye.GetComponent<ParticleSystem> ().enableEmission = false;
+		yield return new WaitForSeconds (1f);
+		LeftEye.GetComponent<FadeObjectInOut> ().FadeOut (2.0f);
+		RightEye.GetComponent<FadeObjectInOut> ().FadeOut (2.0f);
+		yield return new WaitForSeconds (1f);
+		BossObject.SetActive (true);
+		LeftEye.SetActive (false);
+		RightEye.SetActive (false);
+		yield return new WaitForSeconds (1f);
+		gameObject.SetActive (false);
+	}
 }
