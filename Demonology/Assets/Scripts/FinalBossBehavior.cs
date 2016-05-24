@@ -95,10 +95,10 @@ public class FinalBossBehavior : EnemyBehavior {
 	public IEnumerator EyeFlash(int num)
 	{
 		ParticleSystem ps = transform.GetChild (num).GetChild (0).GetComponent<ParticleSystem> ();
-		ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
-		col.enabled = false;
+		//ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
+		//col.enabled = false;
 		yield return new WaitForSeconds (0.5f);
-		col.enabled = true;
+		//col.enabled = true;
 	}
 
 
