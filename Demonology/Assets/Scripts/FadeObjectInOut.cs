@@ -75,6 +75,12 @@ public class FadeObjectInOut : MonoBehaviour
 		}
 	}
 
+	public void FadeIn (float newFadeTime)
+	{
+		StopAllCoroutines(); 
+		StartCoroutine("FadeSequence", newFadeTime); 
+	}
+
 	public void FadeOut (float newFadeTime)
 	{
 		StopAllCoroutines(); 

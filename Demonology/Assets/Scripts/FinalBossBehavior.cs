@@ -8,8 +8,9 @@ public class FinalBossBehavior : EnemyBehavior {
 	public int numCindersLeft = 4;
 	public int numCindersRight = 4;
 	private float timer = 0f;
-	private GameObject player;
+	//private GameObject player;
 	public GameObject spawnAttack;
+	public GameObject EyeObject;
 
 	// Use this for initialization
 	public override void Start () {
@@ -17,10 +18,10 @@ public class FinalBossBehavior : EnemyBehavior {
 		//timer = attackRate;
 		timer = 2f;
 
-		if (GameObject.Find("Character") != null)
+		/*if (GameObject.Find("Character") != null)
 		{
 			player = GameObject.Find("Character");
-		}
+		}*/
 	}
 	
 	// Update is called once per frame
@@ -34,6 +35,16 @@ public class FinalBossBehavior : EnemyBehavior {
 			} else {
 				RightEyeattack ();
 			}
+		}
+
+		if (GameObject.FindGameObjectWithTag ("PowerCrystal") != null) {
+			EyeObject.SetActive (true);
+			ParticleSystem cParts = EyeObject.GetComponent<ParticleSystem> ();
+			if (cParts != null) {
+				cParts.enableEmission = false;
+				cParts.Clear ();
+			}
+			gameObject.SetActive (false);
 		}
 	}
 
