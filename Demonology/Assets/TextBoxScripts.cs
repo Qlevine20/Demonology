@@ -27,6 +27,7 @@ public class TextBoxScripts : MonoBehaviour {
     private float StartFieldOfView;
     
     
+    
 	// Use this for initialization
 	void Start () {
         Poololi = Camera.main.GetComponent<AudioSource>();
@@ -40,7 +41,7 @@ public class TextBoxScripts : MonoBehaviour {
     {
         counter += Time.deltaTime;
         Camera.main.transform.position = new Vector3(follow.transform.position.x, follow.transform.position.y + 20.0f, Camera.main.transform.position.z);
-        if (Tbox < NumTextBoxes - 1 && !Input.GetKey(KeyCode.A))
+        if (Tbox < NumTextBoxes-1 && !Input.GetKey(KeyCode.A))
         {
 
             if (StartOffset < counter && Started == false) 
@@ -57,37 +58,37 @@ public class TextBoxScripts : MonoBehaviour {
                 transform.GetChild(Tbox).gameObject.SetActive(true);
             }
         }
-        else if (Poololi.enabled == false)
+        else if (Poololi.enabled == false && DisplayTime < counter)
         {
             transform.GetChild(Tbox).gameObject.SetActive(false);
             Poololi.enabled = true;
             counter = 0;
-           
+
 
         }
-        else 
+        else if(Poololi.enabled == true)
         {
             //Debug.Log(counter);
-            if (counter < DevilTalkTime1 && DevilTalking == false) 
+            if (counter < DevilTalkTime1 && DevilTalking == false)
             {
                 DevilTalking = true;
                 follow = Devil;
                 Camera.main.fieldOfView = DevilFieldOfView;
             }
-            else if ((counter > DevilTalkTime1 && counter < TabooTalkTime1 + DevilTalkTime1) && TabooTalking == false) 
+            else if ((counter > DevilTalkTime1 && counter < TabooTalkTime1 + DevilTalkTime1) && TabooTalking == false)
             {
                 TabooTalking = true;
                 ActivateTabooPoolali();
             }
-            else if ((counter > TabooTalkTime1 + DevilTalkTime1 && counter < (TabooTalkTime2 + TabooTalkTime1 + DevilTalkTime1)) && TabooTalking2 == false) 
+            else if ((counter > TabooTalkTime1 + DevilTalkTime1 && counter < (TabooTalkTime2 + TabooTalkTime1 + DevilTalkTime1)) && TabooTalking2 == false)
             {
                 TabooTalking2 = true;
                 follow = StartCam;
                 Camera.main.fieldOfView = StartFieldOfView;
                 Debug.Log(StartCam.transform.position);
-                
+
             }
-            else if((counter > TabooTalkTime1 + DevilTalkTime1 + TabooTalkTime2 && counter < (TabooTalkTime1 + DevilTalkTime1 + TabooTalkTime2 + BackUpTalkTime1)) && BackUpTalking == false)
+            else if ((counter > TabooTalkTime1 + DevilTalkTime1 + TabooTalkTime2 && counter < (TabooTalkTime1 + DevilTalkTime1 + TabooTalkTime2 + BackUpTalkTime1)) && BackUpTalking == false)
             {
                 BackUpTalking = true;
                 Debug.Log("BackUp");
