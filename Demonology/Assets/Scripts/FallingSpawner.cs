@@ -7,6 +7,8 @@ public class FallingSpawner : MonoBehaviour {
 	private float timer = 0f;
 	private float timer2 = 0f;
 	public float spawnRate = 0.5f;
+    public float ChangeScale = 1.0f;
+    
 
 	Camera mainCamera;
 	//Vector3 originalCameraPosition;
@@ -29,13 +31,13 @@ public class FallingSpawner : MonoBehaviour {
 			Vector3 newPos = GameObject.FindGameObjectWithTag("Player").transform.position;
 			Vector3 newScale = SpawnedObj.transform.localScale;
 
-			newPos.x += Random.Range (-25f, 25f);
+			newPos.x += Random.Range (-25f * ChangeScale, 25f * ChangeScale);
 			newPos.y += 40f;
 			newPos.z += Random.Range(-13f, 13f);
 			float randDir = ((float)Random.Range(0,2)-0.5f)*2f;
 			newScale.x *= randDir;
 			SpawnedObj.transform.position = newPos;
-			SpawnedObj.transform.localScale = newScale;
+			SpawnedObj.transform.localScale = newScale * ChangeScale;
 
 			if( newPos.z >= 0 ) {
 				SpawnedObj.GetComponent<SpriteRenderer>().sortingLayerName = "DisplayBehind";
@@ -62,7 +64,7 @@ public class FallingSpawner : MonoBehaviour {
 			pp.x += (Random.value * shakeAmt * 2 - shakeAmt) * (num/shakeTime);
 			pp.y += (Random.value * shakeAmt * 2 - shakeAmt) * (num/shakeTime);
 			//pp.z += (Random.value * shakeAmt * 2 - shakeAmt) * (num/shakeTime);
-			mainCamera.transform.position = pp;
+			Camera.main.transform.position = pp;
 			yield return new WaitForSeconds (0.05f);
 			StartCoroutine (CameraShake (num - 0.05f));
 		} else {
