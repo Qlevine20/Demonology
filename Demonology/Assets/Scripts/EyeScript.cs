@@ -16,6 +16,8 @@ public class EyeScript : MonoBehaviour
 
     public int divider;
 
+	private bool bossTurnOn;
+
     // Use this for initialization
     void Start()
     {
@@ -61,38 +63,53 @@ public class EyeScript : MonoBehaviour
 
 		if (gameObject.name != "Boss" && GameObject.FindGameObjectWithTag ("PowerCrystal") == null) {
 			//GameObject.Find ("Boss").SetActive(true);
-			if (BossObject != null) {
+			if (BossObject != null && !bossTurnOn) {
 				StartCoroutine (SwitchToBoss ());
+				bossTurnOn = true;
 			}
 		} else if (gameObject.name != "Boss"){
 			if (LeftEye.activeSelf != true) {
 				LeftEye.SetActive (true);
 				LeftEye.GetComponent<FadeObjectInOut> ().FadeIn(0f);
-				LeftEye.GetComponent<ParticleSystem> ().enableEmission = true;
+				ParticleSystem cParts = LeftEye.GetComponent<ParticleSystem> ();
+				cParts.enableEmission = true;
+				Color newColor = cParts.startColor; newColor.a = 255f; cParts.startColor = newColor;
+				cParts.Simulate (10.0f);
+				cParts.Play ();
 			}
 			if (RightEye.activeSelf != true) {
 				RightEye.SetActive (true);
 				RightEye.GetComponent<FadeObjectInOut> ().FadeIn(0f);
-				RightEye.GetComponent<ParticleSystem> ().enableEmission = true;
+				ParticleSystem cParts = RightEye.GetComponent<ParticleSystem> ();
+				cParts.enableEmission = true;
+				Color newColor = cParts.startColor; newColor.a = 255f; cParts.startColor = newColor;
+				cParts.Simulate (10.0f);
+				cParts.Play ();
 			}
-			if ( GetComponent<ParticleSystem> ().enableEmission == true )
-			GetComponent<ParticleSystem> ().enableEmission = false;
+			//if ( GetComponent<ParticleSystem> ().enableEmission == true )
+			//GetComponent<ParticleSystem> ().enableEmission = false;
 		}
     }
 
 	public IEnumerator SwitchToBoss()
 	{
-		GetComponent<ParticleSystem> ().enableEmission = true;
+		ParticleSystem cParts = GetComponent<ParticleSystem> ();
+		cParts.enableEmission = true;
+		GetComponent<FadeObjectInOut> ().FadeIn(0f);
+		Color newColor = cParts.startColor; newColor.a = 255f; cParts.startColor = newColor;
+
 		LeftEye.GetComponent<ParticleSystem> ().enableEmission = false;
 		RightEye.GetComponent<ParticleSystem> ().enableEmission = false;
-		yield return new WaitForSeconds (1f);
+		//yield return new WaitForSeconds (1f);
 		LeftEye.GetComponent<FadeObjectInOut> ().FadeOut (2.0f);
 		RightEye.GetComponent<FadeObjectInOut> ().FadeOut (2.0f);
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (2f);
 		BossObject.SetActive (true);
 		LeftEye.SetActive (false);
 		RightEye.SetActive (false);
+		GetComponent<FadeObjectInOut> ().FadeOut (1.0f);
 		yield return new WaitForSeconds (1f);
+		bossTurnOn = false;
 		gameObject.SetActive (false);
 	}
 }

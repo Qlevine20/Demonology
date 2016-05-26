@@ -224,11 +224,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d9bd3787a9a1479af5f3a38eba786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHitPoints: 10
   hitPoints: 10
   attackRate: 10
+  batRate: 0.5
   numCindersLeft: 4
   numCindersRight: 6
   spawnAttack: {fileID: 145676, guid: dd905bb7bb976924bb3fd00ddc96b4de, type: 2}
+  spawnBat: {fileID: 130902, guid: 5305abd72eb7ba54f9a0aee38193fc27, type: 2}
+  EyeObject: {fileID: 0}
 --- !u!114 &11461886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed779370402ca445a0af69fc135e6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BossObject: {fileID: 0}
   RightEye: {fileID: 158352}
   LeftEye: {fileID: 175934}
   speed: 5

@@ -3,20 +3,30 @@ using System.Collections;
 
 public class FinalBossBehavior : EnemyBehavior {
 
-	public int hitPoints = 10;
+	public int startHitPoints = 10;
+	public int hitPoints;
 	public float attackRate = 2.5f;
+	public float easyBatRate = 3f;
+	public float mediumBatRate = 1.5f;
+	public float hardBatRate = 1.0f;
+	public float criticalBatRate = 0.6f;
 	public int numCindersLeft = 4;
 	public int numCindersRight = 4;
 	private float timer = 0f;
+	private float timer2 = 0f;
 	//private GameObject player;
 	public GameObject spawnAttack;
+	public GameObject spawnBat;
 	public GameObject EyeObject;
+	private bool invincible;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 		//timer = attackRate;
 		timer = 2f;
+		invincible = false;
+		hitPoints = startHitPoints;
 
 		/*if (GameObject.Find("Character") != null)
 		{
@@ -34,6 +44,30 @@ public class FinalBossBehavior : EnemyBehavior {
 				LeftEyeAttack ();
 			} else {
 				RightEyeattack ();
+			}
+		}
+
+		timer2 -= Time.deltaTime;
+		if (timer2 <= 0f) {
+			if (hitPoints >= 4 * hitPoints / 5) {
+				timer2 += easyBatRate;
+			} else if (hitPoints >= 3 * hitPoints / 5) {
+				timer2 += mediumBatRate;
+			} else if (hitPoints >= hitPoints / 5) {
+				timer2 += hardBatRate;
+			} else {
+				timer2 += criticalBatRate;
+			}
+
+			GameObject SpawnedObj = Instantiate(spawnBat) as GameObject;
+			if (Random.Range (-5f, 5f) < 0) {
+				SpawnedObj.transform.position = new Vector3 (transform.position.x - 20f,
+					transform.position.y + Random.Range(-2f, 15f),
+					0f);
+			} else {
+				SpawnedObj.transform.position = new Vector3 (transform.position.x + 20f,
+					transform.position.y + Random.Range(-2f, 15f),
+					0f);
 			}
 		}
 
@@ -85,12 +119,13 @@ public class FinalBossBehavior : EnemyBehavior {
 
 	public IEnumerator CinderShotLeft(float num)
 	{
-		yield return new WaitForSeconds (0.3f*num + 0.5f);
+		yield return new WaitForSeconds (1.2f*num/numCindersLeft + 0.5f);
 		GameObject SpawnedObj = Instantiate(spawnAttack) as GameObject;
 		SpawnedObj.transform.position = new Vector3 (transform.GetChild(0).position.x + 4f*Mathf.Cos(num*Mathf.PI/(numCindersLeft-1)),
 			transform.GetChild(0).position.y - 4f*Mathf.Sin(num*Mathf.PI/(numCindersLeft-1)),
 			0f);
-		SpawnedObj.GetComponent<BossCinder>().initialDelay = 1.5f*num+1.5f - 0.3f*num;
+		SpawnedObj.GetComponent<BossCinder>().initialDelay = 1.5f - 1.2f*num/numCindersLeft;
+		//SpawnedObj.GetComponent<BossCinder>().initialDelay = 1.5f*num+1.5f - 0.3f*num;
 	}
 
 	public IEnumerator CinderShotRight(float num)
@@ -106,10 +141,23 @@ public class FinalBossBehavior : EnemyBehavior {
 	public IEnumerator EyeFlash(int num)
 	{
 		ParticleSystem ps = transform.GetChild (num).GetChild (0).GetComponent<ParticleSystem> ();
-		//ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
-		//col.enabled = false;
+		ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
+		col.enabled = false;
 		yield return new WaitForSeconds (0.5f);
-		//col.enabled = true;
+		col.enabled = true;
+	}
+
+	public IEnumerator HitSquint(float num)
+	{
+		invincible = true;
+		ParticleSystem ps1 = transform.GetChild (0).GetChild (0).GetComponent<ParticleSystem> ();
+		ParticleSystem ps2 = transform.GetChild (1).GetChild (0).GetComponent<ParticleSystem> ();
+		ps1.startSize = 0.6f; ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
+		ps2.startSize = 0.6f; ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
+		yield return new WaitForSeconds (num);
+		ps1.startSize = 2f; ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
+		ps2.startSize = 2f; ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
+		invincible = false;
 	}
 
 
@@ -120,13 +168,31 @@ public class FinalBossBehavior : EnemyBehavior {
 			print (other.gameObject.tag);
 		}*/
 
-		if ((other.gameObject.tag == "imp" && other.gameObject.GetComponent<ImpExp>() != null) ||
-			(other.gameObject.tag == "impTrigger" && other.transform.parent.gameObject.GetComponent<ImpExp>() != null)) {
+		if (!invincible && ((other.gameObject.tag == "imp" && other.gameObject.GetComponent<ImpExp>() != null) ||
+			(other.gameObject.tag == "impTrigger" && other.transform.parent.gameObject.GetComponent<ImpExp>() != null)) ) {
 			//print ("boom");
 			if (--hitPoints <= 0) {
+				StopAllCoroutines ();
 				OnDeath ();
 			}
 			print (hitPoints);
+			StartCoroutine (HitSquint (2.0f));
 		}
+	}
+
+	public override void OnRespawn()
+	{
+		base.OnRespawn ();
+		timer = 2f;
+		invincible = false;
+		hitPoints = startHitPoints;
+		StopAllCoroutines ();
+
+		ParticleSystem ps1 = transform.GetChild (0).GetChild (0).GetComponent<ParticleSystem> ();
+		ParticleSystem ps2 = transform.GetChild (1).GetChild (0).GetComponent<ParticleSystem> ();
+		ps1.startSize = 2f; ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
+		ps2.startSize = 2f; ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
+		ParticleSystem.ColorOverLifetimeModule col = ps1.colorOverLifetime; col.enabled = true;
+		col = ps2.colorOverLifetime; col.enabled = true;
 	}
 }

@@ -88,7 +88,9 @@ public class BatBehavior : EnemyBehavior {
                 if (FirstSight == false)
                 {
                     FirstSight = true;
-                    AudioSource.PlayClipAtPoint(PlayerFoundSound, Camera.main.transform.position,100.0f);
+					if (PlayerFoundSound != null) {
+						AudioSource.PlayClipAtPoint (PlayerFoundSound, Camera.main.transform.position, 100.0f);
+					}
                 }
                 SmartMove(transform.position, new Vector3(p.x, p.y, 0.0f), speed * Time.deltaTime);
             }
