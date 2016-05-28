@@ -33,11 +33,11 @@ public class Devil : MonoBehaviour {
             transform.Translate(new Vector3(-(WalkingSpeed * Time.deltaTime), 0.0f, 0.0f));
            
         }
-        else if (anim.GetBool("Walking") == true && !BackUp) 
+        else if (anim!= null && anim.GetBool("Walking") == true && !BackUp) 
         {
             anim.SetBool("Walking",false);
         }
-        else if (BackUp) 
+        else if (BackUp && anim!=null) 
         {
             anim.SetBool("Walking", transform.parent.GetComponent<Animator>().GetBool("Walking"));
         }

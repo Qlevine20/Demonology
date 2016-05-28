@@ -90,8 +90,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .101999998, y: -.370000005, z: 0}
-  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_LocalPosition: {x: 0.102, y: -0.37, z: 0}
+  m_LocalScale: {x: 0.45454544, y: 0.45454544, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 421424}
   m_RootOrder: 3
@@ -102,8 +103,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.37350416, y: -.245748609, z: 0}
-  m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 1}
+  m_LocalPosition: {x: 48.031197, y: -13.425008, z: 0}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 433266}
   - {fileID: 459882}
@@ -118,8 +120,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0170000009, y: -.370000005, z: 0}
-  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_LocalPosition: {x: -0.017, y: -0.37, z: 0}
+  m_LocalScale: {x: 0.45454544, y: 0.45454544, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 421424}
   m_RootOrder: 2
@@ -132,6 +135,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 421424}
   m_RootOrder: 0
@@ -142,8 +146,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0860000029, y: -.370000005, z: 0}
-  m_LocalScale: {x: .454545438, y: .454545438, z: 1}
+  m_LocalPosition: {x: -0.086, y: -0.37, z: 0}
+  m_LocalScale: {x: 0.45454544, y: 0.45454544, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 421424}
   m_RootOrder: 1
@@ -154,9 +159,10 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178706}
+  m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_GravityScale: 2
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -170,12 +176,13 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142450}
   m_Enabled: 0
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .150000006
+  m_Radius: 0.15
 --- !u!61 &6105770
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -183,12 +190,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142450}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .409999996, y: .639999986}
+  m_Size: {x: 0.41, y: 0.64}
 --- !u!61 &6148302
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -196,12 +204,13 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178706}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .409999996, y: .639999986}
+  m_Size: {x: 0.41, y: 0.64}
 --- !u!95 &9540646
 Animator:
   serializedVersion: 3
@@ -308,14 +317,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a727eeee9f25d401aac0581c66c8c197, type: 3}
-  m_Color: {r: 0, g: 1, b: .0896551609, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.08965516, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,7 +8,8 @@ public class FallingSpawner : MonoBehaviour {
 	private float timer2 = 0f;
 	public float spawnRate = 0.5f;
     public float ChangeScale = 1.0f;
-    
+    public bool Shake = true;
+    public bool RandomShake = true;
 
 	Camera mainCamera;
 	//Vector3 originalCameraPosition;
@@ -49,7 +50,10 @@ public class FallingSpawner : MonoBehaviour {
 
 		timer2 -= Time.deltaTime;
 		if (timer2 <= 0f) {
-			timer2 += 4f + Random.Range (0f, 8f);
+            if (RandomShake)
+            {
+                timer2 += 4f + Random.Range(0f, 8f);
+            }
 			//originalCameraPosition = mainCamera.transform.position;
 			StartCoroutine(CameraShake(shakeTime));
 		}
@@ -57,7 +61,7 @@ public class FallingSpawner : MonoBehaviour {
 
 	public IEnumerator CameraShake(float num)
 	{
-		if (num >= 0f) {
+		if (num >= 0f && Shake) {
 			//float quakeAmt = Random.value*shakeAmt*2 - shakeAmt;
 			//mainCamera.transform.position = originalCameraPosition;
 			Vector3 pp = mainCamera.transform.position;

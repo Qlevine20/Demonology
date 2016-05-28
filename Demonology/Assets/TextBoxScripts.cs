@@ -11,6 +11,8 @@ public class TextBoxScripts : MonoBehaviour {
     public float TabooTalkTime2;
     public float BackUpTalkTime1;
     public float BackUpTalkTime2;
+    public float BackUpTalkTime3;
+    public float EndOfScene;
     private float counter = 0;
     private int Tbox = 0;
     private bool Started = false;
@@ -28,14 +30,18 @@ public class TextBoxScripts : MonoBehaviour {
     private bool TabooTalking2 = false;
     private bool BackUpTalking = false;
     private bool BackUpTalking2 = false;
+    private bool BackUpTalking3 = false;
+    private bool FinishScene = false;
     private float StartFieldOfView;
     
-    private float totTime;
-    
+    private float totTime = 0;
+    private int currBool = 0;
+    //private bool[] boolL;
     
     
 	// Use this for initialization
 	void Start () {
+        //boolL = new bool[7] { DevilTalking, TabooTalking, TabooTalking2, BackUpTalking, BackUpTalking2, BackUpTalking3, FinishScene };
         Poololi = Camera.main.GetComponent<AudioSource>();
         follow = StartCam;
         StartFieldOfView = Camera.main.fieldOfView;
@@ -84,28 +90,49 @@ public class TextBoxScripts : MonoBehaviour {
                 totTime = DevilTalkTime1;
                 
             }
-            else if (TimeChange(counter, totTime,TabooTalkTime1, TabooTalking)) 
+            else if (TimeChange(counter, totTime,TabooTalkTime1, TabooTalking) && currBool == 0) 
             {
+                
                 TabooTalking = true;
+                currBool++;
+                Debug.Log(currBool);
+                Debug.Log(totTime);
                 ActivateTabooPoolali();
             }
-            else if (TimeChange(counter, totTime,TabooTalkTime2, TabooTalking2)) 
+            else if (TimeChange(counter, totTime, TabooTalkTime2, TabooTalking2) && currBool == 1)
             {
                 TabooTalking2 = true;
+                currBool++;
+                Debug.Log(currBool);
                 follow = StartCam;
                 Camera.main.fieldOfView = StartFieldOfView;
                 Debug.Log(StartCam.transform.position);
             }
-            else if (TimeChange(counter,totTime,BackUpTalkTime1,BackUpTalking))
+            else if (TimeChange(counter, totTime, BackUpTalkTime1, BackUpTalking) && currBool == 2)
             {
                 BackUpTalking = true;
+                currBool++;
                 Debug.Log("BackUp");
                 BackUp.GetComponent<Animator>().SetBool("YesSIR", true);
             }
-            else if(TimeChange(counter,totTime,BackUpTalkTime2,BackUpTalking2))
+            else if (TimeChange(counter, totTime, BackUpTalkTime2, BackUpTalking2) && currBool == 3)
             {
                 BackUpTalking2 = true;
+                currBool++;
                 ImpFallSpawner.SetActive(true);
+            }
+            else if (TimeChange(counter, totTime, BackUpTalkTime3, BackUpTalking3) && currBool == 4) 
+            {
+                Debug.Log("Last");
+                BackUpTalking3 = true;
+                currBool++;
+                ImpFallSpawner.GetComponent<FallingSpawner>().Shake = true;
+                ImpUIScript.JumpTowardsDevil = true;
+            }
+            else if (TimeChange(counter, totTime, EndOfScene, FinishScene) && currBool == 5) 
+            {
+                FinishScene = true;
+                Application.LoadLevel(0);
             }
         }
     }
@@ -125,13 +152,12 @@ public class TextBoxScripts : MonoBehaviour {
     {
         if (!StartCheck) 
         {
-            if(countC > countStart)
+
+            if (countC > countEnd + countStart) 
             {
-                    if (countC < countEnd + countStart) 
-                    {
-                        totTime += countEnd;
-                        return true;
-                    }
+                
+                totTime += countEnd;
+                return true;
             }
         }
         return false;
