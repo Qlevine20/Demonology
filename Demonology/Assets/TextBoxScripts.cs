@@ -34,7 +34,6 @@ public class TextBoxScripts : MonoBehaviour {
     private bool FinishScene = false;
     private float StartFieldOfView;
     
-    private float totTime = 0;
     private int currBool = 0;
     //private bool[] boolL;
     
@@ -53,9 +52,8 @@ public class TextBoxScripts : MonoBehaviour {
     {
         counter += Time.deltaTime;
         Camera.main.transform.position = new Vector3(follow.transform.position.x, follow.transform.position.y + 20.0f, Camera.main.transform.position.z);
-        if (Tbox < NumTextBoxes-1 && !Input.GetKey(KeyCode.A))
+        if (Tbox < NumTextBoxes-1 && !Input.GetKey(KeyCode.A) && Poololi.enabled == false)
         {
-
             if (StartOffset < counter && Started == false) 
             {
                 Started = true;
@@ -78,7 +76,7 @@ public class TextBoxScripts : MonoBehaviour {
 
 
         }
-        else if(Poololi.enabled == true)
+        else if (Poololi.enabled == true)
         {
             //Debug.Log(counter);
             if (counter < DevilTalkTime1 && DevilTalking == false)
@@ -87,54 +85,57 @@ public class TextBoxScripts : MonoBehaviour {
                 DevilTalking = true;
                 follow = Devil;
                 Camera.main.fieldOfView = DevilFieldOfView;
-                totTime = DevilTalkTime1;
-                
+                counter = 0;
+
             }
-            else if (TimeChange(counter, totTime,TabooTalkTime1, TabooTalking) && currBool == 0) 
+            else if (TimeChange(counter, TabooTalkTime1, TabooTalking) && currBool == 0)
             {
-                
+
                 TabooTalking = true;
                 currBool++;
-                Debug.Log(currBool);
-                Debug.Log(totTime);
+                counter = 0;
                 ActivateTabooPoolali();
             }
-            else if (TimeChange(counter, totTime, TabooTalkTime2, TabooTalking2) && currBool == 1)
+            else if (TimeChange(counter, TabooTalkTime2, TabooTalking2) && currBool == 1)
             {
                 TabooTalking2 = true;
                 currBool++;
-                Debug.Log(currBool);
+                counter = 0;
                 follow = StartCam;
                 Camera.main.fieldOfView = StartFieldOfView;
-                Debug.Log(StartCam.transform.position);
             }
-            else if (TimeChange(counter, totTime, BackUpTalkTime1, BackUpTalking) && currBool == 2)
+            else if (TimeChange(counter,  BackUpTalkTime1, BackUpTalking) && currBool == 2)
             {
                 BackUpTalking = true;
                 currBool++;
-                Debug.Log("BackUp");
+                counter = 0;
                 BackUp.GetComponent<Animator>().SetBool("YesSIR", true);
             }
-            else if (TimeChange(counter, totTime, BackUpTalkTime2, BackUpTalking2) && currBool == 3)
+            else if (TimeChange(counter, BackUpTalkTime2, BackUpTalking2) && currBool == 3)
             {
                 BackUpTalking2 = true;
+                counter = 0;
                 currBool++;
                 ImpFallSpawner.SetActive(true);
+                BackUp.GetComponent<Animator>().SetBool("Raining", true);
             }
-            else if (TimeChange(counter, totTime, BackUpTalkTime3, BackUpTalking3) && currBool == 4) 
+            else if (TimeChange(counter,  BackUpTalkTime3, BackUpTalking3) && currBool == 4)
             {
-                Debug.Log("Last");
                 BackUpTalking3 = true;
                 currBool++;
+                counter = 0;
                 ImpFallSpawner.GetComponent<FallingSpawner>().Shake = true;
                 ImpUIScript.JumpTowardsDevil = true;
             }
-            else if (TimeChange(counter, totTime, EndOfScene, FinishScene) && currBool == 5) 
+            else if (TimeChange(counter,EndOfScene, FinishScene) && currBool == 5)
             {
                 FinishScene = true;
+            
                 Application.LoadLevel(0);
             }
+
         }
+
     }
 
     void ActivateTabooPoolali() 
@@ -148,15 +149,13 @@ public class TextBoxScripts : MonoBehaviour {
         Camera.main.fieldOfView = TabooFieldOfView;
     }
 
-    bool TimeChange(float countC, float countStart, float countEnd, bool StartCheck) 
+    bool TimeChange(float countC, float countEnd, bool StartCheck) 
     {
         if (!StartCheck) 
         {
 
-            if (countC > countEnd + countStart) 
+            if (countC > countEnd) 
             {
-                
-                totTime += countEnd;
                 return true;
             }
         }
