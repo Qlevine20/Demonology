@@ -19,6 +19,9 @@ public class FinalBossBehavior : EnemyBehavior {
 	public GameObject spawnBat;
 	public GameObject EyeObject;
 	private bool invincible;
+	public AudioClip HitSound;
+	public GameObject normalMusic;
+	public GameObject bossMusic;
 
 	// Use this for initialization
 	public override void Start () {
@@ -49,11 +52,11 @@ public class FinalBossBehavior : EnemyBehavior {
 
 		timer2 -= Time.deltaTime;
 		if (timer2 <= 0f) {
-			if (hitPoints >= 4 * hitPoints / 5) {
+			if (hitPoints >= 4 * startHitPoints / 5) {
 				timer2 += easyBatRate;
-			} else if (hitPoints >= 3 * hitPoints / 5) {
+			} else if (hitPoints >= 3 * startHitPoints / 5) {
 				timer2 += mediumBatRate;
-			} else if (hitPoints >= hitPoints / 5) {
+			} else if (hitPoints >= startHitPoints / 5) {
 				timer2 += hardBatRate;
 			} else {
 				timer2 += criticalBatRate;
@@ -77,6 +80,10 @@ public class FinalBossBehavior : EnemyBehavior {
 			if (cParts != null) {
 				cParts.enableEmission = false;
 				cParts.Clear ();
+			}
+			if (bossMusic != null) {
+				bossMusic.GetComponent<AudioSource> ().Stop ();
+				normalMusic.GetComponent<AudioSource> ().Play ();
 			}
 			gameObject.SetActive (false);
 		}
@@ -175,7 +182,8 @@ public class FinalBossBehavior : EnemyBehavior {
 				StopAllCoroutines ();
 				OnDeath ();
 			}
-			print (hitPoints);
+			//print (hitPoints);
+			AudioSource.PlayClipAtPoint (HitSound, Camera.main.transform.position, 100.0f);
 			StartCoroutine (HitSquint (2.0f));
 		}
 	}

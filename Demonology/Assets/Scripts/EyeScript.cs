@@ -17,6 +17,8 @@ public class EyeScript : MonoBehaviour
     public int divider;
 
 	private bool bossTurnOn;
+	public GameObject normalMusic;
+	public GameObject bossMusic;
 
     // Use this for initialization
     void Start()
@@ -108,6 +110,10 @@ public class EyeScript : MonoBehaviour
 		LeftEye.SetActive (false);
 		RightEye.SetActive (false);
 		GetComponent<FadeObjectInOut> ().FadeOut (1.0f);
+		if (normalMusic != null) {
+			normalMusic.GetComponent<AudioSource> ().Stop ();
+			bossMusic.GetComponent<AudioSource> ().Play ();
+		}
 		yield return new WaitForSeconds (1f);
 		bossTurnOn = false;
 		gameObject.SetActive (false);

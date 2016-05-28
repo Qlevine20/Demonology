@@ -18,6 +18,7 @@ public class BatBehavior : EnemyBehavior {
 	private Animator batAnim;
 	public GameObject Poof;
 	private Rigidbody2D rb;
+	public bool respawn = true;
 
 	public override void Start()
 	{
@@ -186,16 +187,24 @@ public class BatBehavior : EnemyBehavior {
 
 	public override void OnRespawn()
 	{
-		base.OnRespawn ();
-		ArrayDir = 1;
-		Pos = 0;
+		if (respawn) {
+			base.OnRespawn ();
+			ArrayDir = 1;
+			Pos = 0;
+		} else {
+			Destroy (gameObject);
+		}
 	}
 
 	public override void OnDeath()
 	{
-		base.OnDeath ();
-		Instantiate (Poof, transform.position, Quaternion.identity);
-		AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position,100.0f);
+		if (respawn) {
+			base.OnDeath ();
+			Instantiate (Poof, transform.position, Quaternion.identity);
+			AudioSource.PlayClipAtPoint (DeathSound, Camera.main.transform.position, 100.0f);
+		} else {
+			Destroy (gameObject);
+		}
 	}
 
 	//Flips the direction of the sprite
