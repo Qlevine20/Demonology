@@ -10,6 +10,7 @@ public class CreditsScript : MonoBehaviour {
     private float counter;
     private int currCredit = 0;
     public float changeAlpha;
+    public KeyCode QuitCredits;
     
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,10 @@ public class CreditsScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         counter += Time.deltaTime;
+        if(Input.GetMouseButton(0) || Input.GetKey(QuitCredits))
+        {
+            Application.LoadLevel(0);
+        }
         if (currCredit < credits.Length) 
         {
             currColor = credits[currCredit].GetComponent<Text>().color;
