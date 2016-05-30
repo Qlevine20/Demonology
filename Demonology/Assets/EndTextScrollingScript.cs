@@ -15,7 +15,7 @@ public class EndTextScrollingScript : MonoBehaviour {
         Vector3 move = new Vector3(0, speed * Time.deltaTime, 0);
 	    transform.Translate(move);
         EndScroll.transform.Translate(move);
-        if (EndScroll.transform.position.y > 0) 
+        if (EndScroll.transform.localPosition.y > 0) 
         {
             Application.LoadLevel(0);
         }

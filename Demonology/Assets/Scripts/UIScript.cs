@@ -90,6 +90,8 @@ public class UIScript : MonoBehaviour {
     {
         Debug.Log("Button Pressed");
         Time.timeScale = 1.0f;
+        LevelsScreen.SetActive(false);
+        GameMenu.SetActive(false);
         MenuScript.levelNum = level;
         Application.LoadLevel("LoadingScreen");
     }

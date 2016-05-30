@@ -8,25 +8,25 @@ SceneSettings:
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
     smallestOccluder: 5
-    smallestHole: .25
+    smallestHole: 0.25
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: .00999999978
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: .211999997, g: .226999998, b: .259000003, a: 1}
-  m_AmbientEquatorColor: {r: .114, g: .125, b: .133000001, a: 1}
-  m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SkyboxMaterial: {fileID: 2100000, guid: ba5e7c303ebe41e42857c403fc238843, type: 2}
-  m_HaloStrength: .5
+  m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -40,7 +40,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 5
+  serializedVersion: 6
   m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
@@ -66,7 +66,7 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightingDataAsset: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -74,15 +74,15 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
-    agentRadius: .5
+    agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: .400000006
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     accuratePlacement: 0
     minRegionArea: 2
-    cellSize: .166666672
+    cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &35622131
@@ -124,14 +124,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 158952, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19947392, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 22309338, guid: e6e5db07e9e91d04fb2ee864d032406d, type: 2}
       propertyPath: m_Camera
       value: 
@@ -163,6 +155,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 796320935}
   - {fileID: 1814537915}
@@ -393,11 +386,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 492770, guid: 5032e93dfaf411b49b997428c946b69a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 22.3999996
+      value: 22.4
       objectReference: {fileID: 0}
     - target: {fileID: 492770, guid: 5032e93dfaf411b49b997428c946b69a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.1558018
+      value: -10.155802
       objectReference: {fileID: 0}
     - target: {fileID: 492770, guid: 5032e93dfaf411b49b997428c946b69a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -421,7 +414,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 492770, guid: 5032e93dfaf411b49b997428c946b69a, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 411144, guid: 5032e93dfaf411b49b997428c946b69a, type: 2}
       propertyPath: m_LocalScale.x
@@ -701,8 +694,9 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839204748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .791352153, y: -1.60537767, z: 0}
-  m_LocalScale: {x: .687249899, y: .741361678, z: .686154306}
+  m_LocalPosition: {x: 0.79135215, y: -1.6053777, z: 0}
+  m_LocalScale: {x: 0.6872499, y: 0.7413617, z: 0.6861543}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 661612952}
   m_Father: {fileID: 0}
@@ -906,7 +900,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 425892, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f86999e6e5a33394f82957a52b28d0e8, type: 2}
@@ -935,6 +929,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 311329469}
   - {fileID: 446283229}
@@ -1018,11 +1013,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 434992, guid: 9a5473a6e82998b41b4eaaa59a6cd89a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 86.6550903
+      value: 86.65509
       objectReference: {fileID: 0}
     - target: {fileID: 434992, guid: 9a5473a6e82998b41b4eaaa59a6cd89a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.6681166
+      value: -10.668117
       objectReference: {fileID: 0}
     - target: {fileID: 434992, guid: 9a5473a6e82998b41b4eaaa59a6cd89a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1046,7 +1041,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 434992, guid: 9a5473a6e82998b41b4eaaa59a6cd89a, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11452834, guid: 9a5473a6e82998b41b4eaaa59a6cd89a, type: 2}
       propertyPath: m_Text
@@ -1266,6 +1261,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1591801120}
   - {fileID: 210909500}

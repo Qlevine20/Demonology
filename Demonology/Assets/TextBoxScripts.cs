@@ -130,8 +130,8 @@ public class TextBoxScripts : MonoBehaviour {
             else if (TimeChange(counter,EndOfScene, FinishScene) && currBool == 5)
             {
                 FinishScene = true;
-            
-                Application.LoadLevel(0);
+                MenuScript.levelNum = Application.loadedLevel + 1;
+                Application.LoadLevel("LoadingScreen");
             }
 
         }
