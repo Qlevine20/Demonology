@@ -17,7 +17,7 @@ public class EndTextScrollingScript : MonoBehaviour {
         EndScroll.transform.Translate(move);
         if (EndScroll.transform.localPosition.y > 0) 
         {
-            Application.LoadLevel(0);
+            Application.LoadLevel(16);
         }
 	}
 }
