@@ -15,6 +15,14 @@ public class UIScript : MonoBehaviour {
 	// Update is called once per frame
     public void Update()
     {
+        if(Input.GetKey(KeyCode.B) && Input.GetKey(KeyCode.O) && Input.GetKey(KeyCode.S))
+        {
+            Application.LoadLevel(13);
+        }
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.T)) 
+        {
+            Application.LoadLevel(14);
+        }
         if (GameMenu != null && Input.GetKeyUp(menuKey))
         {
             UpdateMenu(GameMenu);
