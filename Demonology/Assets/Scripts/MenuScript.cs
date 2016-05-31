@@ -12,7 +12,6 @@ public class MenuScript : MonoBehaviour {
     public GameObject ControlsScreen;
     public GameObject MainMenu;
     public GameObject LevelsScreen;
-    public GameObject CreditsScreen;
     public static int levelNum;
     
 	// Use this for initialization
@@ -39,7 +38,6 @@ public class MenuScript : MonoBehaviour {
     {
         ControlsScreen.SetActive(false);
         LevelsScreen.SetActive(false);
-        CreditsScreen.SetActive(false);
         startButton.interactable = true;
         quitButton.interactable = true;
         controlsButton.interactable = true;
@@ -84,8 +82,8 @@ public class MenuScript : MonoBehaviour {
 
 	public void StartLevel()
 	{
-        levelNum = 1;
-		Application.LoadLevel ("LoadingScreen");
+        levelNum = 0;
+        Application.LoadLevel(18);
 	}
 
 	public void QuitGame()

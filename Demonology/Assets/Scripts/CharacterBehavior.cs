@@ -98,7 +98,7 @@ public class CharacterBehavior : DeadlyBehavior {
 
 	// Use this for initialization
 	public override void Start () {
-        if (Application.loadedLevelName != "LoadingScreen")
+        if (Application.loadedLevelName != "LoadingScreen" && Application.loadedLevelName != "OpeningScene")
         {
             MenuScript.levelNum = Application.loadedLevel;
         }
@@ -498,7 +498,11 @@ public class CharacterBehavior : DeadlyBehavior {
 			//Add go to next level code here
             if (Application.loadedLevel+1 < Application.levelCount)
             {
-                MenuScript.levelNum = Application.loadedLevel + 1;
+                if (Application.loadedLevelName != "OpeningScene")
+                {
+                    Debug.Log("here");
+                    MenuScript.levelNum = Application.loadedLevel + 1;
+                }
                 Application.LoadLevel("LoadingScreen");
             }
             else 

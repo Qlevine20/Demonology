@@ -217,15 +217,7 @@ public class FauxCharacter : DeadlyBehavior {
 		if (other.gameObject.tag == "Finish") {
 			Time.timeScale = 1.0f;
 			//Add go to next level code here
-			if (Application.loadedLevel+1 < Application.levelCount)
-			{
-				MenuScript.levelNum = Application.loadedLevel + 1;
-				Application.LoadLevel("LoadingScreen");
-			}
-			else 
-			{
-				Application.LoadLevel(0);
-			}
+            Application.LoadLevel(1);
 		}
 		// If you collide with a moving platform..
 		if (other.gameObject.tag == "moving") {

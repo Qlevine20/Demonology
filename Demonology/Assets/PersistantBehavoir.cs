@@ -8,7 +8,7 @@ public class PersistantBehavoir : MonoBehaviour {
     public static int levelsEarned = 0;
 	// Use this for initialization
 	void Start () {
-        if (levelsEarned < Application.loadedLevel && Application.loadedLevelName != "LoadingScreen") 
+        if (levelsEarned < Application.loadedLevel && Application.loadedLevelName != "LoadingScreen" && Application.loadedLevelName != "Credits") 
         {
             
             levelsEarned = Application.loadedLevel;
