@@ -135,7 +135,7 @@ public class CharacterBehavior : DeadlyBehavior {
 		// new fall death code
 		if (onGround ()) {
 			float newGround = transform.position.y;
-			if (fallCheck - 10 > newGround) {
+			if (fallCheck - 10 > newGround && !Dying) {
 				CharacterBehavior.Dying = true;
 				PlayerAnim.SetBool ("FallDeath", true);
 			}

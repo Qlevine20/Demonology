@@ -10,11 +10,11 @@ public class FadeObjectInOut : MonoBehaviour
 	float MaxAlpha()
 	{
 		float maxAlpha = 0.0f; 
-		Renderer[] rendererObjects = GetComponents<Renderer>(); 
+		Renderer[] rendererObjects = GetComponents<SpriteRenderer>(); 
 		foreach (Renderer item in rendererObjects)
 		{
-			//maxAlpha = Mathf.Max (maxAlpha, item.material.color.a); 
-			maxAlpha = 255f;
+			maxAlpha = Mathf.Max (maxAlpha, item.material.color.a); 
+			//maxAlpha = 255f;
 		}
 		return maxAlpha; 
 	}
@@ -27,7 +27,7 @@ public class FadeObjectInOut : MonoBehaviour
 		float fadingOutSpeed = 1.0f / fadingOutTime; 
 		
 		// grab all child objects
-		Renderer[] rendererObjects = GetComponents<Renderer>(); 
+		Renderer[] rendererObjects = GetComponents<SpriteRenderer>(); 
 		if (colors == null)
 		{
 			//create a cache of colors if necessary

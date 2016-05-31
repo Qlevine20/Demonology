@@ -110,7 +110,7 @@ public class ImpAI : DemonBehavior {
 			if (other.GetComponent<GravityCinder> () != null) {
 				other.GetComponent<GravityCinder> ().StartCo ();
 			} else if (other.GetComponent<BossCinder> () != null) {
-				other.GetComponent<GravityCinder> ().StartCo ();
+				other.GetComponent<BossCinder> ().StartCo ();
 			}
             DropKill = true;
         }

@@ -23,6 +23,11 @@ public class FinalBossBehavior : EnemyBehavior {
 	public GameObject normalMusic;
 	public GameObject bossMusic;
 
+	public float shakeAmt = 0f;
+	public float shakeTime = 0f;
+	private bool dying = false;
+	public GameObject exitPortal;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
@@ -40,7 +45,7 @@ public class FinalBossBehavior : EnemyBehavior {
 	// Update is called once per frame
 	public override void Update () {
 		timer -= Time.deltaTime;
-		if (timer <= 0f) {
+		if (timer <= 0f && !dying) {
 			timer += attackRate;
 
 			if (Random.Range (-5f, 5f) < 0) {
@@ -51,7 +56,7 @@ public class FinalBossBehavior : EnemyBehavior {
 		}
 
 		timer2 -= Time.deltaTime;
-		if (timer2 <= 0f) {
+		if (timer2 <= 0f && !dying) {
 			if (hitPoints >= 4 * startHitPoints / 5) {
 				timer2 += easyBatRate;
 			} else if (hitPoints >= 3 * startHitPoints / 5) {
@@ -162,9 +167,44 @@ public class FinalBossBehavior : EnemyBehavior {
 		ps1.startSize = 0.6f; ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
 		ps2.startSize = 0.6f; ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
 		yield return new WaitForSeconds (num);
-		ps1.startSize = 2f; ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
-		ps2.startSize = 2f; ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
+		ps1.startSize = 2f; //ps1.Clear (); ps1.Simulate (2f); ps1.Play ();
+		ps2.startSize = 2f; //ps2.Clear (); ps2.Simulate (2f); ps2.Play ();
 		invincible = false;
+	}
+
+	public IEnumerator ScreenShake(float num)
+	{
+		if (num >= 0f) {
+			//float quakeAmt = Random.value*shakeAmt*2 - shakeAmt;
+			//mainCamera.transform.position = originalCameraPosition;
+			Vector3 pp = Camera.main.transform.position;
+			pp.x += (Random.value * shakeAmt * 2 - shakeAmt) * (num/shakeTime);
+			pp.y += (Random.value * shakeAmt * 2 - shakeAmt) * (num/shakeTime);
+			if (num >= shakeTime *6/10) {
+				pp.z -= Mathf.Abs (Random.value * shakeAmt * 2 - shakeAmt) * (num / 2 / shakeTime);
+			} else {
+				pp.z += Mathf.Abs (Random.value * shakeAmt * 2 - shakeAmt) * (num / 2 / shakeTime);
+			}
+			Camera.main.transform.position = pp;
+			yield return new WaitForSeconds (0.05f);
+			StartCoroutine (ScreenShake (num - 0.05f));
+		}
+	}
+
+	public IEnumerator DeathSequence()
+	{
+		dying = true;
+		StartCoroutine (ScreenShake (shakeTime));
+		transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
+		transform.GetChild (1).GetChild (1).gameObject.SetActive (true);
+		yield return new WaitForSeconds (2f);
+		transform.GetChild (0).GetChild (0).GetComponent<ParticleSystem> ().enableEmission = false;
+		transform.GetChild (1).GetChild (0).GetComponent<ParticleSystem> ().enableEmission = false;
+		transform.GetChild (0).GetComponent<ParticleSystem> ().enableEmission = false;
+		transform.GetChild (1).GetComponent<ParticleSystem> ().enableEmission = false;
+		yield return new WaitForSeconds (2f);
+		exitPortal.SetActive (true);
+		OnDeath ();
 	}
 
 
@@ -180,7 +220,8 @@ public class FinalBossBehavior : EnemyBehavior {
 			//print ("boom");
 			if (--hitPoints <= 0) {
 				StopAllCoroutines ();
-				OnDeath ();
+				//OnDeath ();
+				StartCoroutine(DeathSequence());
 			}
 			//print (hitPoints);
 			AudioSource.PlayClipAtPoint (HitSound, Camera.main.transform.position, 100.0f);
@@ -194,6 +235,7 @@ public class FinalBossBehavior : EnemyBehavior {
 		timer = 2f;
 		invincible = false;
 		hitPoints = startHitPoints;
+		dying = false;
 		StopAllCoroutines ();
 
 		ParticleSystem ps1 = transform.GetChild (0).GetChild (0).GetComponent<ParticleSystem> ();

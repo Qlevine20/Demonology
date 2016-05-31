@@ -44,10 +44,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 472116}
+  - 114: {fileID: 11427054}
   - 114: {fileID: 11461886}
   - 58: {fileID: 5828824}
   - 58: {fileID: 5816734}
-  - 114: {fileID: 11427054}
   m_Layer: 0
   m_Name: Boss
   m_TagString: impkiller
@@ -227,12 +227,21 @@ MonoBehaviour:
   startHitPoints: 10
   hitPoints: 10
   attackRate: 10
-  batRate: 0.5
+  easyBatRate: 3
+  mediumBatRate: 1.5
+  hardBatRate: 1
+  criticalBatRate: 0.6
   numCindersLeft: 4
   numCindersRight: 6
   spawnAttack: {fileID: 145676, guid: dd905bb7bb976924bb3fd00ddc96b4de, type: 2}
   spawnBat: {fileID: 130902, guid: 5305abd72eb7ba54f9a0aee38193fc27, type: 2}
   EyeObject: {fileID: 0}
+  HitSound: {fileID: 0}
+  normalMusic: {fileID: 0}
+  bossMusic: {fileID: 0}
+  shakeAmt: 0
+  shakeTime: 0
+  exitPortal: {fileID: 0}
 --- !u!114 &11461886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,6 +259,8 @@ MonoBehaviour:
   speed: 5
   radius: 10
   divider: 8
+  normalMusic: {fileID: 0}
+  bossMusic: {fileID: 0}
 --- !u!198 &19833674
 ParticleSystem:
   m_ObjectHideFlags: 1
