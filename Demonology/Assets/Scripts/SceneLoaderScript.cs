@@ -16,10 +16,17 @@ public class SceneLoaderScript : MonoBehaviour {
     //private bool Begin = false;
     public float min;
     public float max;
+    public float LoadingTime;
+    public int TestImpsKilled;
+    public bool TestOn;
 
 
     void Start() 
     {
+        if(TestOn)
+        {
+            CharacterBehavior.ImpsKilled = TestImpsKilled;
+        }
         ImpsKilledText.text = CharacterBehavior.ImpsKilled.ToString();
         TimesPlayerKilledText.text = CharacterBehavior.TimesPlayerDied.ToString();
         if (mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) > min && mult / Mathf.Sqrt(CharacterBehavior.ImpsKilled) < max) 
@@ -73,7 +80,7 @@ public class SceneLoaderScript : MonoBehaviour {
 
         // This line waits for 3 seconds before executing the next line in the coroutine.
         // This line is only necessary for this demo. The scenes are so simple that they load too fast to read the "Loading..." text.
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(LoadingTime);
 
         // Start an asynchronous operation to load the scene that was passed to the LoadNewScene coroutine.
         AsyncOperation async = Application.LoadLevelAsync(MenuScript.levelNum);

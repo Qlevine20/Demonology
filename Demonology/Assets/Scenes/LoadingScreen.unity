@@ -588,9 +588,12 @@ MonoBehaviour:
   ImpsKilledText: {fileID: 308690804}
   TimesPlayerKilledText: {fileID: 523145385}
   impSpawner: {fileID: 206676374}
-  mult: 1
-  min: 0.5
-  max: 4
+  mult: 4
+  min: 0.1
+  max: 10
+  LoadingTime: 6
+  TestImpsKilled: 500
+  TestOn: 0
 --- !u!224 &570241233
 RectTransform:
   m_ObjectHideFlags: 0
