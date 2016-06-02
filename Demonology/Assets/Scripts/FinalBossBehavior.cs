@@ -27,6 +27,7 @@ public class FinalBossBehavior : EnemyBehavior {
 	public float shakeTime = 0f;
 	private bool dying = false;
 	public GameObject exitPortal;
+	public bool cheatCode = false;
 
 	// Use this for initialization
 	public override void Start () {
@@ -203,6 +204,9 @@ public class FinalBossBehavior : EnemyBehavior {
 		transform.GetChild (0).GetComponent<ParticleSystem> ().enableEmission = false;
 		transform.GetChild (1).GetComponent<ParticleSystem> ().enableEmission = false;
 		yield return new WaitForSeconds (2f);
+		if (cheatCode) {
+			Application.LoadLevel (14);
+		}
 		exitPortal.SetActive (true);
 		OnDeath ();
 	}

@@ -19,10 +19,14 @@ public class UIScript : MonoBehaviour {
         {
             Application.LoadLevel(13);
         }
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.T)) 
-        {
-            Application.LoadLevel(14);
-        }
+		if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.T)) 
+		{
+			Application.LoadLevel(14);
+		}
+		if (Input.GetKey(KeyCode.T) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.N)) 
+		{
+			Application.LoadLevel(19);
+		}
         if (GameMenu != null && Input.GetKeyUp(menuKey))
         {
             UpdateMenu(GameMenu);
