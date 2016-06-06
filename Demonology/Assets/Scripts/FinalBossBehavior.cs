@@ -69,6 +69,7 @@ public class FinalBossBehavior : EnemyBehavior {
 			}
 
 			GameObject SpawnedObj = Instantiate(spawnBat) as GameObject;
+			SpawnedObj.name = "BossBat";
 			if (Random.Range (-5f, 5f) < 0) {
 				SpawnedObj.transform.position = new Vector3 (transform.position.x - 20f,
 					transform.position.y + Random.Range(-2f, 15f),
@@ -195,6 +196,12 @@ public class FinalBossBehavior : EnemyBehavior {
 	public IEnumerator DeathSequence()
 	{
 		dying = true;
+		GameObject[] killTheBat = GameObject.FindGameObjectsWithTag("enemy");
+		for (int i = 0; i < killTheBat.Length; i++){
+			if (killTheBat [i].name == "BossBat") {
+				GameObject.Destroy (killTheBat [i]);
+			}
+		}
 		StartCoroutine (ScreenShake (shakeTime));
 		transform.GetChild (0).GetChild (1).gameObject.SetActive (true);
 		transform.GetChild (1).GetChild (1).gameObject.SetActive (true);

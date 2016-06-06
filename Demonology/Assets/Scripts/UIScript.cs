@@ -29,7 +29,9 @@ public class UIScript : MonoBehaviour {
 		}
         if (GameMenu != null && Input.GetKeyUp(menuKey))
         {
-            UpdateMenu(GameMenu);
+			if (Application.loadedLevelName != "LoadingScreen" && Application.loadedLevelName != "OpeningScene") {
+				UpdateMenu (GameMenu);
+			}
         }
     }
 
